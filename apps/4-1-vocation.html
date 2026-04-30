@@ -1,0 +1,2917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRE4M1 · Lesson 4.1: What is Vocation?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0F1A35;
+    --bg-mid: #162749;
+    --bg-card: #F5EDD8;
+    --bg-card-alt: #EEE4C9;
+    --gold: #C9A961;
+    --gold-soft: #D4B97A;
+    --gold-deep: #8C7135;
+    --wine: #6B2C2C;
+    --ivory: #F5EDD8;
+    --cream: #E8DFB8;
+    --ink: #1F2937;
+    --ink-soft: #3F4656;
+    --locked: #4A556880;
+    --success: #3F7A4D;
+    --danger: #A8432B;
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.25);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Textured background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(201, 169, 97, 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(107, 44, 44, 0.1), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ---- Header ---- */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .unit-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .lesson-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .lesson-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gold-soft);
+    opacity: 0.9;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  /* ---- Progress bar ---- */
+  .progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-deep) 70%, transparent);
+    padding: 16px 0 12px;
+    margin: -24px -20px 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft));
+    width: 0%;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.5);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    margin: 8px auto 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  /* ---- Sticky save button (top bar) ---- */
+  .save-sticky {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 169, 97, 0.12);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .save-sticky:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    border-color: var(--gold);
+  }
+
+  .save-sticky.saved {
+    background: rgba(63, 122, 77, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  /* ---- In-row save (button row) ---- */
+  .btn-save-row {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-save-row:hover {
+    background: var(--gold-deep);
+    color: var(--ivory);
+  }
+
+  .btn-save-row.saved {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .btn-row-split {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* ---- Pause and Reflect blocks (in-flow) ---- */
+  .pause {
+    background: linear-gradient(135deg, rgba(107, 44, 44, 0.06), rgba(201, 169, 97, 0.08));
+    border: 1px solid rgba(107, 44, 44, 0.2);
+    border-left: 3px solid var(--wine);
+    padding: 22px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .pause-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pause-label::before {
+    content: '❊';
+    font-size: 14px;
+    color: var(--gold-deep);
+  }
+
+  .pause-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .pause textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(107, 44, 44, 0.25);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    border-radius: 2px;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .pause textarea:focus {
+    outline: none;
+    border-color: var(--wine);
+    box-shadow: 0 0 0 2px rgba(107, 44, 44, 0.15);
+  }
+
+  /* Save confirmation toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid var(--gold);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---- Screen Cards ---- */
+  .screen {
+    display: none;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .screen.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .screen-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .screen-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .screen-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .prose {
+    font-size: 16.5px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .prose p { margin-bottom: 18px; }
+
+  .prose strong { color: var(--wine); font-weight: 600; }
+
+  .prose em { color: var(--ink-soft); }
+
+  .prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 28px 0 14px;
+    color: var(--wine);
+    line-height: 1.25;
+  }
+
+  .prose h3::before {
+    content: '❖ ';
+    color: var(--gold-deep);
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+
+  .divider {
+    display: block;
+    margin: 32px auto;
+    width: 120px;
+    height: auto;
+    opacity: 0.6;
+  }
+
+  .pullquote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--wine);
+    text-align: center;
+    margin: 28px 20px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    line-height: 1.4;
+  }
+
+  .scripture {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scripture-ref {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--ivory);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--wine);
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:disabled {
+    background: var(--locked);
+    border-color: var(--locked);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+  }
+
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- Forms ---- */
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .word-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .word-count .met {
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  .word-count .short {
+    color: var(--danger);
+  }
+
+  /* ---- Key Terms / Flashcards ---- */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .term-card {
+    background: var(--bg-card-alt);
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    border-radius: 2px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 100px;
+  }
+
+  .term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--gold-deep);
+  }
+
+  .term-card.viewed {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+  }
+
+  .term-card.viewed::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .term-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.7;
+  }
+
+  .term-def {
+    display: none;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .term-card.open .term-def { display: block; }
+  .term-card.open .term-tap { display: none; }
+
+  /* ---- Inline comprehension check ---- */
+  .check {
+    background: #FDF8E8;
+    border: 1px dashed var(--gold-deep);
+    border-radius: 2px;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .check-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .check-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .check-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-option {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .check-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .check-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .check-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .check-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .check-feedback {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    display: none;
+  }
+
+  .check-feedback.show { display: block; }
+
+  /* ---- Vocation Compass ---- */
+  .compass-intro {
+    background: #FDF8E8;
+    border-left: 3px solid var(--wine);
+    padding: 18px 22px;
+    margin: 20px 0 30px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .compass-vocation {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(140, 113, 53, 0.25);
+  }
+
+  .compass-vocation:last-child {
+    border-bottom: none;
+  }
+
+  .compass-voc-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+
+  .compass-voc-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  .compass-aspect {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px dotted rgba(140, 113, 53, 0.2);
+  }
+
+  .compass-aspect:first-of-type { border-top: none; }
+
+  .compass-aspect-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .rating-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .rating-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(140, 113, 53, 0.4);
+    background: white;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .rating-btn:hover {
+    border-color: var(--gold-deep);
+  }
+
+  .rating-btn.selected {
+    background: var(--wine);
+    color: var(--ivory);
+    border-color: var(--wine);
+  }
+
+  .rating-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  .compass-result {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(107, 44, 44, 0.08));
+    border: 1px solid var(--gold-deep);
+    padding: 24px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  .compass-result.show { display: block; }
+
+  .result-voc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.3);
+  }
+
+  .result-voc:last-child { border-bottom: none; }
+
+  .result-voc-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--wine);
+  }
+
+  .result-bar {
+    width: 180px;
+    height: 8px;
+    background: rgba(140, 113, 53, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .result-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    transition: width 1s ease;
+  }
+
+  /* ---- Quiz ---- */
+  .quiz-question {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.25);
+  }
+
+  .quiz-question:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .q-option {
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .q-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .q-option.selected {
+    border-color: var(--wine);
+    background: rgba(107, 44, 44, 0.06);
+  }
+
+  .q-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .q-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+  }
+
+  .q-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+  }
+
+  .q-option.locked {
+    pointer-events: none;
+  }
+
+  .q-explanation {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201, 169, 97, 0.1);
+    border-left: 2px solid var(--gold-deep);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    display: none;
+  }
+
+  .q-explanation.show { display: block; }
+
+  .quiz-score {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(107, 44, 44, 0.1));
+    border: 1px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score strong {
+    font-size: 34px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ---- Completion screen ---- */
+  .completion-hero {
+    text-align: center;
+    padding: 20px 0 32px;
+  }
+
+  .completion-icon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    color: var(--gold-deep);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .completion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .completion-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .summary-stat {
+    background: #FDF8E8;
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+  }
+
+  .download-note {
+    background: rgba(201, 169, 97, 0.12);
+    padding: 18px 22px;
+    border-left: 3px solid var(--gold-deep);
+    margin: 24px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ---- Hero (start screen) ---- */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-deep));
+    color: var(--ivory);
+    padding: 40px 40px 36px;
+    margin: -40px -44px 32px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .hero-banner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+
+  .hero-banner p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-soft);
+    margin-top: 8px;
+  }
+
+  .hero-banner .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+
+  .upload-zone {
+    border: 1px dashed rgba(140, 113, 53, 0.4);
+    padding: 20px;
+    text-align: center;
+    margin-top: 24px;
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .upload-zone label {
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .upload-zone input { display: none; }
+
+  /* ---- Error / alert ---- */
+  .alert {
+    padding: 12px 16px;
+    background: rgba(168, 67, 43, 0.1);
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    margin-top: 14px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .alert.show { display: block; }
+
+  /* ---- Footer ---- */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .card { padding: 28px 22px; }
+    .hero-banner { margin: -28px -22px 28px; padding: 30px 24px 26px; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; justify-content: center; }
+    .compass-aspect { grid-template-columns: 1fr; gap: 8px; }
+    .result-bar { width: 120px; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .save-sticky {
+      position: static;
+      display: flex;
+      margin: 10px auto 0;
+      width: fit-content;
+    }
+    .progress-meta { flex-wrap: wrap; }
+    .btn-row-split { width: 100%; flex-direction: column; }
+    .btn-row-split .btn-save-row { width: 100%; justify-content: center; }
+  }
+
+  /* Print-friendly download report styling will be injected separately */
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ==================== HEADER ==================== -->
+  <div class="header">
+    <div class="unit-label">HRE4M1 · Unit 4 · Lesson 1</div>
+    <h1 class="lesson-title">What is Vocation?</h1>
+    <div class="lesson-subtitle">Discerning God's call in every state of life</div>
+    <svg class="ornament" width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 0 10 L 30 10 M 50 10 L 80 10" stroke="#C9A961" stroke-width="1" fill="none"/>
+      <circle cx="40" cy="10" r="3" fill="none" stroke="#C9A961" stroke-width="1"/>
+      <circle cx="40" cy="10" r="1" fill="#C9A961"/>
+    </svg>
+  </div>
+
+  <!-- ==================== PROGRESS ==================== -->
+  <div class="progress-container" id="progressContainer" style="display:none; position:relative;">
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-meta">
+      <span id="progressLabel">Section 1 of 11</span>
+      <span id="progressPercent">0%</span>
+    </div>
+    <button class="save-sticky" id="stickySave" onclick="saveProgressNow()" title="Download your progress to resume later">
+      <span>💾</span><span id="stickySaveLabel">Save Progress</span>
+    </button>
+  </div>
+
+  <!-- SCREENS WILL BE INSERTED HERE -->
+  <div id="screens">
+
+    <!-- ========== SCREEN 1: WELCOME & SETUP ========== -->
+    <section class="screen active" data-screen="welcome">
+      <div class="card">
+        <div class="hero-banner">
+          <div class="ornament-line">
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+            <span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">A Study in Vocation</span>
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+          </div>
+          <h2>Welcome to Lesson 4.1</h2>
+          <p>Every baptized person has a calling. This lesson helps you begin to discover yours.</p>
+        </div>
+
+        <p class="prose" style="margin-bottom:24px;">Before we begin, tell me a little about yourself. Your name will appear on your final report, which you will download at the end of the lesson and submit.</p>
+
+        <div class="field">
+          <label for="studentName">Full Name</label>
+          <input type="text" id="studentName" placeholder="First and last name" autocomplete="name">
+        </div>
+
+        <div class="field">
+          <label for="studentEmail">School Email</label>
+          <input type="email" id="studentEmail" placeholder="you@school.ca" autocomplete="email">
+        </div>
+
+        <div class="field">
+          <label for="studentClass">Class / Period</label>
+          <input type="text" id="studentClass" placeholder="e.g., HRE4M1 · Period 2">
+        </div>
+
+        <div class="alert" id="setupAlert">Please fill in your name and email before starting.</div>
+
+        <div class="btn-row">
+          <div></div>
+          <button class="btn btn-primary" onclick="beginLesson()">Begin Lesson →</button>
+        </div>
+
+        <div class="upload-zone">
+          <div style="font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Returning to finish?</div>
+          <label for="resumeFile">Upload your saved progress file</label>
+          <input type="file" id="resumeFile" accept=".html" onchange="resumeFromFile(event)">
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 2: PRE-LESSON HOOK ========== -->
+    <section class="screen" data-screen="hook">
+      <div class="card">
+        <div class="screen-label">Before We Begin</div>
+        <h2 class="screen-title">A Question to Sit With</h2>
+        <p class="screen-intro">There is no right answer. Just tell me honestly what you think.</p>
+
+        <div class="prose">
+          <p>When you hear the word <strong>"calling"</strong> (as in, "I was called to do this"), what comes to mind?</p>
+          <p>Maybe you think of a career. Maybe a relationship. Maybe a kind of purpose or destiny. Maybe nothing at all. Take a moment and write whatever comes up.</p>
+        </div>
+
+        <div class="field" style="margin-top:20px;">
+          <label for="hookResponse">Your initial thoughts</label>
+          <textarea id="hookResponse" placeholder="What does the word 'calling' mean to you right now, before we start the lesson?" oninput="updateWordCount('hookResponse', 'hookWC', 30)"></textarea>
+          <div class="word-count" id="hookWC"><span>0 words</span><span>Minimum: 30 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()" title="Download your progress">💾 Save</button>
+            <button class="btn btn-primary" id="hookNext" onclick="completeHook()" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 3: INTRODUCTION ========== -->
+    <section class="screen" data-screen="intro">
+      <div class="card">
+        <div class="screen-label">Part One · Introduction</div>
+        <h2 class="screen-title">The Call That Belongs to You</h2>
+        <p class="screen-intro">In Catholic teaching, the idea that each person is called by God is not reserved for priests or nuns. It belongs to you.</p>
+
+        <div class="prose">
+          <p>The word <strong>vocation</strong> comes from the Latin <em>vocare</em>, which means <em>"to call."</em> In Catholic understanding, a vocation is more than a job or career. It is a personal invitation from God to live a life of holiness in a particular way, so that you can serve God and others with your whole life.</p>
+
+          <p>Every baptized person has a vocation. That is the teaching. The Church calls this the <strong>universal call to holiness</strong>, and it was especially emphasized by the Second Vatican Council in the 1960s. The Catechism puts it this way:</p>
+
+          <div class="scripture">
+            "All Christians in any state or walk of life are called to the fullness of Christian life and to the perfection of charity."
+            <span class="scripture-ref">Catechism of the Catholic Church, §2013</span>
+          </div>
+
+          <p>In simpler terms: no matter who you are, no matter what path your life takes, God is inviting you to become a person of love. Your vocation is the particular way you will live out that invitation.</p>
+        </div>
+
+        <!-- Inline comprehension check -->
+        <div class="check" data-check="intro1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">According to the lesson, the "universal call to holiness" means…</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">a.</span><span>Only priests and religious sisters are called to be holy.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">b.</span><span>Holiness is something reserved for after death.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">c.</span><span>Every baptized person, in any state of life, is called to become holy.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">d.</span><span>Only people who attend daily Mass can be called holy.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-intro1"></div>
+        </div>
+
+        <div class="prose">
+          <h3>You Do Not Have to Wait</h3>
+          <p>One of the most important things to know about vocation is that it begins with <strong>Baptism</strong>. Through Baptism, you were already given a share in Christ's mission as priest, prophet, and king. That means you do not have to wait until you are thirty and married, or until you enter a seminary, to start living your vocation. You can begin now, as a student, by:</p>
+
+          <ul style="margin-left:20px; margin-bottom:18px;">
+            <li style="margin-bottom:6px;">Striving to live with virtue (honesty, patience, courage, kindness).</li>
+            <li style="margin-bottom:6px;">Helping others when the chance comes up.</li>
+            <li style="margin-bottom:6px;">Listening for God's guidance in your ordinary daily decisions.</li>
+          </ul>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Three ideas were introduced: <em>vocare</em> (to call), <em>universal call to holiness</em>, and <em>sharing in Christ's mission through Baptism</em>. Which one struck you most? Why?</div>
+          <textarea id="pauseIntro" placeholder="Be honest. Which idea landed for you?" oninput="updatePause('pauseIntro', 'pauseIntroWC', 40, 'introNext', 'intro1')"></textarea>
+          <div class="word-count" id="pauseIntroWC"><span>0 words</span><span>Minimum: 40 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()" title="Download your progress">💾 Save</button>
+            <button class="btn btn-primary" id="introNext" onclick="completeIntro()" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 4: KEY TERMS ========== -->
+    <section class="screen" data-screen="terms">
+      <div class="card">
+        <div class="screen-label">Part Two · Vocabulary</div>
+        <h2 class="screen-title">Six Words to Know</h2>
+        <p class="screen-intro">Tap each card to reveal its meaning. You will need to view all six before moving on.</p>
+
+        <div class="terms-grid" id="termsGrid">
+
+          <div class="term-card" data-term="vocation" onclick="openTerm(this)">
+            <div class="term-name">Vocation</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">A calling from God to live a life of holiness in a particular state of life. Every baptized person has a vocation and is invited to respond to God's call.</div>
+          </div>
+
+          <div class="term-card" data-term="laity" onclick="openTerm(this)">
+            <div class="term-name">Laity</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">All the baptized faithful who are not ordained clergy or consecrated religious. Their mission is to bring Christ into the everyday world (family, work, school, civic life) as "salt of the earth" and "light of the world."</div>
+          </div>
+
+          <div class="term-card" data-term="marriage" onclick="openTerm(this)">
+            <div class="term-name">Marriage</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">A vocation in which a man and a woman form a lifelong, faithful union blessed by God, open to the gift of children. The spouses help each other grow in holiness and form a "domestic church" at home.</div>
+          </div>
+
+          <div class="term-card" data-term="holy-orders" onclick="openTerm(this)">
+            <div class="term-name">Holy Orders</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">The vocation of ordained ministry. Men who receive Holy Orders become deacons, priests, or bishops, dedicating their lives to serving God's people through the sacraments, preaching, and pastoral leadership.</div>
+          </div>
+
+          <div class="term-card" data-term="religious-life" onclick="openTerm(this)">
+            <div class="term-name">Religious Life</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">A vocation in which men or women take vows of poverty, chastity, and obedience and live in a religious community dedicated entirely to God's service and the Church's mission.</div>
+          </div>
+
+          <div class="term-card" data-term="single-life" onclick="openTerm(this)">
+            <div class="term-name">Single Life</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">A state of life, sometimes temporary and sometimes permanent, in which a person is not married or ordained but devotes their life to God and others. Like every vocation, it is a path to holiness through love and service.</div>
+          </div>
+
+        </div>
+
+        <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink-soft); text-align:center; margin-top:16px;">
+          Viewed: <span id="termsViewed">0</span> of 6
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()" title="Download your progress">💾 Save</button>
+            <button class="btn btn-primary" id="termsNext" onclick="completeTerms()" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 5: THE FOUR VOCATIONS ========== -->
+    <section class="screen" data-screen="four">
+      <div class="card">
+        <div class="screen-label">Part Three · Main Content</div>
+        <h2 class="screen-title">The Four Main Vocations</h2>
+        <p class="screen-intro">Every Christian is called to love. The Church recognizes four main ways to live that call.</p>
+
+        <div class="prose">
+          <p>In the Catholic view, vocation is about responding to God's personal call. This idea is rooted in Scripture. Think of Jesus calling his apostles with the simple words, <em>"Follow me."</em> The call is personal. The response is personal.</p>
+
+          <p>The Church recognizes four primary types of vocations, each a different way of living out the call to love God and neighbor.</p>
+
+          <h3>Marriage</h3>
+          <p>A husband and wife devote themselves to each other in lifelong love and work together to raise a family rooted in faith. Scripture compares this love to Christ's love for the Church itself.</p>
+          <div class="scripture">
+            "Husbands, love your wives, just as Christ loved the Church and gave himself up for her."
+            <span class="scripture-ref">Ephesians 5:25</span>
+          </div>
+
+          <h3>Holy Orders (Priesthood and Diaconate)</h3>
+          <p>Men are ordained to pastoral ministry. They act in the person of Christ to serve the spiritual needs of the community by administering the sacraments, preaching, and guiding the faithful. Their vocation reflects Christ the Good Shepherd.</p>
+
+          <h3>Religious Life</h3>
+          <p>Men and women join orders or congregations such as the Franciscans, Jesuits, Benedictines, or Sisters of Charity. They take vows of poverty, chastity, and obedience, sharing everything in common and focusing their lives on prayer and service.</p>
+
+          <h3>Dedicated Single Life</h3>
+          <p>Some people live as faithful single persons, using their talents and time to serve in ways others might not be free to do. Volunteering deeply, serving the poor, being active in the parish: the single vocation offers a unique freedom to give oneself to many.</p>
+        </div>
+
+        <div class="pullquote">
+          No vocation is "better" in God's eyes. What matters is responding to the call <em>you</em> personally receive.
+        </div>
+
+        <!-- Inline comprehension check -->
+        <div class="check" data-check="four1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Which of the following is NOT one of the four main vocations recognized by the Church?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this, 'four1', 'd')"><span class="letter">a.</span><span>Marriage</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this, 'four1', 'd')"><span class="letter">b.</span><span>Religious Life</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this, 'four1', 'd')"><span class="letter">c.</span><span>Dedicated Single Life</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this, 'four1', 'd')"><span class="letter">d.</span><span>Professional Volunteer Work</span></button>
+          </div>
+          <div class="check-feedback" id="fb-four1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Before this lesson, which of the four vocations (Marriage, Holy Orders, Religious Life, Single Life) had you thought about the <em>least</em>? What assumptions did you carry into it?</div>
+          <textarea id="pauseFour" placeholder="Name the vocation and be honest about your assumptions. There is no wrong answer." oninput="updatePause('pauseFour', 'pauseFourWC', 50, 'fourNext', 'four1')"></textarea>
+          <div class="word-count" id="pauseFourWC"><span>0 words</span><span>Minimum: 50 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()" title="Download your progress">💾 Save</button>
+            <button class="btn btn-primary" id="fourNext" onclick="completeFour()" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 6: BAPTISM, LAITY, DIVERSITY ========== -->
+    <section class="screen" data-screen="baptism">
+      <div class="card">
+        <div class="screen-label">Part Four · Main Content Continued</div>
+        <h2 class="screen-title">Rooted in Baptism</h2>
+        <p class="screen-intro">Before any of the four specific vocations, there is a deeper one given to everyone at their Baptism.</p>
+
+        <div class="prose">
+          <p>Through Baptism, every Christian is given a share in Christ's own mission as <strong>priest, prophet, and king</strong>. That means every baptized person has something to contribute to the Church and the world. Specific vocations like marriage or priesthood build on this foundation later, but the foundation is there from the start.</p>
+
+          <p>This is especially important for students. You do not have to have your whole life figured out to begin living your vocation. Even right now, as a baptized person, you are called to spread Christ's love in your daily choices.</p>
+
+          <h3>The Laity's Mission</h3>
+          <p>A huge part of the Church's mission is carried out by the <strong>laity</strong>, meaning ordinary baptized people living in the world. The image Jesus gave for this was <em>salt</em> and <em>light</em>:</p>
+
+          <div class="scripture">
+            "You are the salt of the earth… You are the light of the world."
+            <span class="scripture-ref">Matthew 5:13, 14</span>
+          </div>
+
+          <p>Through everyday actions, showing honesty, kindness, diligence, and faith, lay people preserve what is good in the world and help illuminate it with God's truth. A Catholic student who stands up for someone being bullied is living their vocation as a lay Christian. A doctor who treats her patients with compassion is infusing her work with Christian love. The Catechism goes so far as to say:</p>
+
+          <div class="scripture">
+            "Lay believers are in the front line of Church life… They <em>are</em> the Church."
+            <span class="scripture-ref">Catechism of the Catholic Church, §899</span>
+          </div>
+
+          <h3>Many Vocations, One Mission</h3>
+          <p>St. Paul compared the Church to a body with many different parts (1 Corinthians 12). An eye, a hand, and a foot all have different functions, but they all belong to one body. In the same way, people in different vocations serve in different ways but all belong to the one Body of Christ.</p>
+
+          <p>A contemplative nun praying in a monastery, a married dad raising his kids, and a missionary priest traveling to preach the Gospel are very different lives. Yet each one is contributing to the same mission of God's Kingdom.</p>
+
+          <h3>The Story of the Three Stonecutters</h3>
+          <p>Three laborers were asked what they were doing. The first said, "I am cutting stones." The second said, "I am earning a wage." The third smiled and answered, <em>"I am building a great cathedral for God."</em></p>
+
+          <p>All three did the same work. But only the third saw a higher purpose, a vocation, in his labor. His perspective gave his ordinary work a meaning that changed everything.</p>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Think of an ordinary moment in the past week when you could have been "salt" or "light" to someone. Describe it honestly, including what you did or what you <em>didn't</em> do.</div>
+          <textarea id="pauseBaptism" placeholder="A specific moment. Name it. What happened? What could have happened?" oninput="updatePause('pauseBaptism', 'pauseBaptismWC', 60, 'baptismNext', null)"></textarea>
+          <div class="word-count" id="pauseBaptismWC"><span>0 words</span><span>Minimum: 60 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()" title="Download your progress">💾 Save</button>
+            <button class="btn btn-primary" id="baptismNext" onclick="completeBaptism()" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 7: TRADITION & CULTURE ========== -->
+    <section class="screen" data-screen="tradition">
+      <div class="card">
+        <div class="screen-label">Part Five · Catholic Tradition and Culture</div>
+        <h2 class="screen-title">Saints Who Answered the Call</h2>
+        <p class="screen-intro">For two thousand years, the Church has recognized holy men and women in every vocation. Here are a few.</p>
+
+        <div class="prose">
+          <h3>Married Saints · Louis and Zélie Martin</h3>
+          <p>A French married couple (and the parents of St. Thérèse of Lisieux) who lived out their vocation through family life. They raised their children with love and faith, cared for the poor, and supported each other in holiness. They were canonized <em>together</em>. Their story tells us: ordinary family love is a path to sainthood.</p>
+
+          <h3>Priestly Saints · St. John Vianney and St. Oscar Romero</h3>
+          <p>St. John Vianney was a humble parish priest in France, known for spending long hours in the confessional guiding souls. He is the patron saint of parish priests. St. Oscar Romero was a bishop in El Salvador who spoke out for justice and was killed while celebrating Mass, giving his life for his people.</p>
+
+          <h3>Religious Saints · St. Francis of Assisi and St. Teresa of Calcutta</h3>
+          <p>St. Francis heard Christ ask him to "repair my house" and left everything to follow that call, starting the Franciscan movement. St. Teresa of Calcutta (Mother Teresa) founded the Missionaries of Charity and served "the poorest of the poor." She famously said, <em>"Not all of us can do great things. But we can do small things with great love."</em></p>
+
+          <h3>Lay Saints · St. Gianna Molla and Bl. Pier Giorgio Frassati</h3>
+          <p>St. Gianna Molla was an Italian mother and doctor who heroically sacrificed her life for her unborn child. Bl. Pier Giorgio Frassati was a young layman who loved mountain climbing and serving the poor. Youth today still look to him as a model. Lay saints remind us: holiness is not reserved for clergy.</p>
+        </div>
+
+        <div class="pullquote">
+          "My vocation is love. In the heart of the Church, my Mother, I will be love."<br>
+          <span style="font-family:'DM Sans',sans-serif; font-style:normal; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-deep); margin-top:10px; display:inline-block;">St. Thérèse of Lisieux</span>
+        </div>
+
+        <div class="prose">
+          <p>St. Thérèse was a young Carmelite nun who died at 24. She was later declared a Doctor of the Church. Her insight matters for everyone, no matter what vocation they end up in: the particular path is a means, but love itself is the deeper calling.</p>
+
+          <h3>In Catholic Culture Today</h3>
+          <p>Every year the Church celebrates the <strong>World Day of Prayer for Vocations</strong>, asking God to raise up more priests, religious, and holy marriages. Patron saints are prayed to for specific states of life. A young woman preparing for marriage might ask the intercession of Mary and Joseph. Someone discerning priesthood might pray a novena to St. John Vianney. The communion of saints becomes a real support network.</p>
+        </div>
+
+        <!-- Comprehension check -->
+        <div class="check" data-check="trad1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">What does the example of Sts. Louis and Zélie Martin teach us about vocation?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this, 'trad1', 'c')"><span class="letter">a.</span><span>Only priests and nuns can be canonized as saints.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this, 'trad1', 'c')"><span class="letter">b.</span><span>Marriage is considered a lesser vocation than religious life.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this, 'trad1', 'c')"><span class="letter">c.</span><span>Ordinary married life, lived faithfully, is a genuine path to sainthood.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this, 'trad1', 'c')"><span class="letter">d.</span><span>Parents must enter religious life after their children grow up.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-trad1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Of the saints mentioned (Louis and Zélie Martin, John Vianney, Oscar Romero, Francis of Assisi, Teresa of Calcutta, Gianna Molla, Pier Giorgio Frassati, Thérèse of Lisieux), which one stood out to you? What do you think God was doing through their life?</div>
+          <textarea id="pauseTrad" placeholder="Name the saint. What drew you to them? What was God doing through them?" oninput="updatePause('pauseTrad', 'pauseTradWC', 50, 'tradNext', 'trad1')"></textarea>
+          <div class="word-count" id="pauseTradWC"><span>0 words</span><span>Minimum: 50 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()" title="Download your progress">💾 Save</button>
+            <button class="btn btn-primary" id="tradNext" onclick="completeTradition()" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 8: REAL-WORLD CONNECTIONS ========== -->
+    <section class="screen" data-screen="realworld">
+      <div class="card">
+        <div class="screen-label">Part Six · Real-World Connections</div>
+        <h2 class="screen-title">Vocation in Daily Life</h2>
+        <p class="screen-intro">Vocation is not an abstract idea. It shapes how you treat your time, your work, and the people in front of you right now.</p>
+
+        <div class="prose">
+          <h3>Career vs. Calling</h3>
+          <p>A Grade 12 student who loves science might be torn between pursuing a high-paying job in industry or becoming a teacher. If she thinks in terms of <em>vocation</em>, she asks a different question: "How can I best serve others and use the gifts I have been given?" That question does not always lead to the highest salary, but it usually leads to the deepest satisfaction.</p>
+
+          <h3>High School Life as a Vocation</h3>
+          <p>You do not need a job or a spouse to live your calling. Right now, part of your vocation might be being a good student. A loyal friend. A loving son or daughter. A patient older sibling. If your grandparents need help, spending time with them and helping out <em>is</em> vocation in action. If you notice a student sitting alone, choosing to include them <em>is</em> living your calling.</p>
+
+          <h3>Service Roles in the Community</h3>
+          <p>Firefighters, police officers, nurses, and military personnel often see their work as a calling to protect and serve, even at personal risk. A coach who starts practice with a quick character reflection and ends with a team prayer is treating coaching as ministry, not just a way to win games. The attitude changes the work.</p>
+
+          <h3>Faithful Single Laypeople</h3>
+          <p>In every parish, there are single laywomen and laymen who are the backbone of volunteer efforts. Running the food pantry. Visiting the sick. Organizing charity drives. They often have more time to give because they do not have immediate family obligations. Their vocation is no less real, and no less needed, than any other.</p>
+
+          <h3>When Following a Call is Counter-Cultural</h3>
+          <p>In today's world, following a vocation can look strange to others. A young person who decides to become a priest or a sister may face questions: "Why would you give up marriage or career?" Even lifelong marriage can look daunting in a culture that often treats relationships as temporary. Yet many who answer these calls describe a peace and joy they did not expect.</p>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Look at your current daily life: school, family, friendships, the activities you do, the people you spend time with. Where might your vocation already be hiding in plain sight? Give a specific example.</div>
+          <textarea id="pauseReal" placeholder="Be specific. Where is your calling already showing up, even if you have not named it as such?" oninput="updatePause('pauseReal', 'pauseRealWC', 60, 'realNext', null)"></textarea>
+          <div class="word-count" id="pauseRealWC"><span>0 words</span><span>Minimum: 60 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()" title="Download your progress">💾 Save</button>
+            <button class="btn btn-primary" id="realNext" onclick="completeRealworld()" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 9: VOCATION COMPASS ========== -->
+    <section class="screen" data-screen="compass">
+      <div class="card">
+        <div class="screen-label">Part Seven · Reflective Activity</div>
+        <h2 class="screen-title">The Vocation Compass</h2>
+        <p class="screen-intro">A reflection, not a verdict. Rate how strongly each aspect resonates with you right now, at this point in your life.</p>
+
+        <div class="compass-intro">
+          <strong>This is not a quiz.</strong> No score will judge you, and no algorithm will tell you your vocation. The goal is to notice which aspects of each vocation speak to your current desires, so you can reflect honestly on them. God works through our deepest, truest desires.
+          <br><br>
+          <strong>Rate each aspect from 1 (does not resonate) to 5 (resonates strongly).</strong>
+        </div>
+
+        <!-- MARRIAGE -->
+        <div class="compass-vocation" data-voc="marriage">
+          <div class="compass-voc-title">Marriage</div>
+          <div class="compass-voc-desc">A lifelong, faithful union open to family life.</div>
+
+          <div class="compass-aspect" data-asp="m1">
+            <div class="compass-aspect-text">The idea of making a lifelong commitment of love to one specific person.</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'m1')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'m1')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'m1')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'m1')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'m1')">5</button>
+            </div>
+          </div>
+
+          <div class="compass-aspect" data-asp="m2">
+            <div class="compass-aspect-text">Working together with a partner to build a family and raise children.</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'m2')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'m2')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'m2')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'m2')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'m2')">5</button>
+            </div>
+          </div>
+
+          <div class="compass-aspect" data-asp="m3">
+            <div class="compass-aspect-text">Creating a home where faith is lived out daily (a "domestic church").</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'m3')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'m3')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'m3')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'m3')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'m3')">5</button>
+            </div>
+          </div>
+
+          <div class="compass-aspect" data-asp="m4">
+            <div class="compass-aspect-text">Learning to love one person so deeply that their growth matters more than your own comfort.</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'m4')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'m4')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'m4')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'m4')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'m4')">5</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- HOLY ORDERS -->
+        <div class="compass-vocation" data-voc="orders">
+          <div class="compass-voc-title">Holy Orders</div>
+          <div class="compass-voc-desc">Ordained ministry as a deacon, priest, or bishop (for men).</div>
+
+          <div class="compass-aspect" data-asp="h1">
+            <div class="compass-aspect-text">Leading a community in prayer and worship.</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'h1')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'h1')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'h1')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'h1')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'h1')">5</button>
+            </div>
+          </div>
+
+          <div class="compass-aspect" data-asp="h2">
+            <div class="compass-aspect-text">Being a spiritual guide to others as they walk through life's hardest moments.</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'h2')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'h2')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'h2')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'h2')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'h2')">5</button>
+            </div>
+          </div>
+
+          <div class="compass-aspect" data-asp="h3">
+            <div class="compass-aspect-text">Dedicating your entire life to serving God's people, without marriage or family of your own.</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'h3')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'h3')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'h3')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'h3')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'h3')">5</button>
+            </div>
+          </div>
+
+          <div class="compass-aspect" data-asp="h4">
+            <div class="compass-aspect-text">Preaching the Gospel and teaching the faith to others.</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'h4')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'h4')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'h4')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'h4')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'h4')">5</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RELIGIOUS LIFE -->
+        <div class="compass-vocation" data-voc="religious">
+          <div class="compass-voc-title">Religious Life</div>
+          <div class="compass-voc-desc">Taking vows of poverty, chastity, and obedience in community.</div>
+
+          <div class="compass-aspect" data-asp="r1">
+            <div class="compass-aspect-text">Living in community with others who have dedicated their lives to God.</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'r1')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'r1')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'r1')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'r1')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'r1')">5</button>
+            </div>
+          </div>
+
+          <div class="compass-aspect" data-asp="r2">
+            <div class="compass-aspect-text">Giving up personal possessions and ownership (vow of poverty).</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'r2')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'r2')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'r2')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'r2')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'r2')">5</button>
+            </div>
+          </div>
+
+          <div class="compass-aspect" data-asp="r3">
+            <div class="compass-aspect-text">Spending significant time in prayer, silence, and contemplation each day.</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'r3')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'r3')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'r3')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'r3')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'r3')">5</button>
+            </div>
+          </div>
+
+          <div class="compass-aspect" data-asp="r4">
+            <div class="compass-aspect-text">Serving a specific mission as a sister, brother, or monk (teaching, nursing, mission work).</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'r4')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'r4')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'r4')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'r4')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'r4')">5</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SINGLE LIFE -->
+        <div class="compass-vocation" data-voc="single">
+          <div class="compass-voc-title">Dedicated Single Life</div>
+          <div class="compass-voc-desc">Serving God and others with the freedom of a single life.</div>
+
+          <div class="compass-aspect" data-asp="s1">
+            <div class="compass-aspect-text">The flexibility to serve people in many different ways, without one primary relationship tying you down.</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'s1')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'s1')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'s1')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'s1')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'s1')">5</button>
+            </div>
+          </div>
+
+          <div class="compass-aspect" data-asp="s2">
+            <div class="compass-aspect-text">Building deep, meaningful friendships and being a stable presence in others' lives.</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'s2')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'s2')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'s2')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'s2')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'s2')">5</button>
+            </div>
+          </div>
+
+          <div class="compass-aspect" data-asp="s3">
+            <div class="compass-aspect-text">Focusing your time and energy on a mission, ministry, or cause.</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'s3')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'s3')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'s3')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'s3')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'s3')">5</button>
+            </div>
+          </div>
+
+          <div class="compass-aspect" data-asp="s4">
+            <div class="compass-aspect-text">Being present to extended family, parish, or community in ways that married or ordained people cannot always be.</div>
+            <div class="rating-row">
+              <button class="rating-btn" data-val="1" onclick="rate(this,'s4')">1</button>
+              <button class="rating-btn" data-val="2" onclick="rate(this,'s4')">2</button>
+              <button class="rating-btn" data-val="3" onclick="rate(this,'s4')">3</button>
+              <button class="rating-btn" data-val="4" onclick="rate(this,'s4')">4</button>
+              <button class="rating-btn" data-val="5" onclick="rate(this,'s4')">5</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rating-scale" style="margin:16px 0 8px;">
+          <span>1 · Does not resonate</span>
+          <span>5 · Resonates strongly</span>
+        </div>
+
+        <div class="compass-result" id="compassResult">
+          <div style="font-family:'Cormorant Garamond',Georgia,serif; font-size:24px; font-weight:600; color:var(--wine); margin-bottom:14px;">Your Reflection Summary</div>
+          <div style="font-size:14px; color:var(--ink-soft); font-style:italic; margin-bottom:18px;">Remember: this is not a verdict. These averages simply show where your current desires are. Reflect honestly on what this tells you.</div>
+
+          <div class="result-voc">
+            <div class="result-voc-name">Marriage</div>
+            <div class="result-bar"><div class="result-bar-fill" id="bar-marriage"></div></div>
+          </div>
+          <div class="result-voc">
+            <div class="result-voc-name">Holy Orders</div>
+            <div class="result-bar"><div class="result-bar-fill" id="bar-orders"></div></div>
+          </div>
+          <div class="result-voc">
+            <div class="result-voc-name">Religious Life</div>
+            <div class="result-bar"><div class="result-bar-fill" id="bar-religious"></div></div>
+          </div>
+          <div class="result-voc">
+            <div class="result-voc-name">Single Life</div>
+            <div class="result-bar"><div class="result-bar-fill" id="bar-single"></div></div>
+          </div>
+
+          <div class="field" style="margin-top:24px;">
+            <label for="compassReflect">Your Reflection</label>
+            <textarea id="compassReflect" placeholder="Which vocation or aspects resonated most with you? Which surprised you? What might God be inviting you to consider?" oninput="updateWordCount('compassReflect', 'compassWC', 75)"></textarea>
+            <div class="word-count" id="compassWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()" title="Download your progress">💾 Save</button>
+            <button class="btn btn-primary" id="compassNext" onclick="completeCompass()" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 10: CHECK YOUR UNDERSTANDING (QUIZ) ========== -->
+    <section class="screen" data-screen="quiz">
+      <div class="card">
+        <div class="screen-label">Part Eight · Check Your Understanding</div>
+        <h2 class="screen-title">Quick Knowledge Check</h2>
+        <p class="screen-intro">Seven multiple-choice questions. Take your time. Answer all before moving on.</p>
+
+        <div id="quizQuestions">
+          <!-- Questions will be rendered here by JS -->
+        </div>
+
+        <div class="quiz-score" id="quizScore">
+          You scored <strong id="scoreText">0 / 7</strong>
+          <div style="font-size:14px; font-style:italic; color:var(--ink-soft); margin-top:6px;">This score will appear on your download.</div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()" title="Download your progress">💾 Save</button>
+            <button class="btn btn-primary" id="quizNext" onclick="completeQuiz()" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 11: THINK DEEPER ========== -->
+    <section class="screen" data-screen="thinkDeeper">
+      <div class="card">
+        <div class="screen-label">Part Nine · Think Deeper</div>
+        <h2 class="screen-title">Reflection Prompts</h2>
+        <p class="screen-intro">Take these seriously. Your written responses are a significant part of how your work is assessed.</p>
+
+        <div class="prose">
+          <p>You have worked through the key ideas of vocation. Now go deeper. Respond thoughtfully to both prompts. Aim for depth and honesty, not just length.</p>
+        </div>
+
+        <div class="field" style="margin-top:28px;">
+          <label for="td1">Prompt 1 · Listening for God's Call</label>
+          <div style="font-family:'Cormorant Garamond',Georgia,serif; font-size:19px; color:var(--ink); margin-bottom:10px; line-height:1.4;">
+            Finding one's vocation involves listening to God. What are some concrete ways you can start listening for God's call in your own life? Think about prayer, service, the activities you feel most alive doing, and the needs you notice around you.
+          </div>
+          <textarea id="td1" placeholder="Take your time. Write with depth." oninput="updateWordCount('td1', 'td1WC', 150)"></textarea>
+          <div class="word-count" id="td1WC"><span>0 words</span><span>Minimum: 150 words</span></div>
+        </div>
+
+        <div class="field" style="margin-top:28px;">
+          <label for="td2">Prompt 2 · Joy and the World's Need</label>
+          <div style="font-family:'Cormorant Garamond',Georgia,serif; font-size:19px; color:var(--ink); margin-bottom:10px; line-height:1.4;">
+            Consider the idea that <em>"your vocation is where your greatest joy meets the world's greatest need."</em> What do you think this means, and how could you begin to find that intersection in your own life? Use a concrete example from your own experience if you can.
+          </div>
+          <textarea id="td2" placeholder="What joys have you noticed that might be pointing toward your calling?" oninput="updateWordCount('td2', 'td2WC', 150)"></textarea>
+          <div class="word-count" id="td2WC"><span>0 words</span><span>Minimum: 150 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()" title="Download your progress">💾 Save</button>
+            <button class="btn btn-primary" id="tdNext" onclick="completeThinkDeeper()" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 12: SYNTHESIS & BRIDGE ========== -->
+    <section class="screen" data-screen="finish">
+      <div class="card">
+        <div class="screen-label">Part Ten · Synthesis and Bridge</div>
+        <h2 class="screen-title">One Last Question</h2>
+        <p class="screen-intro">A bridge to the next lesson. If vocation is the call to love, then what is love, really?</p>
+
+        <div class="prose">
+          <p>Almost every saint we looked at described their vocation as a form of love. St. Thérèse said it most directly: <em>"My vocation is love."</em> That means the next thing we have to understand is <strong>love itself</strong>, which is what Lesson 4.2 explores.</p>
+
+          <p>Before you move on, answer this honestly: based on your own experience and what you have learned here, what do <em>you</em> think love really is? Not what movies say. Not what social media says. What do you actually think?</p>
+        </div>
+
+        <div class="field" style="margin-top:20px;">
+          <label for="synthesis">Your Synthesis Response</label>
+          <textarea id="synthesis" placeholder="In your own words, what is love? How does it connect to what you have learned about vocation?" oninput="updateWordCount('synthesis', 'synthWC', 100)"></textarea>
+          <div class="word-count" id="synthWC"><span>0 words</span><span>Minimum: 100 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()" title="Download your progress">💾 Save</button>
+            <button class="btn btn-primary" id="synthNext" onclick="finishLesson()" disabled>Complete Lesson →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 13: COMPLETE (DOWNLOAD) ========== -->
+    <section class="screen" data-screen="complete">
+      <div class="card">
+        <div class="completion-hero">
+          <div class="completion-icon">✦</div>
+          <div class="completion-title">Lesson Complete</div>
+          <div class="completion-sub">Well done. Now download your report and submit it to your teacher.</div>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-stat">
+            <div class="stat-label">Quiz Score</div>
+            <div class="stat-value" id="finalScore">0 / 7</div>
+          </div>
+          <div class="summary-stat">
+            <div class="stat-label">Total Time</div>
+            <div class="stat-value" id="finalTime">0 min</div>
+          </div>
+          <div class="summary-stat">
+            <div class="stat-label">Words Written</div>
+            <div class="stat-value" id="finalWords">0</div>
+          </div>
+          <div class="summary-stat">
+            <div class="stat-label">Completion</div>
+            <div class="stat-value">100%</div>
+          </div>
+        </div>
+
+        <div class="download-note">
+          Your report contains your name, your quiz score, every written reflection, and timestamps. When you download it, open the file in a browser to review it, then submit it to your teacher. If you need to return to this lesson later to revise, upload this same file on the welcome screen.
+        </div>
+
+        <div class="btn-row" style="justify-content:center;">
+          <button class="btn btn-gold" onclick="downloadReport()" style="padding:16px 36px; font-size:15px;">⬇ Download My Report</button>
+        </div>
+
+        <div style="margin-top:30px; padding-top:20px; border-top:1px solid rgba(140,113,53,0.3); text-align:center;">
+          <div style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:18px; color:var(--wine);">
+            "My vocation is love."
+          </div>
+          <div style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-deep); margin-top:8px;">
+            St. Thérèse of Lisieux
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="footer">
+    HRE4M1 · Faith Through Vocation · Lesson 4.1
+  </div>
+
+</div>
+
+<div class="toast" id="saveToast">✓ Progress downloaded. Keep this file to resume later.</div>
+
+<script>
+/* ==========================================================================
+   HRE4M1 Lesson 4.1 · Vocation
+   State, navigation, interactions, save, download
+   ========================================================================== */
+
+const LESSON_ID = '4.1';
+const STORAGE_KEY = 'hre4m1_lesson_4_1';
+
+const SCREEN_ORDER = [
+  'welcome', 'hook', 'intro', 'terms', 'four', 'baptism',
+  'tradition', 'realworld', 'compass', 'quiz', 'thinkDeeper',
+  'finish', 'complete'
+];
+
+const TOTAL_STEPS = SCREEN_ORDER.length - 1;
+
+const QUIZ = [
+  {
+    id: 'q1',
+    q: 'What does the word "vocation" mean in Catholic teaching?',
+    opts: [
+      'A calling from God to live a life of holiness in a particular state of life.',
+      'A well-paid career chosen mainly based on personal interest.',
+      'A hobby a person pursues outside of work.',
+      'The job a person inherits from their parents.'
+    ],
+    correct: 0,
+    explain: 'Vocation comes from the Latin "vocare" meaning "to call." It is God\'s invitation to holiness through a particular way of life.'
+  },
+  {
+    id: 'q2',
+    q: 'Which of the following is NOT one of the four main vocations recognized by the Catholic Church?',
+    opts: [
+      'Marriage',
+      'Holy Orders (priesthood or diaconate)',
+      'Dedicated Single Life',
+      'Professional volunteer work'
+    ],
+    correct: 3,
+    explain: 'The four main vocations are Marriage, Holy Orders, Religious Life, and Dedicated Single Life. Volunteering can be part of any vocation but is not itself one of the four.'
+  },
+  {
+    id: 'q3',
+    q: 'Maria is a Grade 12 student who is not sure what her long-term vocation is. According to Catholic teaching, what is true about her right now?',
+    opts: [
+      'She cannot live her vocation until she gets married or enters religious life.',
+      'Through Baptism, she already has a share in Christ\'s mission and can live her calling now.',
+      'Only adults are capable of responding to God\'s call.',
+      'Her vocation will be automatically revealed after graduation.'
+    ],
+    correct: 1,
+    explain: 'Every vocation is rooted in Baptism. Students can already live their calling now through virtue, service, and listening for God in daily life.'
+  },
+  {
+    id: 'q4',
+    q: 'The Second Vatican Council emphasized the "universal call to holiness." What does this teach?',
+    opts: [
+      'Only ordained clergy and consecrated religious are called to holiness.',
+      'Holiness is only possible in monasteries and convents.',
+      'Holiness is reserved for people who become saints after death.',
+      'All Christians, in any state or walk of life, are called to the fullness of Christian life.'
+    ],
+    correct: 3,
+    explain: 'The Council taught that holiness belongs to every baptized person, not only clergy or religious. The Catechism (§2013) puts it plainly.'
+  },
+  {
+    id: 'q5',
+    q: 'According to the Church, which best describes the mission of the laity?',
+    opts: [
+      'To replace the role of priests in the parish.',
+      'To seek God\'s Kingdom by engaging in everyday worldly duties and directing them according to God\'s will.',
+      'To take vows of poverty, chastity, and obedience like religious.',
+      'To avoid the secular world as much as possible.'
+    ],
+    correct: 1,
+    explain: 'The laity bring Christ into every arena of life: families, workplaces, schools, civic life. They are "salt of the earth" and "light of the world."'
+  },
+  {
+    id: 'q6',
+    q: 'Two teachers work at the same school. Teacher A sees her job only as a paycheck. Teacher B sees her teaching as a way to serve God by caring for students. What is the key difference?',
+    opts: [
+      'Teacher B is more skilled than Teacher A.',
+      'Teacher A is not allowed to call herself a Catholic.',
+      'Teacher B sees her work as a vocation, which gives it deeper meaning and mission.',
+      'Teacher B will definitely earn more money than Teacher A.'
+    ],
+    correct: 2,
+    explain: 'Seeing one\'s work through the lens of vocation transforms ordinary tasks into participation in God\'s work. This echoes the story of the three stonecutters.'
+  },
+  {
+    id: 'q7',
+    q: 'St. Thérèse of Lisieux said, "My vocation is love!" Which statement best captures what she meant?',
+    opts: [
+      'Regardless of her specific state of life, the deeper calling of all vocations is to love God and others wholeheartedly.',
+      'She wanted to fall in love and get married.',
+      'She thought love was only for married people.',
+      'She believed only nuns could truly love God.'
+    ],
+    correct: 0,
+    explain: 'Thérèse became a Carmelite nun, but she meant something deeper: underneath every specific vocation, love itself is the true calling.'
+  }
+];
+
+const state = {
+  lessonId: LESSON_ID,
+  startedAt: null,
+  finishedAt: null,
+  studentInfo: { name: '', email: '', class: '' },
+  currentScreen: 'welcome',
+  unlocked: { welcome: true },
+  sectionTimes: {},
+  responses: {
+    hook: '',
+    pauseIntro: '',
+    pauseFour: '',
+    pauseBaptism: '',
+    pauseTrad: '',
+    pauseReal: '',
+    compassReflect: '',
+    td1: '',
+    td2: '',
+    synthesis: ''
+  },
+  termsViewed: [],
+  inlineChecks: {},
+  compassRatings: {},
+  compassAverages: {},
+  quiz: {
+    answers: {},
+    scoreCount: 0,
+    correctIds: []
+  },
+  lastSavedAt: null
+};
+
+let screenEnterTime = Date.now();
+
+function countWords(str) {
+  if (!str) return 0;
+  return str.trim().split(/\s+/).filter(w => w.length > 0).length;
+}
+
+function escapeHTML(str) {
+  if (str === null || str === undefined) return '';
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function formatTime(ms) {
+  const totalMin = Math.floor(ms / 60000);
+  if (totalMin < 1) return '< 1 min';
+  if (totalMin < 60) return totalMin + ' min';
+  const hrs = Math.floor(totalMin / 60);
+  const mins = totalMin % 60;
+  return hrs + 'h ' + mins + 'm';
+}
+
+function saveLocal() {
+  state.lastSavedAt = new Date().toISOString();
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {}
+}
+
+function showScreen(name) {
+  const prev = state.currentScreen;
+  if (prev && screenEnterTime) {
+    const elapsed = Date.now() - screenEnterTime;
+    state.sectionTimes[prev] = (state.sectionTimes[prev] || 0) + elapsed;
+  }
+
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const next = document.querySelector('.screen[data-screen="' + name + '"]');
+  if (next) {
+    next.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  state.currentScreen = name;
+  state.unlocked[name] = true;
+  screenEnterTime = Date.now();
+  updateProgress();
+  saveLocal();
+}
+
+function prevScreen() {
+  const idx = SCREEN_ORDER.indexOf(state.currentScreen);
+  if (idx > 0) showScreen(SCREEN_ORDER[idx - 1]);
+}
+
+function updateProgress() {
+  const container = document.getElementById('progressContainer');
+  if (state.currentScreen === 'welcome') {
+    container.style.display = 'none';
+    return;
+  }
+  container.style.display = 'block';
+  const idx = SCREEN_ORDER.indexOf(state.currentScreen);
+  const pct = Math.round((idx / TOTAL_STEPS) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = 'Part ' + idx + ' of ' + TOTAL_STEPS;
+  document.getElementById('progressPercent').textContent = pct + '%';
+}
+
+function beginLesson() {
+  const name = document.getElementById('studentName').value.trim();
+  const email = document.getElementById('studentEmail').value.trim();
+  const cls = document.getElementById('studentClass').value.trim();
+  const alertEl = document.getElementById('setupAlert');
+
+  if (!name || !email) {
+    alertEl.textContent = 'Please fill in your name and email before starting.';
+    alertEl.classList.add('show');
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alertEl.textContent = 'Please enter a valid email address.';
+    alertEl.classList.add('show');
+    return;
+  }
+  alertEl.classList.remove('show');
+
+  state.studentInfo = { name: name, email: email, class: cls };
+  if (!state.startedAt) state.startedAt = new Date().toISOString();
+  showScreen('hook');
+}
+
+function updateWordCount(inputId, wcId, minimum) {
+  const val = document.getElementById(inputId).value;
+  const count = countWords(val);
+  const wc = document.getElementById(wcId);
+  const status = count >= minimum ? 'met' : (count > 0 ? 'short' : '');
+  wc.innerHTML = '<span class="' + status + '">' + count + ' words</span><span>Minimum: ' + minimum + ' words</span>';
+
+  if (inputId === 'hookResponse') state.responses.hook = val;
+  else if (inputId === 'compassReflect') state.responses.compassReflect = val;
+  else if (inputId === 'td1') state.responses.td1 = val;
+  else if (inputId === 'td2') state.responses.td2 = val;
+  else if (inputId === 'synthesis') state.responses.synthesis = val;
+
+  if (inputId === 'hookResponse') {
+    document.getElementById('hookNext').disabled = count < minimum;
+  } else if (inputId === 'td1' || inputId === 'td2') {
+    const w1 = countWords(document.getElementById('td1').value);
+    const w2 = countWords(document.getElementById('td2').value);
+    document.getElementById('tdNext').disabled = (w1 < 150 || w2 < 150);
+  } else if (inputId === 'synthesis') {
+    document.getElementById('synthNext').disabled = count < minimum;
+  } else if (inputId === 'compassReflect') {
+    checkCompassReady();
+  }
+  saveLocal();
+}
+
+function completeHook() { showScreen('intro'); }
+
+function answerCheck(btn, checkId, correctAnswer) {
+  const existing = state.inlineChecks[checkId];
+  if (existing && existing.locked) return;
+
+  const parent = btn.parentElement;
+  parent.querySelectorAll('.check-option').forEach(b => b.classList.add('answered'));
+  const chosen = btn.getAttribute('data-answer');
+  const isCorrect = chosen === correctAnswer;
+
+  btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+  if (!isCorrect) {
+    parent.querySelectorAll('.check-option').forEach(b => {
+      if (b.getAttribute('data-answer') === correctAnswer) b.classList.add('correct');
+    });
+  }
+
+  state.inlineChecks[checkId] = {
+    selected: chosen,
+    correct: isCorrect,
+    locked: true,
+    at: new Date().toISOString()
+  };
+
+  const fb = document.getElementById('fb-' + checkId);
+  if (fb) {
+    fb.textContent = isCorrect
+      ? 'Correct. Well thought through.'
+      : 'Not quite. The correct answer is ' + correctAnswer + '. Take another look at the reading above.';
+    fb.classList.add('show');
+  }
+
+  // Update gating for screens that combine check + pause
+  refreshGating();
+  saveLocal();
+}
+
+// Returns true if inline check at `checkId` was answered (regardless of correctness).
+function checkAnswered(checkId) {
+  return !!(state.inlineChecks && state.inlineChecks[checkId]);
+}
+
+// Central gating refresh. Called after pause inputs and inline checks change.
+function refreshGating() {
+  // Intro: needs intro1 check answered AND pauseIntro >= 40 words
+  const introBtn = document.getElementById('introNext');
+  if (introBtn) {
+    introBtn.disabled = !(checkAnswered('intro1') && countWords(state.responses.pauseIntro) >= 40);
+  }
+  // Four: needs four1 check AND pauseFour >= 50
+  const fourBtn = document.getElementById('fourNext');
+  if (fourBtn) {
+    fourBtn.disabled = !(checkAnswered('four1') && countWords(state.responses.pauseFour) >= 50);
+  }
+  // Baptism: needs pauseBaptism >= 60
+  const baptBtn = document.getElementById('baptismNext');
+  if (baptBtn) {
+    baptBtn.disabled = countWords(state.responses.pauseBaptism) < 60;
+  }
+  // Tradition: needs trad1 check AND pauseTrad >= 50
+  const tradBtn = document.getElementById('tradNext');
+  if (tradBtn) {
+    tradBtn.disabled = !(checkAnswered('trad1') && countWords(state.responses.pauseTrad) >= 50);
+  }
+  // Realworld: needs pauseReal >= 60
+  const realBtn = document.getElementById('realNext');
+  if (realBtn) {
+    realBtn.disabled = countWords(state.responses.pauseReal) < 60;
+  }
+}
+
+// Pause-reflect input handler: persists response, updates word count, refreshes gating.
+function updatePause(inputId, wcId, minimum, nextBtnId, checkId) {
+  const val = document.getElementById(inputId).value;
+  const count = countWords(val);
+  const wc = document.getElementById(wcId);
+  const status = count >= minimum ? 'met' : (count > 0 ? 'short' : '');
+  wc.innerHTML = '<span class="' + status + '">' + count + ' words</span><span>Minimum: ' + minimum + ' words</span>';
+
+  // Store response
+  if (inputId === 'pauseIntro') state.responses.pauseIntro = val;
+  else if (inputId === 'pauseFour') state.responses.pauseFour = val;
+  else if (inputId === 'pauseBaptism') state.responses.pauseBaptism = val;
+  else if (inputId === 'pauseTrad') state.responses.pauseTrad = val;
+  else if (inputId === 'pauseReal') state.responses.pauseReal = val;
+
+  refreshGating();
+  saveLocal();
+}
+
+function completeIntro() { showScreen('terms'); }
+
+function openTerm(card) {
+  card.classList.toggle('open');
+  if (card.classList.contains('open')) {
+    card.classList.add('viewed');
+    const term = card.getAttribute('data-term');
+    if (!state.termsViewed.includes(term)) state.termsViewed.push(term);
+    const count = state.termsViewed.length;
+    document.getElementById('termsViewed').textContent = count;
+    if (count >= 6) document.getElementById('termsNext').disabled = false;
+    saveLocal();
+  }
+}
+
+function completeTerms() { showScreen('four'); }
+function completeFour() { showScreen('baptism'); }
+function completeBaptism() { showScreen('tradition'); }
+function completeTradition() { showScreen('realworld'); }
+function completeRealworld() { showScreen('compass'); }
+
+function rate(btn, aspectId) {
+  const val = parseInt(btn.getAttribute('data-val'));
+  const row = btn.parentElement;
+  row.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+
+  state.compassRatings[aspectId] = val;
+  const total = Object.keys(state.compassRatings).length;
+  if (total >= 16) showCompassResults();
+  saveLocal();
+}
+
+function showCompassResults() {
+  const groups = {
+    marriage: ['m1','m2','m3','m4'],
+    orders: ['h1','h2','h3','h4'],
+    religious: ['r1','r2','r3','r4'],
+    single: ['s1','s2','s3','s4']
+  };
+
+  const avgs = {};
+  Object.keys(groups).forEach(voc => {
+    const vals = groups[voc].map(id => state.compassRatings[id] || 0);
+    const sum = vals.reduce((a,b) => a+b, 0);
+    avgs[voc] = sum / 4;
+  });
+  state.compassAverages = avgs;
+
+  document.getElementById('compassResult').classList.add('show');
+
+  setTimeout(() => {
+    document.getElementById('bar-marriage').style.width = (avgs.marriage / 5 * 100) + '%';
+    document.getElementById('bar-orders').style.width = (avgs.orders / 5 * 100) + '%';
+    document.getElementById('bar-religious').style.width = (avgs.religious / 5 * 100) + '%';
+    document.getElementById('bar-single').style.width = (avgs.single / 5 * 100) + '%';
+  }, 150);
+
+  setTimeout(() => {
+    document.getElementById('compassResult').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 300);
+
+  checkCompassReady();
+  saveLocal();
+}
+
+function checkCompassReady() {
+  const ratingsDone = Object.keys(state.compassRatings).length >= 16;
+  const reflectDone = countWords(state.responses.compassReflect) >= 75;
+  document.getElementById('compassNext').disabled = !(ratingsDone && reflectDone);
+}
+
+function completeCompass() {
+  renderQuiz();
+  showScreen('quiz');
+}
+
+function renderQuiz() {
+  const container = document.getElementById('quizQuestions');
+  if (container.dataset.rendered === 'yes') return;
+  container.dataset.rendered = 'yes';
+
+  const letters = ['a', 'b', 'c', 'd'];
+  container.innerHTML = QUIZ.map((q, idx) => {
+    return '<div class="quiz-question" data-qid="' + q.id + '">' +
+      '<div class="q-number">Question ' + (idx + 1) + ' of ' + QUIZ.length + '</div>' +
+      '<div class="q-text">' + escapeHTML(q.q) + '</div>' +
+      '<div class="q-options">' +
+        q.opts.map((opt, i) =>
+          '<button class="q-option" data-opt="' + i + '" onclick="answerQ(\'' + q.id + '\', ' + i + ', ' + q.correct + ')">' +
+            '<span class="letter">' + letters[i] + '.</span><span>' + escapeHTML(opt) + '</span>' +
+          '</button>'
+        ).join('') +
+      '</div>' +
+      '<div class="q-explanation" id="exp-' + q.id + '">' + escapeHTML(q.explain) + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function answerQ(qId, chosen, correct) {
+  if (state.quiz.answers[qId] !== undefined) return;
+
+  state.quiz.answers[qId] = chosen;
+  const qEl = document.querySelector('.quiz-question[data-qid="' + qId + '"]');
+  const buttons = qEl.querySelectorAll('.q-option');
+  buttons.forEach(b => b.classList.add('locked'));
+
+  const chosenBtn = qEl.querySelector('.q-option[data-opt="' + chosen + '"]');
+  const correctBtn = qEl.querySelector('.q-option[data-opt="' + correct + '"]');
+
+  if (chosen === correct) {
+    chosenBtn.classList.add('correct');
+    state.quiz.scoreCount++;
+    if (!state.quiz.correctIds.includes(qId)) state.quiz.correctIds.push(qId);
+  } else {
+    chosenBtn.classList.add('incorrect');
+    correctBtn.classList.add('correct');
+  }
+
+  document.getElementById('exp-' + qId).classList.add('show');
+
+  if (Object.keys(state.quiz.answers).length >= QUIZ.length) {
+    document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length;
+    document.getElementById('quizScore').classList.add('show');
+    document.getElementById('quizNext').disabled = false;
+  }
+  saveLocal();
+}
+
+function completeQuiz() { showScreen('thinkDeeper'); }
+function completeThinkDeeper() { showScreen('finish'); }
+
+function finishLesson() {
+  if (!state.finishedAt) state.finishedAt = new Date().toISOString();
+
+  const totalMs = Object.values(state.sectionTimes).reduce((a,b) => a+b, 0) + (Date.now() - screenEnterTime);
+  const totalWords = countWords(state.responses.hook) +
+                     countWords(state.responses.compassReflect) +
+                     countWords(state.responses.td1) +
+                     countWords(state.responses.td2) +
+                     countWords(state.responses.synthesis);
+
+  document.getElementById('finalScore').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length;
+  document.getElementById('finalTime').textContent = formatTime(totalMs);
+  document.getElementById('finalWords').textContent = totalWords.toLocaleString();
+
+  saveLocal();
+  showScreen('complete');
+}
+
+function downloadReport() {
+  doDownload(false);
+}
+
+function saveProgressNow() {
+  doDownload(true);
+  showToast('✓ Progress saved. Keep this file to resume later.');
+  markSaveButtonsSaved();
+}
+
+function showToast(message) {
+  const toast = document.getElementById('saveToast');
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2800);
+}
+
+function markSaveButtonsSaved() {
+  // Brief visual "saved" state on all save buttons, then revert
+  const buttons = document.querySelectorAll('.save-sticky, .btn-save-row');
+  buttons.forEach(b => {
+    b.classList.add('saved');
+    const original = b.innerHTML;
+    if (b.classList.contains('save-sticky')) {
+      b.innerHTML = '<span>✓</span><span>Saved</span>';
+    } else {
+      b.innerHTML = '✓ Saved';
+    }
+    clearTimeout(b._revertTimer);
+    b._revertTimer = setTimeout(() => {
+      b.classList.remove('saved');
+      b.innerHTML = original;
+    }, 2200);
+  });
+}
+
+function doDownload(inProgress) {
+  const totalMs = Object.values(state.sectionTimes).reduce((a,b) => a+b, 0) + (Date.now() - screenEnterTime);
+  const totalWords = countWords(state.responses.hook) +
+                     countWords(state.responses.pauseIntro) +
+                     countWords(state.responses.pauseFour) +
+                     countWords(state.responses.pauseBaptism) +
+                     countWords(state.responses.pauseTrad) +
+                     countWords(state.responses.pauseReal) +
+                     countWords(state.responses.compassReflect) +
+                     countWords(state.responses.td1) +
+                     countWords(state.responses.td2) +
+                     countWords(state.responses.synthesis);
+
+  const completedDate = state.finishedAt ? new Date(state.finishedAt).toLocaleString('en-CA') : 'In progress';
+  const startedDate = state.startedAt ? new Date(state.startedAt).toLocaleString('en-CA') : '';
+  const letters = ['a', 'b', 'c', 'd'];
+
+  const quizReview = QUIZ.map((q, idx) => {
+    const chosen = state.quiz.answers[q.id];
+    const chosenText = chosen !== undefined ? q.opts[chosen] : 'Not answered';
+    const correctText = q.opts[q.correct];
+    const isCorrect = chosen === q.correct;
+    const mark = isCorrect
+      ? '<span class="mark correct-mark">CORRECT</span>'
+      : '<span class="mark incorrect-mark">INCORRECT</span>';
+    const correctLine = !isCorrect
+      ? '<div class="q-ans correct-note"><strong>Correct answer:</strong> ' + letters[q.correct] + '. ' + escapeHTML(correctText) + '</div>'
+      : '';
+    return '<div class="q-block">' +
+      '<div class="q-num">Question ' + (idx + 1) + ' ' + mark + '</div>' +
+      '<div class="q-prompt">' + escapeHTML(q.q) + '</div>' +
+      '<div class="q-ans"><strong>Student answer:</strong> ' + (chosen !== undefined ? letters[chosen] + '. ' : '') + escapeHTML(chosenText) + '</div>' +
+      correctLine +
+    '</div>';
+  }).join('');
+
+  let compassSummary = '';
+  if (Object.keys(state.compassAverages).length > 0) {
+    compassSummary =
+      '<div class="sub-heading">Vocation Compass Averages</div>' +
+      '<ul class="compass-list">' +
+      '<li>Marriage: ' + state.compassAverages.marriage.toFixed(2) + ' / 5</li>' +
+      '<li>Holy Orders: ' + state.compassAverages.orders.toFixed(2) + ' / 5</li>' +
+      '<li>Religious Life: ' + state.compassAverages.religious.toFixed(2) + ' / 5</li>' +
+      '<li>Single Life: ' + state.compassAverages.single.toFixed(2) + ' / 5</li>' +
+      '</ul>';
+  }
+
+  const checkEntries = Object.entries(state.inlineChecks);
+  let checksHtml = '';
+  if (checkEntries.length > 0) {
+    checksHtml = '<div class="sub-heading">Inline Comprehension Checks</div>' +
+      '<ul class="compass-list">' +
+      checkEntries.map(entry => '<li>' + entry[0] + ': <strong>' + (entry[1].correct ? 'Correct' : 'Incorrect') + '</strong> (chose ' + entry[1].selected + ')</li>').join('') +
+      '</ul>';
+  }
+
+  const timeRows = Object.entries(state.sectionTimes)
+    .map(entry => '<li>' + entry[0] + ': ' + formatTime(entry[1]) + '</li>')
+    .join('');
+
+  const safeName = (state.studentInfo.name || 'Student').replace(/[^a-zA-Z0-9]/g, '_');
+  const dateStr = new Date().toISOString().slice(0,10);
+  const progressSuffix = inProgress ? '_IN-PROGRESS' : '';
+  const filename = 'HRE4M1_L4-1_Vocation_' + safeName + progressSuffix + '_' + dateStr + '.html';
+
+  const stateJson = JSON.stringify(state).replace(/</g, '\\u003c');
+
+  // Figure out completion percentage for the banner
+  const currentIdx = SCREEN_ORDER.indexOf(state.currentScreen);
+  const completionPct = Math.round((currentIdx / TOTAL_STEPS) * 100);
+  const progressBanner = inProgress
+    ? '<div class="progress-banner">In Progress <span class="percent">' + completionPct + '% · Current section: ' + (state.currentScreen || 'welcome') + '</span></div>\n'
+    : '';
+
+  const report = '<!DOCTYPE html>\n<html lang="en">\n<head>\n' +
+'<meta charset="UTF-8">\n' +
+'<title>HRE4M1 Lesson 4.1 Report · ' + escapeHTML(state.studentInfo.name) + '</title>\n' +
+'<style>\n' +
+'  body { font-family: Georgia, "Times New Roman", serif; max-width: 820px; margin: 40px auto; padding: 24px; color: #1F2937; line-height: 1.6; background: #FDFAF0; }\n' +
+'  .hdr { border-bottom: 3px double #8C7135; padding-bottom: 16px; margin-bottom: 24px; }\n' +
+'  .hdr-label { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: #8C7135; font-weight: 600; }\n' +
+'  h1 { font-size: 28px; color: #6B2C2C; margin: 8px 0 4px; }\n' +
+'  .subtitle { font-style: italic; color: #5a5a5a; font-size: 16px; }\n' +
+'  .meta { background: #F5EDD8; padding: 14px 18px; margin: 20px 0; border-left: 3px solid #8C7135; font-size: 14px; }\n' +
+'  .meta dl { margin: 0; display: grid; grid-template-columns: 140px 1fr; gap: 6px 16px; }\n' +
+'  .meta dt { font-weight: 700; color: #8C7135; font-family: Arial, sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }\n' +
+'  .meta dd { margin: 0; }\n' +
+'  h2 { font-size: 20px; color: #6B2C2C; border-bottom: 1px solid #C9A961; padding-bottom: 6px; margin-top: 30px; }\n' +
+'  .score-big { font-size: 36px; color: #6B2C2C; font-weight: 700; margin: 10px 0; }\n' +
+'  .sub-heading { font-weight: 700; font-size: 13px; color: #8C7135; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 18px; margin-bottom: 8px; font-family: Arial, sans-serif; }\n' +
+'  .response-box { background: white; border: 1px solid #ddd; border-left: 3px solid #8C7135; padding: 14px 18px; margin: 8px 0 20px; white-space: pre-wrap; font-size: 15px; line-height: 1.65; }\n' +
+'  .response-prompt { font-style: italic; color: #555; font-size: 14px; margin-bottom: 6px; }\n' +
+'  .response-wc { font-family: Arial, sans-serif; font-size: 11px; color: #8C7135; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.08em; }\n' +
+'  .q-block { background: white; border: 1px solid #e0e0e0; padding: 12px 16px; margin: 10px 0; border-radius: 2px; }\n' +
+'  .q-num { font-family: Arial, sans-serif; font-size: 12px; color: #8C7135; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }\n' +
+'  .q-prompt { font-weight: 600; margin-bottom: 8px; }\n' +
+'  .q-ans { font-size: 14px; margin: 4px 0; }\n' +
+'  .correct-note { color: #3F7A4D; }\n' +
+'  .mark { font-family: Arial, sans-serif; font-size: 10px; padding: 2px 8px; border-radius: 2px; margin-left: 8px; color: white; }\n' +
+'  .correct-mark { background: #3F7A4D; }\n' +
+'  .incorrect-mark { background: #A8432B; }\n' +
+'  .compass-list { list-style: none; padding: 0; }\n' +
+'  .compass-list li { padding: 6px 0; border-bottom: 1px dotted #C9A961; font-size: 14px; }\n' +
+'  .footer-note { margin-top: 40px; padding-top: 16px; border-top: 1px solid #ccc; font-size: 12px; color: #888; font-style: italic; text-align: center; }\n' +
+'  .progress-banner { background: #8C7135; color: #FDFAF0; padding: 12px 18px; font-family: Arial, sans-serif; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; margin: -24px -24px 24px; }\n' +
+'  .progress-banner .percent { float: right; }\n' +
+'  @media print { body { background: white; } }\n' +
+'</style>\n</head>\n<body>\n' +
+progressBanner +
+'<div class="hdr">\n' +
+'  <div class="hdr-label">HRE4M1 · Unit 4 · Lesson 1</div>\n' +
+'  <h1>What is Vocation?</h1>\n' +
+'  <div class="subtitle">Student ' + (inProgress ? 'Progress Save' : 'Assessment Report') + '</div>\n' +
+'</div>\n\n' +
+'<div class="meta">\n' +
+'  <dl>\n' +
+'    <dt>Name</dt><dd>' + escapeHTML(state.studentInfo.name) + '</dd>\n' +
+'    <dt>Email</dt><dd>' + escapeHTML(state.studentInfo.email) + '</dd>\n' +
+'    <dt>Class</dt><dd>' + (escapeHTML(state.studentInfo.class) || '(not provided)') + '</dd>\n' +
+'    <dt>Started</dt><dd>' + startedDate + '</dd>\n' +
+'    <dt>' + (inProgress ? 'Saved' : 'Completed') + '</dt><dd>' + (inProgress ? new Date().toLocaleString('en-CA') : completedDate) + '</dd>\n' +
+'    <dt>Total Time</dt><dd>' + formatTime(totalMs) + '</dd>\n' +
+'    <dt>Total Words</dt><dd>' + totalWords.toLocaleString() + '</dd>\n' +
+'  </dl>\n' +
+'</div>\n\n' +
+'<h2>Knowledge Check Score</h2>\n' +
+'<div class="score-big">' + state.quiz.scoreCount + ' / ' + QUIZ.length + '</div>\n\n' +
+'<h2>Pre-Lesson Hook</h2>\n' +
+'<div class="response-prompt">When you hear the word "calling," what comes to mind?</div>\n' +
+'<div class="response-box">' + (escapeHTML(state.responses.hook) || '(no response)') + '</div>\n' +
+'<div class="response-wc">' + countWords(state.responses.hook) + ' words</div>\n\n' +
+'<h2>Pause &amp; Reflect · After Introduction</h2>\n' +
+'<div class="response-prompt">Three ideas were introduced: vocare, universal call to holiness, and sharing in Christ\'s mission through Baptism. Which one struck you most? Why?</div>\n' +
+'<div class="response-box">' + (escapeHTML(state.responses.pauseIntro) || '(no response)') + '</div>\n' +
+'<div class="response-wc">' + countWords(state.responses.pauseIntro) + ' words</div>\n\n' +
+'<h2>Pause &amp; Reflect · After Four Vocations</h2>\n' +
+'<div class="response-prompt">Before this lesson, which of the four vocations had you thought about the least? What assumptions did you carry?</div>\n' +
+'<div class="response-box">' + (escapeHTML(state.responses.pauseFour) || '(no response)') + '</div>\n' +
+'<div class="response-wc">' + countWords(state.responses.pauseFour) + ' words</div>\n\n' +
+'<h2>Pause &amp; Reflect · Salt and Light</h2>\n' +
+'<div class="response-prompt">Think of an ordinary moment in the past week when you could have been "salt" or "light" to someone. Describe it honestly.</div>\n' +
+'<div class="response-box">' + (escapeHTML(state.responses.pauseBaptism) || '(no response)') + '</div>\n' +
+'<div class="response-wc">' + countWords(state.responses.pauseBaptism) + ' words</div>\n\n' +
+'<h2>Pause &amp; Reflect · A Saint Who Stood Out</h2>\n' +
+'<div class="response-prompt">Which saint stood out to you, and what do you think God was doing through their life?</div>\n' +
+'<div class="response-box">' + (escapeHTML(state.responses.pauseTrad) || '(no response)') + '</div>\n' +
+'<div class="response-wc">' + countWords(state.responses.pauseTrad) + ' words</div>\n\n' +
+'<h2>Pause &amp; Reflect · Vocation Hiding in Plain Sight</h2>\n' +
+'<div class="response-prompt">Where might your vocation already be hiding in plain sight in your current daily life?</div>\n' +
+'<div class="response-box">' + (escapeHTML(state.responses.pauseReal) || '(no response)') + '</div>\n' +
+'<div class="response-wc">' + countWords(state.responses.pauseReal) + ' words</div>\n\n' +
+'<h2>Vocation Compass</h2>\n' +
+compassSummary + '\n' +
+'<div class="sub-heading">Student Reflection</div>\n' +
+'<div class="response-box">' + (escapeHTML(state.responses.compassReflect) || '(no response)') + '</div>\n' +
+'<div class="response-wc">' + countWords(state.responses.compassReflect) + ' words</div>\n\n' +
+'<h2>Think Deeper · Prompt 1</h2>\n' +
+'<div class="response-prompt">Finding one\'s vocation involves listening to God. What are some concrete ways you can start listening for God\'s call in your own life?</div>\n' +
+'<div class="response-box">' + (escapeHTML(state.responses.td1) || '(no response)') + '</div>\n' +
+'<div class="response-wc">' + countWords(state.responses.td1) + ' words</div>\n\n' +
+'<h2>Think Deeper · Prompt 2</h2>\n' +
+'<div class="response-prompt">"Your vocation is where your greatest joy meets the world\'s greatest need." What does this mean, and how could you find that in your own life?</div>\n' +
+'<div class="response-box">' + (escapeHTML(state.responses.td2) || '(no response)') + '</div>\n' +
+'<div class="response-wc">' + countWords(state.responses.td2) + ' words</div>\n\n' +
+'<h2>Synthesis · Bridge to Lesson 4.2</h2>\n' +
+'<div class="response-prompt">Based on your own experience and what you have learned, what do you think love really is?</div>\n' +
+'<div class="response-box">' + (escapeHTML(state.responses.synthesis) || '(no response)') + '</div>\n' +
+'<div class="response-wc">' + countWords(state.responses.synthesis) + ' words</div>\n\n' +
+'<h2>Quiz Review</h2>\n' +
+quizReview + '\n\n' +
+'<h2>Engagement Details</h2>\n' +
+checksHtml + '\n' +
+'<div class="sub-heading">Time on Each Section</div>\n' +
+'<ul class="compass-list">' + timeRows + '</ul>\n\n' +
+'<div class="footer-note">\n' +
+'  This report was generated by the HRE4M1 Vocation learning app.<br>\n' +
+'  File contains embedded progress data. Re-upload to the app to resume or revise.\n' +
+'</div>\n\n' +
+'<script type="application/json" id="hre4m1-save-data">\n' +
+stateJson + '\n' +
+'<\/script>\n' +
+'</body>\n</html>';
+
+  const blob = new Blob([report], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function resumeFromFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const text = e.target.result;
+      const match = text.match(/<script type="application\/json" id="hre4m1-save-data">([\s\S]*?)<\/script>/);
+      if (!match) {
+        alert('This file does not appear to be a valid saved lesson report.');
+        return;
+      }
+      const saved = JSON.parse(match[1]);
+      if (saved.lessonId !== LESSON_ID) {
+        alert('This file is from a different lesson. Please upload the file for Lesson 4.1.');
+        return;
+      }
+
+      // Restore state
+      Object.assign(state, saved);
+      screenEnterTime = Date.now();
+
+      // Populate forms
+      document.getElementById('studentName').value = state.studentInfo.name || '';
+      document.getElementById('studentEmail').value = state.studentInfo.email || '';
+      document.getElementById('studentClass').value = state.studentInfo.class || '';
+
+      if (document.getElementById('hookResponse')) {
+        document.getElementById('hookResponse').value = state.responses.hook || '';
+        updateWordCount('hookResponse', 'hookWC', 30);
+      }
+      // Restore pause responses
+      const pauseMap = [
+        { id: 'pauseIntro', wc: 'pauseIntroWC', min: 40, next: 'introNext', check: 'intro1' },
+        { id: 'pauseFour', wc: 'pauseFourWC', min: 50, next: 'fourNext', check: 'four1' },
+        { id: 'pauseBaptism', wc: 'pauseBaptismWC', min: 60, next: 'baptismNext', check: null },
+        { id: 'pauseTrad', wc: 'pauseTradWC', min: 50, next: 'tradNext', check: 'trad1' },
+        { id: 'pauseReal', wc: 'pauseRealWC', min: 60, next: 'realNext', check: null }
+      ];
+      pauseMap.forEach(p => {
+        const el = document.getElementById(p.id);
+        if (el) {
+          el.value = state.responses[p.id] || '';
+          if (state.responses[p.id]) updatePause(p.id, p.wc, p.min, p.next, p.check);
+        }
+      });
+      if (document.getElementById('compassReflect')) {
+        document.getElementById('compassReflect').value = state.responses.compassReflect || '';
+      }
+      if (document.getElementById('td1')) {
+        document.getElementById('td1').value = state.responses.td1 || '';
+      }
+      if (document.getElementById('td2')) {
+        document.getElementById('td2').value = state.responses.td2 || '';
+      }
+      if (document.getElementById('synthesis')) {
+        document.getElementById('synthesis').value = state.responses.synthesis || '';
+      }
+
+      // Restore term cards
+      (state.termsViewed || []).forEach(term => {
+        const card = document.querySelector('.term-card[data-term="' + term + '"]');
+        if (card) {
+          card.classList.add('open', 'viewed');
+        }
+      });
+      if (document.getElementById('termsViewed')) {
+        document.getElementById('termsViewed').textContent = (state.termsViewed || []).length;
+        if ((state.termsViewed || []).length >= 6) document.getElementById('termsNext').disabled = false;
+      }
+
+      // Restore inline checks
+      Object.entries(state.inlineChecks || {}).forEach(entry => {
+        const checkId = entry[0];
+        const info = entry[1];
+        const container = document.querySelector('.check[data-check="' + checkId + '"]');
+        if (!container) return;
+        const buttons = container.querySelectorAll('.check-option');
+        buttons.forEach(b => {
+          b.classList.add('answered');
+          const ans = b.getAttribute('data-answer');
+          if (ans === info.selected) {
+            b.classList.add(info.correct ? 'correct' : 'incorrect');
+          }
+        });
+        // Also mark the correct answer if they were wrong
+        if (!info.correct) {
+          buttons.forEach(b => {
+            const ans = b.getAttribute('data-answer');
+            // Find correct answer by data - we need to determine it from the onclick
+            const onclick = b.getAttribute('onclick') || '';
+            const correctMatch = onclick.match(/'[^']*',\s*'([a-d])'/);
+            if (correctMatch && ans === correctMatch[1]) {
+              b.classList.add('correct');
+            }
+          });
+        }
+        const fb = document.getElementById('fb-' + checkId);
+        if (fb) {
+          fb.textContent = info.correct ? 'Correct. Well thought through.' : 'Not quite. Take another look at the reading above.';
+          fb.classList.add('show');
+        }
+      });
+
+      if (state.inlineChecks && state.inlineChecks.intro1 && document.getElementById('introNext')) document.getElementById('introNext').disabled = false;
+      if (state.inlineChecks && state.inlineChecks.four1 && document.getElementById('fourNext')) document.getElementById('fourNext').disabled = false;
+      if (state.inlineChecks && state.inlineChecks.trad1 && document.getElementById('tradNext')) document.getElementById('tradNext').disabled = false;
+
+      // Re-evaluate gating (checks + pause responses combined)
+      refreshGating();
+
+      // Restore compass
+      Object.entries(state.compassRatings || {}).forEach(entry => {
+        const aspectId = entry[0];
+        const val = entry[1];
+        const aspect = document.querySelector('.compass-aspect[data-asp="' + aspectId + '"]');
+        if (aspect) {
+          const btn = aspect.querySelector('.rating-btn[data-val="' + val + '"]');
+          if (btn) btn.classList.add('selected');
+        }
+      });
+      if (Object.keys(state.compassRatings || {}).length >= 16) {
+        document.getElementById('compassResult').classList.add('show');
+        const avgs = state.compassAverages || {};
+        if (avgs.marriage !== undefined) {
+          document.getElementById('bar-marriage').style.width = (avgs.marriage / 5 * 100) + '%';
+          document.getElementById('bar-orders').style.width = (avgs.orders / 5 * 100) + '%';
+          document.getElementById('bar-religious').style.width = (avgs.religious / 5 * 100) + '%';
+          document.getElementById('bar-single').style.width = (avgs.single / 5 * 100) + '%';
+        }
+        checkCompassReady();
+      }
+
+      // Restore quiz
+      if (state.quiz && Object.keys(state.quiz.answers || {}).length > 0) {
+        renderQuiz();
+        Object.entries(state.quiz.answers).forEach(entry => {
+          const qId = entry[0];
+          const chosen = entry[1];
+          const qObj = QUIZ.find(x => x.id === qId);
+          if (!qObj) return;
+          const qEl = document.querySelector('.quiz-question[data-qid="' + qId + '"]');
+          if (!qEl) return;
+          qEl.querySelectorAll('.q-option').forEach(b => b.classList.add('locked'));
+          const chosenBtn = qEl.querySelector('.q-option[data-opt="' + chosen + '"]');
+          const correctBtn = qEl.querySelector('.q-option[data-opt="' + qObj.correct + '"]');
+          if (chosen === qObj.correct) {
+            chosenBtn.classList.add('correct');
+          } else {
+            chosenBtn.classList.add('incorrect');
+            correctBtn.classList.add('correct');
+          }
+          document.getElementById('exp-' + qId).classList.add('show');
+        });
+        if (Object.keys(state.quiz.answers).length >= QUIZ.length) {
+          document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length;
+          document.getElementById('quizScore').classList.add('show');
+          document.getElementById('quizNext').disabled = false;
+        }
+      }
+
+      // Navigate to last screen
+      const target = state.currentScreen && state.currentScreen !== 'welcome' ? state.currentScreen : 'hook';
+      state.currentScreen = 'welcome'; // reset so showScreen does the move cleanly
+      showScreen(target);
+
+      alert('Welcome back, ' + state.studentInfo.name + '. Your progress has been restored.');
+    } catch (err) {
+      alert('Could not read your saved file. Please start a new lesson.');
+      console.error(err);
+    }
+  };
+  reader.readAsText(file);
+}
+
+// Initialize
+window.addEventListener('DOMContentLoaded', () => {
+  screenEnterTime = Date.now();
+  updateProgress();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRE4M1 · Lesson 4.5: Family Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+
+  :root {
+    --bg-deep: #0F1A35;
+    --bg-mid: #162749;
+    --bg-card: #F5EDD8;
+    --bg-card-alt: #EEE4C9;
+    --gold: #C9A961;
+    --gold-soft: #D4B97A;
+    --gold-deep: #8C7135;
+    --wine: #6B2C2C;
+    --ivory: #F5EDD8;
+    --cream: #E8DFB8;
+    --ink: #1F2937;
+    --ink-soft: #3F4656;
+    --locked: #4A556880;
+    --success: #3F7A4D;
+    --danger: #A8432B;
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.25);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(201, 169, 97, 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(107, 44, 44, 0.1), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .unit-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .lesson-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .lesson-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gold-soft);
+    opacity: 0.9;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  .progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-deep) 70%, transparent);
+    padding: 16px 20px 12px;
+    margin: -24px -20px 24px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft));
+    width: 0%;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.5);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    margin: 8px auto 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  .save-sticky {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 169, 97, 0.12);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .save-sticky:hover, .btn-save-row:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    border-color: var(--gold);
+  }
+
+  .save-sticky.saved, .btn-save-row.saved {
+    background: rgba(63, 122, 77, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .btn-save-row {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .screen {
+    display: none;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .screen.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .hero-banner {
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-deep));
+    color: var(--ivory);
+    padding: 40px 40px 36px;
+    margin: -40px -44px 32px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .hero-banner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+
+  .hero-banner p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-soft);
+    margin-top: 8px;
+  }
+
+  .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+
+  .screen-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .screen-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .screen-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .prose {
+    font-size: 16.5px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .prose p { margin-bottom: 18px; }
+  .prose strong { color: var(--wine); font-weight: 600; }
+  .prose em { color: var(--ink-soft); }
+  .prose ul { margin-left: 22px; margin-bottom: 18px; }
+  .prose li { margin-bottom: 8px; }
+
+  .prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 28px 0 14px;
+    color: var(--wine);
+    line-height: 1.25;
+  }
+
+  .prose h3::before {
+    content: '❖ ';
+    color: var(--gold-deep);
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+
+  .scripture {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scripture-ref {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+  }
+
+  .pullquote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--wine);
+    text-align: center;
+    margin: 28px 20px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    line-height: 1.4;
+  }
+
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .word-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .word-count .met { color: var(--success); font-weight: 600; }
+  .word-count .short { color: var(--danger); }
+
+  .alert {
+    padding: 12px 16px;
+    background: rgba(168, 67, 43, 0.1);
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    margin-top: 14px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .alert.show { display: block; }
+
+  .upload-zone {
+    border: 1px dashed rgba(140, 113, 53, 0.4);
+    padding: 20px;
+    text-align: center;
+    margin-top: 24px;
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .upload-zone label {
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .upload-zone input { display: none; }
+
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--ivory);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--wine);
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:disabled {
+    background: var(--locked);
+    border-color: var(--locked);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+  }
+
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-row-split {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .pause {
+    background: linear-gradient(135deg, rgba(107, 44, 44, 0.06), rgba(201, 169, 97, 0.08));
+    border: 1px solid rgba(107, 44, 44, 0.2);
+    border-left: 3px solid var(--wine);
+    padding: 22px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .pause-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pause-label::before {
+    content: '❊';
+    font-size: 14px;
+    color: var(--gold-deep);
+  }
+
+  .pause-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .pause textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(107, 44, 44, 0.25);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    border-radius: 2px;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .pause textarea:focus {
+    outline: none;
+    border-color: var(--wine);
+    box-shadow: 0 0 0 2px rgba(107, 44, 44, 0.15);
+  }
+
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .term-card {
+    background: var(--bg-card-alt);
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    border-radius: 2px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 120px;
+  }
+
+  .term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--gold-deep);
+  }
+
+  .term-card.viewed {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+  }
+
+  .term-card.viewed::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .term-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.7;
+  }
+
+  .term-def {
+    display: none;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .term-card.open .term-def { display: block; }
+  .term-card.open .term-tap { display: none; }
+
+  .check {
+    background: #FDF8E8;
+    border: 1px dashed var(--gold-deep);
+    border-radius: 2px;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .check-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .check-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .check-options,
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-option,
+  .q-option {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .check-option:hover:not(.answered),
+  .q-option:hover:not(.locked) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .check-option .letter,
+  .q-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .check-option.correct,
+  .q-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .check-option.incorrect,
+  .q-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .q-option.selected {
+    border-color: var(--wine);
+    background: rgba(107, 44, 44, 0.06);
+  }
+
+  .q-option.locked { pointer-events: none; }
+
+  .check-feedback,
+  .q-explanation {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    display: none;
+  }
+
+  .check-feedback.show,
+  .q-explanation.show { display: block; }
+
+  .love-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 24px 0 30px;
+  }
+
+  .love-card {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+    border: 1px solid rgba(140, 113, 53, 0.25);
+    padding: 20px 22px;
+    min-height: 170px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .love-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    opacity: 0.75;
+  }
+
+  .love-card h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+
+  .love-card .subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 12px;
+  }
+
+  .love-card p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .lens-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .lens-card {
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.15);
+    padding: 18px 20px;
+    border-left: 3px solid var(--gold-deep);
+  }
+
+  .lens-card h4 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .lens-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  .quiz-question {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.25);
+  }
+
+  .quiz-question:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .quiz-score {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(107, 44, 44, 0.1));
+    border: 1px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score strong {
+    font-size: 34px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .summary-stat {
+    background: #FDF8E8;
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+  }
+
+  .completion-hero {
+    text-align: center;
+    padding: 20px 0 32px;
+  }
+
+  .completion-icon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    color: var(--gold-deep);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .completion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .completion-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .download-note {
+    background: rgba(201, 169, 97, 0.12);
+    padding: 18px 22px;
+    border-left: 3px solid var(--gold-deep);
+    margin: 24px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid var(--gold);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  @media (max-width: 760px) {
+    .card { padding: 28px 22px; }
+    .hero-banner { margin: -28px -22px 28px; padding: 30px 24px 26px; }
+    .love-grid { grid-template-columns: 1fr; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; justify-content: center; }
+    .btn-row-split { width: 100%; flex-direction: column; }
+    .btn-row-split .btn-save-row { width: 100%; justify-content: center; }
+    .save-sticky {
+      position: static;
+      display: flex;
+      margin: 10px auto 0;
+      width: fit-content;
+    }
+    .progress-meta { flex-wrap: wrap; }
+  }
+
+  .prose ul { margin-left: 20px; margin-bottom: 18px; }
+  .prose li { margin-bottom: 8px; }
+  .note-panel {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin: 22px 0;
+    color: var(--ink);
+    line-height: 1.65;
+  }
+
+
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="unit-label">HRE4M1 · Unit 4 · Lesson 5</div>
+    <h1 class="lesson-title">Family Life</h1>
+    <div class="lesson-subtitle">The domestic church, the first school of Christian life</div>
+    <svg class="ornament" width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 0 10 L 30 10 M 50 10 L 80 10" stroke="#C9A961" stroke-width="1" fill="none"/>
+      <circle cx="40" cy="10" r="3" fill="none" stroke="#C9A961" stroke-width="1"/>
+      <circle cx="40" cy="10" r="1" fill="#C9A961"/>
+    </svg>
+  </div>
+
+  <div class="progress-container" id="progressContainer" style="display:none; position:relative;">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-meta"><span id="progressLabel">Section 1 of 12</span><span id="progressPercent">0%</span></div>
+    <button class="save-sticky" id="stickySave" onclick="saveProgressNow()" title="Download your progress to resume later"><span>💾</span><span id="stickySaveLabel">Save Progress</span></button>
+  </div>
+
+  <div id="screens">
+    <section class="screen active" data-screen="welcome">
+      <div class="card">
+        <div class="hero-banner">
+          <div class="ornament-line">
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+            <span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">A Study in Family Life</span>
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+          </div>
+          <h2>Welcome to Lesson 4.5</h2>
+          <p>This lesson explores why the family matters so much in Catholic life, and how faith is meant to be lived at home.</p>
+        </div>
+
+        <p class="prose" style="margin-bottom:24px;">Before we begin, enter your information. Your name will appear on your final report, which you can download at the end and submit.</p>
+
+        <div class="field"><label for="studentName">Full Name</label><input type="text" id="studentName" placeholder="First and last name" autocomplete="name"></div>
+        <div class="field"><label for="studentEmail">School Email</label><input type="email" id="studentEmail" placeholder="you@school.ca" autocomplete="email"></div>
+        <div class="field"><label for="studentClass">Class / Period</label><input type="text" id="studentClass" placeholder="e.g., HRE4M1 · Period 2"></div>
+        <div class="alert" id="setupAlert">Please fill in your name and email before starting.</div>
+
+        <div class="btn-row"><div></div><button class="btn btn-primary" onclick="beginLesson()">Begin Lesson →</button></div>
+
+        <div class="upload-zone">
+          <div style="font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Returning to finish?</div>
+          <label for="resumeFile">Upload your saved progress file</label>
+          <input type="file" id="resumeFile" accept=".json" onchange="resumeFromFile(event)">
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="hook">
+      <div class="card">
+        <div class="screen-label">Before We Begin</div>
+        <h2 class="screen-title">A Question to Sit With</h2>
+        <p class="screen-intro">There is no perfect answer here. Just be honest about what you think right now.</p>
+        <div class="prose">
+          <p>When you hear the word <strong>family</strong>, what comes to mind first?</p>
+          <p>For some people, family means comfort, support, and love. For others, it also includes tension, stress, or disappointment. This lesson is not pretending family life is always easy. It is asking what family is meant to be in God’s plan, and how faith can shape it.</p>
+        </div>
+        <div class="field" style="margin-top:20px;">
+          <label for="hookResponse">Your starting point</label>
+          <textarea id="hookResponse" placeholder="What makes a family strong, weak, life-giving, or difficult?" oninput="updateWordCount('hookResponse','hookWC',35)"></textarea>
+          <div class="word-count" id="hookWC"><span>0 words</span><span>Minimum: 35 words</span></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="hookNext" onclick="showScreen('intro')" disabled>Continue →</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="intro">
+      <div class="card">
+        <div class="screen-label">Part One · Foundations</div>
+        <h2 class="screen-title">God’s Design for Family</h2>
+        <p class="screen-intro">The Church teaches that the family is not just one social arrangement among many. It is the original cell of society and a key place where people grow in holiness.</p>
+        <div class="prose">
+          <p>From the beginning of Scripture, family is central. God creates man and woman, joins them together, and from that union family life begins. The Bible presents family as one of the first and most basic realities of human life. Before there were schools, governments, or nations, there was the family.</p>
+          <p>The Catechism calls the family the <strong>“original cell of social life”</strong>. That means the family is the basic building block of society. In healthy families, people first learn how to love, forgive, share, obey, communicate, and use freedom well. Those same habits later shape schools, workplaces, neighborhoods, and the wider world.</p>
+          <div class="scripture">“As for me and my house, we will serve the Lord.”<span class="scripture-ref">Joshua 24:15</span></div>
+          <p>The Church also recognizes that not all families look the same. Some are traditional, some are blended, some are led by a single parent, and some carry deep wounds. The lesson is not saying every family is easy or ideal. It is saying that God still works through family relationships, even when they are messy, and that love and responsibility remain the heart of family life.</p>
+        </div>
+        <div class="check" data-check="intro1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">What does it mean to call the family the “original cell of social life”?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'intro1','c')"><span class="letter">a.</span><span>Family is mainly a private matter that does not affect society.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'intro1','c')"><span class="letter">b.</span><span>Family matters only when children are very young.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'intro1','c')"><span class="letter">c.</span><span>The family is the basic building block where people first learn how to live with others.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'intro1','c')"><span class="letter">d.</span><span>The family is more important than the Church and replaces it.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-intro1"></div>
+        </div>
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Why do you think the Church connects strong family life to the health of society as a whole?</div>
+          <textarea id="pauseIntro" placeholder="Explain the connection in your own words." oninput="updateWordCount('pauseIntro','pauseIntroWC',60)"></textarea>
+          <div class="word-count" id="pauseIntroWC"><span>0 words</span><span>Minimum: 60 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="introNext" onclick="showScreen('terms')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="terms">
+      <div class="card">
+        <div class="screen-label">Part Two · Vocabulary</div>
+        <h2 class="screen-title">Six Terms to Know</h2>
+        <p class="screen-intro">Tap each card to reveal its meaning. You will need to open all six before moving on.</p>
+        <div class="terms-grid" id="termsGrid">
+          <div class="term-card" data-term="domestic-church" onclick="openTerm(this)"><div class="term-name">Domestic Church</div><div class="term-tap">Tap to reveal</div><div class="term-def">The family as the smallest unit of the Church, where prayer, faith formation, love, and virtue are lived at home.</div></div>
+          <div class="term-card" data-term="fourth-commandment" onclick="openTerm(this)"><div class="term-name">Fourth Commandment</div><div class="term-tap">Tap to reveal</div><div class="term-def">Honor your father and mother. This calls children to respect, gratitude, obedience, and care toward parents, and teaches the basis of social order.</div></div>
+          <div class="term-card" data-term="parental-responsibility" onclick="openTerm(this)"><div class="term-name">Parental Responsibility</div><div class="term-tap">Tap to reveal</div><div class="term-def">The duty of parents to provide for the physical, emotional, moral, and spiritual needs of their children, including education in the faith.</div></div>
+          <div class="term-card" data-term="obedience" onclick="openTerm(this)"><div class="term-name">Obedience</div><div class="term-tap">Tap to reveal</div><div class="term-def">Listening to and following the reasonable guidance of parents or guardians, as an act of respect and trust for one’s good.</div></div>
+          <div class="term-card" data-term="family-of-god" onclick="openTerm(this)"><div class="term-name">Family of God</div><div class="term-tap">Tap to reveal</div><div class="term-def">The spiritual family of the Church. Through Baptism, Christians become sons and daughters of God and brothers and sisters in Christ.</div></div>
+          <div class="term-card" data-term="original-cell" onclick="openTerm(this)"><div class="term-name">Original Cell of Society</div><div class="term-tap">Tap to reveal</div><div class="term-def">A way of saying the family is the basic unit of society, where people first learn moral values, community life, and responsibility.</div></div>
+        </div>
+        <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink-soft); text-align:center; margin-top:16px;">Viewed: <span id="termsViewed">0</span> of 6</div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="termsNext" onclick="showScreen('domestic')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="domestic">
+      <div class="card">
+        <div class="screen-label">Part Three · The Home of Faith</div>
+        <h2 class="screen-title">The Family as a Domestic Church</h2>
+        <p class="screen-intro">The home is meant to be more than a place where people sleep and eat. It is meant to be a place where faith is lived.</p>
+        <div class="prose">
+          <p>Calling the family a <strong>domestic church</strong> means the family shares in the life and mission of the wider Church. The home becomes a small place of worship, teaching, service, and community.</p>
+          <p>This can look very ordinary. A family prays before meals. Parents explain the meaning of Advent, Lent, or a feast day. Family members practice forgiveness after conflict. They serve each other in chores, sacrifices, and hospitality. They make room for faith to be part of daily life, not just Sunday morning.</p>
+          <div class="scripture">“The Christian family constitutes a specific revelation and realization of ecclesial communion… it can and should be called a domestic church.”<span class="scripture-ref">Catechism of the Catholic Church, §2204</span></div>
+          <p>A domestic church also reaches outward. Families can invite others in, care for neighbors, and live the Gospel beyond the walls of the house. Even simple habits, like family grace, a prayer corner, or an Advent wreath, can shape the identity of a home.</p>
+        </div>
+        <div class="check" data-check="domestic1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Which example best shows a family living as a domestic church?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'domestic1','b')"><span class="letter">a.</span><span>A family that keeps faith private and never talks about it at home.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'domestic1','b')"><span class="letter">b.</span><span>A family that prays, teaches the faith, practices forgiveness, and serves others together.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'domestic1','b')"><span class="letter">c.</span><span>A family that goes to church only on major holidays but never lives the faith at home.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'domestic1','b')"><span class="letter">d.</span><span>A family that avoids talking about values so nobody gets offended.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-domestic1"></div>
+        </div>
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">What is one small family habit, practice, or tradition that could make a home feel more like a domestic church?</div>
+          <textarea id="pauseDomestic" placeholder="Choose one realistic practice and explain why it matters." oninput="updateWordCount('pauseDomestic','pauseDomesticWC',65)"></textarea>
+          <div class="word-count" id="pauseDomesticWC"><span>0 words</span><span>Minimum: 65 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="domesticNext" onclick="showScreen('parents')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="parents">
+      <div class="card">
+        <div class="screen-label">Part Four · Family Roles</div>
+        <h2 class="screen-title">The Responsibility of Parents</h2>
+        <p class="screen-intro">Parents are not just caretakers. In Catholic teaching, they are the first educators, the first witnesses of faith, and the shepherds of their little domestic church.</p>
+        <div class="prose">
+          <p>Parents are responsible for more than food, clothing, and shelter. They are called to create a loving environment where tenderness, forgiveness, respect, fidelity, and service become normal. They are meant to form the character of their children and help them grow in faith and virtue.</p>
+          <p>This means teaching the faith, modeling virtue, disciplining with love, and helping each child discover his or her gifts and vocation. Children often learn more from what parents do than from what parents say.</p>
+          <div class="scripture">“Parents have the first responsibility for the education of their children… They must regard their children as children of God and respect them as human persons.”<span class="scripture-ref">Catechism of the Catholic Church, §§2221–2222</span></div>
+          <p>Parenting is holy work. Everyday actions, driving a child to practice, checking homework, apologizing after losing patience, praying with a teenager, making sacrifices for the family, are all part of a real vocation.</p>
+        </div>
+        <div class="check" data-check="parents1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Which statement best reflects Catholic teaching on parental responsibility?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'parents1','d')"><span class="letter">a.</span><span>Parents mainly provide money, while schools handle the moral and spiritual side.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'parents1','d')"><span class="letter">b.</span><span>Parents should never discipline because all correction is harmful.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'parents1','d')"><span class="letter">c.</span><span>Parents should choose their children’s future vocations for them.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'parents1','d')"><span class="letter">d.</span><span>Parents are the first educators, responsible for physical, emotional, moral, and spiritual formation.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-parents1"></div>
+        </div>
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Why is it important that children see faith and virtue modeled at home, and not only taught in class or at church?</div>
+          <textarea id="pauseParents" placeholder="Use a concrete example if possible." oninput="updateWordCount('pauseParents','pauseParentsWC',70)"></textarea>
+          <div class="word-count" id="pauseParentsWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="parentsNext" onclick="showScreen('children')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="children">
+      <div class="card">
+        <div class="screen-label">Part Five · Family Roles Continued</div>
+        <h2 class="screen-title">The Responsibility of Children</h2>
+        <p class="screen-intro">Family life is not a one-way street. Children also have duties, especially respect, gratitude, obedience, and care.</p>
+        <div class="prose">
+          <p>The Fourth Commandment calls children to <strong>honor</strong> their father and mother. That includes respectful speech, gratitude for sacrifices, obedience to reasonable rules, and care for parents as they age.</p>
+          <div class="scripture">“Children, obey your parents in the Lord, for this is right… ‘Honor your father and mother’ is the first commandment with a promise.”<span class="scripture-ref">Ephesians 6:1–3</span></div>
+          <p>Obedience in the Christian sense is not blind submission. It is respect in action. Children should follow the reasonable guidance of parents, but if a parent ever demanded something morally wrong, God’s law comes first. As children mature, they also grow in understanding, forgiveness, and responsibility.</p>
+          <p>Siblings, too, are called to real love. Family life teaches people how to share, apologize, compromise, and stand by one another. Extended family, grandparents, cousins, aunts, and uncles, can also become important teachers of faith, culture, and belonging.</p>
+        </div>
+        <div class="check" data-check="children1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Which statement best reflects Catholic teaching on obedience in the family?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'children1','c')"><span class="letter">a.</span><span>Obedience means doing whatever a parent says, even if it is morally wrong.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'children1','c')"><span class="letter">b.</span><span>Obedience has no connection to love or respect.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'children1','c')"><span class="letter">c.</span><span>Children should obey reasonable guidance, while always putting God’s law first if a command is immoral.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'children1','c')"><span class="letter">d.</span><span>Obedience ends as soon as a child feels annoyed by a rule.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-children1"></div>
+        </div>
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Why do you think gratitude, respect, and forgiveness are so important in family life, especially when family members are not perfect?</div>
+          <textarea id="pauseChildren" placeholder="Explain in your own words." oninput="updateWordCount('pauseChildren','pauseChildrenWC',75)"></textarea>
+          <div class="word-count" id="pauseChildrenWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="childrenNext" onclick="showScreen('society')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="society">
+      <div class="card">
+        <div class="screen-label">Part Six · Wider Connections</div>
+        <h2 class="screen-title">The Family and Society</h2>
+        <p class="screen-intro">The family shapes society, and society also shapes family life. The relationship works both ways.</p>
+        <div class="prose">
+          <p>Families are where many people first learn moral values, responsibility, compassion, and freedom used well. If strong families help form strong people, then they also help form stronger communities.</p>
+          <p>At the same time, society can support or strain family life. Work schedules, media, economic pressure, and cultural messages can either strengthen or weaken family bonds. This is one reason the Church supports family-friendly policies and community structures that protect the dignity of family life.</p>
+          <p>The Church also speaks of the <strong>family of God</strong>. Through Baptism, Christians become brothers and sisters in Christ. That means when someone’s biological family is hurting, weak, or absent, the Church community can help fill that gap through friendship, mentorship, and support.</p>
+          <div class="pullquote">The family is not only a private reality. It has public consequences for the common good.</div>
+          <p>Strong friendships matter here too. Good friends can become like family. They can support faith, build character, and make a person feel less alone. Bad friendships can pull a person away from home, virtue, and truth. This is why peer influence matters so much in teenage life.</p>
+        </div>
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">How can strong families, healthy friendships, and parish communities work together to support someone who feels alone or comes from a difficult home life?</div>
+          <textarea id="pauseSociety" placeholder="Think about both family life and the wider family of God." oninput="updateWordCount('pauseSociety','pauseSocietyWC',85)"></textarea>
+          <div class="word-count" id="pauseSocietyWC"><span>0 words</span><span>Minimum: 85 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="societyNext" onclick="showScreen('tradition')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="tradition">
+      <div class="card">
+        <div class="screen-label">Part Seven · Catholic Tradition and Culture</div>
+        <h2 class="screen-title">Family Faith in Catholic Life</h2>
+        <p class="screen-intro">Catholic tradition gives families concrete practices that help make faith visible and lived.</p>
+        <div class="prose">
+          <h3>The Holy Family</h3>
+          <p>Catholics look to Jesus, Mary, and Joseph as a model of home life marked by faith, obedience, patience, and trust in God. The Feast of the Holy Family reminds families that ordinary home life can be holy.</p>
+          <h3>Blessing the Home</h3>
+          <p>One beautiful custom is the chalking of the door at Epiphany, asking Christ to bless the house for the coming year. Other traditions include prayer corners, grace before meals, family rosaries, May crownings, and visiting graves in November.</p>
+          <h3>Family Support in the Church</h3>
+          <p>The Church also supports family life through movements, ministries, patron saints, and parish communities. Families help families. Friends become mentors. A parish can become a real source of belonging.</p>
+        </div>
+        <div class="check" data-check="tradition1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">What is the purpose of the chalking of the door tradition?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'tradition1','a')"><span class="letter">a.</span><span>To ask Christ to bless the home and all who live and visit there.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'tradition1','a')"><span class="letter">b.</span><span>To mark which homes belong to one ethnic background only.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'tradition1','a')"><span class="letter">c.</span><span>To replace the need for prayer inside the home.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'tradition1','a')"><span class="letter">d.</span><span>To decorate the house only for social reasons.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-tradition1"></div>
+        </div>
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Which Catholic family practice or tradition from this lesson seems most meaningful or realistic to you, and why?</div>
+          <textarea id="pauseTradition" placeholder="Choose one tradition and explain what it could do for a family." oninput="updateWordCount('pauseTradition','pauseTraditionWC',70)"></textarea>
+          <div class="word-count" id="pauseTraditionWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="traditionNext" onclick="showScreen('quiz')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="quiz">
+      <div class="card">
+        <div class="screen-label">Part Eight · Check Your Understanding</div>
+        <h2 class="screen-title">Lesson Quiz</h2>
+        <p class="screen-intro">Answer each question. Feedback appears right away.</p>
+        <div id="quizWrap"></div>
+        <div class="quiz-score" id="quizScore">Quiz Score<strong id="scoreText">0 / 7</strong></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="quizNext" onclick="showScreen('deeper')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="deeper">
+      <div class="card">
+        <div class="screen-label">Part Nine · Think Deeper</div>
+        <h2 class="screen-title">Stretch Your Thinking</h2>
+        <p class="screen-intro">Use the lesson ideas, but also think carefully and honestly.</p>
+        <div class="field"><label for="td1">Think Deeper 1</label><textarea id="td1" placeholder="Why is quality time and intentional family life so important in a world that is busy and fragmented? What changes could help a family protect that time?" oninput="updateWordCount('td1','td1WC',130)"></textarea><div class="word-count" id="td1WC"><span>0 words</span><span>Minimum: 130 words</span></div></div>
+        <div class="field"><label for="td2">Think Deeper 2</label><textarea id="td2" placeholder="If you had to explain to someone why the Church cares so much about family life, what would you say? Include the ideas of domestic church, moral formation, and the common good." oninput="updateWordCount('td2','td2WC',130)"></textarea><div class="word-count" id="td2WC"><span>0 words</span><span>Minimum: 130 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="deeperNext" onclick="showScreen('synthesis')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="synthesis">
+      <div class="card">
+        <div class="screen-label">Part Ten · Final Writing</div>
+        <h2 class="screen-title">Final Synthesis</h2>
+        <p class="screen-intro">Bring the whole lesson together in one strong paragraph set.</p>
+        <div class="field"><label for="synthesis">Why Family Life Matters</label><textarea id="synthesis" placeholder="Explain why the family matters so much in Catholic teaching. Include domestic church, roles of parents and children, the family of God, and the connection between family life and society." oninput="updateWordCount('synthesis','synthesisWC',160)"></textarea><div class="word-count" id="synthesisWC"><span>0 words</span><span>Minimum: 160 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="synthesisNext" onclick="showScreen('finish')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="finish">
+      <div class="card">
+        <div class="completion-hero">
+          <div class="completion-icon">✧</div>
+          <div class="completion-title">Almost Finished</div>
+          <div class="completion-sub">Review your lesson work, then download your final report.</div>
+        </div>
+        <div class="summary-grid">
+          <div class="summary-stat"><div class="stat-label">Quiz Score</div><div class="stat-value" id="finishQuiz">0 / 7</div></div>
+          <div class="summary-stat"><div class="stat-label">Total Words</div><div class="stat-value" id="finishWords">0</div></div>
+          <div class="summary-stat"><div class="stat-label">Time in Lesson</div><div class="stat-value" id="finishTime">0 min</div></div>
+        </div>
+        <div class="download-note">Download your final report when you are ready. It will include your student info, quiz score, and written responses from the whole lesson.</div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn btn-gold" onclick="downloadReport()">⬇ Download Report</button><button class="btn btn-primary" onclick="finishLesson()">Mark Complete →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="complete">
+      <div class="card">
+        <div class="completion-hero">
+          <div class="completion-icon">✓</div>
+          <div class="completion-title">Lesson Completed</div>
+          <div class="completion-sub">Your work has been saved in this browser, and your report can be downloaded again anytime from the previous screen.</div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="showScreen('finish')">← Back to Report</button><button class="btn btn-gold" onclick="downloadReport()">⬇ Download Report Again</button></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast">Saved.</div>
+  <div class="footer">HRE4M1 · Unit 4 · Lesson 5</div>
+</div>
+
+<script>
+const LESSON_ID = '4.5';
+const STORAGE_KEY = 'hre4m1_lesson_4_5';
+const SCREEN_ORDER = ['welcome','hook','intro','terms','domestic','parents','children','society','tradition','quiz','deeper','synthesis','finish','complete'];
+const TOTAL_STEPS = SCREEN_ORDER.length - 1;
+const REQUIRED_TERMS = 6;
+const QUIZ = [
+  {id:'q1', q:'What does it mean to call the family the “domestic church”?', opts:['The family replaces the parish and no longer needs the wider Church.','The family is a small place where prayer, faith, love, and Christian virtue are lived at home.','Only very religious families can be called domestic churches.','The term refers only to priests living in rectories.'], correct:1, explain:'The family is called a domestic church because the home becomes a place where faith is prayed, taught, and lived.'},
+  {id:'q2', q:'Which statement best describes parental responsibility in Catholic teaching?', opts:['Parents mainly provide food and shelter, while others handle faith and moral formation.','Parents are the first educators, responsible for physical, emotional, moral, and spiritual formation.','Parents should never correct children because discipline is unchristian.','Parents should decide every part of a child’s future vocation.'], correct:1, explain:'Catholic teaching says parents are the first and principal educators of their children, especially in faith and virtue.'},
+  {id:'q3', q:'How should children honor their father and mother?', opts:['By obeying every command without thinking about morality.','By showing respect, gratitude, obedience to reasonable rules, and care for their parents.','By agreeing with parents in every argument.','By avoiding family responsibilities until adulthood.'], correct:1, explain:'Honor includes respect, gratitude, obedience to what is reasonable, and care for parents.'},
+  {id:'q4', q:'Why is the Fourth Commandment important for society as a whole?', opts:['Because it teaches habits of respect, responsibility, and order that extend beyond the home.','Because it matters only inside private family life.','Because it gives parents unlimited power.','Because it removes the need for forgiveness or dialogue.'], correct:0, explain:'The commandment helps form respect for authority, gratitude, and social order, not just private family life.'},
+  {id:'q5', q:'What does the phrase “family of God” mean?', opts:['Only clergy belong to God’s family.','Christians become part of a spiritual family through Baptism and are brothers and sisters in Christ.','It refers only to biological relatives who all attend the same parish.','It means family background decides holiness.'], correct:1, explain:'The Church is called the family of God because Baptism makes us sons and daughters of God and members of one spiritual family.'},
+  {id:'q6', q:'Why does the Church encourage family prayer and shared traditions?', opts:['To make family life more rigid and formal.','To replace the need for love and communication.','Because these practices help unite the family and pass on faith in daily life.','Because rituals matter more than relationships.'], correct:2, explain:'Family prayer and traditions help shape identity, strengthen unity, and hand on the faith in concrete ways.'},
+  {id:'q7', q:'What role can good friendships play in family and faith life?', opts:['They are mostly distractions from real family life.','They can become like family, support virtue, and strengthen someone who feels alone.','They matter only when they improve social status.','They should always stay separate from faith and home life.'], correct:1, explain:'Good friendships can support faith, provide belonging, and act like an extension of the family of God.'}
+];
+const CORRECT_MAP = {intro1:'c', domestic1:'b', parents1:'d', children1:'c', tradition1:'a'};
+const MINIMUMS = {hookResponse:35, pauseIntro:60, pauseDomestic:65, pauseParents:70, pauseChildren:75, pauseSociety:85, pauseTradition:70, td1:130, td2:130, synthesis:160};
+const RESPONSE_ORDER = ['hookResponse','pauseIntro','pauseDomestic','pauseParents','pauseChildren','pauseSociety','pauseTradition','td1','td2','synthesis'];
+const RESPONSE_TITLES = {hookResponse:'Starting Point', pauseIntro:'Reflection 1', pauseDomestic:'Reflection 2', pauseParents:'Reflection 3', pauseChildren:'Reflection 4', pauseSociety:'Reflection 5', pauseTradition:'Reflection 6', td1:'Think Deeper 1', td2:'Think Deeper 2', synthesis:'Final Synthesis'};
+const REPORT_FILE_PREFIX = 'HRE4M1_L4_5_Family_Life';
+const REPORT_HEADER_LABEL = 'HRE4M1 · Unit 4 · Lesson 5';
+const REPORT_TITLE = 'Family Life';
+const REPORT_SUBTITLE = 'Student Report';
+const RESUME_ERROR = 'Could not load that file. Please upload a valid Lesson 4.5 progress file.';
+
+const state = {lessonId: LESSON_ID, startedAt: null, finishedAt: null, currentScreen: 'welcome', studentInfo: {name:'', email:'', className:''}, termsViewed: [], inlineChecks: {}, responses: {}, quiz: {answers: {}, scoreCount: 0}, sectionTimes: {}, lastSavedAt: null};
+RESPONSE_ORDER.forEach(key => state.responses[key] = '');
+let screenEnterTime = Date.now();
+
+function countWords(str) { if (!str) return 0; return str.trim().split(/\s+/).filter(Boolean).length; }
+function escapeHTML(str) { if (str === null || str === undefined) return ''; return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function formatTime(ms) { const totalMin = Math.floor(ms/60000); if (totalMin < 1) return '< 1 min'; if (totalMin < 60) return totalMin + ' min'; const hrs = Math.floor(totalMin/60); const mins = totalMin % 60; return hrs + 'h ' + mins + 'm'; }
+
+function persistInputsToState() {
+  state.studentInfo.name = document.getElementById('studentName').value.trim();
+  state.studentInfo.email = document.getElementById('studentEmail').value.trim();
+  state.studentInfo.className = document.getElementById('studentClass').value.trim();
+  RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) state.responses[key] = el.value.trim(); });
+}
+function saveLocal() { state.lastSavedAt = new Date().toISOString(); persistInputsToState(); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function totalWords() { persistInputsToState(); return Object.values(state.responses).reduce((sum, value) => sum + countWords(value), 0); }
+function totalTimeMs() { let total = 0; Object.values(state.sectionTimes).forEach(ms => total += ms || 0); if (state.currentScreen && screenEnterTime) total += Date.now() - screenEnterTime; return total; }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1600); }
+function markSaveButtonsSaved() { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.add('saved')); const label = document.getElementById('stickySaveLabel'); if (label) label.textContent = 'Saved'; setTimeout(() => { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.remove('saved')); const again = document.getElementById('stickySaveLabel'); if (again) again.textContent = 'Save Progress'; }, 1300); }
+
+function updateProgress() {
+  const idx = SCREEN_ORDER.indexOf(state.currentScreen);
+  const activeStep = Math.max(0, idx);
+  const pct = Math.max(0, Math.min(100, Math.round((activeStep / TOTAL_STEPS) * 100)));
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPercent').textContent = pct + '%';
+  document.getElementById('progressLabel').textContent = 'Section ' + Math.max(1, activeStep) + ' of ' + TOTAL_STEPS;
+}
+
+function showScreen(screenId) {
+  persistInputsToState();
+  const now = Date.now();
+  if (state.currentScreen) { state.sectionTimes[state.currentScreen] = (state.sectionTimes[state.currentScreen] || 0) + (now - screenEnterTime); }
+  screenEnterTime = now;
+  state.currentScreen = screenId;
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.querySelector('.screen[data-screen="' + screenId + '"]');
+  if (target) target.classList.add('active');
+  document.getElementById('progressContainer').style.display = screenId === 'welcome' ? 'none' : 'block';
+  if (screenId === 'quiz') renderQuiz();
+  if (screenId === 'finish') refreshFinishStats();
+  updateProgress();
+  refreshGating();
+  saveLocal();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function prevScreen() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); if (idx > 0) showScreen(SCREEN_ORDER[idx-1]); }
+function beginLesson() {
+  const name = document.getElementById('studentName').value.trim();
+  const email = document.getElementById('studentEmail').value.trim();
+  if (!name || !email) { document.getElementById('setupAlert').classList.add('show'); return; }
+  document.getElementById('setupAlert').classList.remove('show');
+  if (!state.startedAt) state.startedAt = new Date().toISOString();
+  showScreen('hook');
+}
+
+function updateWordCount(textareaId, countId, minimum) {
+  const el = document.getElementById(textareaId);
+  const words = countWords(el.value);
+  state.responses[textareaId] = el.value.trim();
+  const counter = document.getElementById(countId);
+  const met = words >= minimum;
+  counter.innerHTML = '<span>' + words + ' words</span><span class="' + (met ? 'met' : 'short') + '">Minimum: ' + minimum + ' words</span>';
+  saveLocal();
+  refreshGating();
+}
+
+function openTerm(card) {
+  const term = card.getAttribute('data-term');
+  card.classList.toggle('open');
+  if (!state.termsViewed.includes(term)) state.termsViewed.push(term);
+  card.classList.add('viewed');
+  document.getElementById('termsViewed').textContent = state.termsViewed.length;
+  saveLocal();
+  refreshGating();
+}
+
+function answerCheck(btn, checkId, correctLetter) {
+  if (state.inlineChecks[checkId]) return;
+  const chosen = btn.getAttribute('data-answer');
+  state.inlineChecks[checkId] = chosen;
+  const wrap = btn.closest('.check');
+  wrap.querySelectorAll('.check-option').forEach(opt => opt.classList.add('answered'));
+  const fb = document.getElementById('fb-' + checkId);
+  wrap.querySelectorAll('.check-option').forEach(opt => {
+    if (opt.getAttribute('data-answer') === correctLetter) opt.classList.add('correct');
+    else if (opt === btn) opt.classList.add('incorrect');
+  });
+  fb.textContent = chosen === correctLetter ? 'Correct. You matched the main lesson idea.' : 'Not quite. The correct answer is highlighted for you.';
+  fb.classList.add('show');
+  saveLocal();
+  refreshGating();
+}
+
+function refreshGating() {
+  const needs = (id, min) => countWords((document.getElementById(id)?.value || '').trim()) >= min;
+  const checked = id => !!state.inlineChecks[id];
+  const setDisabled = (id, disabled) => { const el = document.getElementById(id); if (el) el.disabled = !!disabled; };
+  setDisabled('hookNext', !needs('hookResponse', MINIMUMS.hookResponse));
+  setDisabled('introNext', !(needs('pauseIntro', MINIMUMS.pauseIntro) && checked('intro1')));
+  setDisabled('termsNext', state.termsViewed.length < REQUIRED_TERMS);
+  setDisabled('domesticNext', !(needs('pauseDomestic', MINIMUMS.pauseDomestic) && checked('domestic1')));
+  setDisabled('parentsNext', !(needs('pauseParents', MINIMUMS.pauseParents) && checked('parents1')));
+  setDisabled('childrenNext', !(needs('pauseChildren', MINIMUMS.pauseChildren) && checked('children1')));
+  setDisabled('societyNext', !needs('pauseSociety', MINIMUMS.pauseSociety));
+  setDisabled('traditionNext', !(needs('pauseTradition', MINIMUMS.pauseTradition) && checked('tradition1')));
+  setDisabled('deeperNext', !(needs('td1', MINIMUMS.td1) && needs('td2', MINIMUMS.td2)));
+  setDisabled('synthesisNext', !needs('synthesis', MINIMUMS.synthesis));
+  const allQuizAnswered = Object.keys(state.quiz.answers).length === QUIZ.length;
+  setDisabled('quizNext', !allQuizAnswered);
+}
+
+function renderQuiz() {
+  const wrap = document.getElementById('quizWrap');
+  if (wrap.dataset.rendered === '1') return restoreQuiz();
+  wrap.innerHTML = QUIZ.map((q, idx) => `
+    <div class="quiz-question" id="${q.id}">
+      <div class="q-number">Question ${idx+1}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-options">
+        ${q.opts.map((opt, i) => `<button class="q-option" data-opt="${i}" onclick="answerQuiz('${q.id}', ${i})"><span class="letter">${String.fromCharCode(97+i)}.</span><span>${opt}</span></button>`).join('')}
+      </div>
+      <div class="q-explanation" id="exp-${q.id}">${q.explain}</div>
+    </div>`).join('');
+  wrap.dataset.rendered = '1';
+  restoreQuiz();
+}
+
+function answerQuiz(qId, choice) {
+  if (state.quiz.answers[qId] !== undefined) return;
+  state.quiz.answers[qId] = choice;
+  const q = QUIZ.find(item => item.id === qId);
+  if (choice === q.correct) state.quiz.scoreCount += 1;
+  restoreQuiz();
+  saveLocal();
+  refreshGating();
+}
+
+function restoreQuiz() {
+  QUIZ.forEach(q => {
+    const qEl = document.getElementById(q.id);
+    if (!qEl) return;
+    const chosen = state.quiz.answers[q.id];
+    const options = qEl.querySelectorAll('.q-option');
+    options.forEach(opt => { opt.classList.remove('selected','correct','incorrect','locked'); });
+    qEl.querySelector('.q-explanation').classList.remove('show');
+    if (chosen !== undefined) {
+      options.forEach(opt => opt.classList.add('locked'));
+      const selected = qEl.querySelector('.q-option[data-opt="' + chosen + '"]');
+      const correctBtn = qEl.querySelector('.q-option[data-opt="' + q.correct + '"]');
+      if (selected) selected.classList.add('selected');
+      if (chosen === q.correct) selected.classList.add('correct');
+      else { if (selected) selected.classList.add('incorrect'); if (correctBtn) correctBtn.classList.add('correct'); }
+      qEl.querySelector('.q-explanation').classList.add('show');
+    }
+  });
+  if (Object.keys(state.quiz.answers).length === QUIZ.length) {
+    document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length;
+    document.getElementById('quizScore').classList.add('show');
+  }
+}
+
+function triggerDownload(filename, content, mime) {
+  const blob = new Blob([content], {type: mime});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 500);
+}
+
+function saveProgressNow() {
+  saveLocal();
+  const stamp = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-');
+  triggerDownload(`HRE4M1_L4_5_progress_${stamp}.json`, JSON.stringify(state, null, 2), 'application/json');
+  markSaveButtonsSaved();
+  showToast('Progress downloaded.');
+}
+
+function refreshFinishStats() {
+  document.getElementById('finishQuiz').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length;
+  document.getElementById('finishWords').textContent = totalWords();
+  document.getElementById('finishTime').textContent = formatTime(totalTimeMs());
+}
+
+function buildReportHTML() {
+  persistInputsToState();
+  const rows = RESPONSE_ORDER.map(key => `
+    <section style="margin:0 0 28px 0;">
+      <h3 style="font-family:Georgia,serif;font-size:24px;margin:0 0 8px 0;color:#6B2C2C;">${escapeHTML(RESPONSE_TITLES[key])}</h3>
+      <div style="font-size:13px;color:#7c6a3a;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">${countWords(state.responses[key])} words</div>
+      <div style="white-space:pre-wrap;line-height:1.7;font-size:16px;border:1px solid #ddd7c6;background:#fffdf7;padding:16px 18px;">${escapeHTML(state.responses[key] || '')}</div>
+    </section>`).join('');
+
+  return `<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${REPORT_TITLE} Report</title>
+<style>
+body{font-family:Georgia,serif;background:#f7f1e1;color:#1f2937;margin:0;padding:40px;line-height:1.6;}
+.wrap{max-width:900px;margin:0 auto;background:#fff;padding:42px 46px;border:1px solid #d8c9a0;box-shadow:0 10px 30px rgba(0,0,0,.08);}
+.small{font-family:Arial,sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8c7135;}
+h1{font-size:42px;color:#6B2C2C;margin:8px 0 4px;}
+h2{font-size:18px;font-style:italic;color:#4b5563;margin:0 0 26px;}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0 28px;}
+.card{border:1px solid #ddd7c6;background:#fffdf7;padding:14px 16px;}
+.label{font-family:Arial,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8c7135;margin-bottom:6px;}
+.value{font-size:18px;color:#6B2C2C;}
+hr{border:none;border-top:1px solid #d8c9a0;margin:26px 0;}
+@media print{body{background:white;padding:0;} .wrap{box-shadow:none;border:none;}}
+</style></head><body><div class="wrap">
+<div class="small">${REPORT_HEADER_LABEL}</div>
+<h1>${REPORT_TITLE}</h1>
+<h2>${REPORT_SUBTITLE}</h2>
+<div class="grid">
+  <div class="card"><div class="label">Student</div><div class="value">${escapeHTML(state.studentInfo.name || '')}</div></div>
+  <div class="card"><div class="label">Email</div><div class="value">${escapeHTML(state.studentInfo.email || '')}</div></div>
+  <div class="card"><div class="label">Class</div><div class="value">${escapeHTML(state.studentInfo.className || '')}</div></div>
+  <div class="card"><div class="label">Quiz Score</div><div class="value">${state.quiz.scoreCount} / ${QUIZ.length}</div></div>
+  <div class="card"><div class="label">Total Words</div><div class="value">${totalWords()}</div></div>
+  <div class="card"><div class="label">Time in Lesson</div><div class="value">${formatTime(totalTimeMs())}</div></div>
+</div>
+<hr>
+${rows}
+</div></body></html>`;
+}
+
+function downloadReport() {
+  const stamp = new Date().toISOString().slice(0,10);
+  triggerDownload(`${REPORT_FILE_PREFIX}_${(state.studentInfo.name || 'student').replace(/[^a-z0-9]+/gi,'_')}_${stamp}.html`, buildReportHTML(), 'text/html');
+  showToast('Report downloaded.');
+}
+
+function finishLesson() {
+  state.finishedAt = new Date().toISOString();
+  saveLocal();
+  showScreen('complete');
+}
+
+function restoreChecks() {
+  Object.entries(state.inlineChecks).forEach(([checkId, chosen]) => {
+    const wrap = document.querySelector('.check[data-check="' + checkId + '"]');
+    if (!wrap) return;
+    const correct = CORRECT_MAP[checkId];
+    wrap.querySelectorAll('.check-option').forEach(opt => {
+      opt.classList.add('answered');
+      if (opt.getAttribute('data-answer') === correct) opt.classList.add('correct');
+      else if (opt.getAttribute('data-answer') === chosen) opt.classList.add('incorrect');
+    });
+    const fb = document.getElementById('fb-' + checkId);
+    if (fb) { fb.textContent = chosen === correct ? 'Correct. You matched the main lesson idea.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); }
+  });
+}
+
+function restoreTextAndCounts() {
+  const countIdMap = {hookResponse:'hookWC', pauseIntro:'pauseIntroWC', pauseDomestic:'pauseDomesticWC', pauseParents:'pauseParentsWC', pauseChildren:'pauseChildrenWC', pauseSociety:'pauseSocietyWC', pauseTradition:'pauseTraditionWC', td1:'td1WC', td2:'td2WC', synthesis:'synthesisWC'};
+  RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) el.value = state.responses[key] || ''; const wcId = countIdMap[key]; if (el && document.getElementById(wcId)) updateWordCount(key, wcId, MINIMUMS[key]); });
+}
+
+function resumeFromFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const loaded = JSON.parse(e.target.result);
+      if (!loaded || loaded.lessonId !== LESSON_ID) throw new Error('Wrong lesson file');
+      Object.assign(state, loaded);
+      document.getElementById('studentName').value = state.studentInfo.name || '';
+      document.getElementById('studentEmail').value = state.studentInfo.email || '';
+      document.getElementById('studentClass').value = state.studentInfo.className || '';
+      restoreTextAndCounts();
+      document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); });
+      document.getElementById('termsViewed').textContent = state.termsViewed.length;
+      restoreChecks();
+      renderQuiz();
+      refreshGating();
+      showScreen(state.currentScreen || 'hook');
+      showToast('Progress restored.');
+    } catch (err) { alert(RESUME_ERROR); }
+  };
+  reader.readAsText(file);
+}
+
+function hydrateFromLocalStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const saved = JSON.parse(raw);
+    if (!saved || saved.lessonId !== LESSON_ID) return;
+    Object.assign(state, saved);
+    document.getElementById('studentName').value = state.studentInfo.name || '';
+    document.getElementById('studentEmail').value = state.studentInfo.email || '';
+    document.getElementById('studentClass').value = state.studentInfo.className || '';
+    restoreTextAndCounts();
+    document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); });
+    document.getElementById('termsViewed').textContent = state.termsViewed.length;
+    restoreChecks();
+    renderQuiz();
+  } catch (err) {}
+}
+
+hydrateFromLocalStorage();
+updateProgress();
+refreshGating();
+</script>
+</body>
+</html>

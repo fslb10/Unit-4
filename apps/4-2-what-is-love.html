@@ -1,0 +1,2269 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRE4M1 · Lesson 4.2: What is Love?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0F1A35;
+    --bg-mid: #162749;
+    --bg-card: #F5EDD8;
+    --bg-card-alt: #EEE4C9;
+    --gold: #C9A961;
+    --gold-soft: #D4B97A;
+    --gold-deep: #8C7135;
+    --wine: #6B2C2C;
+    --ivory: #F5EDD8;
+    --cream: #E8DFB8;
+    --ink: #1F2937;
+    --ink-soft: #3F4656;
+    --locked: #4A556880;
+    --success: #3F7A4D;
+    --danger: #A8432B;
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.25);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(201, 169, 97, 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(107, 44, 44, 0.1), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .unit-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .lesson-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .lesson-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gold-soft);
+    opacity: 0.9;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  .progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-deep) 70%, transparent);
+    padding: 16px 20px 12px;
+    margin: -24px -20px 24px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft));
+    width: 0%;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.5);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    margin: 8px auto 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  .save-sticky {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 169, 97, 0.12);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .save-sticky:hover, .btn-save-row:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    border-color: var(--gold);
+  }
+
+  .save-sticky.saved, .btn-save-row.saved {
+    background: rgba(63, 122, 77, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .btn-save-row {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .screen {
+    display: none;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .screen.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .hero-banner {
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-deep));
+    color: var(--ivory);
+    padding: 40px 40px 36px;
+    margin: -40px -44px 32px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .hero-banner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+
+  .hero-banner p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-soft);
+    margin-top: 8px;
+  }
+
+  .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+
+  .screen-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .screen-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .screen-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .prose {
+    font-size: 16.5px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .prose p { margin-bottom: 18px; }
+  .prose strong { color: var(--wine); font-weight: 600; }
+  .prose em { color: var(--ink-soft); }
+  .prose ul { margin-left: 22px; margin-bottom: 18px; }
+  .prose li { margin-bottom: 8px; }
+
+  .prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 28px 0 14px;
+    color: var(--wine);
+    line-height: 1.25;
+  }
+
+  .prose h3::before {
+    content: '❖ ';
+    color: var(--gold-deep);
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+
+  .scripture {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scripture-ref {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+  }
+
+  .pullquote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--wine);
+    text-align: center;
+    margin: 28px 20px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    line-height: 1.4;
+  }
+
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .word-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .word-count .met { color: var(--success); font-weight: 600; }
+  .word-count .short { color: var(--danger); }
+
+  .alert {
+    padding: 12px 16px;
+    background: rgba(168, 67, 43, 0.1);
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    margin-top: 14px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .alert.show { display: block; }
+
+  .upload-zone {
+    border: 1px dashed rgba(140, 113, 53, 0.4);
+    padding: 20px;
+    text-align: center;
+    margin-top: 24px;
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .upload-zone label {
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .upload-zone input { display: none; }
+
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--ivory);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--wine);
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:disabled {
+    background: var(--locked);
+    border-color: var(--locked);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+  }
+
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-row-split {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .pause {
+    background: linear-gradient(135deg, rgba(107, 44, 44, 0.06), rgba(201, 169, 97, 0.08));
+    border: 1px solid rgba(107, 44, 44, 0.2);
+    border-left: 3px solid var(--wine);
+    padding: 22px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .pause-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pause-label::before {
+    content: '❊';
+    font-size: 14px;
+    color: var(--gold-deep);
+  }
+
+  .pause-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .pause textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(107, 44, 44, 0.25);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    border-radius: 2px;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .pause textarea:focus {
+    outline: none;
+    border-color: var(--wine);
+    box-shadow: 0 0 0 2px rgba(107, 44, 44, 0.15);
+  }
+
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .term-card {
+    background: var(--bg-card-alt);
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    border-radius: 2px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 120px;
+  }
+
+  .term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--gold-deep);
+  }
+
+  .term-card.viewed {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+  }
+
+  .term-card.viewed::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .term-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.7;
+  }
+
+  .term-def {
+    display: none;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .term-card.open .term-def { display: block; }
+  .term-card.open .term-tap { display: none; }
+
+  .check {
+    background: #FDF8E8;
+    border: 1px dashed var(--gold-deep);
+    border-radius: 2px;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .check-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .check-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .check-options,
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-option,
+  .q-option {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .check-option:hover:not(.answered),
+  .q-option:hover:not(.locked) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .check-option .letter,
+  .q-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .check-option.correct,
+  .q-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .check-option.incorrect,
+  .q-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .q-option.selected {
+    border-color: var(--wine);
+    background: rgba(107, 44, 44, 0.06);
+  }
+
+  .q-option.locked { pointer-events: none; }
+
+  .check-feedback,
+  .q-explanation {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    display: none;
+  }
+
+  .check-feedback.show,
+  .q-explanation.show { display: block; }
+
+  .love-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 24px 0 30px;
+  }
+
+  .love-card {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+    border: 1px solid rgba(140, 113, 53, 0.25);
+    padding: 20px 22px;
+    min-height: 170px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .love-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    opacity: 0.75;
+  }
+
+  .love-card h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+
+  .love-card .subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 12px;
+  }
+
+  .love-card p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .lens-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .lens-card {
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.15);
+    padding: 18px 20px;
+    border-left: 3px solid var(--gold-deep);
+  }
+
+  .lens-card h4 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .lens-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  .quiz-question {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.25);
+  }
+
+  .quiz-question:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .quiz-score {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(107, 44, 44, 0.1));
+    border: 1px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score strong {
+    font-size: 34px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .summary-stat {
+    background: #FDF8E8;
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+  }
+
+  .completion-hero {
+    text-align: center;
+    padding: 20px 0 32px;
+  }
+
+  .completion-icon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    color: var(--gold-deep);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .completion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .completion-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .download-note {
+    background: rgba(201, 169, 97, 0.12);
+    padding: 18px 22px;
+    border-left: 3px solid var(--gold-deep);
+    margin: 24px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid var(--gold);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  @media (max-width: 760px) {
+    .card { padding: 28px 22px; }
+    .hero-banner { margin: -28px -22px 28px; padding: 30px 24px 26px; }
+    .love-grid { grid-template-columns: 1fr; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; justify-content: center; }
+    .btn-row-split { width: 100%; flex-direction: column; }
+    .btn-row-split .btn-save-row { width: 100%; justify-content: center; }
+    .save-sticky {
+      position: static;
+      display: flex;
+      margin: 10px auto 0;
+      width: fit-content;
+    }
+    .progress-meta { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="header">
+    <div class="unit-label">HRE4M1 · Unit 4 · Lesson 2</div>
+    <h1 class="lesson-title">What is Love?</h1>
+    <div class="lesson-subtitle">Seeing love through a Catholic Christian lens</div>
+    <svg class="ornament" width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 0 10 L 30 10 M 50 10 L 80 10" stroke="#C9A961" stroke-width="1" fill="none"/>
+      <circle cx="40" cy="10" r="3" fill="none" stroke="#C9A961" stroke-width="1"/>
+      <circle cx="40" cy="10" r="1" fill="#C9A961"/>
+    </svg>
+  </div>
+
+  <div class="progress-container" id="progressContainer" style="display:none;">
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-meta">
+      <span id="progressLabel">Part 1 of 12</span>
+      <span id="progressPercent">0%</span>
+    </div>
+    <button class="save-sticky" id="stickySave" onclick="saveProgressNow()">
+      <span>💾</span><span>Save Progress</span>
+    </button>
+  </div>
+
+  <div id="screens">
+
+    <section class="screen active" data-screen="welcome">
+      <div class="card">
+        <div class="hero-banner">
+          <div class="ornament-line">
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+            <span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">A Study in Love</span>
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+          </div>
+          <h2>Welcome to Lesson 4.2</h2>
+          <p>This lesson explores love as more than emotion. It asks what love is, where it comes from, and how it is lived.</p>
+        </div>
+
+        <p class="prose" style="margin-bottom:24px;">Before you begin, enter your information. This lesson includes reflection questions, quick checks, key terms, and a final knowledge check.</p>
+
+        <div class="field">
+          <label for="studentName">Full Name</label>
+          <input type="text" id="studentName" placeholder="First and last name" autocomplete="name">
+        </div>
+
+        <div class="field">
+          <label for="studentEmail">School Email</label>
+          <input type="email" id="studentEmail" placeholder="you@school.ca" autocomplete="email">
+        </div>
+
+        <div class="field">
+          <label for="studentClass">Class / Period</label>
+          <input type="text" id="studentClass" placeholder="e.g., HRE4M1 · Period 2">
+        </div>
+
+        <div class="alert" id="setupAlert">Please fill in your name and email before starting.</div>
+
+        <div class="btn-row">
+          <div></div>
+          <button class="btn btn-primary" onclick="beginLesson()">Begin Lesson →</button>
+        </div>
+
+        <div class="upload-zone">
+          <div style="font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Returning to finish?</div>
+          <label for="resumeFile">Upload your saved progress file</label>
+          <input type="file" id="resumeFile" accept=".json,application/json" onchange="resumeFromFile(event)">
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="hook">
+      <div class="card">
+        <div class="screen-label">Before We Begin</div>
+        <h2 class="screen-title">Your First Definition</h2>
+        <p class="screen-intro">Start with your own instinct before the lesson shapes it.</p>
+
+        <div class="prose">
+          <p>The word <strong>love</strong> gets used for everything. We love music, food, pets, friends, dating partners, and God. But do all of those mean the same thing?</p>
+          <p>Write your current answer to this question: <strong>What is love?</strong> You do not need to sound formal. Just be honest.</p>
+        </div>
+
+        <div class="field" style="margin-top:20px;">
+          <label for="hookResponse">Your initial thoughts</label>
+          <textarea id="hookResponse" placeholder="What do you think love is right now?" oninput="updateWordCount('hookResponse', 'hookWC', 35)"></textarea>
+          <div class="word-count" id="hookWC"><span>0 words</span><span>Minimum: 35 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="hookNext" onclick="showScreen('intro')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="intro">
+      <div class="card">
+        <div class="screen-label">Part One · Introduction</div>
+        <h2 class="screen-title">Love Is More Than a Feeling</h2>
+        <p class="screen-intro">Catholic Christianity teaches that true love is deeper than attraction, mood, or excitement.</p>
+
+        <div class="prose">
+          <p>In popular culture, love is often presented as a feeling that rises and falls. Songs, movies, and social media posts often make love sound like chemistry, romance, or emotional intensity. Those feelings can be real, but Christian teaching says they are not the whole story.</p>
+
+          <p>From a Catholic perspective, <strong>true love is not only about what we feel. It is also about what we choose.</strong> Love seeks the good of the other person, even when it costs something. It is active, faithful, truthful, and self-giving.</p>
+
+          <div class="scripture">
+            "God is love."
+            <span class="scripture-ref">1 John 4:8</span>
+          </div>
+
+          <p>This is one of the most important statements in Scripture. It tells us that love is not just one thing God does. Love belongs to who God is. Because of that, love has a spiritual depth that goes beyond personal happiness or temporary emotion.</p>
+
+          <div class="scripture">
+            "You shall love the Lord your God with all your heart, and with all your soul, and with all your mind... You shall love your neighbor as yourself."
+            <span class="scripture-ref">Matthew 22:37-39</span>
+          </div>
+
+          <p>Jesus makes love the center of the moral life. Love of God and love of neighbor are not optional extras. They are the heart of Christian discipleship.</p>
+        </div>
+
+        <div class="check" data-check="intro1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">According to the lesson, which statement best captures the Christian understanding of love?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this, 'intro1', 'b')"><span class="letter">a.</span><span>Love is mainly about intense emotion and attraction.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this, 'intro1', 'b')"><span class="letter">b.</span><span>Love includes feelings, but true love also chooses and acts for the good of the other.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this, 'intro1', 'b')"><span class="letter">c.</span><span>Love matters only in romantic relationships.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this, 'intro1', 'b')"><span class="letter">d.</span><span>Love is valuable only when it makes people happy immediately.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-intro1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">What is one message about love that culture teaches really strongly today? Do you think it is complete, incomplete, or misleading? Explain.</div>
+          <textarea id="pauseIntro" placeholder="Name a message and evaluate it honestly." oninput="updatePause('pauseIntro', 'pauseIntroWC', 50)"></textarea>
+          <div class="word-count" id="pauseIntroWC"><span>0 words</span><span>Minimum: 50 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="introNext" onclick="showScreen('terms')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="terms">
+      <div class="card">
+        <div class="screen-label">Part Two · Vocabulary</div>
+        <h2 class="screen-title">Six Words to Know</h2>
+        <p class="screen-intro">Open all six cards before moving on.</p>
+
+        <div class="terms-grid">
+          <div class="term-card" data-term="agape" onclick="openTerm(this)">
+            <div class="term-name">Agape / Charity</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">Selfless love that wills the good of the other for the other’s sake. It is the highest form of love in Christianity and reflects God’s own love.</div>
+          </div>
+
+          <div class="term-card" data-term="eros" onclick="openTerm(this)">
+            <div class="term-name">Eros</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">Romantic or passionate love. The Church teaches that eros is good, but it must be guided by truth, self-gift, and commitment.</div>
+          </div>
+
+          <div class="term-card" data-term="storge" onclick="openTerm(this)">
+            <div class="term-name">Storge</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">Familial love. It is the natural affection found in families, such as between parents and children or siblings.</div>
+          </div>
+
+          <div class="term-card" data-term="philia" onclick="openTerm(this)">
+            <div class="term-name">Philia</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">Friendship love. It is marked by loyalty, trust, mutual support, and shared life.</div>
+          </div>
+
+          <div class="term-card" data-term="infatuation" onclick="openTerm(this)">
+            <div class="term-name">Infatuation</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">A powerful but shallow or short-lived attraction, often based on idealized perception, excitement, or surface qualities.</div>
+          </div>
+
+          <div class="term-card" data-term="chastity" onclick="openTerm(this)">
+            <div class="term-name">Chastity</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">The virtue of integrating sexuality with respect, self-control, and authentic love. It protects the truth of love rather than reducing people to objects.</div>
+          </div>
+        </div>
+
+        <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink-soft); text-align:center; margin-top:16px;">
+          Viewed: <span id="termsViewed">0</span> of 6
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="termsNext" onclick="showScreen('views')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="views">
+      <div class="card">
+        <div class="screen-label">Part Three · Main Content</div>
+        <h2 class="screen-title">Secular View and Christian View</h2>
+        <p class="screen-intro">Both views notice something real, but they are not equally complete.</p>
+
+        <div class="prose">
+          <p>A secular perspective often describes love as emotion, attraction, bonding, chemistry, or a social force that helps relationships and communities hold together. Psychology may speak about attachment. Biology may point to brain chemistry. Society may frame love in terms of happiness, fulfillment, or identity.</p>
+
+          <p>Those observations are not worthless. They describe real parts of human experience. But they can stay too close to what love <em>feels like</em> or what it <em>does for us</em>.</p>
+
+          <div class="lens-grid">
+            <div class="lens-card">
+              <h4>Secular Emphasis</h4>
+              <p>Love is often seen as emotional, biological, psychological, or socially useful. It is frequently measured by how it feels or how much happiness it produces.</p>
+            </div>
+            <div class="lens-card">
+              <h4>Christian Emphasis</h4>
+              <p>Love comes from God, reflects God, and calls us to holiness. It is measured not only by feeling, but by truth, sacrifice, fidelity, and willing the good of the other.</p>
+            </div>
+          </div>
+
+          <p>Christianity adds an eternal horizon. We do not only love because it feels good or creates stability. We love because every person is made by God, loved by God, and worthy of care. In loving others, we are also responding to God.</p>
+
+          <div class="scripture">
+            "No one has greater love than this, to lay down one’s life for one’s friends."
+            <span class="scripture-ref">John 15:13</span>
+          </div>
+
+          <p>That kind of love cannot be reduced to chemistry. It is rooted in self-gift and sacrifice.</p>
+        </div>
+
+        <div class="check" data-check="views1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Which answer best explains the main difference in the lesson between a secular and a Christian view of love?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this, 'views1', 'c')"><span class="letter">a.</span><span>The secular view says love is always evil, while Christianity says love is always easy.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this, 'views1', 'c')"><span class="letter">b.</span><span>The Christian view ignores emotions completely.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this, 'views1', 'c')"><span class="letter">c.</span><span>The Christian view goes beyond emotion or usefulness and roots love in God, sacrifice, and holiness.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this, 'views1', 'c')"><span class="letter">d.</span><span>The secular view values family, but Christianity does not.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-views1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Why do you think it matters whether love is seen mainly as a feeling, or as a decision to seek the good of another person?</div>
+          <textarea id="pauseViews" placeholder="Think about dating, family, friendship, or even forgiveness." oninput="updatePause('pauseViews', 'pauseViewsWC', 55)"></textarea>
+          <div class="word-count" id="pauseViewsWC"><span>0 words</span><span>Minimum: 55 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="viewsNext" onclick="showScreen('forms')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="forms">
+      <div class="card">
+        <div class="screen-label">Part Four · Main Content Continued</div>
+        <h2 class="screen-title">The Four Major Forms of Love</h2>
+        <p class="screen-intro">The Greek tradition helps us notice that "love" is richer than one single feeling or relationship.</p>
+
+        <div class="love-grid">
+          <div class="love-card">
+            <h3>Eros</h3>
+            <div class="subtitle">Romantic Love</div>
+            <p>Attraction, desire, and romantic passion. Eros can be beautiful, but it needs truth, chastity, and commitment so that it does not become selfish or shallow.</p>
+          </div>
+          <div class="love-card">
+            <h3>Storge</h3>
+            <div class="subtitle">Family Love</div>
+            <p>The natural affection of family life. It is often steady, patient, and rooted in belonging rather than excitement.</p>
+          </div>
+          <div class="love-card">
+            <h3>Philia</h3>
+            <div class="subtitle">Friendship Love</div>
+            <p>Loyalty, shared life, honesty, and mutual support. Healthy friendship is one of the strongest ways people experience love.</p>
+          </div>
+          <div class="love-card">
+            <h3>Agape</h3>
+            <div class="subtitle">Selfless Love</div>
+            <p>The highest love. Agape gives, serves, forgives, and seeks the good of the other even when nothing is gained in return.</p>
+          </div>
+        </div>
+
+        <div class="prose">
+          <p>These forms of love are not enemies. In real life, they often overlap. A healthy marriage may include eros, philia, storge, and agape. A deep friendship may include both philia and agape. The point is not to separate love into sealed boxes. The point is to recognize that love has different dimensions, and that <strong>agape gives the others their deepest moral shape.</strong></p>
+        </div>
+
+        <div class="check" data-check="forms1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Why is agape considered the highest form of love in Christian teaching?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this, 'forms1', 'd')"><span class="letter">a.</span><span>Because it is the most exciting and emotional.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this, 'forms1', 'd')"><span class="letter">b.</span><span>Because it only exists in marriage.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this, 'forms1', 'd')"><span class="letter">c.</span><span>Because it is weaker than friendship and family love.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this, 'forms1', 'd')"><span class="letter">d.</span><span>Because it is self-giving love that seeks the good of the other and reflects God’s own love.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-forms1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Which of the four forms of love do you think your generation understands best right now? Which one do you think is most misunderstood? Explain.</div>
+          <textarea id="pauseForms" placeholder="Choose clearly and explain why." oninput="updatePause('pauseForms', 'pauseFormsWC', 60)"></textarea>
+          <div class="word-count" id="pauseFormsWC"><span>0 words</span><span>Minimum: 60 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="formsNext" onclick="showScreen('choice')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="choice">
+      <div class="card">
+        <div class="screen-label">Part Five · Main Content Continued</div>
+        <h2 class="screen-title">Love as Choice, Action, and Truth</h2>
+        <p class="screen-intro">Feelings matter, but real love endures because it chooses and acts.</p>
+
+        <div class="prose">
+          <p>One of the biggest ideas in this lesson is that <strong>love is not only a feeling. It is also an act of the will.</strong> Feelings can begin love, but feelings alone cannot sustain it. The deeper question is this: when emotions cool down, what remains?</p>
+
+          <p>Christian teaching answers: commitment, sacrifice, service, fidelity, patience, and truth. Love becomes visible in what a person does.</p>
+
+          <div class="scripture">
+            "Faith, hope, and love abide, these three; and the greatest of these is love."
+            <span class="scripture-ref">1 Corinthians 13:13</span>
+          </div>
+
+          <p>St. Paul does not define love by butterflies, excitement, or instant pleasure. He describes love through action and character: patient, kind, truthful, enduring. That is why Christian love can include hard things such as forgiveness, long-term responsibility, or speaking the truth when it would be easier to stay quiet.</p>
+
+          <h3>Love Is Not Use</h3>
+          <p>A major Catholic insight is that the opposite of love is not only hate. It is also <strong>using another person as an object.</strong> Whenever someone is reduced to pleasure, status, attention, or convenience, love is being distorted.</p>
+
+          <h3>Love and Chastity</h3>
+          <p>Chastity protects authentic love. It teaches a person not to treat others as objects for desire or entertainment. Instead, it trains the heart to respect dignity, truth, and self-control.</p>
+        </div>
+
+        <div class="check" data-check="choice1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Which statement best fits the lesson’s understanding of love as choice?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this, 'choice1', 'b')"><span class="letter">a.</span><span>When feelings disappear, love disappears automatically.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this, 'choice1', 'b')"><span class="letter">b.</span><span>Love can continue through commitment and action even when feelings are weak or difficult.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this, 'choice1', 'b')"><span class="letter">c.</span><span>Love and self-control are opposites.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this, 'choice1', 'b')"><span class="letter">d.</span><span>Using another person is acceptable if strong feelings are present.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-choice1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Describe a situation where doing the loving thing would be hard. It can be family, friendship, dating, school, or forgiveness. Why would it be difficult, and what would love require?</div>
+          <textarea id="pauseChoice" placeholder="A real or realistic example is fine." oninput="updatePause('pauseChoice', 'pauseChoiceWC', 70)"></textarea>
+          <div class="word-count" id="pauseChoiceWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="choiceNext" onclick="showScreen('tradition')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="tradition">
+      <div class="card">
+        <div class="screen-label">Part Six · Catholic Tradition and Culture</div>
+        <h2 class="screen-title">Witnesses of Love in the Catholic Tradition</h2>
+        <p class="screen-intro">Catholic tradition does not only define love. It shows it lived.</p>
+
+        <div class="prose">
+          <h3>Mother Teresa</h3>
+          <p>She served the poorest of the poor and insisted that holiness often looks like small acts done with great love. Her life is a witness that love is practical and concrete.</p>
+
+          <h3>St. Maximilian Kolbe</h3>
+          <p>In Auschwitz, he volunteered to die in place of another prisoner. His witness is one of the clearest modern examples of sacrificial love.</p>
+
+          <h3>St. Thérèse of Lisieux</h3>
+          <p>She taught the “Little Way,” showing that hidden acts of love matter deeply. She wrote, “My vocation is love,” which means love is the heart of Christian holiness.</p>
+
+          <h3>St. John Paul II</h3>
+          <p>He emphasized that authentic love involves self-gift, not using other people. He also publicly forgave the man who tried to kill him, showing mercy in action.</p>
+
+          <h3>Church Life and Culture</h3>
+          <p>The Eucharist is often called the sacrament of charity because it makes Christ’s self-giving love present. Devotions such as the Sacred Heart of Jesus focus on the burning love of Christ. Catholic social teaching, charitable organizations, and the witness of the saints all show that love belongs at the center of Christian life.</p>
+        </div>
+
+        <div class="pullquote">
+          "Not all of us can do great things. But we can do small things with great love."
+        </div>
+
+        <div class="check" data-check="trad1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">What do the examples of the saints mainly show in this lesson?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this, 'trad1', 'c')"><span class="letter">a.</span><span>Love is mainly a private feeling and should stay hidden.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this, 'trad1', 'c')"><span class="letter">b.</span><span>Only famous religious leaders can live authentic love.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this, 'trad1', 'c')"><span class="letter">c.</span><span>Love can be lived through service, sacrifice, mercy, and ordinary acts of faithfulness.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this, 'trad1', 'c')"><span class="letter">d.</span><span>Christian love avoids suffering at all costs.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-trad1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Which saint or Catholic example from this section stood out to you most, and what does that example teach about real love?</div>
+          <textarea id="pauseTrad" placeholder="Choose one clearly and explain the lesson you see in it." oninput="updatePause('pauseTrad', 'pauseTradWC', 55)"></textarea>
+          <div class="word-count" id="pauseTradWC"><span>0 words</span><span>Minimum: 55 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="tradNext" onclick="showScreen('realworld')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="realworld">
+      <div class="card">
+        <div class="screen-label">Part Seven · Real-World Connections</div>
+        <h2 class="screen-title">Where Love Shows Up in Daily Life</h2>
+        <p class="screen-intro">This lesson matters because love changes what we do at home, at school, and in relationships.</p>
+
+        <div class="prose">
+          <h3>At Home</h3>
+          <p>Love may look like apologizing first, helping without being asked, or showing patience when you are tired or frustrated.</p>
+
+          <h3>At School</h3>
+          <p>Love can show up in including someone who is isolated, refusing gossip, listening carefully to a friend, or standing up for someone being treated badly.</p>
+
+          <h3>In Service</h3>
+          <p>Volunteer work, charity, and the corporal works of mercy train people to see the dignity of others and not just their problems.</p>
+
+          <h3>In Dating and Relationships</h3>
+          <p>Christian love values honesty, respect, self-control, and the good of the other person. That means dating should not be about using someone for attention, pleasure, or status.</p>
+
+          <h3>In Forgiveness</h3>
+          <p>Forgiveness is one of the hardest forms of love. It does not erase what happened, but it refuses revenge and breaks cycles of resentment.</p>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Look at your own life right now. Where is love most needed in a concrete way? What would it look like to act with love there, not just feel it?</div>
+          <textarea id="pauseReal" placeholder="Be specific about the place, the people, and the action." oninput="updatePause('pauseReal', 'pauseRealWC', 70)"></textarea>
+          <div class="word-count" id="pauseRealWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="realNext" onclick="showScreen('quiz')">Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="quiz">
+      <div class="card">
+        <div class="screen-label">Part Eight · Knowledge Check</div>
+        <h2 class="screen-title">Check Your Understanding</h2>
+        <p class="screen-intro">Answer each question once. Explanations appear after you respond.</p>
+
+        <div id="quizQuestions"></div>
+
+        <div class="quiz-score" id="quizScore">
+          Your score
+          <strong id="scoreText">0 / 7</strong>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="quizNext" onclick="showScreen('deeper')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="deeper">
+      <div class="card">
+        <div class="screen-label">Part Nine · Think Deeper</div>
+        <h2 class="screen-title">Go Beyond Recall</h2>
+        <p class="screen-intro">These prompts ask you to apply the lesson, not just repeat it.</p>
+
+        <div class="field">
+          <label for="td1">Prompt 1</label>
+          <div class="prose" style="margin-bottom:8px;"><p>Our culture often connects love with attraction and strong feelings. Why is that not enough for true love? Use at least one example.</p></div>
+          <textarea id="td1" placeholder="Respond in a developed paragraph." oninput="updateWordCount('td1', 'td1WC', 120)"></textarea>
+          <div class="word-count" id="td1WC"><span>0 words</span><span>Minimum: 120 words</span></div>
+        </div>
+
+        <div class="field">
+          <label for="td2">Prompt 2</label>
+          <div class="prose" style="margin-bottom:8px;"><p>Is it possible to love someone you do not really like, or who has hurt you? Explain how Christian teaching would answer that question.</p></div>
+          <textarea id="td2" placeholder="Respond in a developed paragraph." oninput="updateWordCount('td2', 'td2WC', 120)"></textarea>
+          <div class="word-count" id="td2WC"><span>0 words</span><span>Minimum: 120 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="deeperNext" onclick="showScreen('synthesis')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="synthesis">
+      <div class="card">
+        <div class="screen-label">Part Ten · Synthesis</div>
+        <h2 class="screen-title">Pull the Lesson Together</h2>
+        <p class="screen-intro">This final written response helps you summarize the big idea.</p>
+
+        <div class="field">
+          <label for="synthesis">Final Synthesis</label>
+          <div class="prose" style="margin-bottom:8px;">
+            <p>Complete this idea in your own words: <strong>Christian love is different from a shallow view of love because...</strong></p>
+            <p>Your answer should mention at least two of the following: God, sacrifice, truth, agape, forgiveness, chastity, service, commitment, or willing the good of the other.</p>
+          </div>
+          <textarea id="synthesis" placeholder="Write a clear final paragraph that brings the lesson together." oninput="updateWordCount('synthesis', 'synthesisWC', 120)"></textarea>
+          <div class="word-count" id="synthesisWC"><span>0 words</span><span>Minimum: 120 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="synthesisNext" onclick="showScreen('finish')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="finish">
+      <div class="card">
+        <div class="screen-label">Part Eleven · Finish</div>
+        <h2 class="screen-title">Ready to Complete?</h2>
+        <p class="screen-intro">Review your work, then generate your final report.</p>
+
+        <div class="download-note">
+          When you finish, the app will generate a printable report containing your information, quiz score, and written responses. You can also save progress at any time using the save button.
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-stat">
+            <div class="stat-label">Terms Viewed</div>
+            <div class="stat-value" id="finishTerms">0</div>
+          </div>
+          <div class="summary-stat">
+            <div class="stat-label">Checks Answered</div>
+            <div class="stat-value" id="finishChecks">0</div>
+          </div>
+          <div class="summary-stat">
+            <div class="stat-label">Quiz Score</div>
+            <div class="stat-value" id="finishQuiz">0 / 7</div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-gold" onclick="finishLesson()">Complete Lesson →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="complete">
+      <div class="card">
+        <div class="completion-hero">
+          <div class="completion-icon">✦</div>
+          <div class="completion-title">Lesson Completed</div>
+          <div class="completion-sub">What is Love? has been completed.</div>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-stat">
+            <div class="stat-label">Quiz Score</div>
+            <div class="stat-value" id="finalScore">0 / 7</div>
+          </div>
+          <div class="summary-stat">
+            <div class="stat-label">Total Words</div>
+            <div class="stat-value" id="finalWords">0</div>
+          </div>
+          <div class="summary-stat">
+            <div class="stat-label">Time Spent</div>
+            <div class="stat-value" id="finalTime">0 min</div>
+          </div>
+        </div>
+
+        <div class="download-note">
+          Download the final report for submission or printing. The save-progress file is different from the final report. Use the final report button below when you are fully done.
+        </div>
+
+        <div class="btn-row" style="justify-content:center;">
+          <button class="btn btn-gold" onclick="downloadReport()">Download Final Report</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="footer">HRE4M1 · Lesson 4.2 · What is Love?</div>
+</div>
+
+<div class="toast" id="saveToast">Progress saved.</div>
+
+<script>
+const LESSON_ID = '4.2';
+const STORAGE_KEY = 'hre4m1_lesson_4_2';
+
+const SCREEN_ORDER = [
+  'welcome',
+  'hook',
+  'intro',
+  'terms',
+  'views',
+  'forms',
+  'choice',
+  'tradition',
+  'realworld',
+  'quiz',
+  'deeper',
+  'synthesis',
+  'finish',
+  'complete'
+];
+
+const TOTAL_STEPS = SCREEN_ORDER.length - 1;
+
+const QUIZ = [
+  {
+    id: 'q1',
+    q: 'Which statement best reflects agape?',
+    opts: [
+      'A short burst of attraction based mainly on appearance.',
+      'Willing the good of the other for the other’s sake.',
+      'Only the feeling of being happy around someone.',
+      'Family affection rooted only in blood relationship.'
+    ],
+    correct: 1,
+    explain: 'Agape is selfless, self-giving love that seeks the true good of the other.'
+  },
+  {
+    id: 'q2',
+    q: 'What is the main Christian claim behind the statement "God is love"?',
+    opts: [
+      'God sometimes chooses to act lovingly, but love is not central to who He is.',
+      'Love is only one small aspect of religion.',
+      'Love belongs to God’s very nature, not just one of His actions.',
+      'Love only matters in the New Testament.'
+    ],
+    correct: 2,
+    explain: 'The phrase means love belongs to who God is, which gives love a deeper meaning than emotion alone.'
+  },
+  {
+    id: 'q3',
+    q: 'Which of the following is the best description of philia?',
+    opts: [
+      'Friendship love rooted in loyalty and shared life.',
+      'Romantic and passionate attraction.',
+      'Family affection between parents and children.',
+      'A temporary crush based on idealization.'
+    ],
+    correct: 0,
+    explain: 'Philia is friendship love marked by trust, support, and mutual care.'
+  },
+  {
+    id: 'q4',
+    q: 'Why does the lesson say true love requires more than feelings?',
+    opts: [
+      'Because feelings are always bad.',
+      'Because feelings can change, while love must also involve decision, action, and fidelity.',
+      'Because Christians are not allowed to experience strong emotion.',
+      'Because only suffering proves love is real.'
+    ],
+    correct: 1,
+    explain: 'Feelings matter, but they are not stable enough by themselves to define authentic love.'
+  },
+  {
+    id: 'q5',
+    q: 'What is one major danger of a distorted view of love according to the lesson?',
+    opts: [
+      'People may begin to use others as objects for pleasure, status, or convenience.',
+      'People may become too serious about friendship.',
+      'People may stop caring about family completely.',
+      'People may reject all forms of romance as evil.'
+    ],
+    correct: 0,
+    explain: 'A false view of love can reduce another person to an object rather than respecting their dignity.'
+  },
+  {
+    id: 'q6',
+    q: 'Which saint from the lesson is especially connected with doing small things with great love?',
+    opts: [
+      'St. Maximilian Kolbe',
+      'Mother Teresa',
+      'St. John Paul II',
+      'St. Valentine'
+    ],
+    correct: 1,
+    explain: 'Mother Teresa is well known for that phrase and for showing love through humble service.'
+  },
+  {
+    id: 'q7',
+    q: 'Which statement best summarizes chastity in the lesson?',
+    opts: [
+      'It means rejecting love and avoiding all relationships.',
+      'It is only a rule for married adults.',
+      'It helps integrate sexuality with truth, respect, self-control, and authentic love.',
+      'It is mainly about punishment and shame.'
+    ],
+    correct: 2,
+    explain: 'Chastity protects authentic love by teaching respect for self and others.'
+  }
+];
+
+const state = {
+  lessonId: LESSON_ID,
+  startedAt: null,
+  finishedAt: null,
+  currentScreen: 'welcome',
+  studentInfo: { name: '', email: '', className: '' },
+  termsViewed: [],
+  inlineChecks: {},
+  responses: {
+    hookResponse: '',
+    pauseIntro: '',
+    pauseViews: '',
+    pauseForms: '',
+    pauseChoice: '',
+    pauseTrad: '',
+    pauseReal: '',
+    td1: '',
+    td2: '',
+    synthesis: ''
+  },
+  quiz: {
+    answers: {},
+    scoreCount: 0
+  },
+  sectionTimes: {},
+  lastSavedAt: null
+};
+
+let screenEnterTime = Date.now();
+
+function countWords(str) {
+  if (!str) return 0;
+  return str.trim().split(/\s+/).filter(Boolean).length;
+}
+
+function escapeHTML(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function formatTime(ms) {
+  const totalMin = Math.floor(ms / 60000);
+  if (totalMin < 1) return '< 1 min';
+  if (totalMin < 60) return totalMin + ' min';
+  const hrs = Math.floor(totalMin / 60);
+  const mins = totalMin % 60;
+  return hrs + 'h ' + mins + 'm';
+}
+
+function saveLocal() {
+  state.lastSavedAt = new Date().toISOString();
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (err) {}
+}
+
+function updateProgress() {
+  const container = document.getElementById('progressContainer');
+  if (state.currentScreen === 'welcome') {
+    container.style.display = 'none';
+    return;
+  }
+  container.style.display = 'block';
+  const idx = SCREEN_ORDER.indexOf(state.currentScreen);
+  const pct = Math.round((idx / TOTAL_STEPS) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = 'Part ' + idx + ' of ' + TOTAL_STEPS;
+  document.getElementById('progressPercent').textContent = pct + '%';
+}
+
+function showScreen(name) {
+  const prev = state.currentScreen;
+  if (prev && screenEnterTime) {
+    const elapsed = Date.now() - screenEnterTime;
+    state.sectionTimes[prev] = (state.sectionTimes[prev] || 0) + elapsed;
+  }
+
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const next = document.querySelector('.screen[data-screen="' + name + '"]');
+  if (next) next.classList.add('active');
+
+  state.currentScreen = name;
+  screenEnterTime = Date.now();
+  updateProgress();
+  saveLocal();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (name === 'quiz') renderQuiz();
+  if (name === 'finish') refreshFinishStats();
+}
+
+function prevScreen() {
+  const idx = SCREEN_ORDER.indexOf(state.currentScreen);
+  if (idx > 0) showScreen(SCREEN_ORDER[idx - 1]);
+}
+
+function beginLesson() {
+  const name = document.getElementById('studentName').value.trim();
+  const email = document.getElementById('studentEmail').value.trim();
+  const className = document.getElementById('studentClass').value.trim();
+  const alertBox = document.getElementById('setupAlert');
+
+  if (!name || !email) {
+    alertBox.textContent = 'Please fill in your name and email before starting.';
+    alertBox.classList.add('show');
+    return;
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alertBox.textContent = 'Please enter a valid email address.';
+    alertBox.classList.add('show');
+    return;
+  }
+
+  alertBox.classList.remove('show');
+  state.studentInfo = { name, email, className };
+  if (!state.startedAt) state.startedAt = new Date().toISOString();
+  saveLocal();
+  showScreen('hook');
+}
+
+function updateWordCount(inputId, wcId, minimum) {
+  const val = document.getElementById(inputId).value;
+  const count = countWords(val);
+  const wc = document.getElementById(wcId);
+  const status = count >= minimum ? 'met' : (count > 0 ? 'short' : '');
+  wc.innerHTML = '<span class="' + status + '">' + count + ' words</span><span>Minimum: ' + minimum + ' words</span>';
+
+  state.responses[inputId] = val;
+
+  if (inputId === 'hookResponse') {
+    document.getElementById('hookNext').disabled = count < minimum;
+  }
+  if (inputId === 'td1' || inputId === 'td2') {
+    const td1 = countWords(document.getElementById('td1').value);
+    const td2 = countWords(document.getElementById('td2').value);
+    document.getElementById('deeperNext').disabled = !(td1 >= 120 && td2 >= 120);
+  }
+  if (inputId === 'synthesis') {
+    document.getElementById('synthesisNext').disabled = count < minimum;
+  }
+
+  refreshGating();
+  saveLocal();
+}
+
+function answerCheck(btn, checkId, correctAnswer) {
+  if (state.inlineChecks[checkId]) return;
+
+  const options = btn.parentElement.querySelectorAll('.check-option');
+  options.forEach(opt => opt.classList.add('answered'));
+
+  const selected = btn.getAttribute('data-answer');
+  const isCorrect = selected === correctAnswer;
+
+  btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+  if (!isCorrect) {
+    options.forEach(opt => {
+      if (opt.getAttribute('data-answer') === correctAnswer) opt.classList.add('correct');
+    });
+  }
+
+  state.inlineChecks[checkId] = {
+    selected,
+    correct: isCorrect,
+    at: new Date().toISOString()
+  };
+
+  const fb = document.getElementById('fb-' + checkId);
+  fb.textContent = isCorrect
+    ? 'Correct. You are tracking the main idea well.'
+    : 'Not quite. Check the explanation above and try to name the lesson\'s main distinction more clearly.';
+  fb.classList.add('show');
+
+  refreshGating();
+  saveLocal();
+}
+
+function openTerm(card) {
+  card.classList.toggle('open');
+  if (card.classList.contains('open')) {
+    card.classList.add('viewed');
+    const term = card.getAttribute('data-term');
+    if (!state.termsViewed.includes(term)) state.termsViewed.push(term);
+    document.getElementById('termsViewed').textContent = state.termsViewed.length;
+    document.getElementById('termsNext').disabled = state.termsViewed.length < 6;
+    saveLocal();
+  }
+}
+
+function refreshGating() {
+  const introReady = !!state.inlineChecks.intro1 && countWords(state.responses.pauseIntro) >= 50;
+  const viewsReady = !!state.inlineChecks.views1 && countWords(state.responses.pauseViews) >= 55;
+  const formsReady = !!state.inlineChecks.forms1 && countWords(state.responses.pauseForms) >= 60;
+  const choiceReady = !!state.inlineChecks.choice1 && countWords(state.responses.pauseChoice) >= 70;
+  const tradReady = !!state.inlineChecks.trad1 && countWords(state.responses.pauseTrad) >= 55;
+  const realReady = countWords(state.responses.pauseReal) >= 70;
+
+  const introBtn = document.getElementById('introNext');
+  const viewsBtn = document.getElementById('viewsNext');
+  const formsBtn = document.getElementById('formsNext');
+  const choiceBtn = document.getElementById('choiceNext');
+  const tradBtn = document.getElementById('tradNext');
+  const realBtn = document.getElementById('realNext');
+
+  if (introBtn) introBtn.disabled = !introReady;
+  if (viewsBtn) viewsBtn.disabled = !viewsReady;
+  if (formsBtn) formsBtn.disabled = !formsReady;
+  if (choiceBtn) choiceBtn.disabled = !choiceReady;
+  if (tradBtn) tradBtn.disabled = !tradReady;
+  if (realBtn) realBtn.disabled = !realReady;
+}
+
+function updatePause(inputId, wcId, minimum) {
+  updateWordCount(inputId, wcId, minimum);
+}
+
+function renderQuiz() {
+  const container = document.getElementById('quizQuestions');
+  if (container.dataset.rendered === 'yes') return;
+  container.dataset.rendered = 'yes';
+
+  const letters = ['a', 'b', 'c', 'd'];
+  container.innerHTML = QUIZ.map((q, idx) => {
+    return '<div class="quiz-question" data-qid="' + q.id + '">' +
+      '<div class="q-number">Question ' + (idx + 1) + ' of ' + QUIZ.length + '</div>' +
+      '<div class="q-text">' + escapeHTML(q.q) + '</div>' +
+      '<div class="q-options">' +
+        q.opts.map((opt, i) =>
+          '<button class="q-option" data-opt="' + i + '" onclick="answerQ(\'' + q.id + '\',' + i + ',' + q.correct + ')">' +
+          '<span class="letter">' + letters[i] + '.</span><span>' + escapeHTML(opt) + '</span>' +
+          '</button>'
+        ).join('') +
+      '</div>' +
+      '<div class="q-explanation" id="exp-' + q.id + '">' + escapeHTML(q.explain) + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function answerQ(qId, chosen, correct) {
+  if (state.quiz.answers[qId] !== undefined) return;
+
+  state.quiz.answers[qId] = chosen;
+  const qEl = document.querySelector('.quiz-question[data-qid="' + qId + '"]');
+  const options = qEl.querySelectorAll('.q-option');
+  options.forEach(opt => opt.classList.add('locked'));
+
+  const selected = qEl.querySelector('.q-option[data-opt="' + chosen + '"]');
+  const correctBtn = qEl.querySelector('.q-option[data-opt="' + correct + '"]');
+
+  if (chosen === correct) {
+    selected.classList.add('correct');
+    state.quiz.scoreCount += 1;
+  } else {
+    selected.classList.add('incorrect');
+    correctBtn.classList.add('correct');
+  }
+
+  document.getElementById('exp-' + qId).classList.add('show');
+
+  if (Object.keys(state.quiz.answers).length === QUIZ.length) {
+    document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length;
+    document.getElementById('quizScore').classList.add('show');
+    document.getElementById('quizNext').disabled = false;
+  }
+
+  saveLocal();
+}
+
+function refreshFinishStats() {
+  document.getElementById('finishTerms').textContent = state.termsViewed.length;
+  document.getElementById('finishChecks').textContent = Object.keys(state.inlineChecks).length;
+  document.getElementById('finishQuiz').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length;
+}
+
+function totalWords() {
+  return Object.values(state.responses).reduce((sum, text) => sum + countWords(text), 0);
+}
+
+function totalTimeMs() {
+  return Object.values(state.sectionTimes).reduce((sum, ms) => sum + ms, 0) + (Date.now() - screenEnterTime);
+}
+
+function finishLesson() {
+  if (!state.finishedAt) state.finishedAt = new Date().toISOString();
+  document.getElementById('finalScore').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length;
+  document.getElementById('finalWords').textContent = totalWords().toLocaleString();
+  document.getElementById('finalTime').textContent = formatTime(totalTimeMs());
+  saveLocal();
+  showScreen('complete');
+}
+
+function showToast(message) {
+  const toast = document.getElementById('saveToast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2400);
+}
+
+function markSaveButtonsSaved() {
+  document.querySelectorAll('.save-sticky, .btn-save-row').forEach(btn => {
+    btn.classList.add('saved');
+    clearTimeout(btn._timer);
+    btn._timer = setTimeout(() => btn.classList.remove('saved'), 1800);
+  });
+}
+
+function saveProgressNow() {
+  saveLocal();
+  const payload = JSON.stringify(state, null, 2);
+  const blob = new Blob([payload], { type: 'application/json' });
+  const safeName = (state.studentInfo.name || 'student').replace(/[^a-zA-Z0-9]+/g, '_');
+  const filename = 'HRE4M1_L4_2_Love_' + safeName + '_progress.json';
+  triggerDownload(blob, filename);
+  showToast('Progress saved.');
+  markSaveButtonsSaved();
+}
+
+function triggerDownload(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function downloadReport() {
+  const letters = ['a', 'b', 'c', 'd'];
+  const quizHtml = QUIZ.map((q, idx) => {
+    const chosen = state.quiz.answers[q.id];
+    const chosenText = chosen !== undefined ? q.opts[chosen] : 'Not answered';
+    const correctText = q.opts[q.correct];
+    return '<div class="q-block">' +
+      '<div class="q-num">Question ' + (idx + 1) + '</div>' +
+      '<div class="q-prompt">' + escapeHTML(q.q) + '</div>' +
+      '<div class="q-ans"><strong>Student answer:</strong> ' + (chosen !== undefined ? letters[chosen] + '. ' : '') + escapeHTML(chosenText) + '</div>' +
+      '<div class="q-ans"><strong>Correct answer:</strong> ' + letters[q.correct] + '. ' + escapeHTML(correctText) + '</div>' +
+      '</div>';
+  }).join('');
+
+  const report = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>HRE4M1 Lesson 4.2 Report</title><style>' +
+  'body{font-family:Georgia,serif;max-width:820px;margin:40px auto;padding:24px;color:#1F2937;line-height:1.6;background:#FDFAF0;}' +
+  '.hdr{border-bottom:3px double #8C7135;padding-bottom:16px;margin-bottom:24px;}' +
+  '.hdr-label{font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#8C7135;font-weight:600;}' +
+  'h1{font-size:28px;color:#6B2C2C;margin:8px 0 4px;} .subtitle{font-style:italic;color:#5a5a5a;font-size:16px;}' +
+  '.meta{background:#F5EDD8;padding:14px 18px;margin:20px 0;border-left:3px solid #8C7135;font-size:14px;}' +
+  '.meta dl{margin:0;display:grid;grid-template-columns:140px 1fr;gap:6px 16px;} .meta dt{font-weight:700;color:#8C7135;font-family:Arial,sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;} .meta dd{margin:0;}' +
+  'h2{font-size:20px;color:#6B2C2C;border-bottom:1px solid #C9A961;padding-bottom:6px;margin-top:30px;}' +
+  '.response-prompt{font-style:italic;color:#555;font-size:14px;margin-bottom:6px;}' +
+  '.response-box{background:white;border:1px solid #ddd;border-left:3px solid #8C7135;padding:14px 18px;margin:8px 0 20px;white-space:pre-wrap;font-size:15px;line-height:1.65;}' +
+  '.response-wc{font-family:Arial,sans-serif;font-size:11px;color:#8C7135;margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;}' +
+  '.score-big{font-size:36px;color:#6B2C2C;font-weight:700;margin:10px 0;}' +
+  '.q-block{background:white;border:1px solid #e0e0e0;padding:12px 16px;margin:10px 0;border-radius:2px;}' +
+  '.q-num{font-family:Arial,sans-serif;font-size:12px;color:#8C7135;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;}' +
+  '.q-prompt{font-weight:600;margin-bottom:8px;} .q-ans{font-size:14px;margin:4px 0;}' +
+  '</style></head><body>' +
+  '<div class="hdr"><div class="hdr-label">HRE4M1 · Unit 4 · Lesson 2</div><h1>What is Love?</h1><div class="subtitle">Student Report</div></div>' +
+  '<div class="meta"><dl>' +
+  '<dt>Name</dt><dd>' + escapeHTML(state.studentInfo.name) + '</dd>' +
+  '<dt>Email</dt><dd>' + escapeHTML(state.studentInfo.email) + '</dd>' +
+  '<dt>Class</dt><dd>' + escapeHTML(state.studentInfo.className || '') + '</dd>' +
+  '<dt>Started</dt><dd>' + (state.startedAt ? new Date(state.startedAt).toLocaleString() : '') + '</dd>' +
+  '<dt>Completed</dt><dd>' + (state.finishedAt ? new Date(state.finishedAt).toLocaleString() : '') + '</dd>' +
+  '<dt>Time Spent</dt><dd>' + formatTime(totalTimeMs()) + '</dd>' +
+  '<dt>Total Words</dt><dd>' + totalWords().toLocaleString() + '</dd>' +
+  '</dl></div>' +
+  '<h2>Knowledge Check Score</h2><div class="score-big">' + state.quiz.scoreCount + ' / ' + QUIZ.length + '</div>' +
+  '<h2>Initial Definition</h2><div class="response-box">' + escapeHTML(state.responses.hookResponse) + '</div><div class="response-wc">' + countWords(state.responses.hookResponse) + ' words</div>' +
+  '<h2>Reflection 1</h2><div class="response-box">' + escapeHTML(state.responses.pauseIntro) + '</div><div class="response-wc">' + countWords(state.responses.pauseIntro) + ' words</div>' +
+  '<h2>Reflection 2</h2><div class="response-box">' + escapeHTML(state.responses.pauseViews) + '</div><div class="response-wc">' + countWords(state.responses.pauseViews) + ' words</div>' +
+  '<h2>Reflection 3</h2><div class="response-box">' + escapeHTML(state.responses.pauseForms) + '</div><div class="response-wc">' + countWords(state.responses.pauseForms) + ' words</div>' +
+  '<h2>Reflection 4</h2><div class="response-box">' + escapeHTML(state.responses.pauseChoice) + '</div><div class="response-wc">' + countWords(state.responses.pauseChoice) + ' words</div>' +
+  '<h2>Reflection 5</h2><div class="response-box">' + escapeHTML(state.responses.pauseTrad) + '</div><div class="response-wc">' + countWords(state.responses.pauseTrad) + ' words</div>' +
+  '<h2>Reflection 6</h2><div class="response-box">' + escapeHTML(state.responses.pauseReal) + '</div><div class="response-wc">' + countWords(state.responses.pauseReal) + ' words</div>' +
+  '<h2>Think Deeper 1</h2><div class="response-box">' + escapeHTML(state.responses.td1) + '</div><div class="response-wc">' + countWords(state.responses.td1) + ' words</div>' +
+  '<h2>Think Deeper 2</h2><div class="response-box">' + escapeHTML(state.responses.td2) + '</div><div class="response-wc">' + countWords(state.responses.td2) + ' words</div>' +
+  '<h2>Final Synthesis</h2><div class="response-box">' + escapeHTML(state.responses.synthesis) + '</div><div class="response-wc">' + countWords(state.responses.synthesis) + ' words</div>' +
+  '<h2>Quiz Review</h2>' + quizHtml +
+  '</body></html>';
+
+  const blob = new Blob([report], { type: 'text/html' });
+  const safeName = (state.studentInfo.name || 'student').replace(/[^a-zA-Z0-9]+/g, '_');
+  triggerDownload(blob, 'HRE4M1_L4_2_Love_' + safeName + '_report.html');
+}
+
+function resumeFromFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const loaded = JSON.parse(e.target.result);
+      if (!loaded || loaded.lessonId !== LESSON_ID) {
+        throw new Error('This file does not match Lesson 4.2.');
+      }
+
+      Object.assign(state, loaded);
+
+      document.getElementById('studentName').value = state.studentInfo.name || '';
+      document.getElementById('studentEmail').value = state.studentInfo.email || '';
+      document.getElementById('studentClass').value = state.studentInfo.className || '';
+      document.getElementById('hookResponse').value = state.responses.hookResponse || '';
+      document.getElementById('pauseIntro').value = state.responses.pauseIntro || '';
+      document.getElementById('pauseViews').value = state.responses.pauseViews || '';
+      document.getElementById('pauseForms').value = state.responses.pauseForms || '';
+      document.getElementById('pauseChoice').value = state.responses.pauseChoice || '';
+      document.getElementById('pauseTrad').value = state.responses.pauseTrad || '';
+      document.getElementById('pauseReal').value = state.responses.pauseReal || '';
+      document.getElementById('td1').value = state.responses.td1 || '';
+      document.getElementById('td2').value = state.responses.td2 || '';
+      document.getElementById('synthesis').value = state.responses.synthesis || '';
+
+      updateWordCount('hookResponse', 'hookWC', 35);
+      updateWordCount('pauseIntro', 'pauseIntroWC', 50);
+      updateWordCount('pauseViews', 'pauseViewsWC', 55);
+      updateWordCount('pauseForms', 'pauseFormsWC', 60);
+      updateWordCount('pauseChoice', 'pauseChoiceWC', 70);
+      updateWordCount('pauseTrad', 'pauseTradWC', 55);
+      updateWordCount('pauseReal', 'pauseRealWC', 70);
+      updateWordCount('td1', 'td1WC', 120);
+      updateWordCount('td2', 'td2WC', 120);
+      updateWordCount('synthesis', 'synthesisWC', 120);
+
+      document.querySelectorAll('.term-card').forEach(card => {
+        const term = card.getAttribute('data-term');
+        if (state.termsViewed.includes(term)) {
+          card.classList.add('viewed');
+        }
+      });
+      document.getElementById('termsViewed').textContent = state.termsViewed.length;
+      document.getElementById('termsNext').disabled = state.termsViewed.length < 6;
+
+      restoreChecks();
+      restoreQuiz();
+      refreshGating();
+      showScreen(state.currentScreen || 'hook');
+      showToast('Progress restored.');
+    } catch (err) {
+      alert('Could not load that file. Please upload a valid Lesson 4.2 progress file.');
+    }
+  };
+  reader.readAsText(file);
+}
+
+function restoreChecks() {
+  Object.keys(state.inlineChecks).forEach(checkId => {
+    const info = state.inlineChecks[checkId];
+    const options = document.querySelectorAll('.check[data-check="' + checkId + '"] .check-option');
+    options.forEach(opt => {
+      opt.classList.add('answered');
+      if (opt.getAttribute('data-answer') === info.selected) {
+        opt.classList.add(info.correct ? 'correct' : 'incorrect');
+      }
+    });
+    if (!info.correct) {
+      const correctMap = {
+        intro1: 'b',
+        views1: 'c',
+        forms1: 'd',
+        choice1: 'b',
+        trad1: 'c'
+      };
+      const correct = correctMap[checkId];
+      options.forEach(opt => {
+        if (opt.getAttribute('data-answer') === correct) opt.classList.add('correct');
+      });
+    }
+    const fb = document.getElementById('fb-' + checkId);
+    if (fb) {
+      fb.textContent = info.correct
+        ? 'Correct. You are tracking the main idea well.'
+        : 'Not quite. Check the explanation above and try to name the lesson\'s main distinction more clearly.';
+      fb.classList.add('show');
+    }
+  });
+}
+
+function restoreQuiz() {
+  renderQuiz();
+  Object.keys(state.quiz.answers).forEach(qId => {
+    const chosen = state.quiz.answers[qId];
+    const q = QUIZ.find(item => item.id === qId);
+    if (!q) return;
+    const qEl = document.querySelector('.quiz-question[data-qid="' + qId + '"]');
+    if (!qEl) return;
+    const options = qEl.querySelectorAll('.q-option');
+    options.forEach(opt => opt.classList.add('locked'));
+    const selected = qEl.querySelector('.q-option[data-opt="' + chosen + '"]');
+    const correctBtn = qEl.querySelector('.q-option[data-opt="' + q.correct + '"]');
+    if (chosen === q.correct) {
+      selected.classList.add('correct');
+    } else {
+      selected.classList.add('incorrect');
+      correctBtn.classList.add('correct');
+    }
+    document.getElementById('exp-' + qId).classList.add('show');
+  });
+
+  if (Object.keys(state.quiz.answers).length === QUIZ.length) {
+    document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length;
+    document.getElementById('quizScore').classList.add('show');
+    document.getElementById('quizNext').disabled = false;
+  }
+}
+
+function hydrateFromLocalStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const saved = JSON.parse(raw);
+    if (!saved || saved.lessonId !== LESSON_ID) return;
+    Object.assign(state, saved);
+    document.getElementById('studentName').value = state.studentInfo.name || '';
+    document.getElementById('studentEmail').value = state.studentInfo.email || '';
+    document.getElementById('studentClass').value = state.studentInfo.className || '';
+  } catch (err) {}
+}
+
+hydrateFromLocalStorage();
+updateProgress();
+refreshGating();
+</script>
+</body>
+</html>
