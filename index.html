@@ -38,6 +38,23 @@
       margin-bottom: 28px;
     }
 
+    .unit-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .unit-nav a {
+      display: inline-flex;
+      align-items: center;
+      height: auto;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
     h1 {
       margin: 0 0 10px;
       font-size: clamp(2rem, 5vw, 4rem);
@@ -98,6 +115,10 @@
 </head>
 <body>
   <main>
+    <nav class="unit-nav" aria-label="Unit dashboards">
+      <a href="unit-1/">Unit 1 Dashboard</a>
+    </nav>
+
     <header>
       <h1>HRE4M1 Unit 4</h1>
       <p>Interactive walkthroughs for Faith Through Vocation. Select a lesson below to open its shareable app.</p>

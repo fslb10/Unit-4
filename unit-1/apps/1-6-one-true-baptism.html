@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HRE4M1 · Unit 1.6: One True Baptism</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=Lora:ital,wght@0,400;0,500;0,600;1,400&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+
+
+  :root {
+    --bg-deep: #2A050B;
+    --bg-mid: #5A101B;
+    --bg-card: #FFF1EA;
+    --bg-card-alt: #F8D9CC;
+    --gold: #F2A65A;
+    --gold-soft: #FFC897;
+    --gold-deep: #B84632;
+    --wine: #8B1024;
+    --ivory: #FFF4EC;
+    --cream: #FFD8C4;
+    --ink: #241318;
+    --ink-soft: #5A323B;
+    --locked: #6B4B5580;
+    --success: #2F7D4A;
+    --danger: #B3262E;
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.25);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Textured background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(242, 166, 90, 0.12), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(139, 16, 36, 0.18), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ---- Header ---- */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .unit-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .lesson-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .lesson-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gold-soft);
+    opacity: 0.9;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  /* ---- Progress bar ---- */
+  .progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-deep) 70%, transparent);
+    padding: 16px 0 12px;
+    margin: -24px -20px 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft));
+    width: 0%;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.5);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    margin: 8px auto 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  /* ---- Sticky save button (top bar) ---- */
+  .save-sticky {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 169, 97, 0.12);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .save-sticky:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    border-color: var(--gold);
+  }
+
+  .save-sticky.saved {
+    background: rgba(63, 122, 77, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  /* ---- In-row save (button row) ---- */
+  .btn-save-row {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-save-row:hover {
+    background: var(--gold-deep);
+    color: var(--ivory);
+  }
+
+  .btn-save-row.saved {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .btn-row-split {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* ---- Pause and Reflect blocks (in-flow) ---- */
+  .pause {
+    background: linear-gradient(135deg, rgba(107, 44, 44, 0.06), rgba(201, 169, 97, 0.08));
+    border: 1px solid rgba(107, 44, 44, 0.2);
+    border-left: 3px solid var(--wine);
+    padding: 22px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .pause-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pause-label::before {
+    content: '❊';
+    font-size: 14px;
+    color: var(--gold-deep);
+  }
+
+  .pause-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .pause textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(107, 44, 44, 0.25);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    border-radius: 2px;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .pause textarea:focus {
+    outline: none;
+    border-color: var(--wine);
+    box-shadow: 0 0 0 2px rgba(107, 44, 44, 0.15);
+  }
+
+  /* Save confirmation toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid var(--gold);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---- Screen Cards ---- */
+  .screen {
+    display: none;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .screen.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .screen-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .screen-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .screen-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .prose {
+    font-size: 16.5px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .prose p { margin-bottom: 18px; }
+
+  .prose strong { color: var(--wine); font-weight: 600; }
+
+  .prose em { color: var(--ink-soft); }
+
+  .prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 28px 0 14px;
+    color: var(--wine);
+    line-height: 1.25;
+  }
+
+  .prose h3::before {
+    content: '❖ ';
+    color: var(--gold-deep);
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+
+  .divider {
+    display: block;
+    margin: 32px auto;
+    width: 120px;
+    height: auto;
+    opacity: 0.6;
+  }
+
+  .pullquote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--wine);
+    text-align: center;
+    margin: 28px 20px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    line-height: 1.4;
+  }
+
+  .scripture {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scripture-ref {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--ivory);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--wine);
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:disabled {
+    background: var(--locked);
+    border-color: var(--locked);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+  }
+
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- Forms ---- */
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .word-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .word-count .met {
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  .word-count .short {
+    color: var(--danger);
+  }
+
+  /* ---- Key Terms / Flashcards ---- */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .term-card {
+    background: var(--bg-card-alt);
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    border-radius: 2px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 100px;
+  }
+
+  .term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--gold-deep);
+  }
+
+  .term-card.viewed {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+  }
+
+  .term-card.viewed::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .term-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.7;
+  }
+
+  .term-def {
+    display: none;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .term-card.open .term-def { display: block; }
+  .term-card.open .term-tap { display: none; }
+
+  /* ---- Inline comprehension check ---- */
+  .check {
+    background: #FDF8E8;
+    border: 1px dashed var(--gold-deep);
+    border-radius: 2px;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .check-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .check-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .check-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-option {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .check-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .check-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .check-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .check-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .check-feedback {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    display: none;
+  }
+
+  .check-feedback.show { display: block; }
+
+  /* ---- Vocation Compass ---- */
+  .compass-intro {
+    background: #FDF8E8;
+    border-left: 3px solid var(--wine);
+    padding: 18px 22px;
+    margin: 20px 0 30px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .compass-vocation {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(140, 113, 53, 0.25);
+  }
+
+  .compass-vocation:last-child {
+    border-bottom: none;
+  }
+
+  .compass-voc-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+
+  .compass-voc-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  .compass-aspect {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px dotted rgba(140, 113, 53, 0.2);
+  }
+
+  .compass-aspect:first-of-type { border-top: none; }
+
+  .compass-aspect-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .rating-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .rating-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(140, 113, 53, 0.4);
+    background: white;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .rating-btn:hover {
+    border-color: var(--gold-deep);
+  }
+
+  .rating-btn.selected {
+    background: var(--wine);
+    color: var(--ivory);
+    border-color: var(--wine);
+  }
+
+  .rating-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  .compass-result {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(107, 44, 44, 0.08));
+    border: 1px solid var(--gold-deep);
+    padding: 24px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  .compass-result.show { display: block; }
+
+  .result-voc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.3);
+  }
+
+  .result-voc:last-child { border-bottom: none; }
+
+  .result-voc-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--wine);
+  }
+
+  .result-bar {
+    width: 180px;
+    height: 8px;
+    background: rgba(140, 113, 53, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .result-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    transition: width 1s ease;
+  }
+
+  /* ---- Quiz ---- */
+  .quiz-question {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.25);
+  }
+
+  .quiz-question:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .q-option {
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .q-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .q-option.selected {
+    border-color: var(--wine);
+    background: rgba(107, 44, 44, 0.06);
+  }
+
+  .q-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .q-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+  }
+
+  .q-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+  }
+
+  .q-option.locked {
+    pointer-events: none;
+  }
+
+  .q-explanation {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201, 169, 97, 0.1);
+    border-left: 2px solid var(--gold-deep);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    display: none;
+  }
+
+  .q-explanation.show { display: block; }
+
+  .quiz-score {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(107, 44, 44, 0.1));
+    border: 1px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score strong {
+    font-size: 34px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ---- Completion screen ---- */
+  .completion-hero {
+    text-align: center;
+    padding: 20px 0 32px;
+  }
+
+  .completion-icon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    color: var(--gold-deep);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .completion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .completion-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .summary-stat {
+    background: #FDF8E8;
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+  }
+
+  .download-note {
+    background: rgba(201, 169, 97, 0.12);
+    padding: 18px 22px;
+    border-left: 3px solid var(--gold-deep);
+    margin: 24px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ---- Hero (start screen) ---- */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-deep));
+    color: var(--ivory);
+    padding: 40px 40px 36px;
+    margin: -40px -44px 32px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .hero-banner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+
+  .hero-banner p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-soft);
+    margin-top: 8px;
+  }
+
+  .hero-banner .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+
+  .upload-zone {
+    border: 1px dashed rgba(140, 113, 53, 0.4);
+    padding: 20px;
+    text-align: center;
+    margin-top: 24px;
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .upload-zone label {
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .upload-zone input { display: none; }
+
+  /* ---- Error / alert ---- */
+  .alert {
+    padding: 12px 16px;
+    background: rgba(168, 67, 43, 0.1);
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    margin-top: 14px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .alert.show { display: block; }
+
+  /* ---- Footer ---- */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .card { padding: 28px 22px; }
+    .hero-banner { margin: -28px -22px 28px; padding: 30px 24px 26px; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; justify-content: center; }
+    .compass-aspect { grid-template-columns: 1fr; gap: 8px; }
+    .result-bar { width: 120px; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .save-sticky {
+      position: static;
+      display: flex;
+      margin: 10px auto 0;
+      width: fit-content;
+    }
+    .progress-meta { flex-wrap: wrap; }
+    .btn-row-split { width: 100%; flex-direction: column; }
+    .btn-row-split .btn-save-row { width: 100%; justify-content: center; }
+  }
+
+  /* Print-friendly download report styling will be injected separately */
+
+.prose ul { margin-left: 20px; margin-bottom: 18px; }
+.prose li { margin-bottom: 8px; }
+.note-panel { background: rgba(184, 70, 50, 0.12); border-left: 3px solid var(--gold-deep); padding: 18px 22px; margin: 22px 0; color: var(--ink); line-height: 1.65; }
+
+</style>
+</head>
+<body>
+<div class="app">
+<div class="header">
+<div class="unit-label">HRE4M1 · Unit 1 · Lesson 6</div>
+<h1 class="lesson-title">One True Baptism</h1>
+<div class="lesson-subtitle">New life, forgiveness, unity, and mission in Christ</div>
+<svg class="ornament" height="20" viewbox="0 0 80 20" width="80" xmlns="http://www.w3.org/2000/svg"><path d="M 0 10 L 30 10 M 50 10 L 80 10" fill="none" stroke="#F2A65A" stroke-width="1"></path><circle cx="40" cy="10" fill="none" r="3" stroke="#F2A65A" stroke-width="1"></circle><circle cx="40" cy="10" fill="#F2A65A" r="1"></circle></svg>
+</div>
+<div class="progress-container" id="progressContainer" style="display:none; position:relative;"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><div class="progress-meta"><span id="progressLabel">Section 1 of 13</span><span id="progressPercent">0%</span></div><button class="save-sticky" id="stickySave" onclick="saveProgressNow()" title="Download your progress to resume later"><span>💾</span><span id="stickySaveLabel">Save Progress</span></button></div>
+<div id="screens">
+<section class="screen active" data-screen="welcome">
+<div class="card">
+<div class="hero-banner">
+<div class="ornament-line">
+<svg height="12" viewbox="0 0 40 12" width="40"><line stroke="currentColor" stroke-width="1" x1="0" x2="40" y1="6" y2="6"></line></svg>
+<span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">A Study in New Life</span>
+<svg height="12" viewbox="0 0 40 12" width="40"><line stroke="currentColor" stroke-width="1" x1="0" x2="40" y1="6" y2="6"></line></svg>
+</div>
+<h2>Welcome to Unit 1.6</h2>
+<p>This lesson explores Baptism as the sacrament of new life, forgiveness, Christian unity, and mission.</p>
+</div>
+<p class="prose" style="margin-bottom:24px;">Enter your information before you begin. At the end, you will be able to download a report of your responses and quiz results.</p>
+<div class="field"><label for="studentName">Full Name</label><input autocomplete="name" id="studentName" placeholder="First and last name" type="text"/></div>
+<div class="field"><label for="studentEmail">School Email</label><input autocomplete="email" id="studentEmail" placeholder="you@school.ca" type="email"/></div>
+<div class="field"><label for="studentClass">Class / Period</label><input id="studentClass" placeholder="e.g., HRE4M1 · Period 2" type="text"/></div>
+<div class="alert" id="setupAlert">Please fill in your name and email before starting.</div>
+<div class="btn-row"><div></div><button class="btn btn-primary" onclick="beginLesson()">Begin Lesson →</button></div>
+<div class="upload-zone">
+<div style="font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Returning to finish?</div>
+<label for="resumeFile">Upload your saved progress file</label>
+<input accept=".json" id="resumeFile" onchange="resumeFromFile(event)" type="file"/>
+</div>
+</div>
+</section>
+<section class="screen" data-screen="hook">
+<div class="card">
+<div class="screen-label">Before We Begin</div>
+<h2 class="screen-title">A Fresh Start</h2>
+<p class="screen-intro">Baptism is about water, grace, forgiveness, belonging, and a new beginning in Christ.</p>
+<div class="prose">
+<p>Most people understand the idea of wanting a fresh start. We make mistakes, carry burdens, and sometimes wish we could begin again with a clean heart and a clearer direction.</p>
+<p>Christian Baptism is much deeper than a symbolic fresh start. It is a sacrament where God acts. Through water and the Holy Spirit, a person is cleansed from sin, reborn as a child of God, and brought into the Church.</p>
+</div>
+<div class="field" style="margin-top:20px;">
+<label for="hookResponse">Your starting point</label>
+<textarea id="hookResponse" oninput="updateWordCount('hookResponse', 'hookWC')" placeholder="What does a fresh start mean to you, and why do you think Baptism is described as a new birth?"></textarea>
+<div class="word-count" id="hookWC"><span>0 words</span><span>Minimum: 35 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="hookNext" onclick="showScreen('intro')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="intro">
+<div class="card">
+<div class="screen-label">Part One · Foundations</div>
+<h2 class="screen-title">Baptism as the Sacrament of New Life</h2>
+<p class="screen-intro">Baptism is the first sacrament of Christian initiation and the gateway to the sacramental life of the Church.</p>
+<div class="prose">
+<p>Baptism was instituted by Jesus and has been practiced by the Church from the beginning. Jesus commanded His disciples to baptize all nations in the name of the Father, and of the Son, and of the Holy Spirit.</p>
+<p>The word <strong>baptism</strong> comes from a Greek word meaning to plunge or immerse. This connects Baptism to dying and rising with Christ. In Baptism, a person is cleansed from sin, reborn as a child of God, and incorporated into the Body of Christ, the Church.</p>
+<p>The Church calls Baptism the <strong>gateway to the other sacraments</strong>. It is the beginning of Christian life. Through Baptism, a person receives sanctifying grace, becomes a temple of the Holy Spirit, receives an indelible spiritual mark, and enters the family of God.</p>
+<div class="scripture">“Unless one is born of water and the Spirit, he cannot enter the kingdom of God.”<span class="scripture-ref">John 3:5</span></div>
+</div>
+<div class="check" data-check="intro1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">Which statement best explains what happens in Baptism?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">a.</span><span>Baptism is mainly a family celebration with no real spiritual effect.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">b.</span><span>Baptism is only a public promise to try to be a better person.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">c.</span><span>Baptism cleanses sin, gives new life in Christ, and incorporates the person into the Church.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">d.</span><span>Baptism is repeated whenever someone recommits to faith.</span></button>
+</div>
+<div class="check-feedback" id="fb-intro1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Why do you think the Church calls Baptism both a cleansing from sin and a new birth into God’s family?</div>
+<textarea id="pauseIntro" oninput="updateWordCount('pauseIntro', 'pauseIntroWC')" placeholder="Explain both ideas clearly: cleansing and new birth."></textarea>
+<div class="word-count" id="pauseIntroWC"><span>0 words</span><span>Minimum: 60 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="introNext" onclick="showScreen('terms')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="terms">
+<div class="card">
+<div class="screen-label">Part Two · Vocabulary</div>
+<h2 class="screen-title">Ten Terms to Know</h2>
+<p class="screen-intro">Open all ten cards before moving on.</p>
+<div class="terms-grid">
+<div class="term-card" data-term="baptism" onclick="openTerm(this)"><div class="term-name">Baptism</div><div class="term-tap">Tap to reveal</div><div class="term-def">The first sacrament of Christian initiation, where a person is cleansed of sin, reborn as a child of God, and incorporated into the Church.</div></div>
+<div class="term-card" data-term="trinitarian" onclick="openTerm(this)"><div class="term-name">Trinitarian Formula</div><div class="term-tap">Tap to reveal</div><div class="term-def">The required words for a valid Baptism: “I baptize you in the name of the Father, and of the Son, and of the Holy Spirit.”</div></div>
+<div class="term-card" data-term="original-sin" onclick="openTerm(this)"><div class="term-name">Original Sin</div><div class="term-tap">Tap to reveal</div><div class="term-def">The fallen condition of humanity inherited from the first sin, washed away through Baptism.</div></div>
+<div class="term-card" data-term="sanctifying-grace" onclick="openTerm(this)"><div class="term-name">Sanctifying Grace</div><div class="term-tap">Tap to reveal</div><div class="term-def">God’s own life in the soul, given in Baptism and meant to grow throughout the Christian life.</div></div>
+<div class="term-card" data-term="indelible" onclick="openTerm(this)"><div class="term-name">Indelible Mark</div><div class="term-tap">Tap to reveal</div><div class="term-def">The permanent spiritual character Baptism places on the soul, marking a person as belonging to Christ forever.</div></div>
+<div class="term-card" data-term="one-baptism" onclick="openTerm(this)"><div class="term-name">One Baptism</div><div class="term-tap">Tap to reveal</div><div class="term-def">The belief that valid Baptism happens once and is not repeated. It unites Christians through one sacramental birth in Christ.</div></div>
+<div class="term-card" data-term="desire" onclick="openTerm(this)"><div class="term-name">Baptism of Desire</div><div class="term-tap">Tap to reveal</div><div class="term-def">God’s mercy applied to someone who desired Baptism, explicitly or implicitly, but died before receiving water Baptism.</div></div>
+<div class="term-card" data-term="blood" onclick="openTerm(this)"><div class="term-name">Baptism of Blood</div><div class="term-tap">Tap to reveal</div><div class="term-def">The grace given to someone who dies as a martyr for Christ before receiving water Baptism.</div></div>
+<div class="term-card" data-term="godparents" onclick="openTerm(this)"><div class="term-name">Godparents</div><div class="term-tap">Tap to reveal</div><div class="term-def">Spiritual witnesses who help support the baptized person in growing in faith, especially when an infant is baptized.</div></div>
+<div class="term-card" data-term="mission" onclick="openTerm(this)"><div class="term-name">Priest, Prophet, King</div><div class="term-tap">Tap to reveal</div><div class="term-def">The baptismal mission of sharing in Christ’s worship, witness to truth, and service-filled leadership.</div></div>
+</div>
+<div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink-soft); text-align:center; margin-top:16px;">Viewed: <span id="termsViewed">0</span> of 10</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="termsNext" onclick="showScreen('freedom')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="freedom">
+<div class="card">
+<div class="screen-label">Part Three · Necessity and Unity</div>
+<h2 class="screen-title">Why Baptism Is Necessary, and Why It Is One</h2>
+<p class="screen-intro">The Church teaches that Baptism is ordinarily necessary for salvation because it is the means Christ gave us for new life.</p>
+<div class="prose">
+<p>Jesus teaches that a person must be born of water and the Spirit. The Church understands this as referring to Baptism. Baptism applies the saving grace of Christ’s Paschal Mystery to a person, washing away sin and giving new life.</p>
+<p>At the same time, the Church does not limit God’s mercy. God is not bound by the sacraments, even though we are called to receive them. This is why Catholic teaching speaks of <strong>Baptism of desire</strong> and <strong>Baptism of blood</strong>.</p>
+<p>The Church also professes <strong>one Baptism for the forgiveness of sins</strong>. If someone is validly baptized with water and the Trinitarian formula, that Baptism is not repeated. This is why the Catholic Church recognizes many baptisms performed in other Christian communities.</p>
+<div class="scripture">“One Lord, one faith, one baptism.”<span class="scripture-ref">Ephesians 4:5</span></div>
+</div>
+<div class="check" data-check="freedom1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">What does “one Baptism for the forgiveness of sins” mean?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'freedom1', 'b')"><span class="letter">a.</span><span>Only Catholic priests can ever baptize validly.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'freedom1', 'b')"><span class="letter">b.</span><span>Valid Baptism happens once, is not repeated, and unites Christians in Christ.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'freedom1', 'b')"><span class="letter">c.</span><span>Baptism is optional because all religious ceremonies are the same.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'freedom1', 'b')"><span class="letter">d.</span><span>Every denomination has a completely different baptism.</span></button>
+</div>
+<div class="check-feedback" id="fb-freedom1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Why is it meaningful that valid Baptism is recognized across many Christian communities, even when Christians are divided in other ways?</div>
+<textarea id="pauseFreedom" oninput="updateWordCount('pauseFreedom', 'pauseFreedomWC')" placeholder="Explain how Baptism creates unity among Christians."></textarea>
+<div class="word-count" id="pauseFreedomWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="freedomNext" onclick="showScreen('primary')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="primary">
+<div class="card">
+<div class="screen-label">Part Four · Form and Effects</div>
+<h2 class="screen-title">Water, Words, and Grace</h2>
+<p class="screen-intro">The outward sign of Baptism is simple, but the inward grace is profound.</p>
+<div class="prose">
+<p>For Baptism to be valid, the <strong>matter</strong> is natural water. The water may be applied by immersion, pouring, or sprinkling, as long as water truly flows on the person.</p>
+<p>The <strong>form</strong> is the Trinitarian formula: “I baptize you in the name of the Father, and of the Son, and of the Holy Spirit.” These words matter because Baptism brings us into the life of the Trinity.</p>
+<p>The ordinary minister is a bishop, priest, or deacon. In an emergency, however, anyone can baptize if they use water, say the Trinitarian formula, and intend to do what the Church does.</p>
+<p>The effects are immense: forgiveness of sins, sanctifying grace, adoption as a child of God, incorporation into the Church, an indelible mark, unity with Christ’s Death and Resurrection, and access to the other sacraments.</p>
+</div>
+<div class="check" data-check="primary1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">What is required for a valid Baptism?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'primary1', 'c')"><span class="letter">a.</span><span>A white garment and a candle, but no specific words.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'primary1', 'c')"><span class="letter">b.</span><span>Only a priest, a church building, and a large baptismal font.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'primary1', 'c')"><span class="letter">c.</span><span>Natural water and the Trinitarian formula, with the intention to do what the Church does.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'primary1', 'c')"><span class="letter">d.</span><span>A public speech about becoming a better person.</span></button>
+</div>
+<div class="check-feedback" id="fb-primary1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Choose two effects of Baptism and explain why each one is important for understanding Christian identity.</div>
+<textarea id="pausePrimary" oninput="updateWordCount('pausePrimary', 'pausePrimaryWC')" placeholder="For example, forgiveness of sin, child of God, Church membership, indelible mark, or union with Christ."></textarea>
+<div class="word-count" id="pausePrimaryWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="primaryNext" onclick="showScreen('aquinas')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="aquinas">
+<div class="card">
+<div class="screen-label">Part Five · Living Baptism</div>
+<h2 class="screen-title">New Life and Mission</h2>
+<p class="screen-intro">Baptism is not just something that happened in the past. It begins a lifelong Christian mission.</p>
+<div class="prose">
+<p>To live out Baptism is to become who we already are by grace: children of God, members of Christ, temples of the Holy Spirit, and members of the Church.</p>
+<p>This means rejecting sin, growing in holiness, praying, participating in the sacraments, and living as part of the Christian community. Baptism gives a seed of grace, but that seed is meant to grow through faith, hope, and love.</p>
+<p>Every baptized Christian also shares in Christ’s mission as <strong>priest, prophet, and king</strong>. As priestly people, we offer our lives, prayers, and sacrifices to God. As prophets, we witness to the truth of the Gospel. As kings, we practice self-mastery and serve others in Christlike leadership.</p>
+</div>
+<div class="check" data-check="aquinas1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">What does it mean that baptized Christians share in Christ’s roles as priest, prophet, and king?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'aquinas1', 'c')"><span class="letter">a.</span><span>Every baptized person automatically becomes an ordained priest.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'aquinas1', 'c')"><span class="letter">b.</span><span>Baptized people no longer need the Church or the sacraments.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'aquinas1', 'c')"><span class="letter">c.</span><span>They are called to worship God, witness to the Gospel, and serve others with Christlike leadership.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'aquinas1', 'c')"><span class="letter">d.</span><span>They only have responsibilities after Confirmation.</span></button>
+</div>
+<div class="check-feedback" id="fb-aquinas1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Give one ordinary example of how a baptized person could live as priest, prophet, or king in daily life.</div>
+<textarea id="pauseAquinas" oninput="updateWordCount('pauseAquinas', 'pauseAquinasWC')" placeholder="Choose one role and explain what it could look like at school, home, work, or online."></textarea>
+<div class="word-count" id="pauseAquinasWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="aquinasNext" onclick="showScreen('magisterium')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="magisterium">
+<div class="card">
+<div class="screen-label">Part Six · Signs and Symbols</div>
+<h2 class="screen-title">The Symbols of Baptism</h2>
+<p class="screen-intro">The baptismal rite uses visible signs to show invisible grace.</p>
+<div class="prose">
+<p><strong>Water</strong> is the central sign. It shows cleansing, death to sin, and new life in Christ. <strong>Sacred chrism</strong> points to the Holy Spirit and the baptized person’s sharing in Christ’s mission.</p>
+<p>The <strong>white garment</strong> symbolizes putting on Christ and being washed clean. The <strong>baptismal candle</strong>, lit from the Easter candle, shows that the light of Christ now burns in the newly baptized person.</p>
+<p><strong>Godparents</strong> and the parish community remind us that Baptism is not only private. A person is welcomed into a spiritual family that has a responsibility to support their growth in faith.</p>
+<p>These signs are not empty decoration. They help us see what God is doing: cleansing, anointing, clothing, enlightening, and welcoming a new member into Christ.</p>
+</div>
+<div class="check" data-check="magisterium1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">Which pairing is matched correctly?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'magisterium1', 'd')"><span class="letter">a.</span><span>White garment: sadness. Candle: secrecy. Water: decoration.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'magisterium1', 'd')"><span class="letter">b.</span><span>Chrism: ordinary perfume. Godparents: social guests only.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'magisterium1', 'd')"><span class="letter">c.</span><span>Water: membership card. Candle: academic success.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'magisterium1', 'd')"><span class="letter">d.</span><span>Water: cleansing and new life. White garment: putting on Christ. Candle: light of Christ.</span></button>
+</div>
+<div class="check-feedback" id="fb-magisterium1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Which baptismal symbol do you think best explains what Baptism means, water, oil, white garment, candle, or godparents? Explain why.</div>
+<textarea id="pauseMagisterium" oninput="updateWordCount('pauseMagisterium', 'pauseMagisteriumWC')" placeholder="Choose one symbol and explain the meaning behind it."></textarea>
+<div class="word-count" id="pauseMagisteriumWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="magisteriumNext" onclick="showScreen('conclusion')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="conclusion">
+<div class="card">
+<div class="screen-label">Part Seven · Conclusion</div>
+<h2 class="screen-title">Remembering Who You Are</h2>
+<p class="screen-intro">Baptism gives a person a lasting identity and a lifelong call.</p>
+<div class="prose">
+<p>Baptism is a beginning, not an ending. It starts a life of grace that must be nurtured through prayer, the Eucharist, Confession, moral choices, and service.</p>
+<p>Each time Catholics bless themselves with holy water, renew their baptismal promises at Easter, or make the Sign of the Cross, they remember their baptismal identity. They belong to Christ.</p>
+<p>This identity matters in ordinary life. A baptized person is called to reject empty promises, resist sin, live with dignity, and help build up the Church. Baptism says: you are not just your mistakes, your popularity, your achievements, or your failures. You are a child of God, called to live in Christ.</p>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">How could remembering Baptism help someone make better choices during peer pressure, temptation, doubt, or fear?</div>
+<textarea id="pauseConclusion" oninput="updateWordCount('pauseConclusion', 'pauseConclusionWC')" placeholder="Connect baptismal identity to real decisions and daily life."></textarea>
+<div class="word-count" id="pauseConclusionWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="conclusionNext" onclick="showScreen('quiz')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="quiz">
+<div class="card">
+<div class="screen-label">Part Eight · Knowledge Check</div>
+<h2 class="screen-title">Check Your Understanding</h2>
+<p class="screen-intro">Answer all seven questions. You will see the correct answer and explanation after each choice.</p>
+<div id="quizQuestions"></div>
+<div class="quiz-score" id="quizScore">Score<strong id="scoreText">0 / 0</strong></div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="quizNext" onclick="showScreen('deeper')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="deeper">
+<div class="card">
+<div class="screen-label">Part Nine · Think Deeper</div>
+<h2 class="screen-title">Go Beyond Recall</h2>
+<p class="screen-intro">Use the lesson to explain Baptism as a lifelong identity and mission, not only a ceremony.</p>
+<div class="field">
+<label for="td1">Think Deeper 1</label>
+<div class="prose" style="margin-bottom:8px;"><p>Consider the baptismal promises, rejecting sin and professing faith in God. In what real situations might those promises be tested, and how could remembering Baptism help someone respond?</p></div>
+<textarea id="td1" oninput="updateWordCount('td1', 'td1WC')" placeholder="Use realistic examples and connect them to baptismal identity."></textarea>
+<div class="word-count" id="td1WC"><span>0 words</span><span>Minimum: 130 words</span></div>
+</div>
+<div class="field">
+<label for="td2">Think Deeper 2</label>
+<div class="prose" style="margin-bottom:8px;"><p>How does knowing you are a baptized child of God affect the way you view dignity, purpose, community, and responsibility?</p></div>
+<textarea id="td2" oninput="updateWordCount('td2', 'td2WC')" placeholder="Explain how Baptism can shape identity and purpose."></textarea>
+<div class="word-count" id="td2WC"><span>0 words</span><span>Minimum: 130 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="deeperNext" onclick="showScreen('synthesis')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="synthesis">
+<div class="card">
+<div class="screen-label">Part Ten · Synthesis</div>
+<h2 class="screen-title">Pull the Lesson Together</h2>
+<p class="screen-intro">Your final response should show that you understand both the sacrament and the mission that flows from it.</p>
+<div class="field">
+<label for="synthesis">Final Synthesis</label>
+<div class="prose" style="margin-bottom:8px;"><p>Write a clear response explaining why Baptism matters in Catholic teaching. Include new life, forgiveness of sin, one Baptism, valid form and matter, the indelible mark, and the call to live as priest, prophet, and king.</p></div>
+<textarea id="synthesis" oninput="updateWordCount('synthesis', 'synthesisWC')" placeholder="Bring together the major ideas from the lesson in one developed response."></textarea>
+<div class="word-count" id="synthesisWC"><span>0 words</span><span>Minimum: 160 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="synthesisNext" onclick="showScreen('finish')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="finish">
+<div class="card">
+<div class="completion-hero">
+<div class="completion-icon">✦</div>
+<div class="completion-title">Ready to Complete?</div>
+<div class="completion-sub">Review your progress, then download your final report.</div>
+</div>
+<div class="summary-grid">
+<div class="summary-stat"><div class="stat-label">Quiz Score</div><div class="stat-value" id="finishQuizScore">0 / 7</div></div>
+<div class="summary-stat"><div class="stat-label">Terms Viewed</div><div class="stat-value" id="finishTerms">0 / 10</div></div>
+<div class="summary-stat"><div class="stat-label">Total Words</div><div class="stat-value" id="finishWords">0</div></div>
+<div class="summary-stat"><div class="stat-label">Time Spent</div><div class="stat-value" id="finishTime">0 min</div></div>
+</div>
+<div class="download-note">Download the report and submit it as directed by your teacher. The file includes your written responses, quiz review, and completion details.</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save Progress</button><button class="btn btn-gold" onclick="finishLesson()">Download Report ↓</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="complete">
+<div class="card">
+<div class="completion-hero">
+<div class="completion-icon">✓</div>
+<div class="completion-title">Lesson Complete</div>
+<div class="completion-sub">You have completed Unit 1.6, One True Baptism.</div>
+</div>
+<div class="prose"><p>You can download the report again if needed, or save your progress file for your records.</p></div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="showScreen('finish')">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save Progress</button><button class="btn btn-gold" onclick="downloadReport()">Download Report Again ↓</button></div></div>
+</div>
+</section>
+</div>
+<div class="toast" id="toast">Saved.</div>
+<div class="footer">HRE4M1 · Unit 1 · Lesson 5</div>
+</div>
+<script>
+const LESSON_ID = "1.6";
+const STORAGE_KEY = "hre4m1_unit_1_6_one_true_baptism";
+const SCREEN_ORDER = ["welcome", "hook", "intro", "terms", "freedom", "primary", "aquinas", "magisterium", "conclusion", "quiz", "deeper", "synthesis", "finish", "complete"];
+const TOTAL_STEPS = SCREEN_ORDER.length - 1;
+const REQUIRED_TERMS = 10;
+const QUIZ = [{"id": "q1", "q": "What is Baptism in Catholic teaching?", "opts": ["A symbolic ceremony with no real spiritual effect", "The first sacrament of initiation, where a person is cleansed of sin, reborn as a child of God, and incorporated into the Church", "A sacrament that can be repeated whenever someone returns to faith", "A private family tradition that does not involve the Church"], "correct": 1, "explain": "Baptism is the foundational sacrament of initiation and the gateway to the Christian life."}, {"id": "q2", "q": "What words and element are required for a valid Baptism?", "opts": ["Natural water and the Trinitarian formula", "Oil and the words of absolution", "A candle and a personal testimony", "Water and any prayer about God"], "correct": 0, "explain": "Valid Baptism requires natural water and the words, I baptize you in the name of the Father, and of the Son, and of the Holy Spirit."}, {"id": "q3", "q": "Why can Baptism never be repeated?", "opts": ["Because it only matters symbolically once", "Because the Church wants to make the ritual rare", "Because Baptism gives an indelible spiritual mark that permanently identifies the person as belonging to Christ", "Because only adults can choose it properly"], "correct": 2, "explain": "Baptism imprints a permanent spiritual character, so one valid Baptism is enough for life."}, {"id": "q4", "q": "What is Baptism of blood?", "opts": ["A second baptism given after Confirmation", "Martyrdom for Christ before receiving water Baptism", "A ritual using wine instead of water", "A baptism that only applies to priests"], "correct": 1, "explain": "Baptism of blood refers to someone who dies for Christ before receiving water Baptism."}, {"id": "q5", "q": "What does the Church mean by one Baptism for the forgiveness of sins?", "opts": ["Each Christian group has a different baptism", "Only Catholics are baptized in any meaningful way", "There is one valid Baptism instituted by Christ, and it is not repeated", "Baptism forgives only small sins"], "correct": 2, "explain": "The Church recognizes one valid Baptism when water and the Trinitarian formula are used."}, {"id": "q6", "q": "Which list best names important effects of Baptism?", "opts": ["Social status, popularity, and perfect behavior", "Forgiveness of sin, sanctifying grace, adoption as a child of God, incorporation into the Church, and an indelible mark", "Automatic knowledge of all Church teaching and freedom from future temptation", "Confirmation, Holy Orders, and Matrimony"], "correct": 1, "explain": "Baptism cleanses sin, gives grace, makes us children of God, joins us to the Church, and marks us permanently for Christ."}, {"id": "q7", "q": "What does it mean to live out Baptism?", "opts": ["To remember it only as a childhood event", "To grow in holiness, reject sin, participate in the sacraments, serve others, and witness to Christ", "To avoid all responsibilities until adulthood", "To keep faith completely private"], "correct": 1, "explain": "Baptism begins a lifelong call to holiness, mission, worship, and service."}];
+const CORRECT_MAP = {intro1:"c", freedom1:"b", primary1:"c", aquinas1:"c", magisterium1:"d"};
+const PROMPTS = {"hookResponse": "What does a fresh start mean to you, and why do you think Baptism is described as a new birth?", "pauseIntro": "Why do you think the Church calls Baptism both a cleansing from sin and a new birth into God’s family?", "pauseFreedom": "Why is it meaningful that valid Baptism is recognized across many Christian communities, even when Christians are divided in other ways?", "pausePrimary": "Choose two effects of Baptism and explain why each one is important for understanding Christian identity.", "pauseAquinas": "Give one ordinary example of how a baptized person could live as priest, prophet, or king in daily life.", "pauseMagisterium": "Which baptismal symbol do you think best explains what Baptism means, water, oil, white garment, candle, or godparents? Explain why.", "pauseConclusion": "How could remembering Baptism help someone make better choices during peer pressure, temptation, doubt, or fear?", "td1": "Consider the baptismal promises, rejecting sin and professing faith in God. In what real situations might those promises be tested, and how could remembering Baptism help someone respond?", "td2": "How does knowing you are a baptized child of God affect the way you view dignity, purpose, community, and responsibility?", "synthesis": "Write a clear response explaining why Baptism matters in Catholic teaching. Include new life, forgiveness of sin, one Baptism, valid form and matter, the indelible mark, and the call to live as priest, prophet, and king."};
+const MINIMUMS = {"hookResponse": 35, "pauseIntro": 60, "pauseFreedom": 70, "pausePrimary": 80, "pauseAquinas": 80, "pauseMagisterium": 80, "pauseConclusion": 80, "td1": 130, "td2": 130, "synthesis": 160};
+const RESPONSE_ORDER = ["hookResponse", "pauseIntro", "pauseFreedom", "pausePrimary", "pauseAquinas", "pauseMagisterium", "pauseConclusion", "td1", "td2", "synthesis"];
+const RESPONSE_TITLES = {"hookResponse": "Starting Point", "pauseIntro": "Reflection 1", "pauseFreedom": "Reflection 2", "pausePrimary": "Reflection 3", "pauseAquinas": "Reflection 4", "pauseMagisterium": "Reflection 5", "pauseConclusion": "Reflection 6", "td1": "Think Deeper 1", "td2": "Think Deeper 2", "synthesis": "Final Synthesis"};
+const REPORT_FILE_PREFIX = "HRE4M1_Unit_1_6_One_True_Baptism";
+const REPORT_HEADER_LABEL = "HRE4M1 · Unit 1 · Lesson 6";
+const REPORT_TITLE = "One True Baptism";
+const REPORT_SUBTITLE = 'Student Report';
+
+const state = { lessonId: LESSON_ID, startedAt: null, finishedAt: null, currentScreen: 'welcome', studentInfo: {name:'', email:'', className:''}, termsViewed: [], inlineChecks: {}, responses: {}, quiz: {answers: {}, scoreCount: 0}, sectionTimes: {}, lastSavedAt: null };
+RESPONSE_ORDER.forEach(key => state.responses[key] = '');
+let screenEnterTime = Date.now();
+
+function countWords(str) { if (!str) return 0; return str.trim().split(/\s+/).filter(Boolean).length; }
+function escapeHTML(str) { if (str === null || str === undefined) return ''; return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function formatTime(ms) { const totalMin = Math.floor(ms / 60000); if (totalMin < 1) return '< 1 min'; if (totalMin < 60) return totalMin + ' min'; const hrs = Math.floor(totalMin / 60); const mins = totalMin % 60; return hrs + 'h ' + mins + 'm'; }
+function persistInputsToState() {
+  state.studentInfo.name = document.getElementById('studentName').value.trim();
+  state.studentInfo.email = document.getElementById('studentEmail').value.trim();
+  state.studentInfo.className = document.getElementById('studentClass').value.trim();
+  RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) state.responses[key] = el.value.trim(); });
+}
+function saveLocal() { state.lastSavedAt = new Date().toISOString(); persistInputsToState(); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function totalWords() { persistInputsToState(); return Object.values(state.responses).reduce((sum, v) => sum + countWords(v), 0); }
+function totalTimeMs() { let total = 0; Object.values(state.sectionTimes).forEach(ms => total += ms || 0); if (state.currentScreen && screenEnterTime) total += Date.now() - screenEnterTime; return total; }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1600); }
+function markSaveButtonsSaved() { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.add('saved')); const label = document.getElementById('stickySaveLabel'); if (label) label.textContent = 'Saved'; setTimeout(() => { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.remove('saved')); const label2 = document.getElementById('stickySaveLabel'); if (label2) label2.textContent = 'Save Progress'; }, 1400); }
+function updateProgress() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); const shown = idx <= 0 ? 0 : idx; const pct = Math.max(0, Math.min(100, Math.round((shown / TOTAL_STEPS) * 100))); document.getElementById('progressFill').style.width = pct + '%'; document.getElementById('progressPercent').textContent = pct + '%'; document.getElementById('progressLabel').textContent = 'Section ' + Math.max(1, shown) + ' of ' + TOTAL_STEPS; document.getElementById('progressContainer').style.display = state.currentScreen === 'welcome' ? 'none' : 'block'; }
+function showScreen(name) { persistInputsToState(); const prev = state.currentScreen; if (prev && screenEnterTime) { state.sectionTimes[prev] = (state.sectionTimes[prev] || 0) + (Date.now() - screenEnterTime); } document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); const next = document.querySelector('.screen[data-screen="' + name + '"]'); if (next) next.classList.add('active'); state.currentScreen = name; screenEnterTime = Date.now(); if (name === 'quiz') renderQuiz(); if (name === 'finish') refreshFinishStats(); updateProgress(); refreshGating(); saveLocal(); window.scrollTo({top:0, behavior:'smooth'}); }
+function prevScreen() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); if (idx > 0) showScreen(SCREEN_ORDER[idx - 1]); }
+function beginLesson() { const name = document.getElementById('studentName').value.trim(); const email = document.getElementById('studentEmail').value.trim(); const alertBox = document.getElementById('setupAlert'); if (!name || !email) { alertBox.classList.add('show'); return; } alertBox.classList.remove('show'); if (!state.startedAt) state.startedAt = new Date().toISOString(); showScreen('hook'); }
+function updateWordCount(inputId, wcId) { const el = document.getElementById(inputId); const wc = countWords(el.value); const minimum = MINIMUMS[inputId] || 0; const box = document.getElementById(wcId); box.innerHTML = '<span>' + wc + ' words</span><span class="' + (wc >= minimum ? 'met' : 'short') + '">Minimum: ' + minimum + ' words</span>'; state.responses[inputId] = el.value.trim(); saveLocal(); refreshGating(); }
+function openTerm(card) { card.classList.toggle('open'); const term = card.getAttribute('data-term'); if (!state.termsViewed.includes(term)) { state.termsViewed.push(term); card.classList.add('viewed'); document.getElementById('termsViewed').textContent = state.termsViewed.length; } saveLocal(); refreshGating(); }
+function answerCheck(button, checkId, correctLetter) { const wrap = button.closest('.check'); if (wrap.querySelector('.check-option.answered')) return; const chosen = button.getAttribute('data-answer'); const isCorrect = chosen === correctLetter; wrap.querySelectorAll('.check-option').forEach(opt => { opt.classList.add('answered'); if (opt.getAttribute('data-answer') === correctLetter) opt.classList.add('correct'); }); if (!isCorrect) button.classList.add('incorrect'); state.inlineChecks[checkId] = {selected: chosen, correct: isCorrect}; const fb = document.getElementById('fb-' + checkId); fb.textContent = isCorrect ? 'Correct. You are tracking the main idea well.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); saveLocal(); refreshGating(); }
+function refreshGating() { persistInputsToState(); const enough = key => countWords(state.responses[key]) >= (MINIMUMS[key] || 0); const setDisabled = (id, disabled) => { const el = document.getElementById(id); if (el) el.disabled = disabled; }; setDisabled('hookNext', !enough('hookResponse')); setDisabled('introNext', !(state.inlineChecks.intro1 && enough('pauseIntro'))); setDisabled('termsNext', state.termsViewed.length < REQUIRED_TERMS); setDisabled('freedomNext', !(state.inlineChecks.freedom1 && enough('pauseFreedom'))); setDisabled('primaryNext', !(state.inlineChecks.primary1 && enough('pausePrimary'))); setDisabled('aquinasNext', !(state.inlineChecks.aquinas1 && enough('pauseAquinas'))); setDisabled('magisteriumNext', !(state.inlineChecks.magisterium1 && enough('pauseMagisterium'))); setDisabled('conclusionNext', !enough('pauseConclusion')); setDisabled('quizNext', Object.keys(state.quiz.answers).length < QUIZ.length); setDisabled('deeperNext', !(enough('td1') && enough('td2'))); setDisabled('synthesisNext', !enough('synthesis')); }
+function renderQuiz() { const container = document.getElementById('quizQuestions'); if (container.dataset.rendered === 'yes') return; container.dataset.rendered = 'yes'; const letters = ['a','b','c','d']; container.innerHTML = QUIZ.map((q, idx) => { const options = q.opts.map((opt, optIdx) => `<button class="q-option" data-opt="${optIdx}" onclick="answerQuiz('${q.id}', ${optIdx})"><span class="letter">${letters[optIdx]}.</span><span>${escapeHTML(opt)}</span></button>`).join(''); return `<div class="quiz-question" data-qid="${q.id}"><div class="q-number">Question ${idx + 1} of ${QUIZ.length}</div><div class="q-text">${escapeHTML(q.q)}</div><div class="q-options">${options}</div><div class="q-explanation" id="exp-${q.id}">${escapeHTML(q.explain)}</div></div>`; }).join(''); restoreQuizVisuals(); }
+function answerQuiz(qId, optIdx) { if (state.quiz.answers[qId] !== undefined) return; const q = QUIZ.find(item => item.id === qId); if (optIdx === q.correct) state.quiz.scoreCount += 1; state.quiz.answers[qId] = optIdx; restoreQuizVisuals(); saveLocal(); refreshGating(); }
+function restoreQuizVisuals() { QUIZ.forEach(q => { const qEl = document.querySelector('.quiz-question[data-qid="' + q.id + '"]'); if (!qEl) return; const chosen = state.quiz.answers[q.id]; qEl.querySelectorAll('.q-option').forEach(opt => opt.classList.remove('locked','correct','incorrect','selected')); const exp = document.getElementById('exp-' + q.id); if (exp) exp.classList.remove('show'); if (chosen !== undefined) { qEl.querySelectorAll('.q-option').forEach(opt => opt.classList.add('locked')); const selected = qEl.querySelector('.q-option[data-opt="' + chosen + '"]'); const correctBtn = qEl.querySelector('.q-option[data-opt="' + q.correct + '"]'); if (selected) selected.classList.add('selected'); if (chosen === q.correct && selected) selected.classList.add('correct'); else { if (selected) selected.classList.add('incorrect'); if (correctBtn) correctBtn.classList.add('correct'); } if (exp) exp.classList.add('show'); } }); if (Object.keys(state.quiz.answers).length === QUIZ.length) { document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('quizScore').classList.add('show'); } }
+function triggerDownload(blob, filename) { const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000); }
+function saveProgressNow() { saveLocal(); const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'}); const safeName = (state.studentInfo.name || 'student').replace(/[^a-zA-Z0-9]+/g, '_'); triggerDownload(blob, REPORT_FILE_PREFIX + '_' + safeName + '_progress.json'); showToast('Progress saved.'); markSaveButtonsSaved(); }
+function refreshFinishStats() { document.getElementById('finishQuizScore').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('finishTerms').textContent = state.termsViewed.length + ' / ' + REQUIRED_TERMS; document.getElementById('finishWords').textContent = totalWords().toLocaleString(); document.getElementById('finishTime').textContent = formatTime(totalTimeMs()); }
+function buildReportHTML() { persistInputsToState(); const letters = ['a','b','c','d']; const responseHtml = RESPONSE_ORDER.map(key => '<h2>' + escapeHTML(RESPONSE_TITLES[key]) + '</h2><div class="response-prompt">' + escapeHTML(PROMPTS[key]) + '</div><div class="response-box">' + escapeHTML(state.responses[key] || '') + '</div><div class="response-wc">' + countWords(state.responses[key] || '') + ' words</div>').join(''); const quizHtml = QUIZ.map((q, idx) => { const chosen = state.quiz.answers[q.id]; const chosenText = chosen !== undefined ? q.opts[chosen] : 'Not answered'; return '<div class="q-block"><div class="q-num">Question ' + (idx + 1) + '</div><div class="q-prompt">' + escapeHTML(q.q) + '</div><div class="q-ans"><strong>Student answer:</strong> ' + (chosen !== undefined ? letters[chosen] + '. ' : '') + escapeHTML(chosenText) + '</div><div class="q-ans"><strong>Correct answer:</strong> ' + letters[q.correct] + '. ' + escapeHTML(q.opts[q.correct]) + '</div><div class="q-ans"><strong>Explanation:</strong> ' + escapeHTML(q.explain) + '</div></div>'; }).join(''); return '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unit 1.5 Report</title><style>body{font-family:Georgia,serif;max-width:860px;margin:40px auto;padding:24px;color:#241318;line-height:1.6;background:#FFF1EA;}.hdr{border-bottom:3px double #B84632;padding-bottom:16px;margin-bottom:24px;}.hdr-label{font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#B84632;font-weight:600;}h1{font-size:28px;color:#8B1024;margin:8px 0 4px;}.subtitle{font-style:italic;color:#5A323B;font-size:16px;}.meta{background:#F8D9CC;padding:14px 18px;margin:20px 0;border-left:3px solid #B84632;font-size:14px;}.meta dl{margin:0;display:grid;grid-template-columns:140px 1fr;gap:6px 16px;}.meta dt{font-weight:700;color:#B84632;font-family:Arial,sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;}.meta dd{margin:0;}h2{font-size:20px;color:#8B1024;border-bottom:1px solid #B84632;padding-bottom:6px;margin-top:30px;}.response-prompt{font-style:italic;color:#5A323B;font-size:14px;margin-bottom:6px;}.response-box{background:white;border:1px solid #F8D9CC;border-left:3px solid #B84632;padding:14px 18px;margin:8px 0 10px;white-space:pre-wrap;font-size:15px;line-height:1.65;}.response-wc{font-family:Arial,sans-serif;font-size:11px;color:#B84632;margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;}.score-big{font-size:36px;color:#8B1024;font-weight:700;margin:10px 0;}.q-block{background:white;border:1px solid #F8D9CC;padding:12px 16px;margin:10px 0;border-radius:2px;}.q-num{font-family:Arial,sans-serif;font-size:12px;color:#B84632;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;}.q-prompt{font-weight:600;margin-bottom:8px;}.q-ans{font-size:14px;margin:4px 0;}</style></head><body><div class="hdr"><div class="hdr-label">' + escapeHTML(REPORT_HEADER_LABEL) + '</div><h1>' + escapeHTML(REPORT_TITLE) + '</h1><div class="subtitle">Student Report</div></div><div class="meta"><dl><dt>Name</dt><dd>' + escapeHTML(state.studentInfo.name) + '</dd><dt>Email</dt><dd>' + escapeHTML(state.studentInfo.email) + '</dd><dt>Class</dt><dd>' + escapeHTML(state.studentInfo.className || '') + '</dd><dt>Started</dt><dd>' + (state.startedAt ? new Date(state.startedAt).toLocaleString() : '') + '</dd><dt>Completed</dt><dd>' + (state.finishedAt ? new Date(state.finishedAt).toLocaleString() : '') + '</dd><dt>Time Spent</dt><dd>' + formatTime(totalTimeMs()) + '</dd><dt>Total Words</dt><dd>' + totalWords().toLocaleString() + '</dd></dl></div><h2>Knowledge Check Score</h2><div class="score-big">' + state.quiz.scoreCount + ' / ' + QUIZ.length + '</div>' + responseHtml + '<h2>Quiz Review</h2>' + quizHtml + '</body></html>'; }
+function downloadReport() { const html = buildReportHTML(); const blob = new Blob([html], {type:'text/html'}); const safeName = (state.studentInfo.name || 'student').replace(/[^a-zA-Z0-9]+/g, '_'); triggerDownload(blob, REPORT_FILE_PREFIX + '_' + safeName + '_report.html'); }
+function finishLesson() { if (!state.finishedAt) state.finishedAt = new Date().toISOString(); saveLocal(); downloadReport(); showScreen('complete'); }
+function restoreChecks() { Object.keys(state.inlineChecks).forEach(checkId => { const info = state.inlineChecks[checkId]; const options = document.querySelectorAll('.check[data-check="' + checkId + '"] .check-option'); options.forEach(opt => { opt.classList.add('answered'); if (opt.getAttribute('data-answer') === CORRECT_MAP[checkId]) opt.classList.add('correct'); if (opt.getAttribute('data-answer') === info.selected && !info.correct) opt.classList.add('incorrect'); }); const fb = document.getElementById('fb-' + checkId); if (fb) { fb.textContent = info.correct ? 'Correct. You are tracking the main idea well.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); } }); }
+function restoreTextAndCounts() { const map = {hookResponse:'hookWC', pauseIntro:'pauseIntroWC', pauseFreedom:'pauseFreedomWC', pausePrimary:'pausePrimaryWC', pauseAquinas:'pauseAquinasWC', pauseMagisterium:'pauseMagisteriumWC', pauseConclusion:'pauseConclusionWC', td1:'td1WC', td2:'td2WC', synthesis:'synthesisWC'}; RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) el.value = state.responses[key] || ''; const wcId = map[key]; if (el && document.getElementById(wcId)) updateWordCount(key, wcId); }); }
+function resumeFromFile(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = function(e) { try { const loaded = JSON.parse(e.target.result); if (!loaded || loaded.lessonId !== LESSON_ID) throw new Error('Wrong lesson file'); Object.assign(state, loaded); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); showScreen(state.currentScreen || 'hook'); showToast('Progress restored.'); } catch (err) { alert('Could not load that file. Please upload a valid Unit 1.5 progress file.'); } }; reader.readAsText(file); }
+function hydrateFromLocalStorage() { try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return; const saved = JSON.parse(raw); if (!saved || saved.lessonId !== LESSON_ID) return; Object.assign(state, saved); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); } catch (err) {} }
+hydrateFromLocalStorage(); updateProgress(); refreshGating();
+</script>
+</body>
+</html>

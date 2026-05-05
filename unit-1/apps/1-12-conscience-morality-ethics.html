@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRE4M1 · Unit 1.12: Conscience, Morality, and Ethics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+
+
+  :root {
+    --bg-deep: #2A050B;
+    --bg-mid: #5A101B;
+    --bg-card: #FFF1EA;
+    --bg-card-alt: #F8D9CC;
+    --gold: #F2A65A;
+    --gold-soft: #FFC897;
+    --gold-deep: #B84632;
+    --wine: #8B1024;
+    --ivory: #FFF4EC;
+    --cream: #FFD8C4;
+    --ink: #241318;
+    --ink-soft: #5A323B;
+    --locked: #6B4B5580;
+    --success: #2F7D4A;
+    --danger: #B3262E;
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.25);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Textured background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(242, 166, 90, 0.12), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(139, 16, 36, 0.18), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ---- Header ---- */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .unit-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .lesson-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .lesson-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gold-soft);
+    opacity: 0.9;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  /* ---- Progress bar ---- */
+  .progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-deep) 70%, transparent);
+    padding: 16px 0 12px;
+    margin: -24px -20px 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft));
+    width: 0%;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.5);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    margin: 8px auto 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  /* ---- Sticky save button (top bar) ---- */
+  .save-sticky {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 169, 97, 0.12);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .save-sticky:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    border-color: var(--gold);
+  }
+
+  .save-sticky.saved {
+    background: rgba(63, 122, 77, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  /* ---- In-row save (button row) ---- */
+  .btn-save-row {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-save-row:hover {
+    background: var(--gold-deep);
+    color: var(--ivory);
+  }
+
+  .btn-save-row.saved {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .btn-row-split {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* ---- Pause and Reflect blocks (in-flow) ---- */
+  .pause {
+    background: linear-gradient(135deg, rgba(107, 44, 44, 0.06), rgba(201, 169, 97, 0.08));
+    border: 1px solid rgba(107, 44, 44, 0.2);
+    border-left: 3px solid var(--wine);
+    padding: 22px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .pause-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pause-label::before {
+    content: '❊';
+    font-size: 14px;
+    color: var(--gold-deep);
+  }
+
+  .pause-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .pause textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(107, 44, 44, 0.25);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    border-radius: 2px;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .pause textarea:focus {
+    outline: none;
+    border-color: var(--wine);
+    box-shadow: 0 0 0 2px rgba(107, 44, 44, 0.15);
+  }
+
+  /* Save confirmation toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid var(--gold);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---- Screen Cards ---- */
+  .screen {
+    display: none;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .screen.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .screen-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .screen-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .screen-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .prose {
+    font-size: 16.5px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .prose p { margin-bottom: 18px; }
+
+  .prose strong { color: var(--wine); font-weight: 600; }
+
+  .prose em { color: var(--ink-soft); }
+
+  .prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 28px 0 14px;
+    color: var(--wine);
+    line-height: 1.25;
+  }
+
+  .prose h3::before {
+    content: '❖ ';
+    color: var(--gold-deep);
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+
+  .divider {
+    display: block;
+    margin: 32px auto;
+    width: 120px;
+    height: auto;
+    opacity: 0.6;
+  }
+
+  .pullquote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--wine);
+    text-align: center;
+    margin: 28px 20px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    line-height: 1.4;
+  }
+
+  .scripture {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scripture-ref {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--ivory);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--wine);
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:disabled {
+    background: var(--locked);
+    border-color: var(--locked);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+  }
+
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- Forms ---- */
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .word-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .word-count .met {
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  .word-count .short {
+    color: var(--danger);
+  }
+
+  /* ---- Key Terms / Flashcards ---- */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .term-card {
+    background: var(--bg-card-alt);
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    border-radius: 2px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 100px;
+  }
+
+  .term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--gold-deep);
+  }
+
+  .term-card.viewed {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+  }
+
+  .term-card.viewed::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .term-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.7;
+  }
+
+  .term-def {
+    display: none;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .term-card.open .term-def { display: block; }
+  .term-card.open .term-tap { display: none; }
+
+  /* ---- Inline comprehension check ---- */
+  .check {
+    background: #FDF8E8;
+    border: 1px dashed var(--gold-deep);
+    border-radius: 2px;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .check-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .check-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .check-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-option {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .check-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .check-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .check-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .check-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .check-feedback {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    display: none;
+  }
+
+  .check-feedback.show { display: block; }
+
+  /* ---- Vocation Compass ---- */
+  .compass-intro {
+    background: #FDF8E8;
+    border-left: 3px solid var(--wine);
+    padding: 18px 22px;
+    margin: 20px 0 30px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .compass-vocation {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(140, 113, 53, 0.25);
+  }
+
+  .compass-vocation:last-child {
+    border-bottom: none;
+  }
+
+  .compass-voc-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+
+  .compass-voc-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  .compass-aspect {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px dotted rgba(140, 113, 53, 0.2);
+  }
+
+  .compass-aspect:first-of-type { border-top: none; }
+
+  .compass-aspect-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .rating-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .rating-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(140, 113, 53, 0.4);
+    background: white;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .rating-btn:hover {
+    border-color: var(--gold-deep);
+  }
+
+  .rating-btn.selected {
+    background: var(--wine);
+    color: var(--ivory);
+    border-color: var(--wine);
+  }
+
+  .rating-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  .compass-result {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(107, 44, 44, 0.08));
+    border: 1px solid var(--gold-deep);
+    padding: 24px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  .compass-result.show { display: block; }
+
+  .result-voc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.3);
+  }
+
+  .result-voc:last-child { border-bottom: none; }
+
+  .result-voc-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--wine);
+  }
+
+  .result-bar {
+    width: 180px;
+    height: 8px;
+    background: rgba(140, 113, 53, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .result-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    transition: width 1s ease;
+  }
+
+  /* ---- Quiz ---- */
+  .quiz-question {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.25);
+  }
+
+  .quiz-question:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .q-option {
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .q-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .q-option.selected {
+    border-color: var(--wine);
+    background: rgba(107, 44, 44, 0.06);
+  }
+
+  .q-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .q-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+  }
+
+  .q-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+  }
+
+  .q-option.locked {
+    pointer-events: none;
+  }
+
+  .q-explanation {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201, 169, 97, 0.1);
+    border-left: 2px solid var(--gold-deep);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    display: none;
+  }
+
+  .q-explanation.show { display: block; }
+
+  .quiz-score {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(107, 44, 44, 0.1));
+    border: 1px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score strong {
+    font-size: 34px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ---- Completion screen ---- */
+  .completion-hero {
+    text-align: center;
+    padding: 20px 0 32px;
+  }
+
+  .completion-icon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    color: var(--gold-deep);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .completion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .completion-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .summary-stat {
+    background: #FDF8E8;
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+  }
+
+  .download-note {
+    background: rgba(201, 169, 97, 0.12);
+    padding: 18px 22px;
+    border-left: 3px solid var(--gold-deep);
+    margin: 24px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ---- Hero (start screen) ---- */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-deep));
+    color: var(--ivory);
+    padding: 40px 40px 36px;
+    margin: -40px -44px 32px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .hero-banner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+
+  .hero-banner p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-soft);
+    margin-top: 8px;
+  }
+
+  .hero-banner .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+
+  .upload-zone {
+    border: 1px dashed rgba(140, 113, 53, 0.4);
+    padding: 20px;
+    text-align: center;
+    margin-top: 24px;
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .upload-zone label {
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .upload-zone input { display: none; }
+
+  /* ---- Error / alert ---- */
+  .alert {
+    padding: 12px 16px;
+    background: rgba(168, 67, 43, 0.1);
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    margin-top: 14px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .alert.show { display: block; }
+
+  /* ---- Footer ---- */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .card { padding: 28px 22px; }
+    .hero-banner { margin: -28px -22px 28px; padding: 30px 24px 26px; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; justify-content: center; }
+    .compass-aspect { grid-template-columns: 1fr; gap: 8px; }
+    .result-bar { width: 120px; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .save-sticky {
+      position: static;
+      display: flex;
+      margin: 10px auto 0;
+      width: fit-content;
+    }
+    .progress-meta { flex-wrap: wrap; }
+    .btn-row-split { width: 100%; flex-direction: column; }
+    .btn-row-split .btn-save-row { width: 100%; justify-content: center; }
+  }
+
+  /* Print-friendly download report styling will be injected separately */
+
+.prose ul { margin-left: 20px; margin-bottom: 18px; }
+.prose li { margin-bottom: 8px; }
+.note-panel { background: rgba(184, 70, 50, 0.12); border-left: 3px solid var(--gold-deep); padding: 18px 22px; margin: 22px 0; color: var(--ink); line-height: 1.65; }
+
+
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="unit-label">HRE4M1 · Unit 1 · Lesson 12</div>
+    <h1 class="lesson-title">Conscience, Morality, and Ethics</h1>
+    <div class="lesson-subtitle">The inner voice of God, moral character, and ethical reasoning</div>
+    <svg class="ornament" width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg"><path d="M 0 10 L 30 10 M 50 10 L 80 10" stroke="#F2A65A" stroke-width="1" fill="none"/><circle cx="40" cy="10" r="3" fill="none" stroke="#F2A65A" stroke-width="1"/><circle cx="40" cy="10" r="1" fill="#F2A65A"/></svg>
+  </div>
+  <div class="progress-container" id="progressContainer" style="display:none; position:relative;"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><div class="progress-meta"><span id="progressLabel">Part 1</span><span id="progressPercent">0%</span></div><button class="save-sticky" onclick="downloadProgress()"><span>💾</span><span>Save Progress</span></button></div>
+  <div id="root"></div>
+  <div class="toast" id="toast">Saved.</div>
+  <div class="footer">HRE4M1 · Unit 1 · Lesson 12</div>
+</div>
+<script>
+const LESSON = {"id": "1.12", "storage": "hre4m1_unit_1_12_conscience_morality_ethics", "title": "Conscience, Morality, and Ethics", "subtitle": "The inner voice of God, moral character, and ethical reasoning", "unit": "HRE4M1 · Unit 1 · Lesson 12", "filePrefix": "HRE4M1_Unit_1_12_Conscience_Morality_and_Ethics", "heroLabel": "A Study in Conscience and Moral Life", "welcomeTitle": "Welcome to Unit 1.12", "welcomeText": "This lesson explores conscience, morality, ethics, and how they work together when we face difficult choices."};
+const TERMS = [["Conscience", "The God-given capacity to judge right from wrong in concrete situations. It is not just a feeling, but an inner moral judgment that should be formed by truth."], ["Well-Formed Conscience", "A conscience educated by Scripture, Church teaching, prayer, wise advice, reason, and the Holy Spirit, so that it can reliably guide moral choices."], ["Morality", "The set of principles about right and wrong that guides human behavior toward the good, human flourishing, and love of God and neighbor."], ["Christian Morality", "Living according to God’s will as revealed in Scripture, Jesus’ teachings, the Church, and the law of love."], ["Ethics", "The systematic study and reasoning about moral principles, especially when applying them to complicated situations or professional contexts."], ["Virtue", "A stable habit of doing good, such as honesty, courage, patience, chastity, mercy, or generosity."], ["Sin", "A choice against God’s law and genuine love. Sin wounds our relationship with God, others, and ourselves."], ["Grace", "God’s help and life within us, strengthening us to choose the good, grow in virtue, repent, and live as disciples of Christ."], ["Consequentialism", "An ethical theory that judges actions mainly by their results or consequences."], ["Deontology", "A duty-based ethical theory that judges actions by whether they follow moral rules or obligations."], ["Virtue Ethics", "An ethical approach focused on becoming the kind of person whose character naturally chooses what is good."], ["Golden Rule", "Jesus’ teaching to do to others as you would have them do to you, a simple but powerful guide for moral action."]];
+const SECTIONS = [{"id": "hook", "label": "Before We Begin", "title": "When Your Conscience Speaks", "intro": "Start with a real-life moral question before we define the concepts.", "content": ["Imagine you see a friend cheating, gossiping, excluding someone, or lying to avoid consequences. You might feel pressure to stay quiet, but something inside tells you the situation is wrong.", "That inner moral pull is what this lesson calls <strong>conscience</strong>. But Catholic teaching says conscience is more than a feeling. It needs to be formed, tested, and connected to truth."], "prompt": "Describe a situation where a person’s conscience might challenge what is easy, popular, or convenient. What would make the right choice difficult?", "min": 35}, {"id": "terms", "type": "terms"}, {"id": "conscience", "label": "Part One · Conscience", "title": "Conscience, The Inner Voice of God", "intro": "Catholic teaching describes conscience as an inner moral guide that moves us toward good and away from evil.", "content": ["Conscience is the inner judgment that helps a person recognize what is right or wrong in a specific situation. It applies moral truth personally. It is sometimes described as an internal compass, because it points us toward the moral north.", "The Church teaches that conscience is not just a feeling, guess, or personal preference. It should be rooted in God’s law and shaped by truth. A person can feel strongly about something and still be wrong if their conscience is poorly formed.", "A well-formed conscience listens to Scripture, prayer, Church teaching, the Holy Spirit, and wise counsel. It also learns to resist social pressure. When everyone says, <strong>everyone does it</strong>, conscience may still say, <strong>this is not right</strong>.", "Conscience also affects community life. When people obey a well-formed conscience, they bring more justice, honesty, and courage into the world. When people ignore conscience repeatedly, it can become dulled or hardened."], "check": {"q": "Which statement best reflects Catholic teaching on conscience?", "options": ["Conscience means doing whatever feels right in the moment.", "Conscience is an inner moral judgment that must be formed by truth and God’s law.", "Conscience is only social pressure in another form.", "Conscience is reliable even when it is never educated or challenged."], "answer": 1}, "prompt": "Why is it dangerous to say that following conscience simply means doing whatever feels right? Explain using the idea of a well-formed conscience.", "min": 65}, {"id": "morality", "label": "Part Two · Morality", "title": "What is Morality?", "intro": "Morality gives the basic framework for right and wrong, but its deeper purpose is human flourishing and love.", "content": ["Morality is the set of principles or standards that guide human behavior toward what is right and away from what is wrong. It answers questions such as: What should I do? What kind of person should I become? How do my choices affect others?", "Morality is not meant to be a list of random restrictions. Its deeper aim is the good. Moral rules are like guardrails that protect the road toward a meaningful and virtuous life.", "A person’s morality is shaped by conscience, family, culture, religion, reason, and experience. For Catholics, morality is grounded in God’s will, objective moral truth, natural law, the Ten Commandments, and the teachings of Jesus.", "The Golden Rule gives a simple moral test: <strong>Do to others as you would have them do to you.</strong> It reminds us that morality includes empathy, fairness, and responsibility."], "check": {"q": "What is the deeper aim of morality beyond simply following rules?", "options": ["To make life harder so people cannot enjoy themselves.", "To guide people toward the good, human flourishing, and responsible love.", "To make every culture behave exactly the same in every custom.", "To replace conscience and personal responsibility."], "answer": 1}, "prompt": "Choose one moral rule or virtue, such as honesty, fidelity, fairness, or compassion. How does it protect human flourishing rather than simply limit freedom?", "min": 70}, {"id": "christian", "label": "Part Three · Christian Morality", "title": "Morality in Christianity", "intro": "Christian morality is not just about avoiding sin. It is about becoming more like Christ through love, virtue, and grace.", "content": ["Christian morality means living according to God’s will as revealed by Scripture, the teachings of Jesus, and the Church. Its heart is love of God and love of neighbor.", "The Ten Commandments provide a foundation. Jesus deepens this foundation through the Sermon on the Mount, the Beatitudes, the Golden Rule, forgiveness, mercy, and the Greatest Commandments.", "Christian morality is also about virtue. A Christian should not only avoid lying, but become truthful. A Christian should not only avoid cruelty, but become merciful. The goal is not minimum compliance, but transformation into Christ-like love.", "Because human beings are weak, Christian morality also depends on grace. Prayer, the sacraments, repentance, and the Holy Spirit strengthen a person to do good when it is difficult."], "check": {"q": "Which statement best summarizes Christian morality?", "options": ["It is mainly about following rules so God will not be angry.", "It is about living according to God’s will, loving God and neighbor, and becoming more like Christ.", "It is only about personal feelings and private spirituality.", "It is a system where consequences matter more than love or truth."], "answer": 1}, "prompt": "Name one teaching of Jesus that is morally challenging, such as forgiveness, love of enemies, humility, or care for the needy. Why do you think Jesus asks this of His followers?", "min": 80}, {"id": "ethics", "label": "Part Four · Ethics", "title": "What is Ethics?", "intro": "Ethics is moral reasoning. It helps us think carefully when situations are complicated or when values seem to conflict.", "content": ["Ethics is the systematic study of moral principles. If morality asks what is right or wrong, ethics asks how we reason through right and wrong, especially in difficult cases.", "Ethics is especially important in gray areas. For example, honesty matters, but what if telling the full truth could put someone in danger? Compassion matters, but what if helping one person harms another? Ethics helps us examine principles, duties, consequences, and character.", "Several ethical theories help organize moral reasoning. Consequentialism focuses on outcomes. Deontology focuses on duties and rules. Virtue ethics focuses on the character of the person acting.", "Catholic ethics uses reason, but it is also shaped by faith. It considers God’s law, human dignity, virtue, natural law, conscience, and the call to love."], "check": {"q": "Which option best describes ethics?", "options": ["The systematic reasoning about moral principles and how to apply them.", "A rejection of morality because every situation is too complicated.", "A private feeling that cannot be explained with reasons.", "A list of customs that never needs reflection."], "answer": 0}, "prompt": "Why is ethical reasoning useful when people disagree about a moral issue? Explain how it can move the conversation beyond simply saying, “I feel this is right.”", "min": 75}, {"id": "difference", "label": "Part Five · Morality and Ethics", "title": "Morality vs. Ethics", "intro": "Morality and ethics are closely connected, but they emphasize different parts of the moral life.", "content": ["Morality usually refers to the actual standards of right and wrong that guide a person or community. It is the content of moral life, such as honesty, justice, fidelity, and respect for life.", "Ethics usually refers to the reasoning process, system, or professional code used to apply moral principles. For example, medical ethics, business ethics, and legal ethics try to guide complicated decisions in specific fields.", "One helpful summary is this: <strong>morality is what we live, ethics is how we think through and apply it.</strong> A moral person may know cheating is wrong. Ethical reasoning helps them decide what to do when they see a friend cheating and several duties seem to conflict.", "Ideally, a person should be both moral and ethical. Their personal conscience, values, reasoning, and actions should work together toward truth and goodness."], "check": {"q": "Which statement best distinguishes morality from ethics?", "options": ["Morality is only religious, while ethics is always anti-religious.", "Morality is about right and wrong standards, while ethics is the reasoning and application of those standards.", "Ethics matters only for adults, while morality matters only for children.", "Morality is objective, but ethics never involves truth."], "answer": 1}, "prompt": "Give one example of a situation where someone might need both personal morality and ethical reasoning. What would each contribute?", "min": 80}, {"id": "application", "label": "Part Six · Real Life Application", "title": "Why These Ideas Matter", "intro": "Conscience, morality, and ethics shape the person you become, the relationships you build, and the kind of community you help create.", "content": ["When you face a difficult choice, conscience, morality, and ethics work together. Morality gives the values and principles. Ethics helps you reason through the situation. Conscience applies truth personally and urges you toward the good.", "These choices also build character. Every time you choose honesty, courage, patience, or mercy, you become more honest, courageous, patient, or merciful. Every time you ignore conscience, the wrong choice becomes easier the next time.", "These ideas also matter for relationships and community. A classroom, family, team, or society becomes healthier when people value honesty, fairness, respect, and responsibility. Moral failure damages trust. Moral courage builds it.", "The lesson uses a helpful GPS analogy: morality is the destination and general route, conscience is the voice giving turn-by-turn guidance, and ethics is the map and rules of the road. If you make a wrong turn, repentance means rerouting and returning to the good."], "check": {"q": "How do conscience, morality, and ethics work together in decision-making?", "options": ["They all mean the same thing and do not need to be distinguished.", "Morality gives values, ethics helps reason through situations, and conscience applies truth personally.", "Conscience replaces morality and ethics completely.", "Ethics tells people to ignore conscience if the choice is difficult."], "answer": 1}, "prompt": "Think about the kind of person you want to become. What daily moral habit would help build that character, and how could conscience or ethical reasoning help you practice it?", "min": 90}];
+const QUIZ = [{"q": "What is conscience in Catholic teaching?", "opts": ["A feeling that always matches personal preference", "A God-given capacity to judge right from wrong in concrete situations", "The same thing as peer pressure", "A rule book that removes personal responsibility"], "answer": 1, "explain": "Conscience is an inner moral judgment, but it must be formed by truth and God’s law."}, {"q": "Why must conscience be formed?", "opts": ["Because conscience can be distorted by poor values, pressure, ignorance, or selfishness", "Because conscience is never connected to God", "Because a formed conscience means never asking questions", "Because feelings are always morally reliable"], "answer": 0, "explain": "A conscience needs formation so it reflects truth instead of bias, pressure, or personal desire."}, {"q": "What is morality?", "opts": ["The systematic study of professional codes only", "A set of principles that guides human behavior toward right and away from wrong", "A purely private feeling with no connection to truth", "The rejection of all rules and duties"], "answer": 1, "explain": "Morality gives the standards and principles for right and wrong human action."}, {"q": "What is the heart of Christian morality?", "opts": ["Looking better than others", "Love of God and love of neighbor, lived in imitation of Christ", "Avoiding every difficult moral question", "Choosing whatever brings the most attention"], "answer": 1, "explain": "Christian morality is rooted in love, discipleship, virtue, grace, and becoming like Christ."}, {"q": "What is ethics?", "opts": ["The branch of reasoning that studies and applies moral principles", "A replacement for conscience", "A way to avoid responsibility by debating forever", "A system that ignores right and wrong"], "answer": 0, "explain": "Ethics is systematic moral reasoning, especially useful in complex situations."}, {"q": "Which ethical theory focuses mainly on outcomes?", "opts": ["Deontology", "Consequentialism", "Virtue ethics", "Natural law"], "answer": 1, "explain": "Consequentialism judges actions mainly by their consequences or results."}, {"q": "Which ethical approach focuses most on the kind of person you are becoming?", "opts": ["Virtue ethics", "Consequentialism", "Relativism", "Legalism"], "answer": 0, "explain": "Virtue ethics focuses on character and stable habits of doing good."}, {"q": "Which statement best explains the relationship between morality and ethics?", "opts": ["Morality is what we live, while ethics is how we reason about and apply moral principles", "Morality and ethics are enemies", "Morality only applies to religion, while ethics only applies to science", "Ethics means doing what is legal, even if it is unjust"], "answer": 0, "explain": "Morality gives the standards, while ethics studies and applies those standards in real situations."}];
+const DEEP_PROMPTS = [["Think Deeper 1", "Consider a situation where telling the truth, standing up for someone, or refusing to go along with wrongdoing would be difficult. Explain how conscience, morality, and ethics could each help a person decide what to do.", 130], ["Think Deeper 2", "Choose one ethical theory from the lesson, consequentialism, deontology, or virtue ethics. Explain how it would approach a real-life dilemma, then evaluate what a Catholic Christian perspective would add.", 130]];
+const SYNTHESIS_PROMPT = "Write a final reflection explaining how conscience, morality, and ethics work together to help a person become more honest, courageous, loving, and responsible. Include at least one concrete example from school, friendship, family life, or society.";
+const root=document.getElementById('root');
+let state = JSON.parse(localStorage.getItem(LESSON.storage)||'null') || {screen:0, student:{name:'',email:'',className:''}, responses:{}, checks:{}, terms:[], quiz:{}, startedMs:Date.now(), finishedAt:null};
+function esc(s) { return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function words(s) { return (s||'').trim().split(/\s+/).filter(Boolean).length; }
+function save() { localStorage.setItem(LESSON.storage, JSON.stringify(state)); progress(); }
+function progress() { const total=SECTIONS.length+4; const pct=Math.round((state.screen/total)*100); document.getElementById('progressContainer').style.display=state.screen===0?'none':'block'; document.getElementById('progressFill').style.width=pct+'%'; document.getElementById('progressLabel').textContent='Part '+Math.max(1,state.screen)+' of '+total; document.getElementById('progressPercent').textContent=pct+'%'; }
+function setScreen(n) { state.screen=Math.max(0,Math.min(n,SECTIONS.length+4)); save(); render(); scrollTo({top:0,behavior:'smooth'}); }
+function nav(canNext) { return `<div class="btn-row"><button class="btn btn-ghost" onclick="setScreen(state.screen-1)">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="downloadProgress()">💾 Save</button><button class="btn btn-primary" ${canNext?'':'disabled'} onclick="setScreen(state.screen+1)">Continue →</button></div></div>`; }
+function showToast(msg) { const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1600); }
+function begin() { state.student.name=document.getElementById('studentName').value.trim(); state.student.email=document.getElementById('studentEmail').value.trim(); state.student.className=document.getElementById('studentClass').value.trim(); if(!state.student.name||!state.student.email) { document.getElementById('setupAlert').classList.add('show'); return; } if(!state.startedMs) state.startedMs=Date.now(); setScreen(1); }
+function renderWelcome() { root.innerHTML = `<section class="screen active"><div class="card"><div class="hero-banner"><div class="ornament-line"><svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"></line></svg><span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">${LESSON.heroLabel}</span><svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"></line></svg></div><h2>${LESSON.welcomeTitle}</h2><p>${LESSON.welcomeText}</p></div><p class="prose" style="margin-bottom:24px;">Enter your information before you begin. Your final report will include your responses and quiz results.</p><div class="field"><label>Full Name</label><input id="studentName" value="${esc(state.student.name)}" placeholder="First and last name"></div><div class="field"><label>School Email</label><input id="studentEmail" value="${esc(state.student.email)}" placeholder="you@school.ca"></div><div class="field"><label>Class / Period</label><input id="studentClass" value="${esc(state.student.className)}" placeholder="e.g., HRE4M1 · Period 2"></div><div class="alert" id="setupAlert">Please fill in your name and email before starting.</div><div class="btn-row"><div></div><button class="btn btn-primary" onclick="begin()">Begin Lesson →</button></div><div class="upload-zone"><div style="font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Returning to finish?</div><label for="resumeFile">Upload your saved progress file</label><input type="file" id="resumeFile" accept=".json" onchange="resumeFile(event)"></div></div></section>`; }
+function renderContent(sec) { const r=state.responses[sec.id]||''; const ck=sec.check; const checked=ck ? state.checks[sec.id]!==undefined : true; const count=words(r); const canNext=count>=(sec.min||0)&&checked; const content=(sec.content||[]).map(p=>`<p>${p}</p>`).join(''); let check=''; if(ck) { check=`<div class="check"><div class="check-label">Quick Check</div><div class="check-q">${esc(ck.q)}</div><div class="check-options">${ck.options.map((o,i)=>`<button class="check-option ${state.checks[sec.id]===i?(i===ck.answer?'correct':'incorrect'):''} ${state.checks[sec.id]!==undefined&&i===ck.answer?'correct':''}" onclick="answerCheck('${sec.id}',${i})"><span class="letter">${'abcd'[i]}.</span><span>${esc(o)}</span></button>`).join('')}</div><div class="check-feedback show">${state.checks[sec.id]===undefined?'Choose an answer before continuing.':(state.checks[sec.id]===ck.answer?'Correct.':'Not quite. The correct answer is highlighted.')}</div></div>`; } root.innerHTML=`<section class="screen active"><div class="card"><div class="screen-label">${esc(sec.label)}</div><h2 class="screen-title">${esc(sec.title)}</h2><p class="screen-intro">${esc(sec.intro)}</p><div class="prose">${content}</div>${check}<div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">${esc(sec.prompt)}</div><textarea id="resp" oninput="state.responses['${sec.id}']=this.value;save();renderWordCount(${sec.min||0})">${esc(r)}</textarea><div class="word-count" id="wc"><span>${count} words</span><span class="${count>=(sec.min||0)?'met':'short'}">Minimum: ${sec.min||0} words</span></div></div>${nav(canNext)}</div></section>`; }
+function renderWordCount(min) { const count=words(document.getElementById('resp').value); document.getElementById('wc').innerHTML=`<span>${count} words</span><span class="${count>=min?'met':'short'}">Minimum: ${min} words</span>`; }
+function answerCheck(id, choice) { state.checks[id]=choice; save(); render(); }
+function renderTerms() { const canNext=state.terms.length===TERMS.length; root.innerHTML=`<section class="screen active"><div class="card"><div class="screen-label">Part Two · Vocabulary</div><h2 class="screen-title">${TERMS.length} Terms to Know</h2><p class="screen-intro">Tap each card to reveal its meaning. View all ${TERMS.length} before moving on.</p><div class="terms-grid">${TERMS.map((t,i)=>`<div class="term-card ${state.terms.includes(i)?'open viewed':''}" onclick="toggleTerm(${i})"><div class="term-name">${esc(t[0])}</div><div class="term-tap">Tap to reveal</div><div class="term-def">${esc(t[1])}</div></div>`).join('')}</div><div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink-soft); text-align:center; margin-top:16px;">Viewed: ${state.terms.length} of ${TERMS.length}</div>${nav(canNext)}</div></section>`; }
+function toggleTerm(i) { if(!state.terms.includes(i)) state.terms.push(i); save(); renderTerms(); }
+function renderQuiz() { const all=QUIZ.every((_,i)=>state.quiz[i]!==undefined); const score=QUIZ.reduce((s,q,i)=>s+(state.quiz[i]===q.answer?1:0),0); root.innerHTML=`<section class="screen active"><div class="card"><div class="screen-label">Part Eight · Knowledge Check</div><h2 class="screen-title">Check Your Understanding</h2><p class="screen-intro">Answer each question. Explanations appear after you respond.</p>${QUIZ.map((q,i)=>`<div class="quiz-question"><div class="q-number">Question ${i+1} of ${QUIZ.length}</div><div class="q-text">${esc(q.q)}</div><div class="q-options">${q.opts.map((o,j)=>`<button class="q-option ${state.quiz[i]===j?(j===q.answer?'correct':'incorrect'):''} ${state.quiz[i]!==undefined&&j===q.answer?'correct':''}" onclick="answerQuiz(${i},${j})"><span class="letter">${'abcd'[j]}.</span><span>${esc(o)}</span></button>`).join('')}</div><div class="q-explanation ${state.quiz[i]!==undefined?'show':''}">${esc(q.explain)}</div></div>`).join('')}<div class="quiz-score show">Your score<strong>${score} / ${QUIZ.length}</strong></div>${nav(all)}</div></section>`; }
+function answerQuiz(i,j) { if(state.quiz[i]!==undefined) return; state.quiz[i]=j; save(); renderQuiz(); }
+function renderDeep() { const r1=state.responses.td1||'', r2=state.responses.td2||''; const can=words(r1)>=DEEP_PROMPTS[0][2]&&words(r2)>=DEEP_PROMPTS[1][2]; root.innerHTML=`<section class="screen active"><div class="card"><div class="screen-label">Part Nine · Think Deeper</div><h2 class="screen-title">Apply the Lesson</h2><p class="screen-intro">Use the lesson to develop thoughtful answers, not just quick opinions.</p>${DEEP_PROMPTS.map((p,i)=>`<div class="field"><label>${esc(p[0])}</label><div class="prose" style="margin-bottom:12px;"><p>${esc(p[1])}</p></div><textarea oninput="state.responses['td${i+1}']=this.value;save();renderDeepCount(this,${p[2]})">${esc(state.responses['td'+(i+1)]||'')}</textarea><div class="word-count"><span>${words(state.responses['td'+(i+1)]||'')} words</span><span class="${words(state.responses['td'+(i+1)]||'')>=p[2]?'met':'short'}">Minimum: ${p[2]} words</span></div></div>`).join('')}${nav(can)}</div></section>`; }
+function renderDeepCount(el,min) { const wc=el.nextElementSibling; const count=words(el.value); wc.innerHTML=`<span>${count} words</span><span class="${count>=min?'met':'short'}">Minimum: ${min} words</span>`; }
+function renderSynthesis() { const r=state.responses.synthesis||''; const can=words(r)>=160; root.innerHTML=`<section class="screen active"><div class="card"><div class="screen-label">Part Ten · Final Synthesis</div><h2 class="screen-title">Your Moral GPS</h2><p class="screen-intro">Bring the whole lesson together in one clear response.</p><div class="field"><label>Final Synthesis</label><div class="prose" style="margin-bottom:12px;"><p>${esc(SYNTHESIS_PROMPT)}</p></div><textarea id="syn" oninput="state.responses.synthesis=this.value;save();renderSynCount()">${esc(r)}</textarea><div class="word-count" id="synWC"><span>${words(r)} words</span><span class="${can?'met':'short'}">Minimum: 160 words</span></div></div>${nav(can)}</div></section>`; }
+function renderSynCount() { const count=words(document.getElementById('syn').value); document.getElementById('synWC').innerHTML=`<span>${count} words</span><span class="${count>=160?'met':'short'}">Minimum: 160 words</span>`; }
+function renderFinish() { const score=QUIZ.reduce((s,q,i)=>s+(state.quiz[i]===q.answer?1:0),0); root.innerHTML=`<section class="screen active"><div class="card"><div class="completion-hero"><div class="completion-icon">✦</div><div class="completion-title">Ready to Complete?</div><div class="completion-sub">Review your progress, then download your final report.</div></div><div class="summary-grid"><div class="summary-stat"><div class="stat-label">Quiz Score</div><div class="stat-value">${score} / ${QUIZ.length}</div></div><div class="summary-stat"><div class="stat-label">Terms Viewed</div><div class="stat-value">${state.terms.length} / ${TERMS.length}</div></div><div class="summary-stat"><div class="stat-label">Total Words</div><div class="stat-value">${totalWords()}</div></div><div class="summary-stat"><div class="stat-label">Time Spent</div><div class="stat-value">${formatTime(Date.now()-state.startedMs)}</div></div></div><div class="download-note">Download the report and submit it as directed by your teacher. The file includes your written responses, quiz review, and completion details.</div><div class="btn-row"><button class="btn btn-ghost" onclick="setScreen(state.screen-1)">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="downloadProgress()">💾 Save Progress</button><button class="btn btn-gold" onclick="downloadReport(); state.finishedAt=new Date().toISOString(); save(); setScreen(state.screen+1);">Download Report ↓</button></div></div></div></section>`; }
+function renderComplete() { root.innerHTML=`<section class="screen active"><div class="card"><div class="completion-hero"><div class="completion-icon">✓</div><div class="completion-title">Lesson Complete</div><div class="completion-sub">Your report has been prepared for download.</div></div><div class="prose"><p>You can download the report again if needed, or save your progress file for your records.</p></div><div class="btn-row"><button class="btn btn-ghost" onclick="setScreen(state.screen-1)">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="downloadProgress()">💾 Save Progress</button><button class="btn btn-gold" onclick="downloadReport()">Download Report Again ↓</button></div></div></div></section>`; }
+function totalWords() { return Object.values(state.responses).reduce((s,v)=>s+words(v),0); }
+function formatTime(ms) { const m=Math.floor(ms/60000); return m<1?'< 1 min':m+' min'; }
+function render() { progress(); if(state.screen===0) return renderWelcome(); if(state.screen>=1&&state.screen<=SECTIONS.length) { const sec=SECTIONS[state.screen-1]; return sec.type==='terms'?renderTerms():renderContent(sec); } if(state.screen===SECTIONS.length+1) return renderQuiz(); if(state.screen===SECTIONS.length+2) return renderDeep(); if(state.screen===SECTIONS.length+3) return renderSynthesis(); if(state.screen===SECTIONS.length+4) return renderFinish(); return renderComplete(); }
+function downloadProgress() { save(); trigger(LESSON.filePrefix+'_progress.json', JSON.stringify(state,null,2),'application/json'); showToast('Progress downloaded.'); }
+function resumeFile(e) { const file=e.target.files[0]; if(!file) return; const r=new FileReader(); r.onload=()=>{ try{ const loaded=JSON.parse(r.result); if(loaded && loaded.screen!==undefined) { state=loaded; save(); render(); showToast('Progress restored.'); } else throw new Error('bad'); }catch(err){ alert('Could not load that file. Please upload a valid Unit 1.12 progress file.'); } }; r.readAsText(file); }
+function trigger(name, content, type) { const blob=new Blob([content],{type}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),800); }
+function downloadReport() { const score=QUIZ.reduce((s,q,i)=>s+(state.quiz[i]===q.answer?1:0),0); const responses=SECTIONS.filter(s=>s.prompt).map(s=>`<h2>${esc(s.title)}</h2><p><em>${esc(s.prompt)}</em></p><div class="box">${esc(state.responses[s.id]||'')}</div>`).join('')+DEEP_PROMPTS.map((p,i)=>`<h2>${esc(p[0])}</h2><p><em>${esc(p[1])}</em></p><div class="box">${esc(state.responses['td'+(i+1)]||'')}</div>`).join('')+`<h2>Final Synthesis</h2><p><em>${esc(SYNTHESIS_PROMPT)}</em></p><div class="box">${esc(state.responses.synthesis||'')}</div>`; const report=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${LESSON.title} Report</title><style>body{font-family:Georgia,serif;background:#f7f1e1;color:#1f2937;margin:0;padding:40px;line-height:1.6}.wrap{max-width:900px;margin:0 auto;background:white;padding:42px;border:1px solid #d8c9a0}.label{font-family:Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#8c1d18;font-size:12px}h1{color:#7f1d1d}.meta{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:24px 0}.card{background:#fff8f0;border:1px solid #e5d5bd;padding:14px}.box{white-space:pre-wrap;background:#fff8f0;border-left:4px solid #8c1d18;padding:16px;margin-bottom:20px}</style></head><body><div class="wrap"><div class="label">${LESSON.unit}</div><h1>${LESSON.title}</h1><div class="meta"><div class="card"><strong>Name:</strong> ${esc(state.student.name)}</div><div class="card"><strong>Email:</strong> ${esc(state.student.email)}</div><div class="card"><strong>Class:</strong> ${esc(state.student.className)}</div><div class="card"><strong>Quiz:</strong> ${score} / ${QUIZ.length}</div></div>${responses}</div></body></html>`; trigger(LESSON.filePrefix+'_report.html', report, 'text/html'); }
+render();
+</script>
+</body>
+</html>

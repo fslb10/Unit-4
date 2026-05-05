@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRE4M1 · Unit 1.2: Causation Theory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+
+  :root {
+    --bg-deep: #2A050B;
+    --bg-mid: #5A101B;
+    --bg-card: #FFF1EA;
+    --bg-card-alt: #F8D9CC;
+    --gold: #F2A65A;
+    --gold-soft: #FFC897;
+    --gold-deep: #B84632;
+    --wine: #8B1024;
+    --ivory: #FFF4EC;
+    --cream: #FFD8C4;
+    --ink: #241318;
+    --ink-soft: #5A323B;
+    --locked: #6B4B5580;
+    --success: #2F7D4A;
+    --danger: #B3262E;
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.25);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Textured background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(242, 166, 90, 0.12), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(139, 16, 36, 0.18), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ---- Header ---- */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .unit-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .lesson-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .lesson-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gold-soft);
+    opacity: 0.9;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  /* ---- Progress bar ---- */
+  .progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-deep) 70%, transparent);
+    padding: 16px 0 12px;
+    margin: -24px -20px 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft));
+    width: 0%;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.5);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    margin: 8px auto 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  /* ---- Sticky save button (top bar) ---- */
+  .save-sticky {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 169, 97, 0.12);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .save-sticky:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    border-color: var(--gold);
+  }
+
+  .save-sticky.saved {
+    background: rgba(63, 122, 77, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  /* ---- In-row save (button row) ---- */
+  .btn-save-row {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-save-row:hover {
+    background: var(--gold-deep);
+    color: var(--ivory);
+  }
+
+  .btn-save-row.saved {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .btn-row-split {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* ---- Pause and Reflect blocks (in-flow) ---- */
+  .pause {
+    background: linear-gradient(135deg, rgba(107, 44, 44, 0.06), rgba(201, 169, 97, 0.08));
+    border: 1px solid rgba(107, 44, 44, 0.2);
+    border-left: 3px solid var(--wine);
+    padding: 22px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .pause-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pause-label::before {
+    content: '❊';
+    font-size: 14px;
+    color: var(--gold-deep);
+  }
+
+  .pause-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .pause textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(107, 44, 44, 0.25);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    border-radius: 2px;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .pause textarea:focus {
+    outline: none;
+    border-color: var(--wine);
+    box-shadow: 0 0 0 2px rgba(107, 44, 44, 0.15);
+  }
+
+  /* Save confirmation toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid var(--gold);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---- Screen Cards ---- */
+  .screen {
+    display: none;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .screen.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .screen-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .screen-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .screen-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .prose {
+    font-size: 16.5px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .prose p { margin-bottom: 18px; }
+
+  .prose strong { color: var(--wine); font-weight: 600; }
+
+  .prose em { color: var(--ink-soft); }
+
+  .prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 28px 0 14px;
+    color: var(--wine);
+    line-height: 1.25;
+  }
+
+  .prose h3::before {
+    content: '❖ ';
+    color: var(--gold-deep);
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+
+  .divider {
+    display: block;
+    margin: 32px auto;
+    width: 120px;
+    height: auto;
+    opacity: 0.6;
+  }
+
+  .pullquote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--wine);
+    text-align: center;
+    margin: 28px 20px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    line-height: 1.4;
+  }
+
+  .scripture {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scripture-ref {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--ivory);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--wine);
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:disabled {
+    background: var(--locked);
+    border-color: var(--locked);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+  }
+
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- Forms ---- */
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .word-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .word-count .met {
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  .word-count .short {
+    color: var(--danger);
+  }
+
+  /* ---- Key Terms / Flashcards ---- */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .term-card {
+    background: var(--bg-card-alt);
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    border-radius: 2px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 100px;
+  }
+
+  .term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--gold-deep);
+  }
+
+  .term-card.viewed {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+  }
+
+  .term-card.viewed::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .term-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.7;
+  }
+
+  .term-def {
+    display: none;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .term-card.open .term-def { display: block; }
+  .term-card.open .term-tap { display: none; }
+
+  /* ---- Inline comprehension check ---- */
+  .check {
+    background: #FDF8E8;
+    border: 1px dashed var(--gold-deep);
+    border-radius: 2px;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .check-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .check-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .check-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-option {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .check-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .check-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .check-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .check-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .check-feedback {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    display: none;
+  }
+
+  .check-feedback.show { display: block; }
+
+  /* ---- Vocation Compass ---- */
+  .compass-intro {
+    background: #FDF8E8;
+    border-left: 3px solid var(--wine);
+    padding: 18px 22px;
+    margin: 20px 0 30px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .compass-vocation {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(140, 113, 53, 0.25);
+  }
+
+  .compass-vocation:last-child {
+    border-bottom: none;
+  }
+
+  .compass-voc-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+
+  .compass-voc-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  .compass-aspect {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px dotted rgba(140, 113, 53, 0.2);
+  }
+
+  .compass-aspect:first-of-type { border-top: none; }
+
+  .compass-aspect-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .rating-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .rating-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(140, 113, 53, 0.4);
+    background: white;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .rating-btn:hover {
+    border-color: var(--gold-deep);
+  }
+
+  .rating-btn.selected {
+    background: var(--wine);
+    color: var(--ivory);
+    border-color: var(--wine);
+  }
+
+  .rating-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  .compass-result {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(107, 44, 44, 0.08));
+    border: 1px solid var(--gold-deep);
+    padding: 24px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  .compass-result.show { display: block; }
+
+  .result-voc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.3);
+  }
+
+  .result-voc:last-child { border-bottom: none; }
+
+  .result-voc-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--wine);
+  }
+
+  .result-bar {
+    width: 180px;
+    height: 8px;
+    background: rgba(140, 113, 53, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .result-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    transition: width 1s ease;
+  }
+
+  /* ---- Quiz ---- */
+  .quiz-question {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.25);
+  }
+
+  .quiz-question:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .q-option {
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .q-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .q-option.selected {
+    border-color: var(--wine);
+    background: rgba(107, 44, 44, 0.06);
+  }
+
+  .q-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .q-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+  }
+
+  .q-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+  }
+
+  .q-option.locked {
+    pointer-events: none;
+  }
+
+  .q-explanation {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201, 169, 97, 0.1);
+    border-left: 2px solid var(--gold-deep);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    display: none;
+  }
+
+  .q-explanation.show { display: block; }
+
+  .quiz-score {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(107, 44, 44, 0.1));
+    border: 1px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score strong {
+    font-size: 34px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ---- Completion screen ---- */
+  .completion-hero {
+    text-align: center;
+    padding: 20px 0 32px;
+  }
+
+  .completion-icon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    color: var(--gold-deep);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .completion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .completion-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .summary-stat {
+    background: #FDF8E8;
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+  }
+
+  .download-note {
+    background: rgba(201, 169, 97, 0.12);
+    padding: 18px 22px;
+    border-left: 3px solid var(--gold-deep);
+    margin: 24px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ---- Hero (start screen) ---- */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-deep));
+    color: var(--ivory);
+    padding: 40px 40px 36px;
+    margin: -40px -44px 32px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .hero-banner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+
+  .hero-banner p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-soft);
+    margin-top: 8px;
+  }
+
+  .hero-banner .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+
+  .upload-zone {
+    border: 1px dashed rgba(140, 113, 53, 0.4);
+    padding: 20px;
+    text-align: center;
+    margin-top: 24px;
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .upload-zone label {
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .upload-zone input { display: none; }
+
+  /* ---- Error / alert ---- */
+  .alert {
+    padding: 12px 16px;
+    background: rgba(168, 67, 43, 0.1);
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    margin-top: 14px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .alert.show { display: block; }
+
+  /* ---- Footer ---- */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .card { padding: 28px 22px; }
+    .hero-banner { margin: -28px -22px 28px; padding: 30px 24px 26px; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; justify-content: center; }
+    .compass-aspect { grid-template-columns: 1fr; gap: 8px; }
+    .result-bar { width: 120px; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .save-sticky {
+      position: static;
+      display: flex;
+      margin: 10px auto 0;
+      width: fit-content;
+    }
+    .progress-meta { flex-wrap: wrap; }
+    .btn-row-split { width: 100%; flex-direction: column; }
+    .btn-row-split .btn-save-row { width: 100%; justify-content: center; }
+  }
+
+  /* Print-friendly download report styling will be injected separately */
+
+.prose ul { margin-left: 20px; margin-bottom: 18px; }
+.prose li { margin-bottom: 8px; }
+.note-panel { background: rgba(184, 70, 50, 0.12); border-left: 3px solid var(--gold-deep); padding: 18px 22px; margin: 22px 0; color: var(--ink); line-height: 1.65; }
+
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="unit-label">HRE4M1 · Unit 1 · Lesson 2</div>
+    <h1 class="lesson-title">Causation Theory</h1>
+    <div class="lesson-subtitle">First Cause, secondary causes, freedom, and providence</div>
+    <svg class="ornament" width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg"><path d="M 0 10 L 30 10 M 50 10 L 80 10" stroke="#F2A65A" stroke-width="1" fill="none"/><circle cx="40" cy="10" r="3" fill="none" stroke="#F2A65A" stroke-width="1"/><circle cx="40" cy="10" r="1" fill="#F2A65A"/></svg>
+  </div>
+  <div class="progress-container" id="progressContainer" style="display:none; position:relative;"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><div class="progress-meta"><span id="progressLabel">Section 1 of 13</span><span id="progressPercent">0%</span></div><button class="save-sticky" id="stickySave" onclick="saveProgressNow()" title="Download your progress to resume later"><span>💾</span><span id="stickySaveLabel">Save Progress</span></button></div>
+  <div id="screens">
+
+    <section class="screen active" data-screen="welcome">
+      <div class="card">
+        <div class="hero-banner">
+          <div class="ornament-line">
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+            <span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">A Study in Causation</span>
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+          </div>
+          <h2>Welcome to Unit 1.2</h2>
+          <p>This lesson explores how Catholic thought understands cause and effect, God as First Cause, and the real role of human freedom.</p>
+        </div>
+
+        <p class="prose" style="margin-bottom:24px;">Before we begin, enter your information. Your name will appear on your final report, which you can download and submit at the end of the lesson.</p>
+
+        <div class="field"><label for="studentName">Full Name</label><input type="text" id="studentName" placeholder="First and last name" autocomplete="name"></div>
+        <div class="field"><label for="studentEmail">School Email</label><input type="email" id="studentEmail" placeholder="you@school.ca" autocomplete="email"></div>
+        <div class="field"><label for="studentClass">Class / Period</label><input type="text" id="studentClass" placeholder="e.g., HRE4M1 · Period 2"></div>
+        <div class="alert" id="setupAlert">Please fill in your name and email before starting.</div>
+
+        <div class="btn-row"><div></div><button class="btn btn-primary" onclick="beginLesson()">Begin Lesson →</button></div>
+
+        <div class="upload-zone">
+          <div style="font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Returning to finish?</div>
+          <label for="resumeFile">Upload your saved progress file</label>
+          <input type="file" id="resumeFile" accept=".json" onchange="resumeFromFile(event)">
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="hook">
+      <div class="card">
+        <div class="screen-label">Before We Begin</div>
+        <h2 class="screen-title">Cause and Effect</h2>
+        <p class="screen-intro">Start with the everyday idea before we move into philosophy and theology.</p>
+        <div class="prose">
+          <p>In everyday life, we constantly connect effects to causes. A candle melts because of heat. A plant grows because of soil, water, sunlight, and biological processes. A student improves because of practice and effort.</p>
+          <p>Write what you currently think it means to say that something has a cause. You can use a simple example from ordinary life.</p>
+        </div>
+        <div class="field" style="margin-top:20px;">
+          <label for="hookResponse">Your first thoughts</label>
+          <textarea id="hookResponse" placeholder="What does it mean to say something has a cause?" oninput="updateWordCount('hookResponse','hookWC')"></textarea>
+          <div class="word-count" id="hookWC"><span>0 words</span><span>Minimum: 35 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="hookNext" onclick="showScreen('intro')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="intro">
+      <div class="card">
+        <div class="screen-label">Part One · What is Causation?</div>
+        <h2 class="screen-title">God as First Cause</h2>
+        <p class="screen-intro">Catholic teaching says God is the ultimate cause of all that exists, but this does not erase scientific explanations or created causes.</p>
+        <div class="prose">
+          <p>Causation means that effects come from causes. We see this everywhere. Fire gives heat, gravity pulls objects, choices create consequences, and events unfold through chains of cause and effect.</p>
+          <p>The Catholic view accepts this, but asks a deeper question: <strong>what explains the existence of the whole chain?</strong> If every created thing depends on causes beyond itself, there must be a First Cause that does not depend on anything else. Catholic thought identifies this First Cause as God.</p>
+          <div class="scripture">“In the beginning, God created the heavens and the earth.”<span class="scripture-ref">Genesis 1:1</span></div>
+          <p>This does not mean God replaces natural explanations. If fire melts wax, fire is a real cause. But God is the deeper cause who gives fire its existence, its heat, and the stable order of nature. God works in the background as the source and sustainer of everything.</p>
+        </div>
+        <div class="check" data-check="intro1"><div class="check-label">Quick Check</div><div class="check-q">What does it mean to call God the First Cause?</div><div class="check-options">
+          <button class="check-option" data-answer="a" onclick="answerCheck(this,'intro1','c')"><span class="letter">a.</span><span>God is one physical cause inside the universe.</span></button>
+          <button class="check-option" data-answer="b" onclick="answerCheck(this,'intro1','c')"><span class="letter">b.</span><span>God removes the need for scientific explanations.</span></button>
+          <button class="check-option" data-answer="c" onclick="answerCheck(this,'intro1','c')"><span class="letter">c.</span><span>God is the uncaused source of existence who gives all created causes their being and power.</span></button>
+          <button class="check-option" data-answer="d" onclick="answerCheck(this,'intro1','c')"><span class="letter">d.</span><span>God caused the universe long ago but is not involved now.</span></button>
+        </div><div class="check-feedback" id="fb-intro1"></div></div>
+        <div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">Explain how God can be the First Cause without replacing scientific explanations like fire causing heat or gravity causing a fall.</div><textarea id="pauseIntro" placeholder="Use your own example if possible." oninput="updateWordCount('pauseIntro','pauseIntroWC')"></textarea><div class="word-count" id="pauseIntroWC"><span>0 words</span><span>Minimum: 60 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="introNext" onclick="showScreen('terms')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="terms">
+      <div class="card">
+        <div class="screen-label">Part Two · Vocabulary</div>
+        <h2 class="screen-title">Six Terms to Know</h2>
+        <p class="screen-intro">Tap each card to reveal its meaning. Open all six cards before moving on.</p>
+        <div class="terms-grid" id="termsGrid">
+          <div class="term-card" data-term="first-cause" onclick="openTerm(this)"><div class="term-name">First Cause</div><div class="term-tap">Tap to reveal</div><div class="term-def">God as the uncaused source of all existence. God is not one cause among many, but the ultimate reason anything exists or can act.</div></div>
+          <div class="term-card" data-term="secondary" onclick="openTerm(this)"><div class="term-name">Secondary Cause</div><div class="term-tap">Tap to reveal</div><div class="term-def">A real created cause within the world, such as fire producing heat, rain helping crops grow, or a person choosing to help another.</div></div>
+          <div class="term-card" data-term="primary" onclick="openTerm(this)"><div class="term-name">Primary Causality</div><div class="term-tap">Tap to reveal</div><div class="term-def">God’s sustaining action as the source of all being and all causal power.</div></div>
+          <div class="term-card" data-term="free-will" onclick="openTerm(this)"><div class="term-name">Free Will</div><div class="term-tap">Tap to reveal</div><div class="term-def">The God-given ability to initiate and control one’s actions. Human choices truly cause effects and carry responsibility.</div></div>
+          <div class="term-card" data-term="providence" onclick="openTerm(this)"><div class="term-name">Divine Providence</div><div class="term-tap">Tap to reveal</div><div class="term-def">God’s wise and loving guidance of creation toward its ultimate good, often working through natural causes and human cooperation.</div></div>
+          <div class="term-card" data-term="efficient" onclick="openTerm(this)"><div class="term-name">Efficient Cause</div><div class="term-tap">Tap to reveal</div><div class="term-def">The cause that brings an effect about. Aquinas used efficient causation to argue that there must be a first efficient cause, God.</div></div>
+        </div>
+        <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink-soft); text-align:center; margin-top:16px;">Viewed: <span id="termsViewed">0</span> of 6</div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="termsNext" onclick="showScreen('freedom')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="freedom">
+      <div class="card">
+        <div class="screen-label">Part Three · Human Freedom and Nature</div>
+        <h2 class="screen-title">Real Causes Within Creation</h2>
+        <p class="screen-intro">God’s causality does not turn the world into a puppet show. Catholic teaching says natural causes and human choices are real.</p>
+        <div class="prose">
+          <p>God creates a world with its own order. Gravity, weather, biology, chemistry, and human decision making all produce real effects. These are not rivals to God. They are part of how God’s creation works.</p>
+          <p>Human freedom is especially important. The Catechism teaches that God gives human beings the dignity of persons who can initiate and control their own actions. That means your choices matter. They can create good or harm in the real world.</p>
+          <div class="scripture">“You reap whatever you sow.”<span class="scripture-ref">Galatians 6:7</span></div>
+          <p>This also applies morally. Good actions can produce peace, trust, and growth. Selfish actions can cause wounds, broken relationships, and guilt. God gives us freedom because real love requires a real choice.</p>
+        </div>
+        <div class="check" data-check="freedom1"><div class="check-label">Quick Check</div><div class="check-q">Which statement best reflects Catholic teaching on freedom and causation?</div><div class="check-options">
+          <button class="check-option" data-answer="a" onclick="answerCheck(this,'freedom1','d')"><span class="letter">a.</span><span>Human choices are not real causes because God controls everything.</span></button>
+          <button class="check-option" data-answer="b" onclick="answerCheck(this,'freedom1','d')"><span class="letter">b.</span><span>Natural laws work independently from God and do not need sustaining.</span></button>
+          <button class="check-option" data-answer="c" onclick="answerCheck(this,'freedom1','d')"><span class="letter">c.</span><span>Moral choices do not have consequences.</span></button>
+          <button class="check-option" data-answer="d" onclick="answerCheck(this,'freedom1','d')"><span class="letter">d.</span><span>God gives creatures real causal power, including human freedom and natural processes.</span></button>
+        </div><div class="check-feedback" id="fb-freedom1"></div></div>
+        <div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">Describe a situation where human choice and natural causes both contribute to an outcome. How could a believer also see God’s providence at work?</div><textarea id="pauseFreedom" placeholder="Use a clear real-life example." oninput="updateWordCount('pauseFreedom','pauseFreedomWC')"></textarea><div class="word-count" id="pauseFreedomWC"><span>0 words</span><span>Minimum: 70 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="freedomNext" onclick="showScreen('primary')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="primary">
+      <div class="card">
+        <div class="screen-label">Part Four · Primary and Secondary Causes</div>
+        <h2 class="screen-title">God Works Through Created Causes</h2>
+        <p class="screen-intro">Primary and secondary causality help explain how God’s action and creaturely action can both be real.</p>
+        <div class="prose">
+          <p><strong>Primary causality</strong> refers to God’s action as the source and sustainer of all being. Nothing exists or acts unless God gives it existence and keeps it in being.</p>
+          <p><strong>Secondary causality</strong> refers to the real action of created things. A painter paints, rain waters the field, a doctor treats illness, and a friend’s kindness comforts someone. These causes are real, but they depend on God.</p>
+          <p>An analogy helps. An artist and a paintbrush together produce a painting. The brush really leaves marks on the canvas, but the deeper source of the painting is the artist. In a similar way, creatures really act, while God remains the deeper source of their existence and power.</p>
+          <p>Catholic teaching avoids two extremes. It rejects the idea that God does everything so creatures do nothing real. It also rejects the idea that creation works by itself without any need for God. God is not in competition with nature. Nature acts because God gives it the power to act.</p>
+        </div>
+        <div class="check" data-check="primary1"><div class="check-label">Quick Check</div><div class="check-q">What is the difference between primary and secondary causality?</div><div class="check-options">
+          <button class="check-option" data-answer="a" onclick="answerCheck(this,'primary1','b')"><span class="letter">a.</span><span>Primary causality belongs to humans, while secondary causality belongs to God.</span></button>
+          <button class="check-option" data-answer="b" onclick="answerCheck(this,'primary1','b')"><span class="letter">b.</span><span>Primary causality is God’s sustaining action, while secondary causality is the real action of created things.</span></button>
+          <button class="check-option" data-answer="c" onclick="answerCheck(this,'primary1','b')"><span class="letter">c.</span><span>Primary causality is scientific, while secondary causality is emotional.</span></button>
+          <button class="check-option" data-answer="d" onclick="answerCheck(this,'primary1','b')"><span class="letter">d.</span><span>Secondary causality means creatures only appear to act but do nothing real.</span></button>
+        </div><div class="check-feedback" id="fb-primary1"></div></div>
+        <div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">Use one analogy from the lesson, artist and brush, musician and instrument, or electricity and appliance. Explain primary and secondary causality in your own words.</div><textarea id="pausePrimary" placeholder="Explain the analogy and connect both levels of cause." oninput="updateWordCount('pausePrimary','pausePrimaryWC')"></textarea><div class="word-count" id="pausePrimaryWC"><span>0 words</span><span>Minimum: 80 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="primaryNext" onclick="showScreen('aquinas')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="aquinas">
+      <div class="card">
+        <div class="screen-label">Part Five · St. Thomas Aquinas</div>
+        <h2 class="screen-title">The Argument from Efficient Cause</h2>
+        <p class="screen-intro">Aquinas reasoned that cause and effect point beyond the universe to an uncaused First Cause.</p>
+        <div class="prose">
+          <p>St. Thomas Aquinas argued that nothing can cause itself, because it would have to exist before itself, which is impossible. Effects need causes, and those causes depend on other causes.</p>
+          <p>Aquinas also argued that an infinite regress of causes does not explain why anything exists right now. If every cause only borrowed its power from something before it, there must be a first source that does not borrow its existence or power from anything else.</p>
+          <div class="scripture">“Therefore it is necessary to admit a first efficient cause, to which everyone gives the name God.”<span class="scripture-ref">St. Thomas Aquinas, Second Way</span></div>
+          <p>Aquinas did not use this argument to shut down science. Instead, he believed science and philosophy study real secondary causes, while theology and metaphysics ask the deeper question of why there are causes at all.</p>
+        </div>
+        <div class="check" data-check="aquinas1"><div class="check-label">Quick Check</div><div class="check-q">Why does Aquinas say a First Cause is necessary?</div><div class="check-options">
+          <button class="check-option" data-answer="a" onclick="answerCheck(this,'aquinas1','a')"><span class="letter">a.</span><span>Because nothing can cause itself, and a chain of causes needs an uncaused source of causal power.</span></button>
+          <button class="check-option" data-answer="b" onclick="answerCheck(this,'aquinas1','a')"><span class="letter">b.</span><span>Because scientific explanations are always wrong.</span></button>
+          <button class="check-option" data-answer="c" onclick="answerCheck(this,'aquinas1','a')"><span class="letter">c.</span><span>Because emotions are stronger than reason.</span></button>
+          <button class="check-option" data-answer="d" onclick="answerCheck(this,'aquinas1','a')"><span class="letter">d.</span><span>Because created things do not really act.</span></button>
+        </div><div class="check-feedback" id="fb-aquinas1"></div></div>
+        <div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">Do you find Aquinas’s First Cause reasoning convincing? Explain what makes it strong, difficult, or still worth discussing today.</div><textarea id="pauseAquinas" placeholder="Give an honest evaluation of the reasoning." oninput="updateWordCount('pauseAquinas','pauseAquinasWC')"></textarea><div class="word-count" id="pauseAquinasWC"><span>0 words</span><span>Minimum: 80 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="aquinasNext" onclick="showScreen('magisterium')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="magisterium">
+      <div class="card">
+        <div class="screen-label">Part Six · Magisterial Teaching</div>
+        <h2 class="screen-title">Providence, Freedom, and Responsibility</h2>
+        <p class="screen-intro">The Catechism holds together two truths: God is sovereign, and humans truly act with freedom and responsibility.</p>
+        <div class="prose">
+          <p>The Catechism teaches that God carries out His plan through the cooperation of creatures. This gives creatures real dignity. We are not puppets. We are invited to participate in God’s providence.</p>
+          <div class="scripture">“God grants his creatures not only their existence, but also the dignity of acting on their own, of being causes.”<span class="scripture-ref">Catechism of the Catholic Church, §306</span></div>
+          <p>At the same time, the Church teaches that God is the first cause who operates in and through secondary causes. This means God’s providence is active without destroying the freedom of creation.</p>
+          <p>The difficult question is evil. Catholic teaching says God is not the direct cause of moral evil. Evil comes from the misuse of creaturely freedom. God permits it because He respects freedom, but He can bring good even from suffering and sin. The Crucifixion is the greatest example: human evil became the path through which God brought redemption.</p>
+        </div>
+        <div class="check" data-check="magisterium1"><div class="check-label">Quick Check</div><div class="check-q">Which statement best reflects the Catechism’s teaching?</div><div class="check-options">
+          <button class="check-option" data-answer="a" onclick="answerCheck(this,'magisterium1','c')"><span class="letter">a.</span><span>God directly causes moral evil.</span></button>
+          <button class="check-option" data-answer="b" onclick="answerCheck(this,'magisterium1','c')"><span class="letter">b.</span><span>Human freedom is fake because God is sovereign.</span></button>
+          <button class="check-option" data-answer="c" onclick="answerCheck(this,'magisterium1','c')"><span class="letter">c.</span><span>God works through secondary causes and gives creatures real dignity to act, while remaining the First Cause.</span></button>
+          <button class="check-option" data-answer="d" onclick="answerCheck(this,'magisterium1','c')"><span class="letter">d.</span><span>Providence means events have no meaning or direction.</span></button>
+        </div><div class="check-feedback" id="fb-magisterium1"></div></div>
+        <div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">How can God be sovereign while humans remain responsible for their choices? Use ideas from the Catechism section.</div><textarea id="pauseMagisterium" placeholder="Explain both sides: God’s providence and human responsibility." oninput="updateWordCount('pauseMagisterium','pauseMagisteriumWC')"></textarea><div class="word-count" id="pauseMagisteriumWC"><span>0 words</span><span>Minimum: 80 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="magisteriumNext" onclick="showScreen('conclusion')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="conclusion">
+      <div class="card">
+        <div class="screen-label">Part Seven · Conclusion</div>
+        <h2 class="screen-title">A Meaningful Universe</h2>
+        <p class="screen-intro">Catholic causation theory gives a way to understand science, freedom, morality, and providence together.</p>
+        <div class="prose">
+          <p>Unit 1.2 shows that Catholic thought does not place God against science or freedom. A rainbow can be explained by sunlight refracting through raindrops, and a believer can still see it as a sign of God’s beauty and promise. These explanations do not compete because they answer different levels of cause.</p>
+          <p>Likewise, a medical treatment can work through chemistry, doctors, and human skill, while a believer can still thank God for providence working through those people and processes.</p>
+          <p>The key idea is this: God is the First Cause and continual sustainer, while created things are real secondary causes. Our choices matter. Natural laws matter. Science matters. But all of them exist within God’s sustaining and guiding providence.</p>
+        </div>
+        <div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">Reflect on a situation in your life that felt meaningful, guided, or meant to be. How might causation and providence help you think about it?</div><textarea id="pauseConclusion" placeholder="Think about an event, decision, coincidence, opportunity, or challenge." oninput="updateWordCount('pauseConclusion','pauseConclusionWC')"></textarea><div class="word-count" id="pauseConclusionWC"><span>0 words</span><span>Minimum: 80 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="conclusionNext" onclick="showScreen('quiz')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="quiz">
+      <div class="card">
+        <div class="screen-label">Part Eight · Knowledge Check</div>
+        <h2 class="screen-title">Check Your Understanding</h2>
+        <p class="screen-intro">Answer all seven questions. You will see the correct answer and explanation after each choice.</p>
+        <div id="quizQuestions"></div>
+        <div class="quiz-score" id="quizScore">Score<strong id="scoreText">0 / 0</strong></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="quizNext" onclick="showScreen('deeper')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="deeper">
+      <div class="card">
+        <div class="screen-label">Part Nine · Think Deeper</div>
+        <h2 class="screen-title">Go Beyond Recall</h2>
+        <p class="screen-intro">Use the lesson to develop thoughtful answers, not just quick opinions.</p>
+        <div class="field"><label for="td1">Think Deeper 1</label><textarea id="td1" placeholder="Explain why a scientific explanation and a faith explanation do not have to compete." oninput="updateWordCount('td1','td1WC')"></textarea><div class="word-count" id="td1WC"><span>0 words</span><span>Minimum: 130 words</span></div></div>
+        <div class="field"><label for="td2">Think Deeper 2</label><textarea id="td2" placeholder="Why does Catholic teaching avoid both extremes: God does everything so creatures do nothing, and creation works without God?" oninput="updateWordCount('td2','td2WC')"></textarea><div class="word-count" id="td2WC"><span>0 words</span><span>Minimum: 130 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="deeperNext" onclick="showScreen('synthesis')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="synthesis">
+      <div class="card">
+        <div class="screen-label">Part Ten · Final Synthesis</div>
+        <h2 class="screen-title">Pull the Lesson Together</h2>
+        <p class="screen-intro">Bring the main concepts into one clear explanation.</p>
+        <div class="field"><label for="synthesis">Final Synthesis</label><textarea id="synthesis" placeholder="Write a clear explanation of Catholic causation theory." oninput="updateWordCount('synthesis','synthesisWC')"></textarea><div class="word-count" id="synthesisWC"><span>0 words</span><span>Minimum: 160 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="synthesisNext" onclick="showScreen('finish')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="finish">
+      <div class="card">
+        <div class="completion-hero"><div class="completion-icon">✦</div><div class="completion-title">Ready to Complete?</div><div class="completion-sub">Review your progress, then download your final report.</div></div>
+        <div class="summary-grid"><div class="summary-stat"><div class="stat-label">Quiz Score</div><div class="stat-value" id="finishQuizScore">0 / 7</div></div><div class="summary-stat"><div class="stat-label">Terms Viewed</div><div class="stat-value" id="finishTerms">0 / 6</div></div><div class="summary-stat"><div class="stat-label">Total Words</div><div class="stat-value" id="finishWords">0</div></div><div class="summary-stat"><div class="stat-label">Time Spent</div><div class="stat-value" id="finishTime">0 min</div></div></div>
+        <div class="download-note">Download the report and submit it as directed by your teacher. The file includes your written responses, quiz review, and completion details.</div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save Progress</button><button class="btn btn-gold" onclick="finishLesson()">Download Report ↓</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="complete">
+      <div class="card">
+        <div class="completion-hero"><div class="completion-icon">✓</div><div class="completion-title">Lesson Complete</div><div class="completion-sub">Your report has been prepared for download.</div></div>
+        <div class="prose"><p>You can download the report again if needed, or save your progress file for your records.</p></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="showScreen('finish')">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save Progress</button><button class="btn btn-gold" onclick="downloadReport()">Download Report Again ↓</button></div></div>
+      </div>
+    </section>
+
+  </div>
+  <div class="toast" id="toast">Saved.</div>
+  <div class="footer">HRE4M1 · Unit 1 · Lesson 2</div>
+</div>
+
+<script>
+const LESSON_ID = "1.2";
+const STORAGE_KEY = "hre4m1_unit_1_2_causation_theory";
+const SCREEN_ORDER = ["welcome", "hook", "intro", "terms", "freedom", "primary", "aquinas", "magisterium", "conclusion", "quiz", "deeper", "synthesis", "finish", "complete"];
+const TOTAL_STEPS = SCREEN_ORDER.length - 1;
+const REQUIRED_TERMS = 6;
+const QUIZ = [{"id": "q1", "q": "What does Catholic teaching mean when it calls God the First Cause?", "opts": ["God is one cause among many causes inside the universe.", "God is the uncaused source of all existence, the One who gives creation its being and causal power.", "God replaces scientific explanations for natural events.", "God only caused the universe at the beginning and no longer sustains it."], "correct": 1, "explain": "God is not just the first event in a chain. Catholic thought understands God as the uncaused source of being who sustains all created causes."}, {"id": "q2", "q": "How can God be the ultimate cause while gravity, fire, biology, or human decisions are also real causes?", "opts": ["Because Catholic teaching rejects natural causes.", "Because created things can be true secondary causes that act through powers God gives and sustains.", "Because God acts only when natural causes fail.", "Because human freedom is an illusion."], "correct": 1, "explain": "The lesson explains that God works through secondary causes. Natural laws and human choices are real, but they depend on God for existence and power."}, {"id": "q3", "q": "Which example best shows secondary causality?", "opts": ["A seed grows into a plant through soil, water, sunlight, and biological processes.", "Nothing in creation can cause anything at all.", "God directly moves every object while nature does nothing real.", "A scientific explanation proves God is absent."], "correct": 0, "explain": "Secondary causality means created things can produce real effects, such as seeds growing through natural processes."}, {"id": "q4", "q": "What is the main difference between primary causality and secondary causality?", "opts": ["Primary causality belongs to science, while secondary causality belongs to faith.", "Primary causality is God’s sustaining action, while secondary causality is the real action of creatures within creation.", "Primary causality happens only in miracles, while secondary causality happens only in sin.", "There is no real difference between them."], "correct": 1, "explain": "Primary causality refers to God as the source and sustainer of being. Secondary causality refers to real created causes, such as nature and human freedom."}, {"id": "q5", "q": "Why did Aquinas argue that there must be a First Cause?", "opts": ["Because nothing can cause itself and an infinite regress of efficient causes cannot explain why anything exists.", "Because he thought scientific investigation was useless.", "Because he believed every event has no secondary cause.", "Because he wanted to replace philosophy with emotion."], "correct": 0, "explain": "Aquinas reasoned that effects need causes, nothing causes itself, and the chain of causes requires an uncaused First Cause, which is God."}, {"id": "q6", "q": "Which statement best reflects the Church’s teaching on human freedom and providence?", "opts": ["If God is in control, humans cannot be responsible for their choices.", "Human freedom is real because God gives persons the dignity of initiating and controlling their actions.", "God causes moral evil directly to teach people lessons.", "Providence means every event is random."], "correct": 1, "explain": "CCC 1730 teaches that God gives human beings the dignity of initiating and controlling their actions. Providence does not erase responsibility."}, {"id": "q7", "q": "How does Catholic teaching explain evil within God’s providence?", "opts": ["God directly causes moral evil.", "Evil is stronger than God’s plan.", "God permits evil because He respects creaturely freedom, and He can bring good from it without being the cause of evil.", "Evil proves there is no real freedom."], "correct": 2, "explain": "CCC 311 teaches that God is not the cause of moral evil. He permits it and can bring good from it through providence."}];
+const CORRECT_MAP = {"intro1": "c", "freedom1": "d", "primary1": "b", "aquinas1": "a", "magisterium1": "c"};
+const PROMPTS = {"hookResponse": "Before the lesson, what do you think it means to say that something has a cause?", "pauseIntro": "Explain how God can be the First Cause without replacing scientific explanations like fire causing heat or gravity causing a fall.", "pauseFreedom": "Describe a situation where human choice and natural causes both contribute to an outcome. How could a believer also see God’s providence at work?", "pausePrimary": "Use one analogy from the lesson, artist and brush, musician and instrument, or electricity and appliance. Explain primary and secondary causality in your own words.", "pauseAquinas": "Do you find Aquinas’s First Cause reasoning convincing? Explain what makes it strong, difficult, or still worth discussing today.", "pauseMagisterium": "How can God be sovereign while humans remain responsible for their choices? Use ideas from the Catechism section.", "pauseConclusion": "Reflect on a situation in your life that felt meaningful, guided, or meant to be. How might causation and providence help you think about it?", "td1": "Think Deeper 1: Explain why a scientific explanation and a faith explanation do not have to compete. Use one example from nature, medicine, technology, or daily life.", "td2": "Think Deeper 2: Why does Catholic teaching avoid both extremes, God micromanages everything so creatures do nothing, and creation works without any need for God?", "synthesis": "Final Synthesis: Write a clear explanation of Catholic causation theory. Include First Cause, secondary causes, human freedom, natural law, Aquinas, and divine providence."};
+const MINIMUMS = {"hookResponse": 35, "pauseIntro": 60, "pauseFreedom": 70, "pausePrimary": 80, "pauseAquinas": 80, "pauseMagisterium": 80, "pauseConclusion": 80, "td1": 130, "td2": 130, "synthesis": 160};
+const RESPONSE_ORDER = ["hookResponse", "pauseIntro", "pauseFreedom", "pausePrimary", "pauseAquinas", "pauseMagisterium", "pauseConclusion", "td1", "td2", "synthesis"];
+const RESPONSE_TITLES = {"hookResponse": "Starting Point", "pauseIntro": "Reflection 1", "pauseFreedom": "Reflection 2", "pausePrimary": "Reflection 3", "pauseAquinas": "Reflection 4", "pauseMagisterium": "Reflection 5", "pauseConclusion": "Reflection 6", "td1": "Think Deeper 1", "td2": "Think Deeper 2", "synthesis": "Final Synthesis"};
+const REPORT_FILE_PREFIX = "HRE4M1_Unit_1_2_Causation_Theory";
+const REPORT_HEADER_LABEL = "HRE4M1 \u00b7 Unit 1 \u00b7 Lesson 2";
+const REPORT_TITLE = "Causation Theory";
+const REPORT_SUBTITLE = 'Student Report';
+
+const state = { lessonId: LESSON_ID, startedAt: null, finishedAt: null, currentScreen: 'welcome', studentInfo: {name:'', email:'', className:''}, termsViewed: [], inlineChecks: {}, responses: {}, quiz: {answers: {}, scoreCount: 0}, sectionTimes: {}, lastSavedAt: null };
+RESPONSE_ORDER.forEach(key => state.responses[key] = '');
+let screenEnterTime = Date.now();
+
+function countWords(str) { if (!str) return 0; return str.trim().split(/\s+/).filter(Boolean).length; }
+function escapeHTML(str) { if (str === null || str === undefined) return ''; return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function formatTime(ms) { const totalMin = Math.floor(ms / 60000); if (totalMin < 1) return '< 1 min'; if (totalMin < 60) return totalMin + ' min'; const hrs = Math.floor(totalMin / 60); const mins = totalMin % 60; return hrs + 'h ' + mins + 'm'; }
+function persistInputsToState() {
+  state.studentInfo.name = document.getElementById('studentName').value.trim();
+  state.studentInfo.email = document.getElementById('studentEmail').value.trim();
+  state.studentInfo.className = document.getElementById('studentClass').value.trim();
+  RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) state.responses[key] = el.value.trim(); });
+}
+function saveLocal() { state.lastSavedAt = new Date().toISOString(); persistInputsToState(); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function totalWords() { persistInputsToState(); return Object.values(state.responses).reduce((sum, v) => sum + countWords(v), 0); }
+function totalTimeMs() { let total = 0; Object.values(state.sectionTimes).forEach(ms => total += ms || 0); if (state.currentScreen && screenEnterTime) total += Date.now() - screenEnterTime; return total; }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1600); }
+function markSaveButtonsSaved() { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.add('saved')); const label = document.getElementById('stickySaveLabel'); if (label) label.textContent = 'Saved'; setTimeout(() => { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.remove('saved')); const label2 = document.getElementById('stickySaveLabel'); if (label2) label2.textContent = 'Save Progress'; }, 1400); }
+function updateProgress() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); const shown = idx <= 0 ? 0 : idx; const pct = Math.max(0, Math.min(100, Math.round((shown / TOTAL_STEPS) * 100))); document.getElementById('progressFill').style.width = pct + '%'; document.getElementById('progressPercent').textContent = pct + '%'; document.getElementById('progressLabel').textContent = 'Section ' + Math.max(1, shown) + ' of ' + TOTAL_STEPS; document.getElementById('progressContainer').style.display = state.currentScreen === 'welcome' ? 'none' : 'block'; }
+function showScreen(name) { persistInputsToState(); const prev = state.currentScreen; if (prev && screenEnterTime) { state.sectionTimes[prev] = (state.sectionTimes[prev] || 0) + (Date.now() - screenEnterTime); } document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); const next = document.querySelector('.screen[data-screen="' + name + '"]'); if (next) next.classList.add('active'); state.currentScreen = name; screenEnterTime = Date.now(); if (name === 'quiz') renderQuiz(); if (name === 'finish') refreshFinishStats(); updateProgress(); refreshGating(); saveLocal(); window.scrollTo({top:0, behavior:'smooth'}); }
+function prevScreen() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); if (idx > 0) showScreen(SCREEN_ORDER[idx - 1]); }
+function beginLesson() { const name = document.getElementById('studentName').value.trim(); const email = document.getElementById('studentEmail').value.trim(); const alertBox = document.getElementById('setupAlert'); if (!name || !email) { alertBox.classList.add('show'); return; } alertBox.classList.remove('show'); if (!state.startedAt) state.startedAt = new Date().toISOString(); showScreen('hook'); }
+function updateWordCount(inputId, wcId) { const el = document.getElementById(inputId); const wc = countWords(el.value); const minimum = MINIMUMS[inputId] || 0; const box = document.getElementById(wcId); box.innerHTML = '<span>' + wc + ' words</span><span class="' + (wc >= minimum ? 'met' : 'short') + '">Minimum: ' + minimum + ' words</span>'; state.responses[inputId] = el.value.trim(); saveLocal(); refreshGating(); }
+function openTerm(card) { card.classList.toggle('open'); const term = card.getAttribute('data-term'); if (!state.termsViewed.includes(term)) { state.termsViewed.push(term); card.classList.add('viewed'); document.getElementById('termsViewed').textContent = state.termsViewed.length; } saveLocal(); refreshGating(); }
+function answerCheck(button, checkId, correctLetter) { const wrap = button.closest('.check'); if (wrap.querySelector('.check-option.answered')) return; const chosen = button.getAttribute('data-answer'); const isCorrect = chosen === correctLetter; wrap.querySelectorAll('.check-option').forEach(opt => { opt.classList.add('answered'); if (opt.getAttribute('data-answer') === correctLetter) opt.classList.add('correct'); }); if (!isCorrect) button.classList.add('incorrect'); state.inlineChecks[checkId] = {selected: chosen, correct: isCorrect}; const fb = document.getElementById('fb-' + checkId); fb.textContent = isCorrect ? 'Correct. You are tracking the main idea well.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); saveLocal(); refreshGating(); }
+function refreshGating() { persistInputsToState(); const enough = key => countWords(state.responses[key]) >= (MINIMUMS[key] || 0); const setDisabled = (id, disabled) => { const el = document.getElementById(id); if (el) el.disabled = disabled; }; setDisabled('hookNext', !enough('hookResponse')); setDisabled('introNext', !(state.inlineChecks.intro1 && enough('pauseIntro'))); setDisabled('termsNext', state.termsViewed.length < REQUIRED_TERMS); setDisabled('freedomNext', !(state.inlineChecks.freedom1 && enough('pauseFreedom'))); setDisabled('primaryNext', !(state.inlineChecks.primary1 && enough('pausePrimary'))); setDisabled('aquinasNext', !(state.inlineChecks.aquinas1 && enough('pauseAquinas'))); setDisabled('magisteriumNext', !(state.inlineChecks.magisterium1 && enough('pauseMagisterium'))); setDisabled('conclusionNext', !enough('pauseConclusion')); setDisabled('quizNext', Object.keys(state.quiz.answers).length < QUIZ.length); setDisabled('deeperNext', !(enough('td1') && enough('td2'))); setDisabled('synthesisNext', !enough('synthesis')); }
+function renderQuiz() { const container = document.getElementById('quizQuestions'); if (container.dataset.rendered === 'yes') return; container.dataset.rendered = 'yes'; const letters = ['a','b','c','d']; container.innerHTML = QUIZ.map((q, idx) => { const options = q.opts.map((opt, optIdx) => `<button class="q-option" data-opt="${optIdx}" onclick="answerQuiz('${q.id}', ${optIdx})"><span class="letter">${letters[optIdx]}.</span><span>${escapeHTML(opt)}</span></button>`).join(''); return `<div class="quiz-question" data-qid="${q.id}"><div class="q-number">Question ${idx + 1} of ${QUIZ.length}</div><div class="q-text">${escapeHTML(q.q)}</div><div class="q-options">${options}</div><div class="q-explanation" id="exp-${q.id}">${escapeHTML(q.explain)}</div></div>`; }).join(''); restoreQuizVisuals(); }
+function answerQuiz(qId, optIdx) { if (state.quiz.answers[qId] !== undefined) return; const q = QUIZ.find(item => item.id === qId); if (optIdx === q.correct) state.quiz.scoreCount += 1; state.quiz.answers[qId] = optIdx; restoreQuizVisuals(); saveLocal(); refreshGating(); }
+function restoreQuizVisuals() { QUIZ.forEach(q => { const qEl = document.querySelector('.quiz-question[data-qid="' + q.id + '"]'); if (!qEl) return; const chosen = state.quiz.answers[q.id]; qEl.querySelectorAll('.q-option').forEach(opt => opt.classList.remove('locked','correct','incorrect','selected')); const exp = document.getElementById('exp-' + q.id); if (exp) exp.classList.remove('show'); if (chosen !== undefined) { qEl.querySelectorAll('.q-option').forEach(opt => opt.classList.add('locked')); const selected = qEl.querySelector('.q-option[data-opt="' + chosen + '"]'); const correctBtn = qEl.querySelector('.q-option[data-opt="' + q.correct + '"]'); if (selected) selected.classList.add('selected'); if (chosen === q.correct && selected) selected.classList.add('correct'); else { if (selected) selected.classList.add('incorrect'); if (correctBtn) correctBtn.classList.add('correct'); } if (exp) exp.classList.add('show'); } }); if (Object.keys(state.quiz.answers).length === QUIZ.length) { document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('quizScore').classList.add('show'); } }
+function triggerDownload(blob, filename) { const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000); }
+function saveProgressNow() { saveLocal(); const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'}); const safeName = (state.studentInfo.name || 'student').replace(/[^a-zA-Z0-9]+/g, '_'); triggerDownload(blob, REPORT_FILE_PREFIX + '_' + safeName + '_progress.json'); showToast('Progress saved.'); markSaveButtonsSaved(); }
+function refreshFinishStats() { document.getElementById('finishQuizScore').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('finishTerms').textContent = state.termsViewed.length + ' / ' + REQUIRED_TERMS; document.getElementById('finishWords').textContent = totalWords().toLocaleString(); document.getElementById('finishTime').textContent = formatTime(totalTimeMs()); }
+function buildReportHTML() { persistInputsToState(); const letters = ['a','b','c','d']; const responseHtml = RESPONSE_ORDER.map(key => '<h2>' + escapeHTML(RESPONSE_TITLES[key]) + '</h2><div class="response-prompt">' + escapeHTML(PROMPTS[key]) + '</div><div class="response-box">' + escapeHTML(state.responses[key] || '') + '</div><div class="response-wc">' + countWords(state.responses[key] || '') + ' words</div>').join(''); const quizHtml = QUIZ.map((q, idx) => { const chosen = state.quiz.answers[q.id]; const chosenText = chosen !== undefined ? q.opts[chosen] : 'Not answered'; return '<div class="q-block"><div class="q-num">Question ' + (idx + 1) + '</div><div class="q-prompt">' + escapeHTML(q.q) + '</div><div class="q-ans"><strong>Student answer:</strong> ' + (chosen !== undefined ? letters[chosen] + '. ' : '') + escapeHTML(chosenText) + '</div><div class="q-ans"><strong>Correct answer:</strong> ' + letters[q.correct] + '. ' + escapeHTML(q.opts[q.correct]) + '</div><div class="q-ans"><strong>Explanation:</strong> ' + escapeHTML(q.explain) + '</div></div>'; }).join(''); return '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unit 1.2 Report</title><style>body{font-family:Georgia,serif;max-width:860px;margin:40px auto;padding:24px;color:#241318;line-height:1.6;background:#FFF1EA;}.hdr{border-bottom:3px double #B84632;padding-bottom:16px;margin-bottom:24px;}.hdr-label{font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#B84632;font-weight:600;}h1{font-size:28px;color:#8B1024;margin:8px 0 4px;}.subtitle{font-style:italic;color:#5A323B;font-size:16px;}.meta{background:#F8D9CC;padding:14px 18px;margin:20px 0;border-left:3px solid #B84632;font-size:14px;}.meta dl{margin:0;display:grid;grid-template-columns:140px 1fr;gap:6px 16px;}.meta dt{font-weight:700;color:#B84632;font-family:Arial,sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;}.meta dd{margin:0;}h2{font-size:20px;color:#8B1024;border-bottom:1px solid #B84632;padding-bottom:6px;margin-top:30px;}.response-prompt{font-style:italic;color:#5A323B;font-size:14px;margin-bottom:6px;}.response-box{background:white;border:1px solid #F8D9CC;border-left:3px solid #B84632;padding:14px 18px;margin:8px 0 10px;white-space:pre-wrap;font-size:15px;line-height:1.65;}.response-wc{font-family:Arial,sans-serif;font-size:11px;color:#B84632;margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;}.score-big{font-size:36px;color:#8B1024;font-weight:700;margin:10px 0;}.q-block{background:white;border:1px solid #F8D9CC;padding:12px 16px;margin:10px 0;border-radius:2px;}.q-num{font-family:Arial,sans-serif;font-size:12px;color:#B84632;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;}.q-prompt{font-weight:600;margin-bottom:8px;}.q-ans{font-size:14px;margin:4px 0;}</style></head><body><div class="hdr"><div class="hdr-label">' + escapeHTML(REPORT_HEADER_LABEL) + '</div><h1>' + escapeHTML(REPORT_TITLE) + '</h1><div class="subtitle">Student Report</div></div><div class="meta"><dl><dt>Name</dt><dd>' + escapeHTML(state.studentInfo.name) + '</dd><dt>Email</dt><dd>' + escapeHTML(state.studentInfo.email) + '</dd><dt>Class</dt><dd>' + escapeHTML(state.studentInfo.className || '') + '</dd><dt>Started</dt><dd>' + (state.startedAt ? new Date(state.startedAt).toLocaleString() : '') + '</dd><dt>Completed</dt><dd>' + (state.finishedAt ? new Date(state.finishedAt).toLocaleString() : '') + '</dd><dt>Time Spent</dt><dd>' + formatTime(totalTimeMs()) + '</dd><dt>Total Words</dt><dd>' + totalWords().toLocaleString() + '</dd></dl></div><h2>Knowledge Check Score</h2><div class="score-big">' + state.quiz.scoreCount + ' / ' + QUIZ.length + '</div>' + responseHtml + '<h2>Quiz Review</h2>' + quizHtml + '</body></html>'; }
+function downloadReport() { const html = buildReportHTML(); const blob = new Blob([html], {type:'text/html'}); const safeName = (state.studentInfo.name || 'student').replace(/[^a-zA-Z0-9]+/g, '_'); triggerDownload(blob, REPORT_FILE_PREFIX + '_' + safeName + '_report.html'); }
+function finishLesson() { if (!state.finishedAt) state.finishedAt = new Date().toISOString(); saveLocal(); downloadReport(); showScreen('complete'); }
+function restoreChecks() { Object.keys(state.inlineChecks).forEach(checkId => { const info = state.inlineChecks[checkId]; const options = document.querySelectorAll('.check[data-check="' + checkId + '"] .check-option'); options.forEach(opt => { opt.classList.add('answered'); if (opt.getAttribute('data-answer') === CORRECT_MAP[checkId]) opt.classList.add('correct'); if (opt.getAttribute('data-answer') === info.selected && !info.correct) opt.classList.add('incorrect'); }); const fb = document.getElementById('fb-' + checkId); if (fb) { fb.textContent = info.correct ? 'Correct. You are tracking the main idea well.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); } }); }
+function restoreTextAndCounts() { const map = {hookResponse:'hookWC', pauseIntro:'pauseIntroWC', pauseFreedom:'pauseFreedomWC', pausePrimary:'pausePrimaryWC', pauseAquinas:'pauseAquinasWC', pauseMagisterium:'pauseMagisteriumWC', pauseConclusion:'pauseConclusionWC', td1:'td1WC', td2:'td2WC', synthesis:'synthesisWC'}; RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) el.value = state.responses[key] || ''; const wcId = map[key]; if (el && document.getElementById(wcId)) updateWordCount(key, wcId); }); }
+function resumeFromFile(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = function(e) { try { const loaded = JSON.parse(e.target.result); if (!loaded || loaded.lessonId !== LESSON_ID) throw new Error('Wrong lesson file'); Object.assign(state, loaded); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); showScreen(state.currentScreen || 'hook'); showToast('Progress restored.'); } catch (err) { alert('Could not load that file. Please upload a valid Unit 1.2 progress file.'); } }; reader.readAsText(file); }
+function hydrateFromLocalStorage() { try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return; const saved = JSON.parse(raw); if (!saved || saved.lessonId !== LESSON_ID) return; Object.assign(state, saved); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); } catch (err) {} }
+hydrateFromLocalStorage(); updateProgress(); refreshGating();
+</script>
+
+</body>
+</html>

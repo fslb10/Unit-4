@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRE4M1 · Unit 1.1: The Existence of God</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --bg-deep: #2A050B;
+    --bg-mid: #5A101B;
+    --bg-card: #FFF1EA;
+    --bg-card-alt: #F8D9CC;
+    --gold: #F2A65A;
+    --gold-soft: #FFC897;
+    --gold-deep: #B84632;
+    --wine: #8B1024;
+    --ivory: #FFF4EC;
+    --cream: #FFD8C4;
+    --ink: #241318;
+    --ink-soft: #5A323B;
+    --locked: #6B4B5580;
+    --success: #2F7D4A;
+    --danger: #B3262E;
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.25);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Textured background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(242, 166, 90, 0.12), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(139, 16, 36, 0.18), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ---- Header ---- */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .unit-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .lesson-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .lesson-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gold-soft);
+    opacity: 0.9;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  /* ---- Progress bar ---- */
+  .progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-deep) 70%, transparent);
+    padding: 16px 0 12px;
+    margin: -24px -20px 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft));
+    width: 0%;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.5);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    margin: 8px auto 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  /* ---- Sticky save button (top bar) ---- */
+  .save-sticky {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 169, 97, 0.12);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .save-sticky:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    border-color: var(--gold);
+  }
+
+  .save-sticky.saved {
+    background: rgba(63, 122, 77, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  /* ---- In-row save (button row) ---- */
+  .btn-save-row {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-save-row:hover {
+    background: var(--gold-deep);
+    color: var(--ivory);
+  }
+
+  .btn-save-row.saved {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .btn-row-split {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* ---- Pause and Reflect blocks (in-flow) ---- */
+  .pause {
+    background: linear-gradient(135deg, rgba(107, 44, 44, 0.06), rgba(201, 169, 97, 0.08));
+    border: 1px solid rgba(107, 44, 44, 0.2);
+    border-left: 3px solid var(--wine);
+    padding: 22px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .pause-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pause-label::before {
+    content: '❊';
+    font-size: 14px;
+    color: var(--gold-deep);
+  }
+
+  .pause-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .pause textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(107, 44, 44, 0.25);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    border-radius: 2px;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .pause textarea:focus {
+    outline: none;
+    border-color: var(--wine);
+    box-shadow: 0 0 0 2px rgba(107, 44, 44, 0.15);
+  }
+
+  /* Save confirmation toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid var(--gold);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---- Screen Cards ---- */
+  .screen {
+    display: none;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .screen.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .screen-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .screen-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .screen-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .prose {
+    font-size: 16.5px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .prose p { margin-bottom: 18px; }
+
+  .prose strong { color: var(--wine); font-weight: 600; }
+
+  .prose em { color: var(--ink-soft); }
+
+  .prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 28px 0 14px;
+    color: var(--wine);
+    line-height: 1.25;
+  }
+
+  .prose h3::before {
+    content: '❖ ';
+    color: var(--gold-deep);
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+
+  .divider {
+    display: block;
+    margin: 32px auto;
+    width: 120px;
+    height: auto;
+    opacity: 0.6;
+  }
+
+  .pullquote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--wine);
+    text-align: center;
+    margin: 28px 20px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    line-height: 1.4;
+  }
+
+  .scripture {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scripture-ref {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--ivory);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--wine);
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:disabled {
+    background: var(--locked);
+    border-color: var(--locked);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+  }
+
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- Forms ---- */
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .word-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .word-count .met {
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  .word-count .short {
+    color: var(--danger);
+  }
+
+  /* ---- Key Terms / Flashcards ---- */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .term-card {
+    background: var(--bg-card-alt);
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    border-radius: 2px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 100px;
+  }
+
+  .term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--gold-deep);
+  }
+
+  .term-card.viewed {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+  }
+
+  .term-card.viewed::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .term-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.7;
+  }
+
+  .term-def {
+    display: none;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .term-card.open .term-def { display: block; }
+  .term-card.open .term-tap { display: none; }
+
+  /* ---- Inline comprehension check ---- */
+  .check {
+    background: #FDF8E8;
+    border: 1px dashed var(--gold-deep);
+    border-radius: 2px;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .check-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .check-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .check-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-option {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .check-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .check-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .check-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .check-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .check-feedback {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    display: none;
+  }
+
+  .check-feedback.show { display: block; }
+
+  /* ---- Vocation Compass ---- */
+  .compass-intro {
+    background: #FDF8E8;
+    border-left: 3px solid var(--wine);
+    padding: 18px 22px;
+    margin: 20px 0 30px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .compass-vocation {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(140, 113, 53, 0.25);
+  }
+
+  .compass-vocation:last-child {
+    border-bottom: none;
+  }
+
+  .compass-voc-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+
+  .compass-voc-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  .compass-aspect {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px dotted rgba(140, 113, 53, 0.2);
+  }
+
+  .compass-aspect:first-of-type { border-top: none; }
+
+  .compass-aspect-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .rating-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .rating-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(140, 113, 53, 0.4);
+    background: white;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .rating-btn:hover {
+    border-color: var(--gold-deep);
+  }
+
+  .rating-btn.selected {
+    background: var(--wine);
+    color: var(--ivory);
+    border-color: var(--wine);
+  }
+
+  .rating-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  .compass-result {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(107, 44, 44, 0.08));
+    border: 1px solid var(--gold-deep);
+    padding: 24px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  .compass-result.show { display: block; }
+
+  .result-voc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.3);
+  }
+
+  .result-voc:last-child { border-bottom: none; }
+
+  .result-voc-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--wine);
+  }
+
+  .result-bar {
+    width: 180px;
+    height: 8px;
+    background: rgba(140, 113, 53, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .result-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    transition: width 1s ease;
+  }
+
+  /* ---- Quiz ---- */
+  .quiz-question {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.25);
+  }
+
+  .quiz-question:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .q-option {
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .q-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .q-option.selected {
+    border-color: var(--wine);
+    background: rgba(107, 44, 44, 0.06);
+  }
+
+  .q-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .q-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+  }
+
+  .q-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+  }
+
+  .q-option.locked {
+    pointer-events: none;
+  }
+
+  .q-explanation {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201, 169, 97, 0.1);
+    border-left: 2px solid var(--gold-deep);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    display: none;
+  }
+
+  .q-explanation.show { display: block; }
+
+  .quiz-score {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(107, 44, 44, 0.1));
+    border: 1px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score strong {
+    font-size: 34px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ---- Completion screen ---- */
+  .completion-hero {
+    text-align: center;
+    padding: 20px 0 32px;
+  }
+
+  .completion-icon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    color: var(--gold-deep);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .completion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .completion-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .summary-stat {
+    background: #FDF8E8;
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+  }
+
+  .download-note {
+    background: rgba(201, 169, 97, 0.12);
+    padding: 18px 22px;
+    border-left: 3px solid var(--gold-deep);
+    margin: 24px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ---- Hero (start screen) ---- */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-deep));
+    color: var(--ivory);
+    padding: 40px 40px 36px;
+    margin: -40px -44px 32px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .hero-banner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+
+  .hero-banner p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-soft);
+    margin-top: 8px;
+  }
+
+  .hero-banner .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+
+  .upload-zone {
+    border: 1px dashed rgba(140, 113, 53, 0.4);
+    padding: 20px;
+    text-align: center;
+    margin-top: 24px;
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .upload-zone label {
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .upload-zone input { display: none; }
+
+  /* ---- Error / alert ---- */
+  .alert {
+    padding: 12px 16px;
+    background: rgba(168, 67, 43, 0.1);
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    margin-top: 14px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .alert.show { display: block; }
+
+  /* ---- Footer ---- */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .card { padding: 28px 22px; }
+    .hero-banner { margin: -28px -22px 28px; padding: 30px 24px 26px; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; justify-content: center; }
+    .compass-aspect { grid-template-columns: 1fr; gap: 8px; }
+    .result-bar { width: 120px; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .save-sticky {
+      position: static;
+      display: flex;
+      margin: 10px auto 0;
+      width: fit-content;
+    }
+    .progress-meta { flex-wrap: wrap; }
+    .btn-row-split { width: 100%; flex-direction: column; }
+    .btn-row-split .btn-save-row { width: 100%; justify-content: center; }
+  }
+
+  /* Print-friendly download report styling will be injected separately */
+
+.prose ul { margin-left: 20px; margin-bottom: 18px; }
+.prose li { margin-bottom: 8px; }
+.note-panel { background: rgba(184, 70, 50, 0.12); border-left: 3px solid var(--gold-deep); padding: 18px 22px; margin: 22px 0; color: var(--ink); line-height: 1.65; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="unit-label">HRE4M1 · Unit 1 · Lesson 1</div>
+    <h1 class="lesson-title">The Existence of God</h1>
+    <div class="lesson-subtitle">Exploring arguments, evidence, faith, science, and reason</div>
+    <svg class="ornament" width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 0 10 L 30 10 M 50 10 L 80 10" stroke="#F2A65A" stroke-width="1" fill="none"/>
+      <circle cx="40" cy="10" r="3" fill="none" stroke="#F2A65A" stroke-width="1"/>
+      <circle cx="40" cy="10" r="1" fill="#F2A65A"/>
+    </svg>
+  </div>
+
+  <div class="progress-container" id="progressContainer" style="display:none; position:relative;">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-meta"><span id="progressLabel">Section 1 of 13</span><span id="progressPercent">0%</span></div>
+    <button class="save-sticky" id="stickySave" onclick="saveProgressNow()" title="Download your progress to resume later"><span>💾</span><span id="stickySaveLabel">Save Progress</span></button>
+  </div>
+
+  <div id="screens">
+    <section class="screen active" data-screen="welcome">
+      <div class="card">
+        <div class="hero-banner">
+          <div class="ornament-line">
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+            <span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">A Study in Faith and Reason</span>
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+          </div>
+          <h2>Welcome to Unit 1.1</h2>
+          <p>Explore how Catholic thought approaches the question of God’s existence through reason, science, morality, and human experience.</p>
+        </div>
+
+        <p class="prose" style="margin-bottom:24px;">Enter your information before you begin. At the end, you will be able to download a report of your responses and quiz results.</p>
+        <div class="field"><label for="studentName">Full Name</label><input type="text" id="studentName" placeholder="First and last name" autocomplete="name"></div>
+        <div class="field"><label for="studentEmail">School Email</label><input type="email" id="studentEmail" placeholder="you@school.ca" autocomplete="email"></div>
+        <div class="field"><label for="studentClass">Class / Period</label><input type="text" id="studentClass" placeholder="e.g., HRE4M1 · Period 2"></div>
+        <div class="alert" id="setupAlert">Please fill in your name and email before starting.</div>
+        <div class="btn-row"><div></div><button class="btn btn-primary" onclick="beginLesson()">Begin Lesson →</button></div>
+        <div class="upload-zone">
+          <div style="font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Returning to finish?</div>
+          <label for="resumeFile">Upload your saved progress file</label>
+          <input type="file" id="resumeFile" accept=".json" onchange="resumeFromFile(event)">
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="hook">
+      <div class="card">
+        <div class="screen-label">Before We Begin</div>
+        <h2 class="screen-title">Science, Faith, or Both?</h2>
+        <p class="screen-intro">Start with your honest opinion before the lesson shapes your answer.</p>
+        <div class="prose"><p>Many people assume science and religion are enemies. Others believe they answer different questions and can work together.</p><p>Before reading further, explain where you currently stand. Do you think science and faith can work together, or do you mostly see them as opposed?</p></div>
+        <div class="field" style="margin-top:20px;"><label for="hookResponse">Your starting point</label><textarea id="hookResponse" placeholder="What do you currently think about science and faith working together?" oninput="updateWordCount('hookResponse','hookWC')"></textarea><div class="word-count" id="hookWC"><span>0 words</span><span>Minimum: 35 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="hookNext" onclick="showScreen('intro')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="intro">
+      <div class="card">
+        <div class="screen-label">Part One · Introduction</div>
+        <h2 class="screen-title">Faith and Science as Partners</h2>
+        <p class="screen-intro">Catholic teaching does not present faith and science as enemies. It sees them as complementary ways of seeking truth.</p>
+        <div class="prose">
+          <p>Science investigates the <strong>how</strong> of the natural world through observation, testing, and evidence. Faith addresses the <strong>why</strong>, questions of meaning, purpose, morality, and God that go beyond what can be measured in a lab.</p>
+          <p>The Catholic view holds that truth cannot contradict truth. If faith and reason are properly understood, they work together. Scientific discoveries such as the Big Bang, evolution, genetics, and astronomy can deepen awe rather than destroy belief.</p>
+          <div class="scripture">“Faith and reason are like two wings on which the human spirit rises to the contemplation of truth.”<span class="scripture-ref">St. John Paul II, Fides et Ratio</span></div>
+          <p>Fr. Georges Lemaître, a Catholic priest and physicist, first proposed what became known as the Big Bang theory. His example shows that a serious Catholic can also be a serious scientist. The goal is not to force science to become religion or faith to become science. The goal is to let each do what it does best.</p>
+        </div>
+        <div class="check" data-check="intro1"><div class="check-label">Quick Check</div><div class="check-q">Why does Catholic teaching say faith and science are not fundamentally in conflict?</div><div class="check-options"><button class="check-option" data-answer="a" onclick="answerCheck(this,'intro1','c')"><span class="letter">a.</span><span>Because science should be ignored whenever faith speaks.</span></button><button class="check-option" data-answer="b" onclick="answerCheck(this,'intro1','c')"><span class="letter">b.</span><span>Because faith only matters when science has no answer.</span></button><button class="check-option" data-answer="c" onclick="answerCheck(this,'intro1','c')"><span class="letter">c.</span><span>Because they seek truth from different angles, with science asking how and faith asking deeper why questions.</span></button><button class="check-option" data-answer="d" onclick="answerCheck(this,'intro1','c')"><span class="letter">d.</span><span>Because religion and science study exactly the same questions in exactly the same way.</span></button></div><div class="check-feedback" id="fb-intro1"></div></div>
+        <div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">Why does the Catholic view say faith and science are not enemies? Explain the difference between the kinds of questions science answers and the kinds faith answers.</div><textarea id="pauseIntro" placeholder="Use how and why questions in your answer." oninput="updateWordCount('pauseIntro','pauseIntroWC')"></textarea><div class="word-count" id="pauseIntroWC"><span>0 words</span><span>Minimum: 60 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="introNext" onclick="showScreen('terms')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="terms">
+      <div class="card">
+        <div class="screen-label">Part Two · Vocabulary</div><h2 class="screen-title">Six Terms to Know</h2><p class="screen-intro">Tap all six cards before moving on.</p>
+        <div class="terms-grid" id="termsGrid">
+          <div class="term-card" data-term="faith-reason" onclick="openTerm(this)"><div class="term-name">Faith and Reason</div><div class="term-tap">Tap to reveal</div><div class="term-def">The Catholic belief that faith and human reason can work together in the search for truth. Reason can point toward God, while faith receives what God reveals.</div></div>
+          <div class="term-card" data-term="cosmological" onclick="openTerm(this)"><div class="term-name">Cosmological Argument</div><div class="term-tap">Tap to reveal</div><div class="term-def">An argument for God based on the existence, beginning, and contingency of the universe. It asks why there is something rather than nothing.</div></div>
+          <div class="term-card" data-term="teleological" onclick="openTerm(this)"><div class="term-name">Teleological Argument</div><div class="term-tap">Tap to reveal</div><div class="term-def">An argument from design, order, purpose, and complexity in nature. It points to an intelligent Designer behind creation.</div></div>
+          <div class="term-card" data-term="moral" onclick="openTerm(this)"><div class="term-name">Moral Argument</div><div class="term-tap">Tap to reveal</div><div class="term-def">An argument that objective moral truth, conscience, and moral duty point to a transcendent Moral Lawgiver.</div></div>
+          <div class="term-card" data-term="consciousness" onclick="openTerm(this)"><div class="term-name">Consciousness</div><div class="term-tap">Tap to reveal</div><div class="term-def">Human self-awareness, inner experience, rationality, and spiritual longing. These can suggest that human beings are more than matter alone.</div></div>
+          <div class="term-card" data-term="scientism" onclick="openTerm(this)"><div class="term-name">Scientism</div><div class="term-tap">Tap to reveal</div><div class="term-def">The mistaken belief that science alone can answer every meaningful question. Catholic thought values science but rejects reducing all truth to measurement.</div></div>
+        </div>
+        <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink-soft); text-align:center; margin-top:16px;">Viewed: <span id="termsViewed">0</span> of 6</div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="termsNext" onclick="showScreen('cosmological')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="cosmological">
+      <div class="card"><div class="screen-label">Part Three · Origin of the Universe</div><h2 class="screen-title">The Cosmological Argument</h2><p class="screen-intro">This argument begins with the universe itself and asks why anything exists at all.</p>
+        <div class="prose"><p>Modern science points to a universe with a beginning. The Big Bang theory suggests that space, time, and matter are not eternal but began approximately 13.8 billion years ago. For believers, this does not prove the Bible like a science experiment, but it does fit well with the idea that creation has a source beyond itself.</p><p>The cosmological argument asks: if the universe began to exist, what caused it? If everything inside the universe depends on something else, what ultimately explains the existence of the whole universe?</p><p>St. Thomas Aquinas reasoned toward an <strong>Uncaused Cause</strong> or necessary being. The argument is not that God is one more object inside the universe. It is that the universe itself points beyond itself to a Creator who grounds all reality.</p><div class="note-panel"><strong>Fine-tuning connection:</strong> The physical constants of the universe seem to fall within an incredibly narrow range that allows stars, planets, chemistry, and life. Many believers see this as evidence of intelligent order rather than blind accident.</div></div>
+        <div class="check" data-check="cosmo1"><div class="check-label">Quick Check</div><div class="check-q">What does the cosmological argument mainly reason from?</div><div class="check-options"><button class="check-option" data-answer="a" onclick="answerCheck(this,'cosmo1','b')"><span class="letter">a.</span><span>Human emotions and personal opinions.</span></button><button class="check-option" data-answer="b" onclick="answerCheck(this,'cosmo1','b')"><span class="letter">b.</span><span>The existence, beginning, and contingency of the universe.</span></button><button class="check-option" data-answer="c" onclick="answerCheck(this,'cosmo1','b')"><span class="letter">c.</span><span>The belief that science is useless.</span></button><button class="check-option" data-answer="d" onclick="answerCheck(this,'cosmo1','b')"><span class="letter">d.</span><span>The idea that all cultures agree about God.</span></button></div><div class="check-feedback" id="fb-cosmo1"></div></div>
+        <div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">How might the Big Bang, the beginning of the universe, or fine-tuning point a person toward belief in God? Explain the logic in your own words.</div><textarea id="pauseCosmological" placeholder="Explain the argument step by step." oninput="updateWordCount('pauseCosmological','pauseCosmologicalWC')"></textarea><div class="word-count" id="pauseCosmologicalWC"><span>0 words</span><span>Minimum: 75 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="cosmologicalNext" onclick="showScreen('teleological')" disabled>Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="teleological"><div class="card"><div class="screen-label">Part Four · Design and Order</div><h2 class="screen-title">The Teleological Argument</h2><p class="screen-intro">This argument looks at purpose, order, and complexity in nature.</p><div class="prose"><p>The word <em>telos</em> means end or purpose. The teleological argument asks whether the order and structure of creation point toward an intelligent Designer.</p><p>Examples include the coded information in DNA, the interdependence of ecosystems, the laws of physics, the conditions that make Earth habitable, and the beauty and intelligibility of the cosmos. Scientific explanations can describe processes, but this argument asks a deeper question: why is nature so ordered and intelligible in the first place?</p><div class="scripture">“The heavens declare the glory of God; the firmament proclaims his handiwork.”<span class="scripture-ref">Psalm 19:1</span></div><p>The teleological argument does not deny evolution or natural processes. Instead, it asks whether the very possibility of ordered natural processes points to a deeper source of intelligence and purpose.</p></div><div class="check" data-check="teleo1"><div class="check-label">Quick Check</div><div class="check-q">Which example best fits the teleological argument?</div><div class="check-options"><button class="check-option" data-answer="a" onclick="answerCheck(this,'teleo1','d')"><span class="letter">a.</span><span>A person feels guilty after lying.</span></button><button class="check-option" data-answer="b" onclick="answerCheck(this,'teleo1','d')"><span class="letter">b.</span><span>The universe began to exist.</span></button><button class="check-option" data-answer="c" onclick="answerCheck(this,'teleo1','d')"><span class="letter">c.</span><span>Science cannot answer a question about purpose.</span></button><button class="check-option" data-answer="d" onclick="answerCheck(this,'teleo1','d')"><span class="letter">d.</span><span>DNA contains complex coded information that supports life.</span></button></div><div class="check-feedback" id="fb-teleo1"></div></div><div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">Choose one example of order or design in nature. How could it support a teleological argument?</div><textarea id="pauseTeleological" placeholder="Use DNA, ecosystems, the human body, the cosmos, or another example." oninput="updateWordCount('pauseTeleological','pauseTeleologicalWC')"></textarea><div class="word-count" id="pauseTeleologicalWC"><span>0 words</span><span>Minimum: 75 words</span></div></div><div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="teleologicalNext" onclick="showScreen('moral')" disabled>Continue →</button></div></div></div></section>
+
+    <section class="screen" data-screen="moral"><div class="card"><div class="screen-label">Part Five · Objective Morality</div><h2 class="screen-title">The Moral Argument</h2><p class="screen-intro">This argument begins with the human sense that some things are truly right or wrong.</p><div class="prose"><p>Across cultures, human beings recognize moral realities such as justice, honesty, compassion, betrayal, cruelty, and courage. While people disagree about details, many believe some moral truths are objective, not merely preferences.</p><p>The moral argument asks: if there really are objective moral truths, what grounds them? If murder, injustice, and exploitation are truly wrong, not just disliked by certain people, then morality seems to point beyond human opinion.</p><p>In Catholic thought, conscience is not just a feeling. It is the inner moral capacity by which we recognize good and evil. The lesson connects conscience to God, the Moral Lawgiver, who writes the moral law on the human heart.</p><div class="scripture">“They show that what the law requires is written on their hearts, while their conscience also bears witness.”<span class="scripture-ref">Romans 2:15</span></div></div><div class="check" data-check="moral1"><div class="check-label">Quick Check</div><div class="check-q">What does the moral argument use as evidence for God?</div><div class="check-options"><button class="check-option" data-answer="a" onclick="answerCheck(this,'moral1','c')"><span class="letter">a.</span><span>The fact that everyone always acts morally.</span></button><button class="check-option" data-answer="b" onclick="answerCheck(this,'moral1','c')"><span class="letter">b.</span><span>The idea that morality is only a personal preference.</span></button><button class="check-option" data-answer="c" onclick="answerCheck(this,'moral1','c')"><span class="letter">c.</span><span>Objective moral truth, conscience, and moral duty.</span></button><button class="check-option" data-answer="d" onclick="answerCheck(this,'moral1','c')"><span class="letter">d.</span><span>The beauty of galaxies and ecosystems.</span></button></div><div class="check-feedback" id="fb-moral1"></div></div><div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">Name one moral truth you think is not just personal opinion. Why would the moral argument say this points beyond human preference or social consensus?</div><textarea id="pauseMoral" placeholder="Name a moral truth and explain why it seems objective." oninput="updateWordCount('pauseMoral','pauseMoralWC')"></textarea><div class="word-count" id="pauseMoralWC"><span>0 words</span><span>Minimum: 80 words</span></div></div><div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="moralNext" onclick="showScreen('consciousness')" disabled>Continue →</button></div></div></div></section>
+
+    <section class="screen" data-screen="consciousness"><div class="card"><div class="screen-label">Part Six · Beyond Matter Alone</div><h2 class="screen-title">Consciousness and Transcendence</h2><p class="screen-intro">Human beings do not only think. We wonder, love, choose, create, pray, and long for eternity.</p><div class="prose"><p>One of the deepest questions in philosophy is consciousness: why is there a subjective experience of being you? Science can map brain activity, but many argue that brain activity alone does not fully explain self-awareness, moral responsibility, love, beauty, or the longing for infinite meaning.</p><p>Catholic teaching says each person has a spiritual soul. This does not mean the body is bad or the brain is irrelevant. It means the human person cannot be reduced to chemistry alone.</p><p>Religious experiences also matter. People throughout history have reported moments of profound peace, awe, conversion, prayer, beauty, or encounter with God. These experiences are personal, but they often change lives and invite people to consider that reality has spiritual depth.</p><div class="scripture">“You have made us for yourself, O Lord, and our heart is restless until it rests in you.”<span class="scripture-ref">St. Augustine</span></div></div><div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">Which part of human life seems hardest to explain by matter alone: consciousness, love, beauty, moral duty, religious experience, or longing for eternity? Explain why.</div><textarea id="pauseConsciousness" placeholder="Choose one and explain your thinking." oninput="updateWordCount('pauseConsciousness','pauseConsciousnessWC')"></textarea><div class="word-count" id="pauseConsciousnessWC"><span>0 words</span><span>Minimum: 80 words</span></div></div><div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="consciousnessNext" onclick="showScreen('limits')" disabled>Continue →</button></div></div></div></section>
+
+    <section class="screen" data-screen="limits"><div class="card"><div class="screen-label">Part Seven · Science and Meaning</div><h2 class="screen-title">The Limits of Science and the Role of Faith</h2><p class="screen-intro">Science is powerful, but not every real question is a scientific question.</p><div class="prose"><p>Science can tell us what things are made of and how they work. It can explain brain chemistry, genetics, energy, medicine, and the expansion of the universe. But science cannot tell us whether love is good, why we should be just, whether life has ultimate meaning, or what we ought to do with powerful technology.</p><p>Problems arise when people expect science to answer questions it was never designed to answer. That error is called <strong>scientism</strong>, the belief that science alone gives all truth.</p><p>Faith and philosophy help with meaning, value, purpose, and morality. This does not weaken science. It protects science from being used without wisdom. Nuclear technology, genetic engineering, and artificial intelligence all show that human beings need more than technical skill. We also need moral guidance.</p><div class="note-panel"><strong>Main takeaway:</strong> Science answers many how questions. Faith and reason help us face why and should questions. Together, they give a fuller view of reality.</div></div><div class="check" data-check="limits1"><div class="check-label">Quick Check</div><div class="check-q">Which question falls outside the normal limits of scientific inquiry?</div><div class="check-options"><button class="check-option" data-answer="a" onclick="answerCheck(this,'limits1','d')"><span class="letter">a.</span><span>What chemical reactions occur in the brain?</span></button><button class="check-option" data-answer="b" onclick="answerCheck(this,'limits1','d')"><span class="letter">b.</span><span>How old is the universe?</span></button><button class="check-option" data-answer="c" onclick="answerCheck(this,'limits1','d')"><span class="letter">c.</span><span>How do genes influence traits?</span></button><button class="check-option" data-answer="d" onclick="answerCheck(this,'limits1','d')"><span class="letter">d.</span><span>What is the ultimate purpose of human life?</span></button></div><div class="check-feedback" id="fb-limits1"></div></div><div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">Give one example of a modern issue where science can tell us what is possible, but faith, philosophy, or ethics must help decide what should be done.</div><textarea id="pauseLimits" placeholder="Examples could include AI, medicine, genetics, nuclear power, or environmental decisions." oninput="updateWordCount('pauseLimits','pauseLimitsWC')"></textarea><div class="word-count" id="pauseLimitsWC"><span>0 words</span><span>Minimum: 85 words</span></div></div><div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="limitsNext" onclick="showScreen('quiz')" disabled>Continue →</button></div></div></div></section>
+
+    <section class="screen" data-screen="quiz"><div class="card"><div class="screen-label">Part Eight · Knowledge Check</div><h2 class="screen-title">Check Your Understanding</h2><p class="screen-intro">Answer all questions. Feedback appears after each choice.</p><div id="quizQuestions"></div><div class="quiz-score" id="quizScore">Score<strong id="scoreText">0 / 7</strong></div><div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="quizNext" onclick="showScreen('deeper')" disabled>Continue →</button></div></div></div></section>
+
+    <section class="screen" data-screen="deeper"><div class="card"><div class="screen-label">Part Nine · Think Deeper</div><h2 class="screen-title">Go Beyond Recall</h2><p class="screen-intro">Use the lesson ideas carefully. These answers should show reasoning, not just opinion.</p><div class="field"><label for="td1">Think Deeper 1</label><textarea id="td1" placeholder="Which argument for God seems strongest to you so far? Explain why and include one possible objection." oninput="updateWordCount('td1','td1WC')"></textarea><div class="word-count" id="td1WC"><span>0 words</span><span>Minimum: 130 words</span></div></div><div class="field"><label for="td2">Think Deeper 2</label><textarea id="td2" placeholder="Respond to the claim that science has made faith unnecessary." oninput="updateWordCount('td2','td2WC')"></textarea><div class="word-count" id="td2WC"><span>0 words</span><span>Minimum: 130 words</span></div></div><div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="deeperNext" onclick="showScreen('synthesis')" disabled>Continue →</button></div></div></div></section>
+
+    <section class="screen" data-screen="synthesis"><div class="card"><div class="screen-label">Part Ten · Final Synthesis</div><h2 class="screen-title">Pull the Lesson Together</h2><p class="screen-intro">Your final response should show how the whole lesson connects.</p><div class="field"><label for="synthesis">Final Synthesis</label><textarea id="synthesis" placeholder="Explain how faith and reason work together, using at least three arguments for God’s existence." oninput="updateWordCount('synthesis','synthesisWC')"></textarea><div class="word-count" id="synthesisWC"><span>0 words</span><span>Minimum: 160 words</span></div></div><div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" id="synthesisNext" onclick="showScreen('finish')" disabled>Continue →</button></div></div></div></section>
+
+    <section class="screen" data-screen="finish"><div class="card"><div class="completion-hero"><div class="completion-icon">✦</div><div class="completion-title">Ready to Complete?</div><div class="completion-sub">Review your progress, then download your final report.</div></div><div class="summary-grid"><div class="summary-stat"><div class="stat-label">Quiz Score</div><div class="stat-value" id="finishQuizScore">0 / 7</div></div><div class="summary-stat"><div class="stat-label">Terms Viewed</div><div class="stat-value" id="finishTerms">0 / 6</div></div><div class="summary-stat"><div class="stat-label">Total Words</div><div class="stat-value" id="finishWords">0</div></div><div class="summary-stat"><div class="stat-label">Time Spent</div><div class="stat-value" id="finishTime">0 min</div></div></div><div class="download-note">Download the report and submit it as directed by your teacher. The file includes your written responses, quiz review, and completion details.</div><div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save Progress</button><button class="btn btn-gold" onclick="finishLesson()">Download Report ↓</button></div></div></div></section>
+
+    <section class="screen" data-screen="complete"><div class="card"><div class="completion-hero"><div class="completion-icon">✓</div><div class="completion-title">Lesson Complete</div><div class="completion-sub">Your report has been prepared for download.</div></div><div class="prose"><p>You can download the report again if needed, or save your progress file for your records.</p></div><div class="btn-row"><button class="btn btn-ghost" onclick="showScreen('finish')">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save Progress</button><button class="btn btn-gold" onclick="downloadReport()">Download Report Again ↓</button></div></div></div></section>
+  </div>
+
+  <div class="toast" id="toast">Saved</div>
+  <div class="footer">HRE4M1 · Unit 1 · Lesson 1</div>
+</div>
+
+<script>
+const LESSON_ID = '1.1';
+const STORAGE_KEY = 'hre4m1_unit_1_1_existence_of_god';
+const SCREEN_ORDER = ["welcome", "hook", "intro", "terms", "cosmological", "teleological", "moral", "consciousness", "limits", "quiz", "deeper", "synthesis", "finish", "complete"];
+const TOTAL_STEPS = SCREEN_ORDER.length - 1;
+const REQUIRED_TERMS = 6;
+const QUIZ = [{"id": "q1", "q": "In the Catholic view, why are faith and science not fundamentally in conflict?", "opts": ["Because science should avoid difficult questions completely.", "Because faith answers how nature works while science answers why life has meaning.", "Because both seek truth, but they ask different kinds of questions about reality.", "Because the Church accepts science only when it proves religious claims directly."], "correct": 2, "explain": "The lesson presents faith and science as complementary paths to truth. Science asks how the natural world works, while faith addresses meaning, purpose, and morality."}, {"id": "q2", "q": "What is the main idea of the cosmological argument?", "opts": ["The universe is beautiful, so beauty itself must be God.", "The universe began to exist and is contingent, so it points to a cause beyond itself.", "Human beings have moral feelings, so every feeling must come from God.", "Nature is complicated, so science cannot study it."], "correct": 1, "explain": "The cosmological argument reasons from the existence and beginning of the universe toward a First Cause or necessary being."}, {"id": "q3", "q": "Why is fine-tuning used as evidence in arguments for God?", "opts": ["Because the universe appears calibrated in ways that allow stars, planets, and life to exist.", "Because every scientific constant changes randomly every day.", "Because fine-tuning proves that no natural laws exist.", "Because the universe is too small to study scientifically."], "correct": 0, "explain": "Fine-tuning refers to the narrow range of physical constants that allow life. Believers may see this order as pointing to intelligent design."}, {"id": "q4", "q": "What does the teleological argument focus on?", "opts": ["The moral law written on the human heart.", "The order, design, and purpose seen in nature.", "The fact that science is useless for studying the world.", "The idea that religious experience is always public and measurable."], "correct": 1, "explain": "Teleological arguments point to design, order, purpose, and complexity in nature, such as DNA, ecosystems, and physical laws."}, {"id": "q5", "q": "What does the moral argument use as evidence for God?", "opts": ["The idea that all cultures agree on every rule exactly.", "The existence of objective moral truth and conscience, which point to a moral Lawgiver.", "The fact that human beings never make immoral choices.", "The idea that science can prove every moral statement in a lab."], "correct": 1, "explain": "The moral argument begins from objective moral law and conscience, then reasons that these point to a transcendent source of morality."}, {"id": "q6", "q": "What does the lesson mean by the limits of science?", "opts": ["Science is unimportant and should not be trusted.", "Science can answer empirical questions, but not every question about meaning, morality, purpose, or God.", "Science answers every question human beings can ask.", "Science and faith must always disagree."], "correct": 1, "explain": "Science is powerful for studying observable, measurable reality, but it cannot settle every question about purpose, value, morality, or ultimate meaning."}, {"id": "q7", "q": "Which statement best expresses the lesson’s final Catholic perspective?", "opts": ["Faith replaces science whenever a question becomes difficult.", "Science replaces faith because only measurable things are real.", "Faith and reason can work together, giving a fuller view of truth than either alone.", "Believers should avoid scientific discoveries because they always weaken faith."], "correct": 2, "explain": "The lesson argues for harmony between faith and reason. Together, they help us seek truth more fully."}];
+const CORRECT_MAP = {intro1:'c', cosmo1:'b', teleo1:'d', moral1:'c', limits1:'d'};
+const PROMPTS = {"hookResponse": "Before the lesson, do you think science and faith can work together, or do you see them as mostly opposed? Explain your starting point.", "pauseIntro": "Why does the Catholic view say faith and science are not enemies? Explain the difference between the kinds of questions science answers and the kinds faith answers.", "pauseCosmological": "How might the Big Bang, the beginning of the universe, or fine-tuning point a person toward belief in God? Explain the logic in your own words.", "pauseTeleological": "Choose one example of order or design in nature, such as DNA, ecosystems, the human body, or the cosmos. How could it support a teleological argument?", "pauseMoral": "Name one moral truth you think is not just personal opinion. Why would the moral argument say this points beyond human preference or social consensus?", "pauseConsciousness": "Which part of human life seems hardest to explain by matter alone: consciousness, love, beauty, moral duty, religious experience, or longing for eternity? Explain why.", "pauseLimits": "Give one example of a modern issue where science can tell us what is possible, but faith, philosophy, or ethics must help decide what should be done.", "td1": "Think Deeper 1: Which argument for God seems strongest to you so far, cosmological, teleological, moral, or consciousness and transcendence? Explain why, and include at least one possible objection someone might raise.", "td2": "Think Deeper 2: Some people say science has made faith unnecessary. Respond to that claim using the lesson’s distinction between how questions and why questions.", "synthesis": "Final Synthesis: Explain how the lesson presents faith and reason as complementary paths to truth. Include at least three arguments for God’s existence and explain how each contributes to a fuller understanding of reality."};
+const MINIMUMS = {"hookResponse": 35, "pauseIntro": 60, "pauseCosmological": 75, "pauseTeleological": 75, "pauseMoral": 80, "pauseConsciousness": 80, "pauseLimits": 85, "td1": 130, "td2": 130, "synthesis": 160};
+const RESPONSE_TITLES = {"hookResponse": "Starting Point", "pauseIntro": "Reflection 1, Faith and Science", "pauseCosmological": "Reflection 2, Cosmological Argument", "pauseTeleological": "Reflection 3, Teleological Argument", "pauseMoral": "Reflection 4, Moral Argument", "pauseConsciousness": "Reflection 5, Consciousness and Transcendence", "pauseLimits": "Reflection 6, Limits of Science and Role of Faith", "td1": "Think Deeper 1", "td2": "Think Deeper 2", "synthesis": "Final Synthesis"};
+const RESPONSE_ORDER = ["hookResponse", "pauseIntro", "pauseCosmological", "pauseTeleological", "pauseMoral", "pauseConsciousness", "pauseLimits", "td1", "td2", "synthesis"];
+
+const state = { lessonId: LESSON_ID, startedAt: null, finishedAt: null, currentScreen: 'welcome', studentInfo: {name:'', email:'', className:''}, termsViewed: [], inlineChecks: {}, responses: {"hookResponse": "", "pauseIntro": "", "pauseCosmological": "", "pauseTeleological": "", "pauseMoral": "", "pauseConsciousness": "", "pauseLimits": "", "td1": "", "td2": "", "synthesis": ""}, quiz: {answers: {}, scoreCount: 0}, sectionTimes: {}, lastSavedAt: null };
+let screenEnterTime = Date.now();
+
+function countWords(str) { if (!str) return 0; return str.trim().split(/\s+/).filter(Boolean).length; }
+function escapeHTML(str) { if (str === null || str === undefined) return ''; return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function formatTime(ms) { const totalMin = Math.floor(ms / 60000); if (totalMin < 1) return '< 1 min'; if (totalMin < 60) return totalMin + ' min'; const hrs = Math.floor(totalMin / 60); const mins = totalMin % 60; return hrs + 'h ' + mins + 'm'; }
+function persistInputsToState() { state.studentInfo.name = document.getElementById('studentName').value.trim(); state.studentInfo.email = document.getElementById('studentEmail').value.trim(); state.studentInfo.className = document.getElementById('studentClass').value.trim(); RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) state.responses[key] = el.value.trim(); }); }
+function saveLocal() { state.lastSavedAt = new Date().toISOString(); persistInputsToState(); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function totalWords() { persistInputsToState(); return Object.values(state.responses).reduce((sum, v) => sum + countWords(v), 0); }
+function totalTimeMs() { let total = 0; Object.values(state.sectionTimes).forEach(ms => total += ms || 0); if (state.currentScreen && screenEnterTime) total += Date.now() - screenEnterTime; return total; }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1600); }
+function markSaveButtonsSaved() { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.add('saved')); const label = document.getElementById('stickySaveLabel'); if (label) label.textContent = 'Saved'; setTimeout(() => { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.remove('saved')); if (label) label.textContent = 'Save Progress'; }, 1400); }
+function updateProgress() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); const shown = idx <= 0 ? 0 : idx; const pct = Math.max(0, Math.min(100, Math.round((shown / TOTAL_STEPS) * 100))); document.getElementById('progressFill').style.width = pct + '%'; document.getElementById('progressPercent').textContent = pct + '%'; document.getElementById('progressLabel').textContent = 'Section ' + Math.max(1, shown) + ' of ' + TOTAL_STEPS; document.getElementById('progressContainer').style.display = state.currentScreen === 'welcome' ? 'none' : 'block'; }
+function showScreen(name) { persistInputsToState(); const prev = state.currentScreen; if (prev && screenEnterTime) { const elapsed = Date.now() - screenEnterTime; state.sectionTimes[prev] = (state.sectionTimes[prev] || 0) + elapsed; } document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); const next = document.querySelector('.screen[data-screen="' + name + '"]'); if (next) next.classList.add('active'); state.currentScreen = name; screenEnterTime = Date.now(); updateProgress(); refreshGating(); saveLocal(); window.scrollTo({top:0, behavior:'smooth'}); if (name === 'quiz') renderQuiz(); if (name === 'finish') refreshFinishStats(); }
+function prevScreen() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); if (idx > 0) showScreen(SCREEN_ORDER[idx - 1]); }
+function beginLesson() { const name = document.getElementById('studentName').value.trim(); const email = document.getElementById('studentEmail').value.trim(); const className = document.getElementById('studentClass').value.trim(); const alertBox = document.getElementById('setupAlert'); if (!name || !email) { alertBox.classList.add('show'); return; } alertBox.classList.remove('show'); state.studentInfo = {name, email, className}; if (!state.startedAt) state.startedAt = new Date().toISOString(); saveLocal(); showScreen('hook'); }
+function updateWordCount(inputId, wcId) { const el = document.getElementById(inputId); const minimum = MINIMUMS[inputId] || 0; const wc = countWords(el.value); const box = document.getElementById(wcId); box.innerHTML = '<span>' + wc + ' words</span><span class="' + (wc >= minimum ? 'met' : 'short') + '">Minimum: ' + minimum + ' words</span>'; state.responses[inputId] = el.value.trim(); saveLocal(); refreshGating(); }
+function openTerm(card) { card.classList.toggle('open'); const term = card.getAttribute('data-term'); if (!state.termsViewed.includes(term)) { state.termsViewed.push(term); card.classList.add('viewed'); document.getElementById('termsViewed').textContent = state.termsViewed.length; saveLocal(); } refreshGating(); }
+function answerCheck(button, checkId, correctLetter) { const wrap = button.closest('.check'); if (wrap.querySelector('.check-option.answered')) return; const chosen = button.getAttribute('data-answer'); const isCorrect = chosen === correctLetter; wrap.querySelectorAll('.check-option').forEach(opt => opt.classList.add('answered')); if (isCorrect) button.classList.add('correct'); else { button.classList.add('incorrect'); wrap.querySelectorAll('.check-option').forEach(opt => { if (opt.getAttribute('data-answer') === correctLetter) opt.classList.add('correct'); }); } state.inlineChecks[checkId] = {selected: chosen, correct: isCorrect}; const fb = document.getElementById('fb-' + checkId); fb.textContent = isCorrect ? 'Correct. You are tracking the main idea well.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); saveLocal(); refreshGating(); }
+function refreshGating() { persistInputsToState(); const setDisabled = (id, disabled) => { const el = document.getElementById(id); if (el) el.disabled = disabled; }; const enough = key => countWords(state.responses[key]) >= (MINIMUMS[key] || 0); setDisabled('hookNext', !enough('hookResponse')); setDisabled('introNext', !(state.inlineChecks.intro1 && enough('pauseIntro'))); setDisabled('termsNext', state.termsViewed.length < REQUIRED_TERMS); setDisabled('cosmologicalNext', !(state.inlineChecks.cosmo1 && enough('pauseCosmological'))); setDisabled('teleologicalNext', !(state.inlineChecks.teleo1 && enough('pauseTeleological'))); setDisabled('moralNext', !(state.inlineChecks.moral1 && enough('pauseMoral'))); setDisabled('consciousnessNext', !enough('pauseConsciousness')); setDisabled('limitsNext', !(state.inlineChecks.limits1 && enough('pauseLimits'))); setDisabled('quizNext', Object.keys(state.quiz.answers).length < QUIZ.length); setDisabled('deeperNext', !(enough('td1') && enough('td2'))); setDisabled('synthesisNext', !enough('synthesis')); }
+function renderQuiz() {
+  const container = document.getElementById('quizQuestions');
+  if (container.dataset.rendered === 'yes') return;
+  container.dataset.rendered = 'yes';
+  const letters = ['a','b','c','d'];
+  container.innerHTML = QUIZ.map((q, idx) => {
+    const options = q.opts.map((opt, optIdx) => {
+      return `<button class="q-option" data-opt="${optIdx}" onclick="answerQuiz('${q.id}', ${optIdx})"><span class="letter">${letters[optIdx]}.</span><span>${escapeHTML(opt)}</span></button>`;
+    }).join('');
+    return `<div class="quiz-question" data-qid="${q.id}"><div class="q-number">Question ${idx + 1} of ${QUIZ.length}</div><div class="q-text">${escapeHTML(q.q)}</div><div class="q-options">${options}</div><div class="q-explanation" id="exp-${q.id}">${escapeHTML(q.explain)}</div></div>`;
+  }).join('');
+  restoreQuizVisuals();
+}
+function answerQuiz(qId, optIdx) { if (state.quiz.answers[qId] !== undefined) return; const q = QUIZ.find(item => item.id === qId); if (optIdx === q.correct) state.quiz.scoreCount += 1; state.quiz.answers[qId] = optIdx; restoreQuizVisuals(); saveLocal(); refreshGating(); }
+function restoreQuizVisuals() { QUIZ.forEach(q => { const qEl = document.querySelector('.quiz-question[data-qid="' + q.id + '"]'); if (!qEl) return; const chosen = state.quiz.answers[q.id]; if (chosen === undefined) return; const options = qEl.querySelectorAll('.q-option'); options.forEach(opt => opt.classList.add('locked')); const selected = qEl.querySelector('.q-option[data-opt="' + chosen + '"]'); const correctBtn = qEl.querySelector('.q-option[data-opt="' + q.correct + '"]'); if (chosen === q.correct) selected.classList.add('correct'); else { selected.classList.add('incorrect'); correctBtn.classList.add('correct'); } document.getElementById('exp-' + q.id).classList.add('show'); }); if (Object.keys(state.quiz.answers).length === QUIZ.length) { document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('quizScore').classList.add('show'); document.getElementById('quizNext').disabled = false; } }
+function triggerDownload(blob, filename) { const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000); }
+function saveProgressNow() { saveLocal(); const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'}); const safeName = (state.studentInfo.name || 'student').replace(/[^a-zA-Z0-9]+/g, '_'); triggerDownload(blob, 'HRE4M1_U1_1_Existence_of_God_' + safeName + '_progress.json'); showToast('Progress saved.'); markSaveButtonsSaved(); }
+function refreshFinishStats() { document.getElementById('finishQuizScore').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('finishTerms').textContent = state.termsViewed.length + ' / ' + REQUIRED_TERMS; document.getElementById('finishWords').textContent = totalWords().toLocaleString(); document.getElementById('finishTime').textContent = formatTime(totalTimeMs()); }
+function buildReportHTML() { persistInputsToState(); const letters = ['a','b','c','d']; const responseHtml = RESPONSE_ORDER.map(key => '<h2>' + escapeHTML(RESPONSE_TITLES[key]) + '</h2><div class="response-prompt">' + escapeHTML(PROMPTS[key]) + '</div><div class="response-box">' + escapeHTML(state.responses[key] || '') + '</div><div class="response-wc">' + countWords(state.responses[key] || '') + ' words</div>').join(''); const quizHtml = QUIZ.map((q, idx) => { const chosen = state.quiz.answers[q.id]; const chosenText = chosen !== undefined ? q.opts[chosen] : 'Not answered'; return '<div class="q-block"><div class="q-num">Question ' + (idx + 1) + '</div><div class="q-prompt">' + escapeHTML(q.q) + '</div><div class="q-ans"><strong>Student answer:</strong> ' + (chosen !== undefined ? letters[chosen] + '. ' : '') + escapeHTML(chosenText) + '</div><div class="q-ans"><strong>Correct answer:</strong> ' + letters[q.correct] + '. ' + escapeHTML(q.opts[q.correct]) + '</div><div class="q-ans"><strong>Explanation:</strong> ' + escapeHTML(q.explain) + '</div></div>'; }).join(''); return '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unit 1.1 Report</title><style>body{font-family:Georgia,serif;max-width:860px;margin:40px auto;padding:24px;color:#241318;line-height:1.6;background:#FFF1EA;}.hdr{border-bottom:3px double #B84632;padding-bottom:16px;margin-bottom:24px;}.hdr-label{font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#B84632;font-weight:600;}h1{font-size:28px;color:#8B1024;margin:8px 0 4px;}.subtitle{font-style:italic;color:#5A323B;font-size:16px;}.meta{background:#F8D9CC;padding:14px 18px;margin:20px 0;border-left:3px solid #B84632;font-size:14px;}.meta dl{margin:0;display:grid;grid-template-columns:140px 1fr;gap:6px 16px;}.meta dt{font-weight:700;color:#B84632;font-family:Arial,sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;}.meta dd{margin:0;}h2{font-size:20px;color:#8B1024;border-bottom:1px solid #F2A65A;padding-bottom:6px;margin-top:30px;}.response-prompt{font-style:italic;color:#555;font-size:14px;margin-bottom:6px;}.response-box{background:white;border:1px solid #ddd;border-left:3px solid #B84632;padding:14px 18px;margin:8px 0 10px;white-space:pre-wrap;font-size:15px;line-height:1.65;}.response-wc{font-family:Arial,sans-serif;font-size:11px;color:#B84632;margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;}.score-big{font-size:36px;color:#8B1024;font-weight:700;margin:10px 0;}.q-block{background:white;border:1px solid #e0e0e0;padding:12px 16px;margin:10px 0;border-radius:2px;}.q-num{font-family:Arial,sans-serif;font-size:12px;color:#B84632;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;}.q-prompt{font-weight:600;margin-bottom:8px;}.q-ans{font-size:14px;margin:4px 0;}</style></head><body><div class="hdr"><div class="hdr-label">HRE4M1 · Unit 1 · Lesson 1</div><h1>The Existence of God</h1><div class="subtitle">Student Report</div></div><div class="meta"><dl><dt>Name</dt><dd>' + escapeHTML(state.studentInfo.name) + '</dd><dt>Email</dt><dd>' + escapeHTML(state.studentInfo.email) + '</dd><dt>Class</dt><dd>' + escapeHTML(state.studentInfo.className || '') + '</dd><dt>Started</dt><dd>' + (state.startedAt ? new Date(state.startedAt).toLocaleString() : '') + '</dd><dt>Completed</dt><dd>' + (state.finishedAt ? new Date(state.finishedAt).toLocaleString() : '') + '</dd><dt>Time Spent</dt><dd>' + formatTime(totalTimeMs()) + '</dd><dt>Total Words</dt><dd>' + totalWords().toLocaleString() + '</dd></dl></div><h2>Knowledge Check Score</h2><div class="score-big">' + state.quiz.scoreCount + ' / ' + QUIZ.length + '</div>' + responseHtml + '<h2>Quiz Review</h2>' + quizHtml + '</body></html>'; }
+function downloadReport() { const html = buildReportHTML(); const blob = new Blob([html], {type:'text/html'}); const safeName = (state.studentInfo.name || 'student').replace(/[^a-zA-Z0-9]+/g, '_'); triggerDownload(blob, 'HRE4M1_U1_1_Existence_of_God_' + safeName + '_report.html'); }
+function finishLesson() { if (!state.finishedAt) state.finishedAt = new Date().toISOString(); saveLocal(); downloadReport(); showScreen('complete'); }
+function restoreChecks() { Object.keys(state.inlineChecks).forEach(checkId => { const info = state.inlineChecks[checkId]; const options = document.querySelectorAll('.check[data-check="' + checkId + '"] .check-option'); options.forEach(opt => { opt.classList.add('answered'); if (opt.getAttribute('data-answer') === info.selected) opt.classList.add(info.correct ? 'correct' : 'incorrect'); if (!info.correct && opt.getAttribute('data-answer') === CORRECT_MAP[checkId]) opt.classList.add('correct'); }); const fb = document.getElementById('fb-' + checkId); if (fb) { fb.textContent = info.correct ? 'Correct. You are tracking the main idea well.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); } }); }
+function restoreTextAndCounts() { const map = {hookResponse:'hookWC', pauseIntro:'pauseIntroWC', pauseCosmological:'pauseCosmologicalWC', pauseTeleological:'pauseTeleologicalWC', pauseMoral:'pauseMoralWC', pauseConsciousness:'pauseConsciousnessWC', pauseLimits:'pauseLimitsWC', td1:'td1WC', td2:'td2WC', synthesis:'synthesisWC'}; RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) el.value = state.responses[key] || ''; const wcId = map[key]; if (el && document.getElementById(wcId)) updateWordCount(key, wcId); }); }
+function resumeFromFile(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = function(e) { try { const loaded = JSON.parse(e.target.result); if (!loaded || loaded.lessonId !== LESSON_ID) throw new Error('Wrong lesson file'); Object.assign(state, loaded); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); showScreen(state.currentScreen || 'hook'); showToast('Progress restored.'); } catch (err) { alert('Could not load that file. Please upload a valid Unit 1.1 progress file.'); } }; reader.readAsText(file); }
+function hydrateFromLocalStorage() { try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return; const saved = JSON.parse(raw); if (!saved || saved.lessonId !== LESSON_ID) return; Object.assign(state, saved); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); } catch (err) {} }
+hydrateFromLocalStorage(); updateProgress(); refreshGating();
+</script>
+</body>
+</html>

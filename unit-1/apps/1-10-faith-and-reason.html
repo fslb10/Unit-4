@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HRE4M1 · Unit 1.10: Faith and Reason</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=Lora:ital,wght@0,400;0,500;0,600;1,400&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+
+
+  :root {
+    --bg-deep: #2A050B;
+    --bg-mid: #5A101B;
+    --bg-card: #FFF1EA;
+    --bg-card-alt: #F8D9CC;
+    --gold: #F2A65A;
+    --gold-soft: #FFC897;
+    --gold-deep: #B84632;
+    --wine: #8B1024;
+    --ivory: #FFF4EC;
+    --cream: #FFD8C4;
+    --ink: #241318;
+    --ink-soft: #5A323B;
+    --locked: #6B4B5580;
+    --success: #2F7D4A;
+    --danger: #B3262E;
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.25);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Textured background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(242, 166, 90, 0.12), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(139, 16, 36, 0.18), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ---- Header ---- */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .unit-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .lesson-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .lesson-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gold-soft);
+    opacity: 0.9;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  /* ---- Progress bar ---- */
+  .progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-deep) 70%, transparent);
+    padding: 16px 0 12px;
+    margin: -24px -20px 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft));
+    width: 0%;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.5);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    margin: 8px auto 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  /* ---- Sticky save button (top bar) ---- */
+  .save-sticky {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 169, 97, 0.12);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .save-sticky:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    border-color: var(--gold);
+  }
+
+  .save-sticky.saved {
+    background: rgba(63, 122, 77, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  /* ---- In-row save (button row) ---- */
+  .btn-save-row {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-save-row:hover {
+    background: var(--gold-deep);
+    color: var(--ivory);
+  }
+
+  .btn-save-row.saved {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .btn-row-split {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* ---- Pause and Reflect blocks (in-flow) ---- */
+  .pause {
+    background: linear-gradient(135deg, rgba(107, 44, 44, 0.06), rgba(201, 169, 97, 0.08));
+    border: 1px solid rgba(107, 44, 44, 0.2);
+    border-left: 3px solid var(--wine);
+    padding: 22px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .pause-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pause-label::before {
+    content: '❊';
+    font-size: 14px;
+    color: var(--gold-deep);
+  }
+
+  .pause-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .pause textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(107, 44, 44, 0.25);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    border-radius: 2px;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .pause textarea:focus {
+    outline: none;
+    border-color: var(--wine);
+    box-shadow: 0 0 0 2px rgba(107, 44, 44, 0.15);
+  }
+
+  /* Save confirmation toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid var(--gold);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---- Screen Cards ---- */
+  .screen {
+    display: none;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .screen.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .screen-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .screen-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .screen-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .prose {
+    font-size: 16.5px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .prose p { margin-bottom: 18px; }
+
+  .prose strong { color: var(--wine); font-weight: 600; }
+
+  .prose em { color: var(--ink-soft); }
+
+  .prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 28px 0 14px;
+    color: var(--wine);
+    line-height: 1.25;
+  }
+
+  .prose h3::before {
+    content: '❖ ';
+    color: var(--gold-deep);
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+
+  .divider {
+    display: block;
+    margin: 32px auto;
+    width: 120px;
+    height: auto;
+    opacity: 0.6;
+  }
+
+  .pullquote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--wine);
+    text-align: center;
+    margin: 28px 20px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    line-height: 1.4;
+  }
+
+  .scripture {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scripture-ref {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--ivory);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--wine);
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:disabled {
+    background: var(--locked);
+    border-color: var(--locked);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+  }
+
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- Forms ---- */
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .word-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .word-count .met {
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  .word-count .short {
+    color: var(--danger);
+  }
+
+  /* ---- Key Terms / Flashcards ---- */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .term-card {
+    background: var(--bg-card-alt);
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    border-radius: 2px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 100px;
+  }
+
+  .term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--gold-deep);
+  }
+
+  .term-card.viewed {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+  }
+
+  .term-card.viewed::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .term-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.7;
+  }
+
+  .term-def {
+    display: none;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .term-card.open .term-def { display: block; }
+  .term-card.open .term-tap { display: none; }
+
+  /* ---- Inline comprehension check ---- */
+  .check {
+    background: #FDF8E8;
+    border: 1px dashed var(--gold-deep);
+    border-radius: 2px;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .check-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .check-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .check-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-option {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .check-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .check-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .check-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .check-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .check-feedback {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    display: none;
+  }
+
+  .check-feedback.show { display: block; }
+
+  /* ---- Vocation Compass ---- */
+  .compass-intro {
+    background: #FDF8E8;
+    border-left: 3px solid var(--wine);
+    padding: 18px 22px;
+    margin: 20px 0 30px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .compass-vocation {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(140, 113, 53, 0.25);
+  }
+
+  .compass-vocation:last-child {
+    border-bottom: none;
+  }
+
+  .compass-voc-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+
+  .compass-voc-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  .compass-aspect {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px dotted rgba(140, 113, 53, 0.2);
+  }
+
+  .compass-aspect:first-of-type { border-top: none; }
+
+  .compass-aspect-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .rating-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .rating-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(140, 113, 53, 0.4);
+    background: white;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .rating-btn:hover {
+    border-color: var(--gold-deep);
+  }
+
+  .rating-btn.selected {
+    background: var(--wine);
+    color: var(--ivory);
+    border-color: var(--wine);
+  }
+
+  .rating-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  .compass-result {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(107, 44, 44, 0.08));
+    border: 1px solid var(--gold-deep);
+    padding: 24px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  .compass-result.show { display: block; }
+
+  .result-voc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.3);
+  }
+
+  .result-voc:last-child { border-bottom: none; }
+
+  .result-voc-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--wine);
+  }
+
+  .result-bar {
+    width: 180px;
+    height: 8px;
+    background: rgba(140, 113, 53, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .result-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    transition: width 1s ease;
+  }
+
+  /* ---- Quiz ---- */
+  .quiz-question {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.25);
+  }
+
+  .quiz-question:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .q-option {
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .q-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .q-option.selected {
+    border-color: var(--wine);
+    background: rgba(107, 44, 44, 0.06);
+  }
+
+  .q-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .q-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+  }
+
+  .q-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+  }
+
+  .q-option.locked {
+    pointer-events: none;
+  }
+
+  .q-explanation {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201, 169, 97, 0.1);
+    border-left: 2px solid var(--gold-deep);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    display: none;
+  }
+
+  .q-explanation.show { display: block; }
+
+  .quiz-score {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(107, 44, 44, 0.1));
+    border: 1px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score strong {
+    font-size: 34px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ---- Completion screen ---- */
+  .completion-hero {
+    text-align: center;
+    padding: 20px 0 32px;
+  }
+
+  .completion-icon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    color: var(--gold-deep);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .completion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .completion-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .summary-stat {
+    background: #FDF8E8;
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+  }
+
+  .download-note {
+    background: rgba(201, 169, 97, 0.12);
+    padding: 18px 22px;
+    border-left: 3px solid var(--gold-deep);
+    margin: 24px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ---- Hero (start screen) ---- */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-deep));
+    color: var(--ivory);
+    padding: 40px 40px 36px;
+    margin: -40px -44px 32px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .hero-banner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+
+  .hero-banner p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-soft);
+    margin-top: 8px;
+  }
+
+  .hero-banner .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+
+  .upload-zone {
+    border: 1px dashed rgba(140, 113, 53, 0.4);
+    padding: 20px;
+    text-align: center;
+    margin-top: 24px;
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .upload-zone label {
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .upload-zone input { display: none; }
+
+  /* ---- Error / alert ---- */
+  .alert {
+    padding: 12px 16px;
+    background: rgba(168, 67, 43, 0.1);
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    margin-top: 14px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .alert.show { display: block; }
+
+  /* ---- Footer ---- */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .card { padding: 28px 22px; }
+    .hero-banner { margin: -28px -22px 28px; padding: 30px 24px 26px; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; justify-content: center; }
+    .compass-aspect { grid-template-columns: 1fr; gap: 8px; }
+    .result-bar { width: 120px; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .save-sticky {
+      position: static;
+      display: flex;
+      margin: 10px auto 0;
+      width: fit-content;
+    }
+    .progress-meta { flex-wrap: wrap; }
+    .btn-row-split { width: 100%; flex-direction: column; }
+    .btn-row-split .btn-save-row { width: 100%; justify-content: center; }
+  }
+
+  /* Print-friendly download report styling will be injected separately */
+
+.prose ul { margin-left: 20px; margin-bottom: 18px; }
+.prose li { margin-bottom: 8px; }
+.note-panel { background: rgba(184, 70, 50, 0.12); border-left: 3px solid var(--gold-deep); padding: 18px 22px; margin: 22px 0; color: var(--ink); line-height: 1.65; }
+
+</style>
+</head>
+<body>
+<div class="app">
+<div class="header">
+<div class="unit-label">HRE4M1 · Unit 1 · Lesson 10</div>
+<h1 class="lesson-title">Faith and Reason</h1>
+<div class="lesson-subtitle">Two lights that guide us toward truth</div>
+<svg class="ornament" height="20" viewbox="0 0 80 20" width="80" xmlns="http://www.w3.org/2000/svg"><path d="M 0 10 L 30 10 M 50 10 L 80 10" fill="none" stroke="#F2A65A" stroke-width="1"></path><circle cx="40" cy="10" fill="none" r="3" stroke="#F2A65A" stroke-width="1"></circle><circle cx="40" cy="10" fill="#F2A65A" r="1"></circle></svg>
+</div>
+<div class="progress-container" id="progressContainer" style="display:none; position:relative;"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><div class="progress-meta"><span id="progressLabel">Section 1 of 13</span><span id="progressPercent">0%</span></div><button class="save-sticky" id="stickySave" onclick="saveProgressNow()" title="Download your progress to resume later"><span>💾</span><span id="stickySaveLabel">Save Progress</span></button></div>
+<div id="screens">
+<section class="screen active" data-screen="welcome">
+<div class="card">
+<div class="hero-banner">
+<div class="ornament-line">
+<svg height="12" viewbox="0 0 40 12" width="40"><line stroke="currentColor" stroke-width="1" x1="0" x2="40" y1="6" y2="6"></line></svg>
+<span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">A Study in Faith and Reason</span>
+<svg height="12" viewbox="0 0 40 12" width="40"><line stroke="currentColor" stroke-width="1" x1="0" x2="40" y1="6" y2="6"></line></svg>
+</div>
+<h2>Welcome to Unit 1.10</h2>
+<p>This lesson explores how faith and reason work together as guiding lights that help us seek truth, make choices, and understand God’s world.</p>
+</div>
+<p class="prose" style="margin-bottom:24px;">Before we begin, enter your information. At the end, you will be able to download a report of your responses and quiz results.</p>
+<div class="field"><label for="studentName">Full Name</label><input autocomplete="name" id="studentName" placeholder="First and last name" type="text"/></div>
+<div class="field"><label for="studentEmail">School Email</label><input autocomplete="email" id="studentEmail" placeholder="you@school.ca" type="email"/></div>
+<div class="field"><label for="studentClass">Class / Period</label><input id="studentClass" placeholder="e.g., HRE4M1 · Period 2" type="text"/></div>
+<div class="alert" id="setupAlert">Please fill in your name and email before starting.</div>
+<div class="btn-row"><div></div><button class="btn btn-primary" onclick="beginLesson()">Begin Lesson →</button></div>
+<div class="upload-zone">
+<div style="font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Returning to finish?</div>
+<label for="resumeFile">Upload your saved progress file</label>
+<input accept=".json,application/json" id="resumeFile" onchange="resumeFromFile(event)" type="file"/>
+</div>
+</div>
+</section>
+<section class="screen" data-screen="hook">
+<div class="card">
+<div class="screen-label">Before We Begin</div>
+<h2 class="screen-title">Can Faith and Reason Work Together?</h2>
+<p class="screen-intro">Start with what you think right now. You do not need the perfect answer yet.</p>
+<div class="prose">
+<p>Some people think faith and reason are enemies. They assume that faith means believing without thinking, and reason means rejecting religion.</p>
+<p>This lesson challenges that assumption. Before we begin, explain what you think the relationship between faith and reason should be.</p>
+</div>
+<div class="field" style="margin-top:20px;">
+<label for="hookResponse">Your starting point</label>
+<textarea id="hookResponse" oninput="updateWordCount('hookResponse', 'hookWC')" placeholder="Can faith and reason work together? Why or why not?"></textarea>
+<div class="word-count" id="hookWC"><span>0 words</span><span>Minimum: 35 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="hookNext" onclick="showScreen('intro')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="intro">
+<div class="card">
+<div class="screen-label">Part One · A Guiding Light</div>
+<h2 class="screen-title">The Harmony of Faith and Reason</h2>
+<p class="screen-intro">Faith and reason are not opposing forces. They are two ways we are drawn toward truth.</p>
+<div class="prose">
+<p>The lesson compares faith and reason to a lighthouse shining through darkness. A lighthouse does not remove every difficulty at sea, but it gives direction, warning, and hope. In a similar way, faith and reason help us navigate life’s big questions and moral choices.</p>
+<p><strong>Faith</strong> is a supernatural gift from God. It allows us to trust what God reveals, even when those truths go beyond what we can prove by sight alone. <strong>Reason</strong> is the natural human power to think, question, analyze, and understand.</p>
+<p>Catholic teaching says these two gifts belong together. Reason helps us understand, explain, and test ideas carefully. Faith lifts reason higher by revealing truths we could not reach on our own. Since all truth comes from God, real faith and right reason cannot truly contradict each other.</p>
+<div class="scripture">“Faith is the assurance of things hoped for, the conviction of things not seen.”<span class="scripture-ref">Hebrews 11:1</span></div>
+</div>
+<div class="check" data-check="intro1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">Which statement best reflects the Catholic view of faith and reason?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">a.</span><span>Faith replaces reason because thinking too much is dangerous.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">b.</span><span>Reason replaces faith because only science can lead to truth.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">c.</span><span>Faith and reason work together because all truth comes from God.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">d.</span><span>Faith and reason are useful only when they never ask difficult questions.</span></button>
+</div>
+<div class="check-feedback" id="fb-intro1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Why might relying only on faith without thinking carefully, or only on reason without faith, become a problem?</div>
+<textarea id="pauseIntro" oninput="updateWordCount('pauseIntro', 'pauseIntroWC')" placeholder="Explain the danger of separating faith and reason."></textarea>
+<div class="word-count" id="pauseIntroWC"><span>0 words</span><span>Minimum: 60 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="introNext" onclick="showScreen('terms')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="terms">
+<div class="card">
+<div class="screen-label">Part Two · Vocabulary</div>
+<h2 class="screen-title">Eight Terms to Know</h2>
+<p class="screen-intro">Tap each card to reveal its meaning. View all eight before moving on.</p>
+<div class="terms-grid" id="termsGrid">
+<div class="term-card" data-term="faith" onclick="openTerm(this)"><div class="term-name">Faith</div><div class="term-tap">Tap to reveal</div><div class="term-def">A supernatural gift from God by which we trust Him and accept what He has revealed.</div></div>
+<div class="term-card" data-term="reason" onclick="openTerm(this)"><div class="term-name">Reason</div><div class="term-tap">Tap to reveal</div><div class="term-def">The natural human ability to think, question, analyze, seek evidence, and understand reality.</div></div>
+<div class="term-card" data-term="revelation" onclick="openTerm(this)"><div class="term-name">Revelation</div><div class="term-tap">Tap to reveal</div><div class="term-def">God making Himself and His saving plan known, especially through Scripture, Tradition, and Jesus Christ.</div></div>
+<div class="term-card" data-term="natural-law" onclick="openTerm(this)"><div class="term-name">Natural Law</div><div class="term-tap">Tap to reveal</div><div class="term-def">The moral law written on the human heart that reason can discover, such as the basic truth that innocent life should be protected.</div></div>
+<div class="term-card" data-term="conscience" onclick="openTerm(this)"><div class="term-name">Conscience</div><div class="term-tap">Tap to reveal</div><div class="term-def">The inner moral judgment that helps us recognize right and wrong, but it must be formed by truth, reason, and faith.</div></div>
+<div class="term-card" data-term="fides-et-ratio" onclick="openTerm(this)"><div class="term-name">Fides et Ratio</div><div class="term-tap">Tap to reveal</div><div class="term-def">Pope St. John Paul II’s encyclical on faith and reason, famous for describing them as two wings that lift the human spirit toward truth.</div></div>
+<div class="term-card" data-term="complementary" onclick="openTerm(this)"><div class="term-name">Complementary</div><div class="term-tap">Tap to reveal</div><div class="term-def">Working together in a way that completes or strengthens the other. Faith and reason are complementary because each helps the other reach truth more fully.</div></div>
+<div class="term-card" data-term="moral-decision" onclick="openTerm(this)"><div class="term-name">Moral Decision</div><div class="term-tap">Tap to reveal</div><div class="term-def">A choice involving right and wrong, where reason weighs facts and consequences, while faith keeps the person rooted in God’s truth and love.</div></div>
+</div>
+<div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink-soft); text-align:center; margin-top:16px;">Viewed: <span id="termsViewed">0</span> of 8</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="termsNext" onclick="showScreen('freedom')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="freedom">
+<div class="card">
+<div class="screen-label">Part Three · Human Reason</div>
+<h2 class="screen-title">The Nature of Human Reason</h2>
+<p class="screen-intro">Reason is one of the great gifts that shows we are made in God’s image.</p>
+<div class="prose">
+<p>Reason allows us to examine reality, seek truth, understand relationships, and make moral judgments. It helps us study nature, ask why things happen, and decide what is wise or good.</p>
+<p>In Catholic thought, reason is not a threat to faith. It is a gift from God. When we use reason well, we honor the intellect God gave us. Reason helps us avoid superstition, emotional shortcuts, and weak arguments.</p>
+<p>Reason also helps us recognize certain truths about God and morality. For example, by looking at creation, cause and effect, order, conscience, and the human longing for meaning, reason can point toward God as the source and goal of all things.</p>
+</div>
+<div class="check" data-check="freedom1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">Why does the Church value reason?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'freedom1', 'b')"><span class="letter">a.</span><span>Because reason makes faith unnecessary.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'freedom1', 'b')"><span class="letter">b.</span><span>Because reason is a God-given gift that helps us seek truth and make wise moral choices.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'freedom1', 'b')"><span class="letter">c.</span><span>Because reason is useful only for math and science, not faith or morality.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'freedom1', 'b')"><span class="letter">d.</span><span>Because reason allows people to avoid difficult spiritual questions.</span></button>
+</div>
+<div class="check-feedback" id="fb-freedom1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Describe a time when reason helped, or could help, you make a better decision. What would happen if you relied only on feelings?</div>
+<textarea id="pauseFreedom" oninput="updateWordCount('pauseFreedom', 'pauseFreedomWC')" placeholder="Use a real or realistic example."></textarea>
+<div class="word-count" id="pauseFreedomWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="freedomNext" onclick="showScreen('primary')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="primary">
+<div class="card">
+<div class="screen-label">Part Four · The Gift of Faith</div>
+<h2 class="screen-title">Faith is Trust in God</h2>
+<p class="screen-intro">Faith is not blind guessing. It is a personal and reasonable trust in God, who is truth itself.</p>
+<div class="prose">
+<p>Faith allows us to accept truths that go beyond what reason can reach by itself, because God has revealed them. We trust God not because we can control Him, but because He is good, wise, and faithful.</p>
+<p>Faith is personal. It involves both the mind and the will. We choose to trust God and live according to what He has revealed. It is also communal, because the Church helps hand on, explain, and protect the truths of faith.</p>
+<p>The story of Thomas shows how faith and reason can work together. Thomas wanted evidence. Jesus showed him His wounds, but then called him to a deeper faith: “Blessed are those who have not seen and yet have believed.”</p>
+<div class="scripture">“My Lord and my God!”<span class="scripture-ref">John 20:28</span></div>
+</div>
+<div class="check" data-check="primary1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">Why is faith not the same as blind irrational belief?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'primary1', 'c')"><span class="letter">a.</span><span>Because faith rejects questions and evidence.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'primary1', 'c')"><span class="letter">b.</span><span>Because faith is only a feeling that people invent for comfort.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'primary1', 'c')"><span class="letter">c.</span><span>Because faith trusts God’s revelation while still allowing reason to seek understanding.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'primary1', 'c')"><span class="letter">d.</span><span>Because faith means we can prove every mystery completely.</span></button>
+</div>
+<div class="check-feedback" id="fb-primary1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Where do you find faith easy, and where do you find it challenging? How could reason help strengthen faith in one difficult area?</div>
+<textarea id="pausePrimary" oninput="updateWordCount('pausePrimary', 'pausePrimaryWC')" placeholder="Be honest and connect faith to real questions or doubts."></textarea>
+<div class="word-count" id="pausePrimaryWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="primaryNext" onclick="showScreen('aquinas')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="aquinas">
+<div class="card">
+<div class="screen-label">Part Five · Harmony in Action</div>
+<h2 class="screen-title">Faith and Reason Working Together</h2>
+<p class="screen-intro">Faith and reason share a common goal: truth.</p>
+<div class="prose">
+<p>Catholic teaching holds that faith and reason are complementary. Faith lifts reason beyond its natural limits, while reason helps faith avoid confusion, superstition, and weak thinking.</p>
+<p><strong>Natural Law</strong> is one clear example. Reason can recognize basic moral truths, such as the wrongness of killing innocent life or the importance of honesty. Faith confirms and deepens these truths by reminding us that every person is made in God’s image and that God’s commandments guide us toward life.</p>
+<p>St. Thomas Aquinas is one of the great examples of this harmony. He used philosophy and reason to think deeply about God, creation, morality, and the meaning of life. Later, Pope St. John Paul II described faith and reason as two wings on which the human spirit rises to truth.</p>
+</div>
+<div class="check" data-check="aquinas1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">How does Natural Law show the harmony of faith and reason?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'aquinas1', 'c')"><span class="letter">a.</span><span>It shows that morality is only a matter of private opinion.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'aquinas1', 'c')"><span class="letter">b.</span><span>It shows that faith and reason always produce different answers.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'aquinas1', 'c')"><span class="letter">c.</span><span>It shows that reason can recognize moral truth, and faith confirms that truth as part of God’s design.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'aquinas1', 'c')"><span class="letter">d.</span><span>It shows that reason can understand every mystery of God completely.</span></button>
+</div>
+<div class="check-feedback" id="fb-aquinas1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Explain the phrase: “science can help explain how, while faith can help explain why.” Do you think this is helpful? Why?</div>
+<textarea id="pauseAquinas" oninput="updateWordCount('pauseAquinas', 'pauseAquinasWC')" placeholder="Use an example such as creation, human life, morality, or purpose."></textarea>
+<div class="word-count" id="pauseAquinasWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="aquinasNext" onclick="showScreen('magisterium')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="magisterium">
+<div class="card">
+<div class="screen-label">Part Six · Living It Out</div>
+<h2 class="screen-title">Faith and Reason in Real Life</h2>
+<p class="screen-intro">The harmony of faith and reason matters when you face doubts, make moral choices, study the world, and build relationships.</p>
+<div class="prose">
+<p>When we face doubts, reason helps us ask good questions and search for real answers. Faith reminds us that we can trust God even before every question is fully solved.</p>
+<p>When we face moral decisions, reason helps us examine facts, consequences, and principles. Faith gives us a compass rooted in God’s commandments and the teaching of Jesus.</p>
+<p>When we study science and culture, reason helps us evaluate evidence and ideas. Faith helps us remember the higher purpose of truth, creation, human dignity, and love.</p>
+<p>In relationships, reason helps us understand another person’s perspective. Faith calls us to forgive, love, and see that person as a child of God.</p>
+</div>
+<div class="check" data-check="magisterium1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">Which answer best shows faith and reason working together in a moral decision?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'magisterium1', 'd')"><span class="letter">a.</span><span>Following whatever feels easiest in the moment.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'magisterium1', 'd')"><span class="letter">b.</span><span>Ignoring consequences because faith alone is enough.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'magisterium1', 'd')"><span class="letter">c.</span><span>Using logic only, without considering dignity, faith, or conscience.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'magisterium1', 'd')"><span class="letter">d.</span><span>Considering facts and consequences while also measuring the choice against God’s truth and human dignity.</span></button>
+</div>
+<div class="check-feedback" id="fb-magisterium1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Choose one real situation where both faith and reason would help: a friendship conflict, a scientific question, a moral decision, or a doubt about God. Explain how both would contribute.</div>
+<textarea id="pauseMagisterium" oninput="updateWordCount('pauseMagisterium', 'pauseMagisteriumWC')" placeholder="Pick one situation and apply both faith and reason."></textarea>
+<div class="word-count" id="pauseMagisteriumWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="magisteriumNext" onclick="showScreen('conclusion')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="conclusion">
+<div class="card">
+<div class="screen-label">Part Seven · Conclusion</div>
+<h2 class="screen-title">A Balanced Way to Seek Truth</h2>
+<p class="screen-intro">Faith and reason together help us avoid two extremes: blind acceptance and cynical doubt.</p>
+<div class="prose">
+<p>A mature Catholic does not need to fear honest questions. Questions can lead to deeper understanding when they are asked with humility, patience, and a real desire for truth.</p>
+<p>At the same time, a mature Catholic does not reduce everything to what can be measured or proven in a lab. Some of life’s deepest truths, such as love, purpose, moral goodness, and God’s revelation, require more than data alone.</p>
+<p>The goal is wisdom. Faith and reason together form a reliable moral and spiritual compass. They teach us to think deeply, trust God faithfully, and act with love.</p>
+<div class="pullquote">Faith asks us to trust God. Reason asks us to seek truth carefully. Together, they help us live with wisdom.</div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">What is one question about life, God, science, morality, or purpose that you would like to explore using both faith and reason?</div>
+<textarea id="pauseConclusion" oninput="updateWordCount('pauseConclusion', 'pauseConclusionWC')" placeholder="Name the question and explain how both faith and reason could help you explore it."></textarea>
+<div class="word-count" id="pauseConclusionWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="conclusionNext" onclick="showScreen('quiz')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="quiz">
+<div class="card">
+<div class="screen-label">Part Eight · Knowledge Check</div>
+<h2 class="screen-title">Check Your Understanding</h2>
+<p class="screen-intro">Answer each question. Feedback appears after you choose.</p>
+<div id="quizQuestions"></div>
+<div class="quiz-score" id="quizScore">Your score<strong id="scoreText">0 / 7</strong></div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="quizNext" onclick="showScreen('deeper')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="deeper">
+<div class="card">
+<div class="screen-label">Part Nine · Think Deeper</div>
+<h2 class="screen-title">Apply the Lesson</h2>
+<p class="screen-intro">Use both your mind and your faith in these responses.</p>
+<div class="field">
+<label for="td1">Think Deeper 1</label>
+<div class="prose" style="margin-bottom:12px;"><p>Some people say, “Science explains how the world works, while faith explains why there is meaning and purpose.” Do you agree, partly agree, or disagree? Explain using ideas from the lesson.</p></div>
+<textarea id="td1" oninput="updateWordCount('td1', 'td1WC')" placeholder="Use science, faith, reason, and purpose in your answer."></textarea>
+<div class="word-count" id="td1WC"><span>0 words</span><span>Minimum: 130 words</span></div>
+</div>
+<div class="field">
+<label for="td2">Think Deeper 2</label>
+<div class="prose" style="margin-bottom:12px;"><p>Choose one current issue in society, such as the environment, justice, poverty, technology, healthcare, or conflict. How might faith shape a Catholic response, and how might reason help address the issue responsibly?</p></div>
+<textarea id="td2" oninput="updateWordCount('td2', 'td2WC')" placeholder="Name the issue and explain how faith and reason each help."></textarea>
+<div class="word-count" id="td2WC"><span>0 words</span><span>Minimum: 130 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="deeperNext" onclick="showScreen('synthesis')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="synthesis">
+<div class="card">
+<div class="screen-label">Part Ten · Final Synthesis</div>
+<h2 class="screen-title">Your Guiding Light</h2>
+<p class="screen-intro">Bring the whole lesson together in one thoughtful final response.</p>
+<div class="field">
+<label for="synthesis">Final Synthesis</label>
+<div class="prose" style="margin-bottom:12px;"><p>Think about a topic or question you care about, scientific, moral, personal, or spiritual. Explain how faith and reason together could help you explore it more fully. Include the role of trust in God, careful thinking, truth, conscience, and moral responsibility.</p></div>
+<textarea id="synthesis" oninput="updateWordCount('synthesis', 'synthesisWC')" placeholder="Show how faith and reason work together to guide a real question or issue."></textarea>
+<div class="word-count" id="synthesisWC"><span>0 words</span><span>Minimum: 160 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="synthesisNext" onclick="showScreen('finish')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="finish">
+<div class="card">
+<div class="screen-label">Part Eleven · Finish</div>
+<div class="completion-hero"><div class="completion-icon">✦</div><div class="completion-title">Ready to Complete?</div><div class="completion-sub">Review your progress, then download your final report.</div></div>
+<div class="summary-grid">
+<div class="summary-stat"><div class="stat-label">Quiz Score</div><div class="stat-value" id="finishQuizScore">0 / 7</div></div>
+<div class="summary-stat"><div class="stat-label">Terms Viewed</div><div class="stat-value" id="finishTerms">0 / 8</div></div>
+<div class="summary-stat"><div class="stat-label">Total Words</div><div class="stat-value" id="finishWords">0</div></div>
+<div class="summary-stat"><div class="stat-label">Time Spent</div><div class="stat-value" id="finishTime">0 min</div></div>
+</div>
+<div class="download-note">Download the report and submit it as directed by your teacher. The file includes your written responses, quiz review, and completion details.</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save Progress</button><button class="btn btn-gold" onclick="finishLesson()">Download Report ↓</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="complete">
+<div class="card">
+<div class="completion-hero">
+<div class="completion-icon">✓</div>
+<div class="completion-title">Lesson Complete</div>
+<div class="completion-sub">Your report has been prepared for download.</div>
+</div>
+<div class="prose"><p>You can download the report again if needed, or save your progress file for your records.</p></div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="showScreen('finish')">← Back to Report</button><button class="btn btn-gold" onclick="downloadReport()">Download Report Again ↓</button></div>
+</div>
+</section>
+</div>
+<div class="toast" id="toast">Saved.</div>
+<div class="footer">HRE4M1 · Unit 1 · Lesson 10</div>
+</div>
+<script>
+const LESSON_ID = "1.10";
+const STORAGE_KEY = "hre4m1_unit_1_10_faith_reason";
+const SCREEN_ORDER = ["welcome", "hook", "intro", "terms", "freedom", "primary", "aquinas", "magisterium", "conclusion", "quiz", "deeper", "synthesis", "finish", "complete"];
+const TOTAL_STEPS = SCREEN_ORDER.length - 1;
+const REQUIRED_TERMS = 8;
+const QUIZ = [{"id":"q1","q":"What is faith in the Catholic understanding?","opts":["A supernatural gift from God that allows us to trust His revelation","A private opinion with no need for truth","A rejection of questions and thinking","A feeling that changes depending on mood"],"correct":0,"explain":"Faith is a gift from God by which we trust Him and accept what He reveals."},{"id":"q2","q":"What is reason?","opts":["The ability to avoid mystery completely","The natural human ability to think, question, analyze, and seek truth","A power that only scientists and philosophers have","The opposite of faith"],"correct":1,"explain":"Reason is the God-given human capacity to think, understand, question, and judge."},{"id":"q3","q":"Why can faith and reason not truly contradict each other?","opts":["Because reason must always be ignored when faith is involved","Because faith means refusing evidence","Because all truth comes from God, so properly understood truths of faith and reason harmonize","Because every religious opinion is automatically true"],"correct":2,"explain":"Catholic teaching holds that all truth comes from God. Real truth discovered by reason cannot contradict true faith."},{"id":"q4","q":"Which example best shows faith and reason working together?","opts":["Making a moral choice by considering facts, consequences, human dignity, and God’s commandments","Doing whatever feels easiest","Rejecting science because faith is enough","Using logic to justify selfishness"],"correct":0,"explain":"Faith and reason work together when we think carefully and also measure choices by God’s truth and human dignity."},{"id":"q5","q":"What does Natural Law show?","opts":["That morality is impossible without reading Scripture","That basic moral truths can be recognized by human reason and confirmed by faith","That everyone’s opinion is equally true","That reason cannot understand anything about right and wrong"],"correct":1,"explain":"Natural Law shows that reason can recognize basic moral truths, while faith confirms and deepens those truths."},{"id":"q6","q":"What lesson does Thomas’ encounter with the risen Jesus teach about faith?","opts":["Faith means we should never ask questions","Evidence can help, but faith ultimately means trusting Christ even when we do not see everything ourselves","Reason is useless after the Resurrection","Faith only matters when there is no doubt at all"],"correct":1,"explain":"Thomas’ story shows that Jesus meets doubt, but also calls us to trust Him beyond what we can physically see."},{"id":"q7","q":"What is the meaning of John Paul II’s image of faith and reason as two wings?","opts":["Faith and reason must fly away from each other","Faith is higher than reason, so reason does not matter","Reason is enough, while faith is optional","Faith and reason together lift the human spirit toward truth"],"correct":3,"explain":"The image means we need both faith and reason to rise toward fuller truth."}];
+const CORRECT_MAP = {"intro1":"c","freedom1":"b","primary1":"c","aquinas1":"c","magisterium1":"d"};
+const MINIMUMS = {"hookResponse":35,"pauseIntro":60,"pauseFreedom":70,"pausePrimary":80,"pauseAquinas":80,"pauseMagisterium":80,"pauseConclusion":80,"td1":130,"td2":130,"synthesis":160};
+const RESPONSE_ORDER = ["hookResponse","pauseIntro","pauseFreedom","pausePrimary","pauseAquinas","pauseMagisterium","pauseConclusion","td1","td2","synthesis"];
+const RESPONSE_TITLES = {"hookResponse":"Starting Point","pauseIntro":"Reflection 1","pauseFreedom":"Reflection 2","pausePrimary":"Reflection 3","pauseAquinas":"Reflection 4","pauseMagisterium":"Reflection 5","pauseConclusion":"Reflection 6","td1":"Think Deeper 1","td2":"Think Deeper 2","synthesis":"Final Synthesis"};
+const REPORT_FILE_PREFIX = "HRE4M1_Unit_1_10_Faith_and_Reason";
+const REPORT_HEADER_LABEL = "HRE4M1 · Unit 1 · Lesson 10";
+const REPORT_TITLE = "Faith and Reason";
+const REPORT_SUBTITLE = 'Student Report';
+
+const state = { lessonId: LESSON_ID, startedAt: null, finishedAt: null, currentScreen: 'welcome', studentInfo: {name:'', email:'', className:''}, termsViewed: [], inlineChecks: {}, responses: {}, quiz: {answers: {}, scoreCount: 0}, sectionTimes: {}, lastSavedAt: null };
+RESPONSE_ORDER.forEach(key => state.responses[key] = '');
+let screenEnterTime = Date.now();
+
+function countWords(str) { if (!str) return 0; return str.trim().split(/\s+/).filter(Boolean).length; }
+function escapeHTML(str) { if (str === null || str === undefined) return ''; return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function formatTime(ms) { const totalMin = Math.floor(ms / 60000); if (totalMin < 1) return '< 1 min'; if (totalMin < 60) return totalMin + ' min'; const hrs = Math.floor(totalMin / 60); const mins = totalMin % 60; return hrs + 'h ' + mins + 'm'; }
+function persistInputsToState() {
+  state.studentInfo.name = document.getElementById('studentName').value.trim();
+  state.studentInfo.email = document.getElementById('studentEmail').value.trim();
+  state.studentInfo.className = document.getElementById('studentClass').value.trim();
+  RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) state.responses[key] = el.value.trim(); });
+}
+function saveLocal() { state.lastSavedAt = new Date().toISOString(); persistInputsToState(); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function totalWords() { persistInputsToState(); return Object.values(state.responses).reduce((sum, v) => sum + countWords(v), 0); }
+function totalTimeMs() { let total = 0; Object.values(state.sectionTimes).forEach(ms => total += ms || 0); if (state.currentScreen && screenEnterTime) total += Date.now() - screenEnterTime; return total; }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1600); }
+function markSaveButtonsSaved() { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.add('saved')); const label = document.getElementById('stickySaveLabel'); if (label) label.textContent = 'Saved'; setTimeout(() => { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.remove('saved')); const label2 = document.getElementById('stickySaveLabel'); if (label2) label2.textContent = 'Save Progress'; }, 1400); }
+function updateProgress() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); const shown = idx <= 0 ? 0 : idx; const pct = Math.max(0, Math.min(100, Math.round((shown / TOTAL_STEPS) * 100))); document.getElementById('progressFill').style.width = pct + '%'; document.getElementById('progressPercent').textContent = pct + '%'; document.getElementById('progressLabel').textContent = 'Section ' + Math.max(1, shown) + ' of ' + TOTAL_STEPS; document.getElementById('progressContainer').style.display = state.currentScreen === 'welcome' ? 'none' : 'block'; }
+function showScreen(name) { persistInputsToState(); const prev = state.currentScreen; if (prev && screenEnterTime) { state.sectionTimes[prev] = (state.sectionTimes[prev] || 0) + (Date.now() - screenEnterTime); } document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); const next = document.querySelector('.screen[data-screen="' + name + '"]'); if (next) next.classList.add('active'); state.currentScreen = name; screenEnterTime = Date.now(); if (name === 'quiz') renderQuiz(); if (name === 'finish') refreshFinishStats(); updateProgress(); refreshGating(); saveLocal(); window.scrollTo({top:0, behavior:'smooth'}); }
+function prevScreen() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); if (idx > 0) showScreen(SCREEN_ORDER[idx - 1]); }
+function beginLesson() { const name = document.getElementById('studentName').value.trim(); const email = document.getElementById('studentEmail').value.trim(); const alertBox = document.getElementById('setupAlert'); if (!name || !email) { alertBox.classList.add('show'); return; } alertBox.classList.remove('show'); if (!state.startedAt) state.startedAt = new Date().toISOString(); showScreen('hook'); }
+function updateWordCount(inputId, wcId) { const el = document.getElementById(inputId); const wc = countWords(el.value); const minimum = MINIMUMS[inputId] || 0; const box = document.getElementById(wcId); box.innerHTML = '<span>' + wc + ' words</span><span class="' + (wc >= minimum ? 'met' : 'short') + '">Minimum: ' + minimum + ' words</span>'; state.responses[inputId] = el.value.trim(); saveLocal(); refreshGating(); }
+function openTerm(card) { card.classList.toggle('open'); const term = card.getAttribute('data-term'); if (!state.termsViewed.includes(term)) { state.termsViewed.push(term); card.classList.add('viewed'); document.getElementById('termsViewed').textContent = state.termsViewed.length; } saveLocal(); refreshGating(); }
+function answerCheck(button, checkId, correctLetter) { const wrap = button.closest('.check'); if (wrap.querySelector('.check-option.answered')) return; const chosen = button.getAttribute('data-answer'); const isCorrect = chosen === correctLetter; wrap.querySelectorAll('.check-option').forEach(opt => { opt.classList.add('answered'); if (opt.getAttribute('data-answer') === correctLetter) opt.classList.add('correct'); }); if (!isCorrect) button.classList.add('incorrect'); state.inlineChecks[checkId] = {selected: chosen, correct: isCorrect}; const fb = document.getElementById('fb-' + checkId); fb.textContent = isCorrect ? 'Correct. You are tracking the main idea well.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); saveLocal(); refreshGating(); }
+function refreshGating() { persistInputsToState(); const enough = key => countWords(state.responses[key]) >= (MINIMUMS[key] || 0); const setDisabled = (id, disabled) => { const el = document.getElementById(id); if (el) el.disabled = disabled; }; setDisabled('hookNext', !enough('hookResponse')); setDisabled('introNext', !(state.inlineChecks.intro1 && enough('pauseIntro'))); setDisabled('termsNext', state.termsViewed.length < REQUIRED_TERMS); setDisabled('freedomNext', !(state.inlineChecks.freedom1 && enough('pauseFreedom'))); setDisabled('primaryNext', !(state.inlineChecks.primary1 && enough('pausePrimary'))); setDisabled('aquinasNext', !(state.inlineChecks.aquinas1 && enough('pauseAquinas'))); setDisabled('magisteriumNext', !(state.inlineChecks.magisterium1 && enough('pauseMagisterium'))); setDisabled('conclusionNext', !enough('pauseConclusion')); setDisabled('quizNext', Object.keys(state.quiz.answers).length < QUIZ.length); setDisabled('deeperNext', !(enough('td1') && enough('td2'))); setDisabled('synthesisNext', !enough('synthesis')); }
+function renderQuiz() { const container = document.getElementById('quizQuestions'); if (container.dataset.rendered === 'yes') return; container.dataset.rendered = 'yes'; const letters = ['a','b','c','d']; container.innerHTML = QUIZ.map((q, idx) => { const options = q.opts.map((opt, optIdx) => `<button class="q-option" data-opt="${optIdx}" onclick="answerQuiz('${q.id}', ${optIdx})"><span class="letter">${letters[optIdx]}.</span><span>${escapeHTML(opt)}</span></button>`).join(''); return `<div class="quiz-question" data-qid="${q.id}"><div class="q-number">Question ${idx + 1} of ${QUIZ.length}</div><div class="q-text">${escapeHTML(q.q)}</div><div class="q-options">${options}</div><div class="q-explanation" id="exp-${q.id}">${escapeHTML(q.explain)}</div></div>`; }).join(''); restoreQuizVisuals(); }
+function answerQuiz(qId, optIdx) { if (state.quiz.answers[qId] !== undefined) return; const q = QUIZ.find(item => item.id === qId); if (optIdx === q.correct) state.quiz.scoreCount += 1; state.quiz.answers[qId] = optIdx; restoreQuizVisuals(); saveLocal(); refreshGating(); }
+function restoreQuizVisuals() { QUIZ.forEach(q => { const qEl = document.querySelector('.quiz-question[data-qid="' + q.id + '"]'); if (!qEl) return; const chosen = state.quiz.answers[q.id]; qEl.querySelectorAll('.q-option').forEach(opt => opt.classList.remove('locked','correct','incorrect','selected')); const exp = document.getElementById('exp-' + q.id); if (exp) exp.classList.remove('show'); if (chosen !== undefined) { qEl.querySelectorAll('.q-option').forEach(opt => opt.classList.add('locked')); const selected = qEl.querySelector('.q-option[data-opt="' + chosen + '"]'); const correctBtn = qEl.querySelector('.q-option[data-opt="' + q.correct + '"]'); if (selected) selected.classList.add('selected'); if (chosen === q.correct && selected) selected.classList.add('correct'); else { if (selected) selected.classList.add('incorrect'); if (correctBtn) correctBtn.classList.add('correct'); } if (exp) exp.classList.add('show'); } }); if (Object.keys(state.quiz.answers).length === QUIZ.length) { document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('quizScore').classList.add('show'); } }
+function triggerDownload(blob, filename) { const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000); }
+function saveProgressNow() { saveLocal(); const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'}); const safeName = (state.studentInfo.name || 'student').replace(/[^a-zA-Z0-9]+/g, '_'); triggerDownload(blob, REPORT_FILE_PREFIX + '_' + safeName + '_progress.json'); showToast('Progress saved.'); markSaveButtonsSaved(); }
+function refreshFinishStats() { document.getElementById('finishQuizScore').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('finishTerms').textContent = state.termsViewed.length + ' / ' + REQUIRED_TERMS; document.getElementById('finishWords').textContent = totalWords().toLocaleString(); document.getElementById('finishTime').textContent = formatTime(totalTimeMs()); }
+function buildReportHTML() { persistInputsToState(); const letters = ['a','b','c','d']; const responseHtml = RESPONSE_ORDER.map(key => '<h2>' + escapeHTML(RESPONSE_TITLES[key]) + '</h2><div class="response-prompt">' + escapeHTML(PROMPTS[key]) + '</div><div class="response-box">' + escapeHTML(state.responses[key] || '') + '</div><div class="response-wc">' + countWords(state.responses[key] || '') + ' words</div>').join(''); const quizHtml = QUIZ.map((q, idx) => { const chosen = state.quiz.answers[q.id]; const chosenText = chosen !== undefined ? q.opts[chosen] : 'Not answered'; return '<div class="q-block"><div class="q-num">Question ' + (idx + 1) + '</div><div class="q-prompt">' + escapeHTML(q.q) + '</div><div class="q-ans"><strong>Student answer:</strong> ' + (chosen !== undefined ? letters[chosen] + '. ' : '') + escapeHTML(chosenText) + '</div><div class="q-ans"><strong>Correct answer:</strong> ' + letters[q.correct] + '. ' + escapeHTML(q.opts[q.correct]) + '</div><div class="q-ans"><strong>Explanation:</strong> ' + escapeHTML(q.explain) + '</div></div>'; }).join(''); return '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unit 1.8 Report</title><style>body{font-family:Georgia,serif;max-width:860px;margin:40px auto;padding:24px;color:#241318;line-height:1.6;background:#FFF1EA;}.hdr{border-bottom:3px double #B84632;padding-bottom:16px;margin-bottom:24px;}.hdr-label{font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#B84632;font-weight:600;}h1{font-size:28px;color:#8B1024;margin:8px 0 4px;}.subtitle{font-style:italic;color:#5A323B;font-size:16px;}.meta{background:#F8D9CC;padding:14px 18px;margin:20px 0;border-left:3px solid #B84632;font-size:14px;}.meta dl{margin:0;display:grid;grid-template-columns:140px 1fr;gap:6px 16px;}.meta dt{font-weight:700;color:#B84632;font-family:Arial,sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;}.meta dd{margin:0;}h2{font-size:20px;color:#8B1024;border-bottom:1px solid #B84632;padding-bottom:6px;margin-top:30px;}.response-prompt{font-style:italic;color:#5A323B;font-size:14px;margin-bottom:6px;}.response-box{background:white;border:1px solid #F8D9CC;border-left:3px solid #B84632;padding:14px 18px;margin:8px 0 10px;white-space:pre-wrap;font-size:15px;line-height:1.65;}.response-wc{font-family:Arial,sans-serif;font-size:11px;color:#B84632;margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;}.score-big{font-size:36px;color:#8B1024;font-weight:700;margin:10px 0;}.q-block{background:white;border:1px solid #F8D9CC;padding:12px 16px;margin:10px 0;border-radius:2px;}.q-num{font-family:Arial,sans-serif;font-size:12px;color:#B84632;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;}.q-prompt{font-weight:600;margin-bottom:8px;}.q-ans{font-size:14px;margin:4px 0;}</style></head><body><div class="hdr"><div class="hdr-label">' + escapeHTML(REPORT_HEADER_LABEL) + '</div><h1>' + escapeHTML(REPORT_TITLE) + '</h1><div class="subtitle">Student Report</div></div><div class="meta"><dl><dt>Name</dt><dd>' + escapeHTML(state.studentInfo.name) + '</dd><dt>Email</dt><dd>' + escapeHTML(state.studentInfo.email) + '</dd><dt>Class</dt><dd>' + escapeHTML(state.studentInfo.className || '') + '</dd><dt>Started</dt><dd>' + (state.startedAt ? new Date(state.startedAt).toLocaleString() : '') + '</dd><dt>Completed</dt><dd>' + (state.finishedAt ? new Date(state.finishedAt).toLocaleString() : '') + '</dd><dt>Time Spent</dt><dd>' + formatTime(totalTimeMs()) + '</dd><dt>Total Words</dt><dd>' + totalWords().toLocaleString() + '</dd></dl></div><h2>Knowledge Check Score</h2><div class="score-big">' + state.quiz.scoreCount + ' / ' + QUIZ.length + '</div>' + responseHtml + '<h2>Quiz Review</h2>' + quizHtml + '</body></html>'; }
+function downloadReport() { const html = buildReportHTML(); const blob = new Blob([html], {type:'text/html'}); const safeName = (state.studentInfo.name || 'student').replace(/[^a-zA-Z0-9]+/g, '_'); triggerDownload(blob, REPORT_FILE_PREFIX + '_' + safeName + '_report.html'); }
+function finishLesson() { if (!state.finishedAt) state.finishedAt = new Date().toISOString(); saveLocal(); downloadReport(); showScreen('complete'); }
+function restoreChecks() { Object.keys(state.inlineChecks).forEach(checkId => { const info = state.inlineChecks[checkId]; const options = document.querySelectorAll('.check[data-check="' + checkId + '"] .check-option'); options.forEach(opt => { opt.classList.add('answered'); if (opt.getAttribute('data-answer') === CORRECT_MAP[checkId]) opt.classList.add('correct'); if (opt.getAttribute('data-answer') === info.selected && !info.correct) opt.classList.add('incorrect'); }); const fb = document.getElementById('fb-' + checkId); if (fb) { fb.textContent = info.correct ? 'Correct. You are tracking the main idea well.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); } }); }
+function restoreTextAndCounts() { const map = {hookResponse:'hookWC', pauseIntro:'pauseIntroWC', pauseFreedom:'pauseFreedomWC', pausePrimary:'pausePrimaryWC', pauseAquinas:'pauseAquinasWC', pauseMagisterium:'pauseMagisteriumWC', pauseConclusion:'pauseConclusionWC', td1:'td1WC', td2:'td2WC', synthesis:'synthesisWC'}; RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) el.value = state.responses[key] || ''; const wcId = map[key]; if (el && document.getElementById(wcId)) updateWordCount(key, wcId); }); }
+function resumeFromFile(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = function(e) { try { const loaded = JSON.parse(e.target.result); if (!loaded || loaded.lessonId !== LESSON_ID) throw new Error('Wrong lesson file'); Object.assign(state, loaded); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); showScreen(state.currentScreen || 'hook'); showToast('Progress restored.'); } catch (err) { alert('Could not load that file. Please upload a valid Unit 1.10 progress file.'); } }; reader.readAsText(file); }
+function hydrateFromLocalStorage() { try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return; const saved = JSON.parse(raw); if (!saved || saved.lessonId !== LESSON_ID) return; Object.assign(state, saved); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); } catch (err) {} }
+hydrateFromLocalStorage(); updateProgress(); refreshGating();
+</script>
+</body>
+</html>

@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HRE4M1 · Unit 1.9: The Soul, The Immortal Essence of Human Identity</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=Lora:ital,wght@0,400;0,500;0,600;1,400&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+
+
+  :root {
+    --bg-deep: #2A050B;
+    --bg-mid: #5A101B;
+    --bg-card: #FFF1EA;
+    --bg-card-alt: #F8D9CC;
+    --gold: #F2A65A;
+    --gold-soft: #FFC897;
+    --gold-deep: #B84632;
+    --wine: #8B1024;
+    --ivory: #FFF4EC;
+    --cream: #FFD8C4;
+    --ink: #241318;
+    --ink-soft: #5A323B;
+    --locked: #6B4B5580;
+    --success: #2F7D4A;
+    --danger: #B3262E;
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.25);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Textured background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(242, 166, 90, 0.12), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(139, 16, 36, 0.18), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ---- Header ---- */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .unit-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .lesson-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .lesson-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gold-soft);
+    opacity: 0.9;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  /* ---- Progress bar ---- */
+  .progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-deep) 70%, transparent);
+    padding: 16px 0 12px;
+    margin: -24px -20px 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft));
+    width: 0%;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.5);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    margin: 8px auto 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  /* ---- Sticky save button (top bar) ---- */
+  .save-sticky {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 169, 97, 0.12);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .save-sticky:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    border-color: var(--gold);
+  }
+
+  .save-sticky.saved {
+    background: rgba(63, 122, 77, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  /* ---- In-row save (button row) ---- */
+  .btn-save-row {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-save-row:hover {
+    background: var(--gold-deep);
+    color: var(--ivory);
+  }
+
+  .btn-save-row.saved {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .btn-row-split {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* ---- Pause and Reflect blocks (in-flow) ---- */
+  .pause {
+    background: linear-gradient(135deg, rgba(107, 44, 44, 0.06), rgba(201, 169, 97, 0.08));
+    border: 1px solid rgba(107, 44, 44, 0.2);
+    border-left: 3px solid var(--wine);
+    padding: 22px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .pause-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pause-label::before {
+    content: '❊';
+    font-size: 14px;
+    color: var(--gold-deep);
+  }
+
+  .pause-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .pause textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(107, 44, 44, 0.25);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    border-radius: 2px;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .pause textarea:focus {
+    outline: none;
+    border-color: var(--wine);
+    box-shadow: 0 0 0 2px rgba(107, 44, 44, 0.15);
+  }
+
+  /* Save confirmation toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid var(--gold);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---- Screen Cards ---- */
+  .screen {
+    display: none;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .screen.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .screen-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .screen-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .screen-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .prose {
+    font-size: 16.5px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .prose p { margin-bottom: 18px; }
+
+  .prose strong { color: var(--wine); font-weight: 600; }
+
+  .prose em { color: var(--ink-soft); }
+
+  .prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 28px 0 14px;
+    color: var(--wine);
+    line-height: 1.25;
+  }
+
+  .prose h3::before {
+    content: '❖ ';
+    color: var(--gold-deep);
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+
+  .divider {
+    display: block;
+    margin: 32px auto;
+    width: 120px;
+    height: auto;
+    opacity: 0.6;
+  }
+
+  .pullquote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--wine);
+    text-align: center;
+    margin: 28px 20px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    line-height: 1.4;
+  }
+
+  .scripture {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scripture-ref {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--ivory);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--wine);
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:disabled {
+    background: var(--locked);
+    border-color: var(--locked);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+  }
+
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- Forms ---- */
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .word-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .word-count .met {
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  .word-count .short {
+    color: var(--danger);
+  }
+
+  /* ---- Key Terms / Flashcards ---- */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .term-card {
+    background: var(--bg-card-alt);
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    border-radius: 2px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 100px;
+  }
+
+  .term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--gold-deep);
+  }
+
+  .term-card.viewed {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+  }
+
+  .term-card.viewed::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .term-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.7;
+  }
+
+  .term-def {
+    display: none;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .term-card.open .term-def { display: block; }
+  .term-card.open .term-tap { display: none; }
+
+  /* ---- Inline comprehension check ---- */
+  .check {
+    background: #FDF8E8;
+    border: 1px dashed var(--gold-deep);
+    border-radius: 2px;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .check-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .check-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .check-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-option {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .check-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .check-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .check-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .check-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .check-feedback {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    display: none;
+  }
+
+  .check-feedback.show { display: block; }
+
+  /* ---- Vocation Compass ---- */
+  .compass-intro {
+    background: #FDF8E8;
+    border-left: 3px solid var(--wine);
+    padding: 18px 22px;
+    margin: 20px 0 30px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .compass-vocation {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(140, 113, 53, 0.25);
+  }
+
+  .compass-vocation:last-child {
+    border-bottom: none;
+  }
+
+  .compass-voc-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+
+  .compass-voc-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  .compass-aspect {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px dotted rgba(140, 113, 53, 0.2);
+  }
+
+  .compass-aspect:first-of-type { border-top: none; }
+
+  .compass-aspect-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .rating-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .rating-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(140, 113, 53, 0.4);
+    background: white;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .rating-btn:hover {
+    border-color: var(--gold-deep);
+  }
+
+  .rating-btn.selected {
+    background: var(--wine);
+    color: var(--ivory);
+    border-color: var(--wine);
+  }
+
+  .rating-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  .compass-result {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(107, 44, 44, 0.08));
+    border: 1px solid var(--gold-deep);
+    padding: 24px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  .compass-result.show { display: block; }
+
+  .result-voc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.3);
+  }
+
+  .result-voc:last-child { border-bottom: none; }
+
+  .result-voc-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--wine);
+  }
+
+  .result-bar {
+    width: 180px;
+    height: 8px;
+    background: rgba(140, 113, 53, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .result-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    transition: width 1s ease;
+  }
+
+  /* ---- Quiz ---- */
+  .quiz-question {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.25);
+  }
+
+  .quiz-question:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .q-option {
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .q-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .q-option.selected {
+    border-color: var(--wine);
+    background: rgba(107, 44, 44, 0.06);
+  }
+
+  .q-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .q-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+  }
+
+  .q-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+  }
+
+  .q-option.locked {
+    pointer-events: none;
+  }
+
+  .q-explanation {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201, 169, 97, 0.1);
+    border-left: 2px solid var(--gold-deep);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    display: none;
+  }
+
+  .q-explanation.show { display: block; }
+
+  .quiz-score {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(107, 44, 44, 0.1));
+    border: 1px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score strong {
+    font-size: 34px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ---- Completion screen ---- */
+  .completion-hero {
+    text-align: center;
+    padding: 20px 0 32px;
+  }
+
+  .completion-icon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    color: var(--gold-deep);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .completion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .completion-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .summary-stat {
+    background: #FDF8E8;
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+  }
+
+  .download-note {
+    background: rgba(201, 169, 97, 0.12);
+    padding: 18px 22px;
+    border-left: 3px solid var(--gold-deep);
+    margin: 24px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ---- Hero (start screen) ---- */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-deep));
+    color: var(--ivory);
+    padding: 40px 40px 36px;
+    margin: -40px -44px 32px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .hero-banner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+
+  .hero-banner p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-soft);
+    margin-top: 8px;
+  }
+
+  .hero-banner .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+
+  .upload-zone {
+    border: 1px dashed rgba(140, 113, 53, 0.4);
+    padding: 20px;
+    text-align: center;
+    margin-top: 24px;
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .upload-zone label {
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .upload-zone input { display: none; }
+
+  /* ---- Error / alert ---- */
+  .alert {
+    padding: 12px 16px;
+    background: rgba(168, 67, 43, 0.1);
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    margin-top: 14px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .alert.show { display: block; }
+
+  /* ---- Footer ---- */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .card { padding: 28px 22px; }
+    .hero-banner { margin: -28px -22px 28px; padding: 30px 24px 26px; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; justify-content: center; }
+    .compass-aspect { grid-template-columns: 1fr; gap: 8px; }
+    .result-bar { width: 120px; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .save-sticky {
+      position: static;
+      display: flex;
+      margin: 10px auto 0;
+      width: fit-content;
+    }
+    .progress-meta { flex-wrap: wrap; }
+    .btn-row-split { width: 100%; flex-direction: column; }
+    .btn-row-split .btn-save-row { width: 100%; justify-content: center; }
+  }
+
+  /* Print-friendly download report styling will be injected separately */
+
+.prose ul { margin-left: 20px; margin-bottom: 18px; }
+.prose li { margin-bottom: 8px; }
+.note-panel { background: rgba(184, 70, 50, 0.12); border-left: 3px solid var(--gold-deep); padding: 18px 22px; margin: 22px 0; color: var(--ink); line-height: 1.65; }
+
+</style>
+</head>
+<body>
+<div class="app">
+<div class="header">
+<div class="unit-label">HRE4M1 · Unit 1 · Lesson 9</div>
+<h1 class="lesson-title">The Soul</h1>
+<div class="lesson-subtitle">The immortal essence of human identity</div>
+<svg class="ornament" height="20" viewbox="0 0 80 20" width="80" xmlns="http://www.w3.org/2000/svg"><path d="M 0 10 L 30 10 M 50 10 L 80 10" fill="none" stroke="#F2A65A" stroke-width="1"></path><circle cx="40" cy="10" fill="none" r="3" stroke="#F2A65A" stroke-width="1"></circle><circle cx="40" cy="10" fill="#F2A65A" r="1"></circle></svg>
+</div>
+<div class="progress-container" id="progressContainer" style="display:none; position:relative;"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><div class="progress-meta"><span id="progressLabel">Section 1 of 13</span><span id="progressPercent">0%</span></div><button class="save-sticky" id="stickySave" onclick="saveProgressNow()" title="Download your progress to resume later"><span>💾</span><span id="stickySaveLabel">Save Progress</span></button></div>
+<div id="screens">
+<section class="screen active" data-screen="welcome">
+<div class="card">
+<div class="hero-banner">
+<div class="ornament-line">
+<svg height="12" viewbox="0 0 40 12" width="40"><line stroke="currentColor" stroke-width="1" x1="0" x2="40" y1="6" y2="6"></line></svg>
+<span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">A Study in Human Identity</span>
+<svg height="12" viewbox="0 0 40 12" width="40"><line stroke="currentColor" stroke-width="1" x1="0" x2="40" y1="6" y2="6"></line></svg>
+</div>
+<h2>Welcome to Unit 1.9</h2>
+<p>This lesson explores the soul, body and soul unity, immortality, conscience, and the human longing for God.</p>
+</div>
+<p class="prose" style="margin-bottom:24px;">Before we begin, enter your information. At the end, you will be able to download a report of your reflections and quiz results.</p>
+<div class="field"><label for="studentName">Full Name</label><input autocomplete="name" id="studentName" placeholder="First and last name" type="text"/></div>
+<div class="field"><label for="studentEmail">School Email</label><input autocomplete="email" id="studentEmail" placeholder="you@school.ca" type="email"/></div>
+<div class="field"><label for="studentClass">Class / Period</label><input id="studentClass" placeholder="e.g., HRE4M1 · Period 2" type="text"/></div>
+<div class="alert" id="setupAlert">Please fill in your name and email before starting.</div>
+<div class="btn-row"><div></div><button class="btn btn-primary" onclick="beginLesson()">Begin Lesson →</button></div>
+<div class="upload-zone">
+<div style="font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Returning to finish?</div>
+<label for="resumeFile">Upload your saved progress file</label>
+<input accept=".json" id="resumeFile" onchange="resumeFromFile(event)" type="file"/>
+</div>
+</div>
+</section>
+<section class="screen" data-screen="hook">
+<div class="card">
+<div class="screen-label">Before We Begin</div>
+<h2 class="screen-title">What Makes You You?</h2>
+<p class="screen-intro">Start with your own thinking before the lesson gives you the theological language.</p>
+<div class="prose">
+<p>When we talk about identity, people often mention appearance, personality, memories, talents, relationships, or achievements.</p>
+<p>Catholic teaching goes deeper. It says that each person has a spiritual soul, created by God, and that this soul is central to who we are.</p>
+</div>
+<div class="field" style="margin-top:20px;">
+<label for="hookResponse">Your starting point</label>
+<textarea id="hookResponse" oninput="updateWordCount('hookResponse', 'hookWC', 35)" placeholder="What do you think makes a person truly themselves, beyond appearance or biology?"></textarea>
+<div class="word-count" id="hookWC"><span>0 words</span><span>Minimum: 35 words</span></div>
+</div>
+<div class="btn-row">
+<button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+<div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="hookNext" onclick="showScreen('intro')">Continue →</button></div>
+</div>
+</div>
+</section>
+<section class="screen" data-screen="intro">
+<div class="card">
+<div class="screen-label">Part One · Foundations</div>
+<h2 class="screen-title">Body and Soul</h2>
+<p class="screen-intro">Catholic teaching says the human person is not just a body, and not just a soul. We are a unity of body and soul.</p>
+<div class="prose">
+<p>The soul is the spiritual principle of a person. It gives life, unity, identity, and purpose to the body. It is not a ghost trapped inside a body. It is the deepest spiritual reality of who we are.</p>
+<p>St. Thomas Aquinas described the soul as the <strong>form of the body</strong>. In simple terms, the soul is what makes the body a living human body rather than only a collection of physical parts.</p>
+<p>This matters because Catholic teaching avoids two mistakes. It does not say the body is worthless, and it does not say humans are only matter. Body and soul together form one human person.</p>
+<div class="scripture">“Then the Lord God formed man from the dust of the ground, and breathed into his nostrils the breath of life.”<span class="scripture-ref">Genesis 2:7</span></div>
+<p>The soul is created directly by God, and once created, it does not die. At death, the soul continues to exist and awaits reunion with the resurrected body at the end of time.</p>
+</div>
+<div class="check" data-check="intro1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">Which statement best reflects the Catholic understanding of the human person?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">a.</span><span>The body is bad and the soul alone matters.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">b.</span><span>The human person is only a physical organism with no spiritual reality.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">c.</span><span>The human person is a unity of body and soul, both created and valued by God.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">d.</span><span>The soul matters only after death and has no connection to daily life.</span></button>
+</div>
+<div class="check-feedback" id="fb-intro1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Why is it important to say that humans are both body and soul, instead of reducing people to only biology or only spirit?</div>
+<textarea id="pauseIntro" oninput="updateWordCount('pauseIntro', 'pauseIntroWC', 60)" placeholder="Explain why both the body and the soul matter."></textarea>
+<div class="word-count" id="pauseIntroWC"><span>0 words</span><span>Minimum: 60 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="introNext" onclick="showScreen('terms')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="terms">
+<div class="card">
+<div class="screen-label">Part Two · Vocabulary</div>
+<h2 class="screen-title">Eight Terms to Know</h2>
+<p class="screen-intro">Tap each card to reveal its meaning. View all eight before moving on.</p>
+<div class="terms-grid" id="termsGrid">
+<div class="term-card" data-term="soul" onclick="openTerm(this)"><div class="term-name">Soul</div><div class="term-tap">Tap to reveal</div><div class="term-def">The spiritual principle of a person. It animates the body, is created by God, and survives bodily death.</div></div>
+<div class="term-card" data-term="body-soul-unity" onclick="openTerm(this)"><div class="term-name">Body-Soul Unity</div><div class="term-tap">Tap to reveal</div><div class="term-def">The Catholic teaching that a human person is one being made of body and soul together, not two separate things loosely connected.</div></div>
+<div class="term-card" data-term="form-of-body" onclick="openTerm(this)"><div class="term-name">Form of the Body</div><div class="term-tap">Tap to reveal</div><div class="term-def">Aquinas’ way of saying the soul gives the body life, unity, and human identity.</div></div>
+<div class="term-card" data-term="immortality" onclick="openTerm(this)"><div class="term-name">Immortality</div><div class="term-tap">Tap to reveal</div><div class="term-def">The soul does not perish at death. It continues to exist and awaits reunion with the resurrected body.</div></div>
+<div class="term-card" data-term="intellect" onclick="openTerm(this)"><div class="term-name">Intellect</div><div class="term-tap">Tap to reveal</div><div class="term-def">The power of the soul that allows humans to reason, seek truth, and ask deeper questions about meaning and God.</div></div>
+<div class="term-card" data-term="will" onclick="openTerm(this)"><div class="term-name">Will</div><div class="term-tap">Tap to reveal</div><div class="term-def">The power of the soul that allows humans to choose freely and love intentionally.</div></div>
+<div class="term-card" data-term="conscience" onclick="openTerm(this)"><div class="term-name">Conscience</div><div class="term-tap">Tap to reveal</div><div class="term-def">The soul’s moral judgment, formed by truth, reason, and God’s law, that helps us recognize right and wrong.</div></div>
+<div class="term-card" data-term="eternal-destiny" onclick="openTerm(this)"><div class="term-name">Eternal Destiny</div><div class="term-tap">Tap to reveal</div><div class="term-def">The truth that each soul is made for eternal life with God and that our choices have lasting significance.</div></div>
+</div>
+<div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink-soft); text-align:center; margin-top:16px;">Viewed: <span id="termsViewed">0</span> of 8</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="termsNext" onclick="showScreen('freedom')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="freedom">
+<div class="card">
+<div class="screen-label">Part Three · Scripture and Catechism</div>
+<h2 class="screen-title">What Scripture and the Catechism Teach</h2>
+<p class="screen-intro">The soul is not a vague idea. It is part of how Christianity understands human dignity, death, hope, and moral life.</p>
+<div class="prose">
+<p>Jesus taught that the soul is more important than any earthly success. In Matthew 10:28, He says not to fear those who can kill the body but cannot kill the soul. In Mark 8:36, He asks what it profits a person to gain the whole world but lose their soul.</p>
+<p>The Catechism teaches that the soul is the innermost aspect of the human person, that body and soul form one nature, and that every spiritual soul is created immediately by God. This means each person is directly loved and willed by God at the deepest level.</p>
+<p>These teachings protect both the dignity of the body and the dignity of the soul. The body is good because it belongs to the person. The soul is precious because it is created by God and made for eternal life.</p>
+</div>
+<div class="check" data-check="freedom1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">What does Jesus’ teaching in Matthew 10:28 show about the soul?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'freedom1', 'b')"><span class="letter">a.</span><span>The soul matters less than physical survival.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'freedom1', 'b')"><span class="letter">b.</span><span>The soul has a reality and importance that cannot be destroyed by bodily death.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'freedom1', 'b')"><span class="letter">c.</span><span>The body is unimportant and should be ignored.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'freedom1', 'b')"><span class="letter">d.</span><span>Only religious leaders have souls that matter eternally.</span></button>
+</div>
+<div class="check-feedback" id="fb-freedom1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">If every soul is created and loved directly by God, how should that affect the way we treat ourselves and others?</div>
+<textarea id="pauseFreedom" oninput="updateWordCount('pauseFreedom', 'pauseFreedomWC', 70)" placeholder="Connect the soul to dignity, self-worth, and how we treat people."></textarea>
+<div class="word-count" id="pauseFreedomWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="freedomNext" onclick="showScreen('primary')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="primary">
+<div class="card">
+<div class="screen-label">Part Four · Longing and Destiny</div>
+<h2 class="screen-title">The Soul Longs for God</h2>
+<p class="screen-intro">Christianity teaches that the deep restlessness in the human heart points toward our ultimate purpose.</p>
+<div class="prose">
+<p>Human beings often sense that nothing in this world fully satisfies. Success, entertainment, comfort, popularity, and possessions can be good, but none of them can answer the deepest hunger of the soul.</p>
+<p>Catholic teaching says this longing is not meaningless. It points to God. The soul is made for communion with the divine. This is why humans naturally search for meaning, truth, beauty, love, and eternity.</p>
+<p>Because the soul is immortal, our choices matter beyond the present moment. Catholic teaching speaks of personal judgment, heaven, purgatory, and hell because the soul’s relationship with God has eternal significance.</p>
+<div class="pullquote">The question is not only, “What do I want right now?” It is also, “What is this doing to my soul?”</div>
+</div>
+<div class="check" data-check="primary1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">Why do Christians believe nothing in this world can fully satisfy the soul?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'primary1', 'c')"><span class="letter">a.</span><span>Because created things are evil and should be rejected.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'primary1', 'c')"><span class="letter">b.</span><span>Because pleasure is always sinful.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'primary1', 'c')"><span class="letter">c.</span><span>Because the soul is ultimately made for God, not only for temporary earthly goods.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'primary1', 'c')"><span class="letter">d.</span><span>Because humans do not really need relationships or purpose.</span></button>
+</div>
+<div class="check-feedback" id="fb-primary1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">What are some things people chase because they think those things will satisfy them? Why might those things still leave the soul restless?</div>
+<textarea id="pausePrimary" oninput="updateWordCount('pausePrimary', 'pausePrimaryWC', 80)" placeholder="Think about success, attention, money, entertainment, image, or comfort."></textarea>
+<div class="word-count" id="pausePrimaryWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="primaryNext" onclick="showScreen('aquinas')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="aquinas">
+<div class="card">
+<div class="screen-label">Part Five · Daily Life</div>
+<h2 class="screen-title">Caring for the Soul</h2>
+<p class="screen-intro">The soul may seem abstract, but it affects ordinary choices, habits, relationships, and peace.</p>
+<div class="prose">
+<p>Just as the body can be strengthened or weakened by habits, the soul can be nourished or wounded. Prayer, silence, Scripture, the sacraments, service, beauty, meaningful conversation, and virtue all help the soul grow.</p>
+<p>On the other hand, lying, addiction, selfishness, cruelty, envy, and treating people as objects wound the soul. These things may not leave visible bruises, but they shape who we become internally.</p>
+<p>Conscience is connected to this. A well-formed conscience is like the healthy function of a soul attentive to truth. When conscience is ignored repeatedly, it can become dull. When it is formed by truth and grace, it becomes clearer.</p>
+</div>
+<div class="check" data-check="aquinas1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">Which practice would best be described as caring for the soul?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'aquinas1', 'c')"><span class="letter">a.</span><span>Ignoring conscience so that choices feel easier.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'aquinas1', 'c')"><span class="letter">b.</span><span>Focusing only on appearance, entertainment, and success.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'aquinas1', 'c')"><span class="letter">c.</span><span>Practicing prayer, virtue, sacraments, reflection, and meaningful love.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'aquinas1', 'c')"><span class="letter">d.</span><span>Avoiding difficult truths because they cause discomfort.</span></button>
+</div>
+<div class="check-feedback" id="fb-aquinas1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">What is one habit that feeds the soul, and one habit that wounds or drains the soul? Explain why.</div>
+<textarea id="pauseAquinas" oninput="updateWordCount('pauseAquinas', 'pauseAquinasWC', 80)" placeholder="Choose one positive habit and one harmful habit, then explain the impact."></textarea>
+<div class="word-count" id="pauseAquinasWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="aquinasNext" onclick="showScreen('magisterium')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="magisterium">
+<div class="card">
+<div class="screen-label">Part Six · The Modern World</div>
+<h2 class="screen-title">Science, Technology, and the Mystery of the Person</h2>
+<p class="screen-intro">Modern science can explain many things about the body and brain, but Catholic teaching says the human person is more than matter.</p>
+<div class="prose">
+<p>Some people argue that humans are only biology, chemistry, genetics, or brain activity. Catholic teaching does not reject science, but it rejects the idea that science alone can explain the whole mystery of the person.</p>
+<p>Experiences like love, guilt, beauty, moral responsibility, longing for meaning, and self-sacrifice point beyond a purely material view of life. These experiences do not prove the soul like a math equation, but they show that human life has a spiritual depth that matter alone does not fully explain.</p>
+<p>Belief in the soul also changes how we see others. When you meet a difficult person, a lonely person, an elderly person, or someone who is ignored, you are not encountering a problem, a label, or a body. You are encountering a soul loved by God and destined for eternity.</p>
+</div>
+<div class="check" data-check="magisterium1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">How does belief in the soul challenge a purely material view of the human person?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'magisterium1', 'd')"><span class="letter">a.</span><span>It says science is useless and should be ignored.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'magisterium1', 'd')"><span class="letter">b.</span><span>It says the body is not part of who we are.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'magisterium1', 'd')"><span class="letter">c.</span><span>It says emotions and choices do not matter.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'magisterium1', 'd')"><span class="letter">d.</span><span>It says the human person has spiritual depth, dignity, and eternal meaning beyond physical processes alone.</span></button>
+</div>
+<div class="check-feedback" id="fb-magisterium1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Choose one human experience, love, guilt, beauty, grief, sacrifice, or longing for purpose. How might it point to the reality of the soul?</div>
+<textarea id="pauseMagisterium" oninput="updateWordCount('pauseMagisterium', 'pauseMagisteriumWC', 80)" placeholder="Explain why that experience seems deeper than biology alone."></textarea>
+<div class="word-count" id="pauseMagisteriumWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="magisteriumNext" onclick="showScreen('conclusion')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="conclusion">
+<div class="card">
+<div class="screen-label">Part Seven · Synthesis Before the Quiz</div>
+<h2 class="screen-title">Your Inner Life Deserves Attention</h2>
+<p class="screen-intro">A person can be busy, successful, entertained, and still spiritually neglected. The soul needs care.</p>
+<div class="prose">
+<p>Modern life often focuses on grades, appearance, productivity, health, sports, money, and entertainment. These things can matter, but they cannot replace the care of the soul.</p>
+<p>Caring for the soul can be simple: a few minutes of silence, honest prayer, journaling, Confession, Mass, reading something meaningful, forgiving someone, serving others, spending time in nature, or having a conversation that goes deeper than small talk.</p>
+<p>The lesson’s main point is not only that you <em>have</em> a soul. It is that your soul is precious, immortal, loved by God, and meant for eternal communion with Him.</p>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">What is one practice you could realistically commit to that would nurture your inner life or soul? Why would it help?</div>
+<textarea id="pauseConclusion" oninput="updateWordCount('pauseConclusion', 'pauseConclusionWC', 80)" placeholder="Choose one realistic practice and explain the spiritual benefit."></textarea>
+<div class="word-count" id="pauseConclusionWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="conclusionNext" onclick="showScreen('quiz')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="quiz">
+<div class="card">
+<div class="screen-label">Part Eight · Knowledge Check</div>
+<h2 class="screen-title">Check Your Understanding</h2>
+<p class="screen-intro">Answer each question once. Feedback will appear as you work.</p>
+<div id="quizQuestions"></div>
+<div class="quiz-score" id="quizScore">Your score<strong id="scoreText">0 / 8</strong></div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="quizNext" onclick="showScreen('deeper')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="deeper">
+<div class="card">
+<div class="screen-label">Part Nine · Think Deeper</div>
+<h2 class="screen-title">The Soul in the Modern World</h2>
+<p class="screen-intro">These questions ask you to apply the lesson to today’s world.</p>
+<div class="field">
+<label for="td1">Think Deeper 1</label>
+<div class="prose" style="margin-bottom:12px;"><p>In an age of science, technology, and artificial intelligence, some people think humans can be fully explained by biology or data. What aspects of human experience suggest that people are more than physical processes?</p></div>
+<textarea id="td1" oninput="updateWordCount('td1', 'td1WC', 130)" placeholder="Discuss experiences like love, guilt, beauty, purpose, conscience, grief, or self-sacrifice."></textarea>
+<div class="word-count" id="td1WC"><span>0 words</span><span>Minimum: 130 words</span></div>
+</div>
+<div class="field">
+<label for="td2">Think Deeper 2</label>
+<div class="prose" style="margin-bottom:12px;"><p>Modern life often focuses on grades, health, appearance, productivity, and entertainment. How can a person also remember to nourish the soul?</p></div>
+<textarea id="td2" oninput="updateWordCount('td2', 'td2WC', 130)" placeholder="Explain practical habits that can help someone care for their inner life."></textarea>
+<div class="word-count" id="td2WC"><span>0 words</span><span>Minimum: 130 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="deeperNext" onclick="showScreen('synthesis')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="synthesis">
+<div class="card">
+<div class="screen-label">Part Ten · Final Reflection</div>
+<h2 class="screen-title">Your Inner Self and Identity</h2>
+<p class="screen-intro">Use the whole lesson to reflect on who you are, what your soul means, and how your inner life deserves care.</p>
+<div class="field">
+<label for="synthesis">Final Synthesis</label>
+<div class="prose" style="margin-bottom:12px;"><p>Write a short personal reflection or letter to yourself about your inner life and identity. You may include gratitude for life, struggles in caring for your soul, questions about meaning, or one practice you want to commit to that could nurture your soul.</p></div>
+<textarea id="synthesis" oninput="updateWordCount('synthesis', 'synthesisWC', 160)" placeholder="What do you believe about your soul, your identity, and the inner life God has given you?"></textarea>
+<div class="word-count" id="synthesisWC"><span>0 words</span><span>Minimum: 160 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="synthesisNext" onclick="showScreen('finish')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="finish">
+<div class="card">
+<div class="screen-label">Part Eleven · Wrap Up</div>
+<h2 class="screen-title">Ready to Complete?</h2>
+<p class="screen-intro">Review your progress, then download your final report.</p>
+<div class="summary-grid">
+<div class="summary-stat"><div class="stat-label">Quiz Score</div><div class="stat-value" id="finishQuizScore">0 / 8</div></div>
+<div class="summary-stat"><div class="stat-label">Terms Viewed</div><div class="stat-value" id="finishTerms">0 / 8</div></div>
+<div class="summary-stat"><div class="stat-label">Total Words</div><div class="stat-value" id="finishWords">0</div></div>
+<div class="summary-stat"><div class="stat-label">Time Spent</div><div class="stat-value" id="finishTime">0 min</div></div>
+</div>
+<div class="download-note">Download the report and submit it as directed by your teacher. The file includes your written responses, quiz review, and completion details.</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save Progress</button><button class="btn btn-gold" onclick="finishLesson()">Download Report ↓</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="complete">
+<div class="card">
+<div class="completion-hero">
+<div class="completion-icon">✦</div>
+<div class="completion-title">Lesson Complete</div>
+<div class="completion-sub">You have completed Unit 1.9, The Soul.</div>
+</div>
+<div class="download-note">Your work has been saved in this browser. Download your report again if needed.</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="showScreen('finish')">← Back to Report</button><button class="btn btn-gold" onclick="downloadReport()">Download Report Again ↓</button></div>
+</div>
+</section>
+</div>
+<div class="toast" id="toast">Saved.</div>
+<div class="footer">HRE4M1 · Unit 1 · Lesson 8</div>
+</div>
+<script>
+const LESSON_ID = "1.9";
+const STORAGE_KEY = "hre4m1_unit_1_8_humanity";
+const SCREEN_ORDER = ["welcome", "hook", "intro", "terms", "freedom", "primary", "aquinas", "magisterium", "conclusion", "quiz", "deeper", "synthesis", "finish", "complete"];
+const TOTAL_STEPS = SCREEN_ORDER.length - 1;
+const REQUIRED_TERMS = 8;
+const QUIZ = [{"id": "q1", "q": "What is the soul in Catholic teaching?", "opts": ["A temporary feeling that disappears when the body dies", "The spiritual principle of a person that animates the body and survives bodily death", "A symbol for personality with no real existence", "A separate creature trapped inside the body"], "correct": 1, "explain": "The soul is the spiritual principle of the person. It gives life to the body and continues after death."}, {"id": "q2", "q": "What does it mean to say the soul is the form of the body?", "opts": ["The soul gives the body life, unity, and human identity", "The soul is shaped like the body", "The body is bad and the soul replaces it", "The soul is only a memory stored in the brain"], "correct": 0, "explain": "Aquinas used this language to explain that the soul gives the body its living human unity and identity."}, {"id": "q3", "q": "Why does Catholic teaching reject the idea that the body is worthless?", "opts": ["Because the body shares in the dignity of the person and is united with the soul", "Because only physical health matters", "Because the soul does not exist until after death", "Because the body is more important than the soul"], "correct": 0, "explain": "Catholic teaching values the body because body and soul form one human nature."}, {"id": "q4", "q": "What does the immortality of the soul mean?", "opts": ["The body never dies", "The soul does not perish at death and awaits reunion with the resurrected body", "People automatically become angels after death", "Memory alone continues through other people"], "correct": 1, "explain": "The soul continues to exist after bodily death and will be reunited with the body at the final Resurrection."}, {"id": "q5", "q": "Why do Christians believe nothing in this world fully satisfies the soul?", "opts": ["Because all earthly things are evil", "Because the soul is ultimately made for communion with God", "Because humans should reject joy and beauty", "Because success is never meaningful in any way"], "correct": 1, "explain": "Created goods can be good, but the soul’s deepest longing is for God."}, {"id": "q6", "q": "Which practice most directly nourishes the soul?", "opts": ["Ignoring conscience repeatedly", "Prayer, sacraments, reflection, virtue, and meaningful love", "Treating people as objects", "Chasing attention without purpose"], "correct": 1, "explain": "These practices help form the soul and orient the person toward God and goodness."}, {"id": "q7", "q": "What does conscience do?", "opts": ["It replaces truth with private opinion", "It helps the soul judge right from wrong when formed by truth and God’s law", "It removes moral responsibility", "It only reacts to social pressure"], "correct": 1, "explain": "Conscience is the soul applying moral truth to real choices, but it must be properly formed."}, {"id": "q8", "q": "How should belief in the soul affect the way we see other people?", "opts": ["We should see each person as a soul loved by God and destined for eternity", "We should value only useful or successful people", "We should treat people as bodies or labels", "We should ignore difficult people because they lack dignity"], "correct": 0, "explain": "Belief in the soul deepens respect for every person’s dignity, even when someone is difficult or overlooked."}];
+const CORRECT_MAP = {"intro1": "c", "freedom1": "b", "primary1": "c", "aquinas1": "c", "magisterium1": "d"};
+const MINIMUMS = {"hookResponse": 35, "pauseIntro": 60, "pauseFreedom": 70, "pausePrimary": 80, "pauseAquinas": 80, "pauseMagisterium": 80, "pauseConclusion": 80, "td1": 130, "td2": 130, "synthesis": 160};
+const RESPONSE_ORDER = ["hookResponse", "pauseIntro", "pauseFreedom", "pausePrimary", "pauseAquinas", "pauseMagisterium", "pauseConclusion", "td1", "td2", "synthesis"];
+const RESPONSE_TITLES = {"hookResponse": "Starting Point", "pauseIntro": "Reflection 1", "pauseFreedom": "Reflection 2", "pausePrimary": "Reflection 3", "pauseAquinas": "Reflection 4", "pauseMagisterium": "Reflection 5", "pauseConclusion": "Reflection 6", "td1": "Think Deeper 1", "td2": "Think Deeper 2", "synthesis": "Final Synthesis"};
+const REPORT_FILE_PREFIX = "HRE4M1_Unit_1_9_The_Soul";
+const REPORT_HEADER_LABEL = "HRE4M1 · Unit 1 · Lesson 9";
+const REPORT_TITLE = "The Soul, The Immortal Essence of Human Identity";
+const REPORT_SUBTITLE = 'Student Report';
+
+const state = { lessonId: LESSON_ID, startedAt: null, finishedAt: null, currentScreen: 'welcome', studentInfo: {name:'', email:'', className:''}, termsViewed: [], inlineChecks: {}, responses: {}, quiz: {answers: {}, scoreCount: 0}, sectionTimes: {}, lastSavedAt: null };
+RESPONSE_ORDER.forEach(key => state.responses[key] = '');
+let screenEnterTime = Date.now();
+
+function countWords(str) { if (!str) return 0; return str.trim().split(/\s+/).filter(Boolean).length; }
+function escapeHTML(str) { if (str === null || str === undefined) return ''; return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function formatTime(ms) { const totalMin = Math.floor(ms / 60000); if (totalMin < 1) return '< 1 min'; if (totalMin < 60) return totalMin + ' min'; const hrs = Math.floor(totalMin / 60); const mins = totalMin % 60; return hrs + 'h ' + mins + 'm'; }
+function persistInputsToState() {
+  state.studentInfo.name = document.getElementById('studentName').value.trim();
+  state.studentInfo.email = document.getElementById('studentEmail').value.trim();
+  state.studentInfo.className = document.getElementById('studentClass').value.trim();
+  RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) state.responses[key] = el.value.trim(); });
+}
+function saveLocal() { state.lastSavedAt = new Date().toISOString(); persistInputsToState(); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function totalWords() { persistInputsToState(); return Object.values(state.responses).reduce((sum, v) => sum + countWords(v), 0); }
+function totalTimeMs() { let total = 0; Object.values(state.sectionTimes).forEach(ms => total += ms || 0); if (state.currentScreen && screenEnterTime) total += Date.now() - screenEnterTime; return total; }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1600); }
+function markSaveButtonsSaved() { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.add('saved')); const label = document.getElementById('stickySaveLabel'); if (label) label.textContent = 'Saved'; setTimeout(() => { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.remove('saved')); const label2 = document.getElementById('stickySaveLabel'); if (label2) label2.textContent = 'Save Progress'; }, 1400); }
+function updateProgress() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); const shown = idx <= 0 ? 0 : idx; const pct = Math.max(0, Math.min(100, Math.round((shown / TOTAL_STEPS) * 100))); document.getElementById('progressFill').style.width = pct + '%'; document.getElementById('progressPercent').textContent = pct + '%'; document.getElementById('progressLabel').textContent = 'Section ' + Math.max(1, shown) + ' of ' + TOTAL_STEPS; document.getElementById('progressContainer').style.display = state.currentScreen === 'welcome' ? 'none' : 'block'; }
+function showScreen(name) { persistInputsToState(); const prev = state.currentScreen; if (prev && screenEnterTime) { state.sectionTimes[prev] = (state.sectionTimes[prev] || 0) + (Date.now() - screenEnterTime); } document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); const next = document.querySelector('.screen[data-screen="' + name + '"]'); if (next) next.classList.add('active'); state.currentScreen = name; screenEnterTime = Date.now(); if (name === 'quiz') renderQuiz(); if (name === 'finish') refreshFinishStats(); updateProgress(); refreshGating(); saveLocal(); window.scrollTo({top:0, behavior:'smooth'}); }
+function prevScreen() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); if (idx > 0) showScreen(SCREEN_ORDER[idx - 1]); }
+function beginLesson() { const name = document.getElementById('studentName').value.trim(); const email = document.getElementById('studentEmail').value.trim(); const alertBox = document.getElementById('setupAlert'); if (!name || !email) { alertBox.classList.add('show'); return; } alertBox.classList.remove('show'); if (!state.startedAt) state.startedAt = new Date().toISOString(); showScreen('hook'); }
+function updateWordCount(inputId, wcId) { const el = document.getElementById(inputId); const wc = countWords(el.value); const minimum = MINIMUMS[inputId] || 0; const box = document.getElementById(wcId); box.innerHTML = '<span>' + wc + ' words</span><span class="' + (wc >= minimum ? 'met' : 'short') + '">Minimum: ' + minimum + ' words</span>'; state.responses[inputId] = el.value.trim(); saveLocal(); refreshGating(); }
+function openTerm(card) { card.classList.toggle('open'); const term = card.getAttribute('data-term'); if (!state.termsViewed.includes(term)) { state.termsViewed.push(term); card.classList.add('viewed'); document.getElementById('termsViewed').textContent = state.termsViewed.length; } saveLocal(); refreshGating(); }
+function answerCheck(button, checkId, correctLetter) { const wrap = button.closest('.check'); if (wrap.querySelector('.check-option.answered')) return; const chosen = button.getAttribute('data-answer'); const isCorrect = chosen === correctLetter; wrap.querySelectorAll('.check-option').forEach(opt => { opt.classList.add('answered'); if (opt.getAttribute('data-answer') === correctLetter) opt.classList.add('correct'); }); if (!isCorrect) button.classList.add('incorrect'); state.inlineChecks[checkId] = {selected: chosen, correct: isCorrect}; const fb = document.getElementById('fb-' + checkId); fb.textContent = isCorrect ? 'Correct. You are tracking the main idea well.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); saveLocal(); refreshGating(); }
+function refreshGating() { persistInputsToState(); const enough = key => countWords(state.responses[key]) >= (MINIMUMS[key] || 0); const setDisabled = (id, disabled) => { const el = document.getElementById(id); if (el) el.disabled = disabled; }; setDisabled('hookNext', !enough('hookResponse')); setDisabled('introNext', !(state.inlineChecks.intro1 && enough('pauseIntro'))); setDisabled('termsNext', state.termsViewed.length < REQUIRED_TERMS); setDisabled('freedomNext', !(state.inlineChecks.freedom1 && enough('pauseFreedom'))); setDisabled('primaryNext', !(state.inlineChecks.primary1 && enough('pausePrimary'))); setDisabled('aquinasNext', !(state.inlineChecks.aquinas1 && enough('pauseAquinas'))); setDisabled('magisteriumNext', !(state.inlineChecks.magisterium1 && enough('pauseMagisterium'))); setDisabled('conclusionNext', !enough('pauseConclusion')); setDisabled('quizNext', Object.keys(state.quiz.answers).length < QUIZ.length); setDisabled('deeperNext', !(enough('td1') && enough('td2'))); setDisabled('synthesisNext', !enough('synthesis')); }
+function renderQuiz() { const container = document.getElementById('quizQuestions'); if (container.dataset.rendered === 'yes') return; container.dataset.rendered = 'yes'; const letters = ['a','b','c','d']; container.innerHTML = QUIZ.map((q, idx) => { const options = q.opts.map((opt, optIdx) => `<button class="q-option" data-opt="${optIdx}" onclick="answerQuiz('${q.id}', ${optIdx})"><span class="letter">${letters[optIdx]}.</span><span>${escapeHTML(opt)}</span></button>`).join(''); return `<div class="quiz-question" data-qid="${q.id}"><div class="q-number">Question ${idx + 1} of ${QUIZ.length}</div><div class="q-text">${escapeHTML(q.q)}</div><div class="q-options">${options}</div><div class="q-explanation" id="exp-${q.id}">${escapeHTML(q.explain)}</div></div>`; }).join(''); restoreQuizVisuals(); }
+function answerQuiz(qId, optIdx) { if (state.quiz.answers[qId] !== undefined) return; const q = QUIZ.find(item => item.id === qId); if (optIdx === q.correct) state.quiz.scoreCount += 1; state.quiz.answers[qId] = optIdx; restoreQuizVisuals(); saveLocal(); refreshGating(); }
+function restoreQuizVisuals() { QUIZ.forEach(q => { const qEl = document.querySelector('.quiz-question[data-qid="' + q.id + '"]'); if (!qEl) return; const chosen = state.quiz.answers[q.id]; qEl.querySelectorAll('.q-option').forEach(opt => opt.classList.remove('locked','correct','incorrect','selected')); const exp = document.getElementById('exp-' + q.id); if (exp) exp.classList.remove('show'); if (chosen !== undefined) { qEl.querySelectorAll('.q-option').forEach(opt => opt.classList.add('locked')); const selected = qEl.querySelector('.q-option[data-opt="' + chosen + '"]'); const correctBtn = qEl.querySelector('.q-option[data-opt="' + q.correct + '"]'); if (selected) selected.classList.add('selected'); if (chosen === q.correct && selected) selected.classList.add('correct'); else { if (selected) selected.classList.add('incorrect'); if (correctBtn) correctBtn.classList.add('correct'); } if (exp) exp.classList.add('show'); } }); if (Object.keys(state.quiz.answers).length === QUIZ.length) { document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('quizScore').classList.add('show'); } }
+function triggerDownload(blob, filename) { const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000); }
+function saveProgressNow() { saveLocal(); const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'}); const safeName = (state.studentInfo.name || 'student').replace(/[^a-zA-Z0-9]+/g, '_'); triggerDownload(blob, REPORT_FILE_PREFIX + '_' + safeName + '_progress.json'); showToast('Progress saved.'); markSaveButtonsSaved(); }
+function refreshFinishStats() { document.getElementById('finishQuizScore').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('finishTerms').textContent = state.termsViewed.length + ' / ' + REQUIRED_TERMS; document.getElementById('finishWords').textContent = totalWords().toLocaleString(); document.getElementById('finishTime').textContent = formatTime(totalTimeMs()); }
+function buildReportHTML() { persistInputsToState(); const letters = ['a','b','c','d']; const responseHtml = RESPONSE_ORDER.map(key => '<h2>' + escapeHTML(RESPONSE_TITLES[key]) + '</h2><div class="response-prompt">' + escapeHTML(PROMPTS[key]) + '</div><div class="response-box">' + escapeHTML(state.responses[key] || '') + '</div><div class="response-wc">' + countWords(state.responses[key] || '') + ' words</div>').join(''); const quizHtml = QUIZ.map((q, idx) => { const chosen = state.quiz.answers[q.id]; const chosenText = chosen !== undefined ? q.opts[chosen] : 'Not answered'; return '<div class="q-block"><div class="q-num">Question ' + (idx + 1) + '</div><div class="q-prompt">' + escapeHTML(q.q) + '</div><div class="q-ans"><strong>Student answer:</strong> ' + (chosen !== undefined ? letters[chosen] + '. ' : '') + escapeHTML(chosenText) + '</div><div class="q-ans"><strong>Correct answer:</strong> ' + letters[q.correct] + '. ' + escapeHTML(q.opts[q.correct]) + '</div><div class="q-ans"><strong>Explanation:</strong> ' + escapeHTML(q.explain) + '</div></div>'; }).join(''); return '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unit 1.8 Report</title><style>body{font-family:Georgia,serif;max-width:860px;margin:40px auto;padding:24px;color:#241318;line-height:1.6;background:#FFF1EA;}.hdr{border-bottom:3px double #B84632;padding-bottom:16px;margin-bottom:24px;}.hdr-label{font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#B84632;font-weight:600;}h1{font-size:28px;color:#8B1024;margin:8px 0 4px;}.subtitle{font-style:italic;color:#5A323B;font-size:16px;}.meta{background:#F8D9CC;padding:14px 18px;margin:20px 0;border-left:3px solid #B84632;font-size:14px;}.meta dl{margin:0;display:grid;grid-template-columns:140px 1fr;gap:6px 16px;}.meta dt{font-weight:700;color:#B84632;font-family:Arial,sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;}.meta dd{margin:0;}h2{font-size:20px;color:#8B1024;border-bottom:1px solid #B84632;padding-bottom:6px;margin-top:30px;}.response-prompt{font-style:italic;color:#5A323B;font-size:14px;margin-bottom:6px;}.response-box{background:white;border:1px solid #F8D9CC;border-left:3px solid #B84632;padding:14px 18px;margin:8px 0 10px;white-space:pre-wrap;font-size:15px;line-height:1.65;}.response-wc{font-family:Arial,sans-serif;font-size:11px;color:#B84632;margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;}.score-big{font-size:36px;color:#8B1024;font-weight:700;margin:10px 0;}.q-block{background:white;border:1px solid #F8D9CC;padding:12px 16px;margin:10px 0;border-radius:2px;}.q-num{font-family:Arial,sans-serif;font-size:12px;color:#B84632;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;}.q-prompt{font-weight:600;margin-bottom:8px;}.q-ans{font-size:14px;margin:4px 0;}</style></head><body><div class="hdr"><div class="hdr-label">' + escapeHTML(REPORT_HEADER_LABEL) + '</div><h1>' + escapeHTML(REPORT_TITLE) + '</h1><div class="subtitle">Student Report</div></div><div class="meta"><dl><dt>Name</dt><dd>' + escapeHTML(state.studentInfo.name) + '</dd><dt>Email</dt><dd>' + escapeHTML(state.studentInfo.email) + '</dd><dt>Class</dt><dd>' + escapeHTML(state.studentInfo.className || '') + '</dd><dt>Started</dt><dd>' + (state.startedAt ? new Date(state.startedAt).toLocaleString() : '') + '</dd><dt>Completed</dt><dd>' + (state.finishedAt ? new Date(state.finishedAt).toLocaleString() : '') + '</dd><dt>Time Spent</dt><dd>' + formatTime(totalTimeMs()) + '</dd><dt>Total Words</dt><dd>' + totalWords().toLocaleString() + '</dd></dl></div><h2>Knowledge Check Score</h2><div class="score-big">' + state.quiz.scoreCount + ' / ' + QUIZ.length + '</div>' + responseHtml + '<h2>Quiz Review</h2>' + quizHtml + '</body></html>'; }
+function downloadReport() { const html = buildReportHTML(); const blob = new Blob([html], {type:'text/html'}); const safeName = (state.studentInfo.name || 'student').replace(/[^a-zA-Z0-9]+/g, '_'); triggerDownload(blob, REPORT_FILE_PREFIX + '_' + safeName + '_report.html'); }
+function finishLesson() { if (!state.finishedAt) state.finishedAt = new Date().toISOString(); saveLocal(); downloadReport(); showScreen('complete'); }
+function restoreChecks() { Object.keys(state.inlineChecks).forEach(checkId => { const info = state.inlineChecks[checkId]; const options = document.querySelectorAll('.check[data-check="' + checkId + '"] .check-option'); options.forEach(opt => { opt.classList.add('answered'); if (opt.getAttribute('data-answer') === CORRECT_MAP[checkId]) opt.classList.add('correct'); if (opt.getAttribute('data-answer') === info.selected && !info.correct) opt.classList.add('incorrect'); }); const fb = document.getElementById('fb-' + checkId); if (fb) { fb.textContent = info.correct ? 'Correct. You are tracking the main idea well.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); } }); }
+function restoreTextAndCounts() { const map = {hookResponse:'hookWC', pauseIntro:'pauseIntroWC', pauseFreedom:'pauseFreedomWC', pausePrimary:'pausePrimaryWC', pauseAquinas:'pauseAquinasWC', pauseMagisterium:'pauseMagisteriumWC', pauseConclusion:'pauseConclusionWC', td1:'td1WC', td2:'td2WC', synthesis:'synthesisWC'}; RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) el.value = state.responses[key] || ''; const wcId = map[key]; if (el && document.getElementById(wcId)) updateWordCount(key, wcId); }); }
+function resumeFromFile(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = function(e) { try { const loaded = JSON.parse(e.target.result); if (!loaded || loaded.lessonId !== LESSON_ID) throw new Error('Wrong lesson file'); Object.assign(state, loaded); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); showScreen(state.currentScreen || 'hook'); showToast('Progress restored.'); } catch (err) { alert('Could not load that file. Please upload a valid Unit 1.9 progress file.'); } }; reader.readAsText(file); }
+function hydrateFromLocalStorage() { try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return; const saved = JSON.parse(raw); if (!saved || saved.lessonId !== LESSON_ID) return; Object.assign(state, saved); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); } catch (err) {} }
+hydrateFromLocalStorage(); updateProgress(); refreshGating();
+</script>
+</body>
+</html>
