@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HRE4M1 Unit 4 Interactive Walkthroughs</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #10182e;
+      --panel: #f4ecd7;
+      --ink: #1f2937;
+      --muted: #4b5563;
+      --gold: #c9a961;
+      --wine: #6b2c2c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #10182e, #192a4d 58%, #2d2335);
+      color: var(--panel);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    main {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 56px 0;
+    }
+
+    header {
+      margin-bottom: 28px;
+    }
+
+    .unit-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .unit-nav a {
+      display: inline-flex;
+      align-items: center;
+      height: auto;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.05;
+    }
+
+    p {
+      margin: 0;
+      color: #e7dfc8;
+      max-width: 68ch;
+    }
+
+    .lesson-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 30px;
+      padding: 0;
+      list-style: none;
+    }
+
+    a {
+      display: block;
+      height: 100%;
+      padding: 20px;
+      border: 1px solid rgba(244, 236, 215, 0.24);
+      border-radius: 8px;
+      background: rgba(244, 236, 215, 0.08);
+      color: var(--panel);
+      text-decoration: none;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    a:hover,
+    a:focus-visible {
+      transform: translateY(-2px);
+      border-color: var(--gold);
+      background: rgba(244, 236, 215, 0.14);
+      outline: none;
+    }
+
+    .lesson {
+      display: block;
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .title {
+      display: block;
+      margin-top: 8px;
+      font-size: 1.12rem;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <nav class="unit-nav" aria-label="Unit dashboards">
+      <a href="../">All Units</a>
+      <a href="../unit-1/">Unit 1 Dashboard</a>
+    </nav>
+
+    <header>
+      <h1>HRE4M1 Unit 4</h1>
+      <p>Interactive walkthroughs for Faith Through Vocation. Select a lesson below to open its shareable app.</p>
+    </header>
+
+    <ul class="lesson-list">
+      <li>
+        <a href="apps/4-1-vocation.html">
+          <span class="lesson">Lesson 4.1</span>
+          <span class="title">What is Vocation?</span>
+        </a>
+      </li>
+      <li>
+        <a href="apps/4-2-what-is-love.html">
+          <span class="lesson">Lesson 4.2</span>
+          <span class="title">What is Love?</span>
+        </a>
+      </li>
+      <li>
+        <a href="apps/4-3-christian-relationships.html">
+          <span class="lesson">Lesson 4.3</span>
+          <span class="title">Christian Relationships</span>
+        </a>
+      </li>
+      <li>
+        <a href="apps/4-4-sacrament-of-matrimony.html">
+          <span class="lesson">Lesson 4.4</span>
+          <span class="title">Sacrament of Matrimony</span>
+        </a>
+      </li>
+      <li>
+        <a href="apps/4-5-family-life.html">
+          <span class="lesson">Lesson 4.5</span>
+          <span class="title">Family Life</span>
+        </a>
+      </li>
+      <li>
+        <a href="apps/4-6-media-love-human-dignity.html">
+          <span class="lesson">Lesson 4.6</span>
+          <span class="title">Media, Love, and Human Dignity</span>
+        </a>
+      </li>
+    </ul>
+  </main>
+</body>
+</html>
