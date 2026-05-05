@@ -1,0 +1,2331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRE4M1 · Lesson 3.2: Jesus and Justice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --bg-deep: #12343B;
+    --bg-mid: #1B4D57;
+    --bg-card: #F6F1E7;
+    --bg-card-alt: #EAE2D1;
+    --gold: #D2A15B;
+    --gold-soft: #E0BB82;
+    --gold-deep: #956A32;
+    --wine: #2F6A59;
+    --ivory: #F6F1E7;
+    --cream: #F0E7D2;
+    --ink: #1E2A2F;
+    --ink-soft: #4B5C61;
+    --locked: #4A556880;
+    --success: #2F7D67;
+    --danger: #A8432B;
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.25);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Textured background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(201, 169, 97, 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(107, 44, 44, 0.1), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ---- Header ---- */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .unit-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .lesson-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .lesson-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gold-soft);
+    opacity: 0.9;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  /* ---- Progress bar ---- */
+  .progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-deep) 70%, transparent);
+    padding: 16px 0 12px;
+    margin: -24px -20px 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft));
+    width: 0%;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.5);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    margin: 8px auto 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  /* ---- Sticky save button (top bar) ---- */
+  .save-sticky {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 169, 97, 0.12);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .save-sticky:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    border-color: var(--gold);
+  }
+
+  .save-sticky.saved {
+    background: rgba(63, 122, 77, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  /* ---- In-row save (button row) ---- */
+  .btn-save-row {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-save-row:hover {
+    background: var(--gold-deep);
+    color: var(--ivory);
+  }
+
+  .btn-save-row.saved {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .btn-row-split {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* ---- Pause and Reflect blocks (in-flow) ---- */
+  .pause {
+    background: linear-gradient(135deg, rgba(107, 44, 44, 0.06), rgba(201, 169, 97, 0.08));
+    border: 1px solid rgba(107, 44, 44, 0.2);
+    border-left: 3px solid var(--wine);
+    padding: 22px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .pause-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pause-label::before {
+    content: '❊';
+    font-size: 14px;
+    color: var(--gold-deep);
+  }
+
+  .pause-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .pause textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(107, 44, 44, 0.25);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    border-radius: 2px;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .pause textarea:focus {
+    outline: none;
+    border-color: var(--wine);
+    box-shadow: 0 0 0 2px rgba(107, 44, 44, 0.15);
+  }
+
+  /* Save confirmation toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid var(--gold);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---- Screen Cards ---- */
+  .screen {
+    display: none;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .screen.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .screen-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .screen-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .screen-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .prose {
+    font-size: 16.5px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .prose p { margin-bottom: 18px; }
+
+  .prose strong { color: var(--wine); font-weight: 600; }
+
+  .prose em { color: var(--ink-soft); }
+
+  .prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 28px 0 14px;
+    color: var(--wine);
+    line-height: 1.25;
+  }
+
+  .prose h3::before {
+    content: '❖ ';
+    color: var(--gold-deep);
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+
+  .divider {
+    display: block;
+    margin: 32px auto;
+    width: 120px;
+    height: auto;
+    opacity: 0.6;
+  }
+
+  .pullquote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--wine);
+    text-align: center;
+    margin: 28px 20px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    line-height: 1.4;
+  }
+
+  .scripture {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scripture-ref {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--ivory);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--wine);
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:disabled {
+    background: var(--locked);
+    border-color: var(--locked);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+  }
+
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- Forms ---- */
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .word-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .word-count .met {
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  .word-count .short {
+    color: var(--danger);
+  }
+
+  /* ---- Key Terms / Flashcards ---- */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .term-card {
+    background: var(--bg-card-alt);
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    border-radius: 2px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 100px;
+  }
+
+  .term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--gold-deep);
+  }
+
+  .term-card.viewed {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+  }
+
+  .term-card.viewed::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .term-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.7;
+  }
+
+  .term-def {
+    display: none;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .term-card.open .term-def { display: block; }
+  .term-card.open .term-tap { display: none; }
+
+  /* ---- Inline comprehension check ---- */
+  .check {
+    background: #FDF8E8;
+    border: 1px dashed var(--gold-deep);
+    border-radius: 2px;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .check-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .check-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .check-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-option {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .check-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .check-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .check-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .check-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .check-feedback {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    display: none;
+  }
+
+  .check-feedback.show { display: block; }
+
+  /* ---- Vocation Compass ---- */
+  .compass-intro {
+    background: #FDF8E8;
+    border-left: 3px solid var(--wine);
+    padding: 18px 22px;
+    margin: 20px 0 30px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .compass-vocation {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(140, 113, 53, 0.25);
+  }
+
+  .compass-vocation:last-child {
+    border-bottom: none;
+  }
+
+  .compass-voc-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+
+  .compass-voc-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  .compass-aspect {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px dotted rgba(140, 113, 53, 0.2);
+  }
+
+  .compass-aspect:first-of-type { border-top: none; }
+
+  .compass-aspect-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .rating-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .rating-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(140, 113, 53, 0.4);
+    background: white;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .rating-btn:hover {
+    border-color: var(--gold-deep);
+  }
+
+  .rating-btn.selected {
+    background: var(--wine);
+    color: var(--ivory);
+    border-color: var(--wine);
+  }
+
+  .rating-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  .compass-result {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(107, 44, 44, 0.08));
+    border: 1px solid var(--gold-deep);
+    padding: 24px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  .compass-result.show { display: block; }
+
+  .result-voc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.3);
+  }
+
+  .result-voc:last-child { border-bottom: none; }
+
+  .result-voc-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--wine);
+  }
+
+  .result-bar {
+    width: 180px;
+    height: 8px;
+    background: rgba(140, 113, 53, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .result-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    transition: width 1s ease;
+  }
+
+  /* ---- Quiz ---- */
+  .quiz-question {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.25);
+  }
+
+  .quiz-question:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .q-option {
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .q-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .q-option.selected {
+    border-color: var(--wine);
+    background: rgba(107, 44, 44, 0.06);
+  }
+
+  .q-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .q-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+  }
+
+  .q-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+  }
+
+  .q-option.locked {
+    pointer-events: none;
+  }
+
+  .q-explanation {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201, 169, 97, 0.1);
+    border-left: 2px solid var(--gold-deep);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    display: none;
+  }
+
+  .q-explanation.show { display: block; }
+
+  .quiz-score {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(107, 44, 44, 0.1));
+    border: 1px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score strong {
+    font-size: 34px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ---- Completion screen ---- */
+  .completion-hero {
+    text-align: center;
+    padding: 20px 0 32px;
+  }
+
+  .completion-icon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    color: var(--gold-deep);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .completion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .completion-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .summary-stat {
+    background: #FDF8E8;
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+  }
+
+  .download-note {
+    background: rgba(201, 169, 97, 0.12);
+    padding: 18px 22px;
+    border-left: 3px solid var(--gold-deep);
+    margin: 24px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ---- Hero (start screen) ---- */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-deep));
+    color: var(--ivory);
+    padding: 40px 40px 36px;
+    margin: -40px -44px 32px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .hero-banner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+
+  .hero-banner p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-soft);
+    margin-top: 8px;
+  }
+
+  .hero-banner .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+
+  .upload-zone {
+    border: 1px dashed rgba(140, 113, 53, 0.4);
+    padding: 20px;
+    text-align: center;
+    margin-top: 24px;
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .upload-zone label {
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .upload-zone input { display: none; }
+
+  /* ---- Error / alert ---- */
+  .alert {
+    padding: 12px 16px;
+    background: rgba(168, 67, 43, 0.1);
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    margin-top: 14px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .alert.show { display: block; }
+
+  /* ---- Footer ---- */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .card { padding: 28px 22px; }
+    .hero-banner { margin: -28px -22px 28px; padding: 30px 24px 26px; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; justify-content: center; }
+    .compass-aspect { grid-template-columns: 1fr; gap: 8px; }
+    .result-bar { width: 120px; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .save-sticky {
+      position: static;
+      display: flex;
+      margin: 10px auto 0;
+      width: fit-content;
+    }
+    .progress-meta { flex-wrap: wrap; }
+    .btn-row-split { width: 100%; flex-direction: column; }
+    .btn-row-split .btn-save-row { width: 100%; justify-content: center; }
+  }
+
+  /* Print-friendly download report styling will be injected separately */
+
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="header">
+    <div class="unit-label">HRE4M1 · Unit 3 · Lesson 2</div>
+    <h1 class="lesson-title">Jesus and Justice</h1>
+    <div class="lesson-subtitle">Mercy, forgiveness, neighbor-love, and the justice of God's Kingdom</div>
+    <svg class="ornament" width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg" style="color:var(--gold);">
+      <path d="M 0 10 L 30 10 M 50 10 L 80 10" stroke="currentColor" stroke-width="1" fill="none"/>
+      <circle cx="40" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1"/>
+      <circle cx="40" cy="10" r="1" fill="currentColor"/>
+    </svg>
+  </div>
+
+  <div class="progress-container" id="progressContainer" style="display:none; position:relative;">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-meta">
+      <span id="progressLabel">Section 1 of 13</span>
+      <span id="progressPercent">0%</span>
+    </div>
+    <button class="save-sticky" id="stickySave" onclick="saveProgressNow()" title="Download your progress to resume later">
+      <span>💾</span><span id="stickySaveLabel">Save Progress</span>
+    </button>
+  </div>
+
+  <div id="screens">
+
+    <section class="screen active" data-screen="welcome">
+      <div class="card">
+        <div class="hero-banner">
+          <div class="ornament-line">
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+            <span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">A Study in Jesus and Justice</span>
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+          </div>
+          <h2>Welcome to Lesson 3.2</h2>
+          <p>This lesson explores how Jesus reveals divine justice through mercy, parables, and radical love of neighbor.</p>
+        </div>
+
+        <p class="prose" style="margin-bottom:24px;">Before you begin, enter your information. Your name will appear on the final report you can download and submit at the end of the lesson.</p>
+
+        <div class="field">
+          <label for="studentName">Full Name</label>
+          <input type="text" id="studentName" placeholder="First and last name" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="studentEmail">School Email</label>
+          <input type="email" id="studentEmail" placeholder="you@school.ca" autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="studentClass">Class / Period</label>
+          <input type="text" id="studentClass" placeholder="e.g., HRE4M1 · Period 2">
+        </div>
+
+        <div class="alert" id="setupAlert">Please fill in your name and email before starting.</div>
+
+        <div class="btn-row">
+          <div></div>
+          <button class="btn btn-primary" onclick="beginLesson()">Begin Lesson →</button>
+        </div>
+
+        <div class="upload-zone">
+          <div style="font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Returning to finish?</div>
+          <label for="resumeFile">Upload your saved progress file</label>
+          <input type="file" id="resumeFile" accept=".json" onchange="resumeFromFile(event)">
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="hook">
+      <div class="card">
+        <div class="screen-label">Before We Begin</div>
+        <h2 class="screen-title">A Question to Sit With</h2>
+        <p class="screen-intro">Start with your instinct before the lesson shapes your answer.</p>
+        <div class="prose">
+          <p>When you think about <strong>Jesus and justice</strong>, what comes to mind first?</p>
+          <p>Do you picture fairness, forgiveness, helping the poor, confronting wrongdoing, showing mercy, or something else? Write your first impression honestly.</p>
+        </div>
+        <div class="field" style="margin-top:20px;">
+          <label for="hookResponse">Your starting point</label>
+          <textarea id="hookResponse" placeholder="What does justice look like when you think about Jesus?" oninput="updateWordCount('hookResponse', 'hookWC', 35)"></textarea>
+          <div class="word-count" id="hookWC"><span>0 words</span><span>Minimum: 35 words</span></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="hookNext" onclick="showScreen('intro')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="intro">
+      <div class="card">
+        <div class="screen-label">Part One · Introduction</div>
+        <h2 class="screen-title">Justice Revealed in the Life of Jesus</h2>
+        <p class="screen-intro">The lesson presents Jesus not only as a teacher of justice, but as the living embodiment of divine justice.</p>
+
+        <div class="prose">
+          <p>Jesus' life and ministry reveal the heart of divine justice. He did not treat justice as an abstract idea or a cold system of reward and punishment. Instead, His justice was relational, born from love of God and neighbor.</p>
+          <p>In the Gospels, Jesus reaches toward the marginalized, heals the excluded, and challenges those who cling to unjust attitudes. When He restores a leper or gives sight to the blind, He is not only healing a body. He is restoring dignity and bringing a person back into community.</p>
+          <p>That is why Christian justice cannot be reduced to fairness alone. In Jesus, justice includes mercy, compassion, forgiveness, and setting things right in love.</p>
+          <div class="scripture">"Just as you did it to one of the least of these who are members of my family, you did it to me."
+            <span class="scripture-ref">Matthew 25:40, NRSV-CE</span>
+          </div>
+        </div>
+
+        <div class="check" data-check="intro1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">According to this lesson, what makes Jesus' justice distinctive?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this, 'intro1', 'b')"><span class="letter">a.</span><span>It focuses mainly on strict punishment and outward rule-keeping.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this, 'intro1', 'b')"><span class="letter">b.</span><span>It is relational, compassionate, and rooted in restoring dignity through love.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this, 'intro1', 'b')"><span class="letter">c.</span><span>It matters only inside the synagogue or Temple, not in daily life.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this, 'intro1', 'b')"><span class="letter">d.</span><span>It rejects mercy in order to preserve fairness.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-intro1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Why does the lesson say that Jesus' justice is relational and rooted in love, not only fairness or punishment?</div>
+          <textarea id="pauseIntro" placeholder="Explain what becomes different when justice starts with love and dignity." oninput="updatePause('pauseIntro', 'pauseIntroWC', 60, 'introNext', 'intro1')"></textarea>
+          <div class="word-count" id="pauseIntroWC"><span>0 words</span><span>Minimum: 60 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="introNext" onclick="showScreen('terms')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="terms">
+      <div class="card">
+        <div class="screen-label">Part Two · Vocabulary</div>
+        <h2 class="screen-title">Five Key Terms to Know</h2>
+        <p class="screen-intro">Tap each card to reveal its meaning. View all five before moving on.</p>
+
+        <div class="terms-grid" id="termsGrid">
+          <div class="term-card" data-term="parable" onclick="openTerm(this)">
+            <div class="term-name">Parable</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">A simple story used by Jesus to reveal moral or spiritual truth. Jesus used parables to teach about justice and the Kingdom in a relatable way.</div>
+          </div>
+          <div class="term-card" data-term="mercy" onclick="openTerm(this)">
+            <div class="term-name">Mercy</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">Compassion or forgiveness shown to someone whom it is within one's power to punish or harm. Jesus shows mercy as an essential part of justice.</div>
+          </div>
+          <div class="term-card" data-term="righteousness" onclick="openTerm(this)">
+            <div class="term-name">Righteousness</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">Living in right relationship with God and others. In Scripture, righteousness is closely linked with justice.</div>
+          </div>
+          <div class="term-card" data-term="neighbor" onclick="openTerm(this)">
+            <div class="term-name">Neighbor</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">In Jesus' teaching, every human person, regardless of status, background, or boundary. The Good Samaritan expands this idea dramatically.</div>
+          </div>
+          <div class="term-card" data-term="forgiveness" onclick="openTerm(this)">
+            <div class="term-name">Forgiveness</div>
+            <div class="term-tap">Tap to reveal</div>
+            <div class="term-def">Letting go of resentment or revenge in order to restore relationship and break cycles of hurt. Jesus presents forgiveness as central to Christian justice.</div>
+          </div>
+        </div>
+
+        <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink-soft); text-align:center; margin-top:16px;">
+          Viewed: <span id="termsViewed">0</span> of 5
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="termsNext" onclick="showScreen('parables')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="parables">
+      <div class="card">
+        <div class="screen-label">Part Three · Jesus Teaches in Stories</div>
+        <h2 class="screen-title">Parables of Justice, Mercy, and Neighbor-Love</h2>
+        <p class="screen-intro">Jesus often taught justice through stories that unsettled people's ordinary assumptions.</p>
+
+        <div class="prose">
+          <h3>The Workers in the Vineyard</h3>
+          <p>In Matthew 20:1 to 16, workers hired at different times all receive the same wage. Those who worked longer feel cheated. Jesus uses the story to challenge a narrow, transactional view of fairness. Divine justice is generous and grace-filled, not just based on comparison.</p>
+
+          <h3>The Unforgiving Servant</h3>
+          <p>In Matthew 18:21 to 35, a servant forgiven an enormous debt refuses to forgive someone else's small debt. Jesus shows that justice without mercy becomes hypocrisy. If we rely on God's mercy, we must show mercy to others.</p>
+
+          <h3>The Good Samaritan</h3>
+          <p>In Luke 10:25 to 37, the hero is not the expected religious figure, but a Samaritan who stops to help a wounded stranger. Jesus teaches that our neighbor is anyone in need, and that justice requires concrete action, not just good intentions.</p>
+        </div>
+
+        <div class="check" data-check="parables1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">What do these parables collectively reveal about Jesus' vision of justice?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this, 'parables1', 'c')"><span class="letter">a.</span><span>Justice is mainly about rewarding effort and punishing failure as precisely as possible.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this, 'parables1', 'c')"><span class="letter">b.</span><span>Justice depends mostly on social status and religious reputation.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this, 'parables1', 'c')"><span class="letter">c.</span><span>Justice includes generosity, forgiveness, and active love of neighbor, especially across boundaries.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this, 'parables1', 'c')"><span class="letter">d.</span><span>Justice and mercy should be kept separate to avoid confusion.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-parables1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Which parable in this lesson seems most challenging or surprising, and what does it teach about God's justice?</div>
+          <textarea id="pauseParables" placeholder="Choose one parable and explain what it reveals that feels challenging or new." oninput="updatePause('pauseParables', 'pauseParablesWC', 70, 'parablesNext', 'parables1')"></textarea>
+          <div class="word-count" id="pauseParablesWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="parablesNext" onclick="showScreen('sermon')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="sermon">
+      <div class="card">
+        <div class="screen-label">Part Four · Fulfilling the Law Through Love</div>
+        <h2 class="screen-title">The Sermon on the Mount</h2>
+        <p class="screen-intro">Jesus fulfills the law not by weakening it, but by deepening it into the level of the heart.</p>
+
+        <div class="prose">
+          <p>In Matthew 5 to 7, Jesus says He has not come to abolish the Law and the Prophets, but to fulfill them. He reveals that justice is not only external rule-keeping. It also involves interior conversion.</p>
+          <p>He teaches that avoiding murder is not enough if anger and hatred still govern the heart. Avoiding adultery is not enough if the heart remains impure. Jesus points toward a deeper righteousness rooted in love.</p>
+          <p>The Beatitudes open this teaching by blessing the poor in spirit, the meek, the merciful, peacemakers, and those who hunger for righteousness. These are not side notes. They are a blueprint for Kingdom justice.</p>
+          <div class="scripture">"Do not think that I have come to abolish the law or the prophets; I have come not to abolish but to fulfill."
+            <span class="scripture-ref">Matthew 5:17, NRSV-CE</span>
+          </div>
+        </div>
+
+        <div class="check" data-check="sermon1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">What does Jesus reveal in the Sermon on the Mount about justice and righteousness?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this, 'sermon1', 'd')"><span class="letter">a.</span><span>Only outward behavior matters, not inner motive or desire.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this, 'sermon1', 'd')"><span class="letter">b.</span><span>The old law should be ignored because love replaces truth.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this, 'sermon1', 'd')"><span class="letter">c.</span><span>Justice belongs mainly to those with visible power and control.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this, 'sermon1', 'd')"><span class="letter">d.</span><span>True justice begins in the heart and reaches its fulfillment in love of God and neighbor.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-sermon1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Why does Jesus move justice from external rule-keeping to the heart in the Sermon on the Mount?</div>
+          <textarea id="pauseSermon" placeholder="Explain why inward transformation matters if a person wants to live justice truthfully." oninput="updatePause('pauseSermon', 'pauseSermonWC', 75, 'sermonNext', 'sermon1')"></textarea>
+          <div class="word-count" id="pauseSermonWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="sermonNext" onclick="showScreen('tradition')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="tradition">
+      <div class="card">
+        <div class="screen-label">Part Five · Catholic Tradition and Culture</div>
+        <h2 class="screen-title">How the Church Carries Forward Jesus' Justice</h2>
+        <p class="screen-intro">Catholic tradition keeps Jesus' vision of justice alive through mercy, solidarity, social teaching, and the witness of saints.</p>
+
+        <div class="prose">
+          <h3>Parables as Moral Teaching</h3>
+          <p>Jesus' parables continue to shape Christian moral imagination. The Good Samaritan has inspired hospitals, charities, and even civil “Good Samaritan” laws that protect those who help others in crisis.</p>
+
+          <h3>The Works of Mercy</h3>
+          <p>Feeding the hungry, sheltering the homeless, forgiving injuries, and comforting the sorrowful are not “extra” acts. They are concrete ways Christian justice becomes visible.</p>
+
+          <h3>The Early Church and Catholic Social Teaching</h3>
+          <p>The first Christians shared resources so that no one was left in need. That spirit continues in Catholic Social Teaching through principles such as dignity of the human person, solidarity, the common good, and the preferential option for the poor.</p>
+
+          <h3>Saints as Models of Justice</h3>
+          <p>Saints like Oscar Romero and Vincent de Paul show that holiness and justice belong together. Their lives remind Christians that mercy, advocacy, courage, and care for the vulnerable are not optional add-ons to faith.</p>
+        </div>
+
+        <div class="check" data-check="tradition1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">What does Catholic tradition teach through the Works of Mercy and the witness of the saints?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this, 'tradition1', 'a')"><span class="letter">a.</span><span>Justice becomes real when love responds to people’s physical and spiritual needs in concrete action.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this, 'tradition1', 'a')"><span class="letter">b.</span><span>Justice belongs mainly to governments, not to ordinary Christians.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this, 'tradition1', 'a')"><span class="letter">c.</span><span>Mercy is valuable, but it should be kept separate from justice.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this, 'tradition1', 'a')"><span class="letter">d.</span><span>Saints become holy by avoiding difficult social issues completely.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-tradition1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Which Catholic tradition example stood out to you most, and what does it show about justice in action?</div>
+          <textarea id="pauseTradition" placeholder="Choose one example and explain what it reveals about Christian justice." oninput="updatePause('pauseTradition', 'pauseTraditionWC', 70, 'traditionNext', 'tradition1')"></textarea>
+          <div class="word-count" id="pauseTraditionWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="traditionNext" onclick="showScreen('realworld')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="realworld">
+      <div class="card">
+        <div class="screen-label">Part Six · Real-World Connections</div>
+        <h2 class="screen-title">Jesus' Justice in Everyday Life</h2>
+        <p class="screen-intro">The lesson shows that justice is not abstract. It appears in school life, friendships, service, and the way we treat the vulnerable.</p>
+
+        <div class="prose">
+          <h3>Compassion in Action</h3>
+          <p>A local group serving meals to the homeless mirrors the Good Samaritan. It restores dignity to people who are often overlooked.</p>
+
+          <h3>Practicing Forgiveness</h3>
+          <p>A student who forgives a friend instead of seeking revenge reflects the lesson of the Unforgiving Servant. Justice seeks healing, not endless retaliation.</p>
+
+          <h3>Standing with the Vulnerable</h3>
+          <p>When someone speaks out against exclusion or bullying, they defend human dignity in a way that echoes Jesus' concern for those pushed aside.</p>
+        </div>
+
+        <div class="check" data-check="real1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">What do these examples show about following Jesus in a just way?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this, 'real1', 'b')"><span class="letter">a.</span><span>Justice matters mostly in big legal systems, not in ordinary daily choices.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this, 'real1', 'b')"><span class="letter">b.</span><span>Following Jesus means practicing mercy, defending dignity, and taking concrete action for others.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this, 'real1', 'b')"><span class="letter">c.</span><span>Mercy and forgiveness weaken the pursuit of justice.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this, 'real1', 'b')"><span class="letter">d.</span><span>Justice is mainly about feeling sympathy, not acting.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-real1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Where do you see a need for Jesus-like justice in school, friendships, family life, or society right now?</div>
+          <textarea id="pauseReal" placeholder="Describe a real situation and explain how Jesus' justice would respond there." oninput="updatePause('pauseReal', 'pauseRealWC', 80, 'realNext', 'real1')"></textarea>
+          <div class="word-count" id="pauseRealWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="realNext" onclick="showScreen('lens')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="lens">
+      <div class="card">
+        <div class="screen-label">Part Seven · Reflective Activity</div>
+        <h2 class="screen-title">The Justice Lens</h2>
+        <p class="screen-intro">This is a reflection tool, not a score. Rate how strongly each justice theme resonates with you right now.</p>
+
+        <div class="compass-intro">
+          <strong>This is not a test.</strong> The goal is to notice which parts of Jesus' justice stand out most to you, or challenge you most, at this point in your life.
+          <br><br>
+          <strong>Rate each aspect from 1 (does not resonate) to 5 (resonates strongly).</strong>
+        </div>
+
+        <div class="compass-vocation" data-voc="generosity">
+          <div class="compass-voc-title">Generosity</div>
+          <div class="compass-voc-desc">Justice that refuses comparison and makes room for grace.</div>
+
+          <div class="compass-aspect"><div class="compass-aspect-text">Rejoicing when someone else receives unexpected good, even if I feel I worked harder.</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'g1')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'g1')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'g1')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'g1')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'g1')">5</button></div></div>
+          <div class="compass-aspect"><div class="compass-aspect-text">Believing that fairness is not always the same thing as grace.</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'g2')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'g2')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'g2')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'g2')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'g2')">5</button></div></div>
+          <div class="compass-aspect"><div class="compass-aspect-text">Welcoming others without obsessing over who “deserves” more.</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'g3')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'g3')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'g3')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'g3')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'g3')">5</button></div></div>
+          <div class="compass-aspect"><div class="compass-aspect-text">Thinking about justice in terms of what people truly need, not only what they earned.</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'g4')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'g4')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'g4')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'g4')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'g4')">5</button></div></div>
+        </div>
+
+        <div class="compass-vocation" data-voc="mercy">
+          <div class="compass-voc-title">Mercy</div>
+          <div class="compass-voc-desc">Justice that restores instead of trapping people in revenge.</div>
+
+          <div class="compass-aspect"><div class="compass-aspect-text">Letting go of grudges rather than keeping score forever.</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'m1')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'m1')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'m1')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'m1')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'m1')">5</button></div></div>
+          <div class="compass-aspect"><div class="compass-aspect-text">Seeing forgiveness as part of justice, not something separate from it.</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'m2')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'m2')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'m2')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'m2')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'m2')">5</button></div></div>
+          <div class="compass-aspect"><div class="compass-aspect-text">Believing that healing relationships matters more than winning arguments.</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'m3')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'m3')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'m3')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'m3')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'m3')">5</button></div></div>
+          <div class="compass-aspect"><div class="compass-aspect-text">Recognizing that if I need mercy from God, I should show mercy to others.</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'m4')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'m4')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'m4')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'m4')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'m4')">5</button></div></div>
+        </div>
+
+        <div class="compass-vocation" data-voc="neighbor">
+          <div class="compass-voc-title">Neighbor-Love</div>
+          <div class="compass-voc-desc">Justice that crosses barriers and acts when someone is in need.</div>
+
+          <div class="compass-aspect"><div class="compass-aspect-text">Helping people who are outside my friend group or comfort zone.</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'n1')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'n1')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'n1')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'n1')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'n1')">5</button></div></div>
+          <div class="compass-aspect"><div class="compass-aspect-text">Breaking through prejudice or labels to see someone’s dignity first.</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'n2')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'n2')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'n2')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'n2')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'n2')">5</button></div></div>
+          <div class="compass-aspect"><div class="compass-aspect-text">Believing justice requires action, not just sympathy from a distance.</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'n3')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'n3')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'n3')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'n3')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'n3')">5</button></div></div>
+          <div class="compass-aspect"><div class="compass-aspect-text">Seeing any person in need as my neighbor, not just people “like me.”</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'n4')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'n4')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'n4')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'n4')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'n4')">5</button></div></div>
+        </div>
+
+        <div class="compass-vocation" data-voc="heart">
+          <div class="compass-voc-title">Heart Transformation</div>
+          <div class="compass-voc-desc">Justice that begins inside and becomes visible in action.</div>
+
+          <div class="compass-aspect"><div class="compass-aspect-text">Understanding that justice is deeper than outward rule-following.</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'h1')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'h1')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'h1')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'h1')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'h1')">5</button></div></div>
+          <div class="compass-aspect"><div class="compass-aspect-text">Taking anger, pride, or hatred seriously because they shape how I treat others.</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'h2')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'h2')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'h2')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'h2')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'h2')">5</button></div></div>
+          <div class="compass-aspect"><div class="compass-aspect-text">Wanting justice that flows from humility, mercy, and purity of heart.</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'h3')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'h3')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'h3')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'h3')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'h3')">5</button></div></div>
+          <div class="compass-aspect"><div class="compass-aspect-text">Seeing the Beatitudes as a real blueprint for how Christians should live.</div><div class="rating-row">
+            <button class="rating-btn" data-val="1" onclick="rate(this,'h4')">1</button><button class="rating-btn" data-val="2" onclick="rate(this,'h4')">2</button><button class="rating-btn" data-val="3" onclick="rate(this,'h4')">3</button><button class="rating-btn" data-val="4" onclick="rate(this,'h4')">4</button><button class="rating-btn" data-val="5" onclick="rate(this,'h4')">5</button></div></div>
+        </div>
+
+        <div class="rating-scale" style="margin:16px 0 8px;">
+          <span>1 · Does not resonate</span>
+          <span>5 · Resonates strongly</span>
+        </div>
+
+        <div class="compass-result" id="lensResult">
+          <div style="font-family:'Cormorant Garamond',Georgia,serif; font-size:24px; font-weight:600; color:var(--wine); margin-bottom:14px;">Your Justice Lens Summary</div>
+          <div style="font-size:14px; color:var(--ink-soft); font-style:italic; margin-bottom:18px;">These averages are not a grade. They simply show which themes of Jesus' justice are speaking to you most right now.</div>
+
+          <div class="result-voc"><div class="result-voc-name">Generosity</div><div class="result-bar"><div class="result-bar-fill" id="bar-generosity"></div></div></div>
+          <div class="result-voc"><div class="result-voc-name">Mercy</div><div class="result-bar"><div class="result-bar-fill" id="bar-mercy"></div></div></div>
+          <div class="result-voc"><div class="result-voc-name">Neighbor-Love</div><div class="result-bar"><div class="result-bar-fill" id="bar-neighbor"></div></div></div>
+          <div class="result-voc"><div class="result-voc-name">Heart Transformation</div><div class="result-bar"><div class="result-bar-fill" id="bar-heart"></div></div></div>
+
+          <div class="field" style="margin-top:24px;">
+            <label for="lensReflect">Your Reflection</label>
+            <textarea id="lensReflect" placeholder="Which justice theme resonated most with you, and why? What might Jesus be asking you to notice or practice?" oninput="updateWordCount('lensReflect', 'lensWC', 75)"></textarea>
+            <div class="word-count" id="lensWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="lensNext" onclick="showScreen('quiz')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="quiz">
+      <div class="card">
+        <div class="screen-label">Part Eight · Check Your Understanding</div>
+        <h2 class="screen-title">Quick Knowledge Check</h2>
+        <p class="screen-intro">Seven multiple-choice questions. Take your time and answer all before moving on.</p>
+        <div id="quizQuestions"></div>
+        <div class="quiz-score" id="quizScore">
+          You scored <strong id="scoreText">0 / 7</strong>
+          <div style="font-size:14px; font-style:italic; color:var(--ink-soft); margin-top:6px;">This score will appear on your download.</div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="quizNext" onclick="showScreen('deeper')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="deeper">
+      <div class="card">
+        <div class="screen-label">Part Nine · Think Deeper</div>
+        <h2 class="screen-title">Reflection Prompts</h2>
+        <p class="screen-intro">Take these seriously. Aim for depth and connection to the lesson, not just length.</p>
+
+        <div class="field" style="margin-top:28px;">
+          <label for="td1">Prompt 1 · Parables and Human Fairness</label>
+          <div style="font-family:'Cormorant Garamond',Georgia,serif; font-size:19px; color:var(--ink); margin-bottom:10px; line-height:1.4;">
+            How do Jesus' parables and actions challenge modern ideas of fairness, revenge, and who deserves mercy?
+          </div>
+          <textarea id="td1" placeholder="Use examples from the lesson, such as the vineyard, Good Samaritan, or Unforgiving Servant." oninput="updateWordCount('td1', 'td1WC', 140)"></textarea>
+          <div class="word-count" id="td1WC"><span>0 words</span><span>Minimum: 140 words</span></div>
+        </div>
+
+        <div class="field" style="margin-top:28px;">
+          <label for="td2">Prompt 2 · Mercy and Justice</label>
+          <div style="font-family:'Cormorant Garamond',Georgia,serif; font-size:19px; color:var(--ink); margin-bottom:10px; line-height:1.4;">
+            Why is mercy not a weakness in Christian justice, but one of its deepest strengths?
+          </div>
+          <textarea id="td2" placeholder="Think about forgiveness, healing, and restoring right relationship." oninput="updateWordCount('td2', 'td2WC', 140)"></textarea>
+          <div class="word-count" id="td2WC"><span>0 words</span><span>Minimum: 140 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="tdNext" onclick="showScreen('synthesis')" disabled>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="synthesis">
+      <div class="card">
+        <div class="screen-label">Part Ten · Final Synthesis</div>
+        <h2 class="screen-title">Bring the Lesson Together</h2>
+        <p class="screen-intro">This is your final written synthesis of the lesson.</p>
+
+        <div class="prose">
+          <p>In one thoughtful response, explain how Jesus reveals the heart of divine justice. Connect His parables, the Sermon on the Mount, mercy, forgiveness, love of neighbor, and the Catholic call to stand with the vulnerable.</p>
+        </div>
+
+        <div class="field" style="margin-top:20px;">
+          <label for="synthesis">Your Synthesis Response</label>
+          <textarea id="synthesis" placeholder="Show how the lesson ideas fit together, and why they matter in real life." oninput="updateWordCount('synthesis', 'synthWC', 170)"></textarea>
+          <div class="word-count" id="synthWC"><span>0 words</span><span>Minimum: 170 words</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button>
+            <button class="btn btn-primary" id="synthNext" onclick="finishLesson()" disabled>Complete Lesson →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="finish">
+      <div class="card">
+        <div class="screen-label">Part Eleven · Wrap Up</div>
+        <h2 class="screen-title">Almost Finished</h2>
+        <p class="screen-intro">Review your progress, download your report, and then mark the lesson as complete.</p>
+
+        <div class="summary-grid">
+          <div class="summary-stat"><div class="stat-label">Quiz Score</div><div class="stat-value" id="finishQuiz">0 / 7</div></div>
+          <div class="summary-stat"><div class="stat-label">Words Written</div><div class="stat-value" id="finishWords">0</div></div>
+          <div class="summary-stat"><div class="stat-label">Time in Lesson</div><div class="stat-value" id="finishTime">0 min</div></div>
+          <div class="summary-stat"><div class="stat-label">Completion</div><div class="stat-value">100%</div></div>
+        </div>
+
+        <div class="download-note">Download your final report when you are ready. It will include your student information, quiz score, all written responses, and your Justice Lens summary.</div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+          <div class="btn-row-split">
+            <button class="btn btn-gold" onclick="downloadReport()">⬇ Download Report</button>
+            <button class="btn btn-primary" onclick="showScreen('complete')">Mark Complete →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="complete">
+      <div class="card">
+        <div class="completion-hero">
+          <div class="completion-icon">✦</div>
+          <div class="completion-title">Lesson Complete</div>
+          <div class="completion-sub">You have finished Lesson 3.2, Jesus and Justice.</div>
+        </div>
+        <div class="download-note">Your work has been saved in this session. Download your report if you have not already done so.</div>
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="showScreen('finish')">← Back to Report</button>
+          <div class="btn-row-split">
+            <button class="btn btn-gold" onclick="downloadReport()">⬇ Download Report Again</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="footer">HRE4M1 · Unit 3 · Lesson 2</div>
+</div>
+
+<div class="toast" id="saveToast">✓ Progress downloaded. Keep this file to resume later.</div>
+
+<script>
+const LESSON_ID = '3.2';
+const STORAGE_KEY = 'hre4m1_lesson_3_2';
+const SCREEN_ORDER = ["welcome", "hook", "intro", "terms", "parables", "sermon", "tradition", "realworld", "lens", "quiz", "deeper", "synthesis", "finish", "complete"];
+const TOTAL_STEPS = 13;
+const REQUIRED_TERMS = 5;
+const QUIZ = [{"id": "q1", "q": "According to the lesson, what best describes Jesus' approach to justice?", "opts": ["Mainly strict punishment and reward.", "Primarily external rule-following and legal codes.", "Relational justice rooted in love, mercy, and restoring dignity.", "A social system that applies only to religious people."], "correct": 2, "explain": "The lesson says Jesus' justice was never abstract. It was relational, compassionate, and aimed at setting things right in love."}, {"id": "q2", "q": "What does the Parable of the Workers in the Vineyard teach about divine justice?", "opts": ["God's justice is transactional and based only on who worked longest.", "God's justice is generous and inclusive, not limited to human ideas of comparison and merit.", "Only the earliest workers deserve God's blessings.", "Justice means everyone always gets the same reward for the same reason."], "correct": 1, "explain": "Jesus uses this parable to show that God's justice is generous and grace-filled, not merely human bookkeeping."}, {"id": "q3", "q": "What is the main lesson of the Parable of the Unforgiving Servant?", "opts": ["Mercy weakens justice and should be avoided.", "Forgiveness is optional if the original offense was serious.", "Those who receive God's mercy must also extend mercy and forgiveness to others.", "Justice is best served by keeping a record of all wrongs."], "correct": 2, "explain": "The parable shows that justice without mercy becomes hypocrisy. Christians are called to forgive as God forgives."}, {"id": "q4", "q": "According to the Good Samaritan, who is my neighbor?", "opts": ["Only people from my own religion or background.", "Only people who have helped me first.", "Anyone who needs my help, regardless of status, ethnicity, or background.", "Only close friends and relatives."], "correct": 2, "explain": "Jesus radically expands the meaning of neighbor. Our neighbor is anyone in need, even someone very different from us."}, {"id": "q5", "q": "In the Sermon on the Mount, how does Jesus fulfill the law?", "opts": ["By lowering moral expectations so more people can follow them.", "By replacing the law with emotion and personal opinion.", "By showing that true justice begins in the heart and reaches its fullness in love.", "By rejecting the commandments of the Old Testament."], "correct": 2, "explain": "Jesus does not abolish the law. He fulfills it by deepening it, calling people to interior conversion and love of God and neighbor."}, {"id": "q6", "q": "What do the Beatitudes reveal about justice in God's Kingdom?", "opts": ["Justice belongs mainly to the powerful and successful.", "The merciful, meek, peacemakers, and those who hunger for righteousness reflect Kingdom justice.", "Justice is about social status and public recognition.", "Justice matters only after death, not in daily life."], "correct": 1, "explain": "The Beatitudes show that humility, mercy, peace, and hunger for righteousness are marks of those who live God's justice."}, {"id": "q7", "q": "Why are works of mercy connected to justice in Catholic teaching?", "opts": ["Because they are optional acts with no connection to real moral duty.", "Because charity replaces the need for justice.", "Because serving the poor and vulnerable helps give people the care, dignity, and compassion they are owed.", "Because mercy applies only to private life, not social life."], "correct": 2, "explain": "The lesson presents works of mercy as concrete expressions of justice, especially for the vulnerable and overlooked."}];
+const CORRECT_MAP = {"intro1": "b", "parables1": "c", "sermon1": "d", "tradition1": "a", "real1": "b"};
+const MINIMUMS = {"hookResponse": 35, "pauseIntro": 60, "pauseParables": 70, "pauseSermon": 75, "pauseTradition": 70, "pauseReal": 80, "lensReflect": 75, "td1": 140, "td2": 140, "synthesis": 170};
+const RESPONSE_ORDER = ["hookResponse", "pauseIntro", "pauseParables", "pauseSermon", "pauseTradition", "pauseReal", "lensReflect", "td1", "td2", "synthesis"];
+const RESPONSE_TITLES = {"hookResponse": "Starting Point", "pauseIntro": "Reflection 1", "pauseParables": "Reflection 2", "pauseSermon": "Reflection 3", "pauseTradition": "Reflection 4", "pauseReal": "Reflection 5", "lensReflect": "Justice Lens Reflection", "td1": "Think Deeper 1", "td2": "Think Deeper 2", "synthesis": "Final Synthesis"};
+const PROMPTS = {"hookResponse": "What does justice mean to you when you think about Jesus?", "pauseIntro": "Why does the lesson say that Jesus' justice is relational and rooted in love, not only fairness or punishment?", "pauseParables": "Which parable in this lesson seems most challenging or surprising, and what does it teach about God's justice?", "pauseSermon": "Why does Jesus move justice from external rule-keeping to the heart in the Sermon on the Mount?", "pauseTradition": "Which Catholic tradition example stood out to you most, and what does it show about justice in action?", "pauseReal": "Where do you see a need for Jesus-like justice in school, friendships, family life, or society right now?", "lensReflect": "Which justice theme resonated most with you in the Justice Lens, and what might that say about the kind of Christian action you are called to notice or practice?", "td1": "How do Jesus' parables and actions challenge modern ideas of fairness, revenge, and who deserves mercy?", "td2": "Why is mercy not a weakness in Christian justice, but one of its deepest strengths?", "synthesis": "Explain how Jesus reveals the heart of divine justice. Connect His parables, the Sermon on the Mount, mercy, forgiveness, love of neighbor, and the Catholic call to stand with the vulnerable."};
+const REPORT_FILE_PREFIX = 'HRE4M1_L3_2_Jesus_and_Justice';
+
+const state = {
+  lessonId: LESSON_ID,
+  startedAt: null,
+  finishedAt: null,
+  studentInfo: { name: '', email: '', class: '' },
+  currentScreen: 'welcome',
+  sectionTimes: {},
+  responses: {
+    hookResponse: '',
+    pauseIntro: '',
+    pauseParables: '',
+    pauseSermon: '',
+    pauseTradition: '',
+    pauseReal: '',
+    lensReflect: '',
+    td1: '',
+    td2: '',
+    synthesis: ''
+  },
+  termsViewed: [],
+  inlineChecks: {},
+  lensRatings: {},
+  lensAverages: {},
+  quiz: {
+    answers: {},
+    scoreCount: 0,
+    correctIds: []
+  },
+  lastSavedAt: null
+};
+
+let screenEnterTime = Date.now();
+
+function countWords(str) {
+  if (!str) return 0;
+  return str.trim().split(/\s+/).filter(w => w.length > 0).length;
+}
+
+function escapeHTML(str) {
+  if (str === null || str === undefined) return '';
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function formatTime(ms) {
+  const totalMin = Math.floor(ms / 60000);
+  if (totalMin < 1) return '< 1 min';
+  if (totalMin < 60) return totalMin + ' min';
+  const hrs = Math.floor(totalMin / 60);
+  const mins = totalMin % 60;
+  return hrs + 'h ' + mins + 'm';
+}
+
+function saveLocal() {
+  state.lastSavedAt = new Date().toISOString();
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {}
+}
+
+function totalWordsCount() {
+  return RESPONSE_ORDER.reduce((sum, key) => sum + countWords(state.responses[key] || ''), 0);
+}
+
+function showScreen(name) {
+  if (state.currentScreen) {
+    const elapsed = Date.now() - screenEnterTime;
+    state.sectionTimes[state.currentScreen] = (state.sectionTimes[state.currentScreen] || 0) + elapsed;
+  }
+  screenEnterTime = Date.now();
+  state.currentScreen = name;
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.querySelector('.screen[data-screen="' + name + '"]');
+  if (target) target.classList.add('active');
+  document.getElementById('progressContainer').style.display = name === 'welcome' ? 'none' : 'block';
+  updateProgress();
+  if (name === 'quiz') renderQuiz();
+  if (name === 'finish' || name === 'complete') refreshFinishStats();
+  saveLocal();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevScreen() {
+  const idx = SCREEN_ORDER.indexOf(state.currentScreen);
+  if (idx > 0) showScreen(SCREEN_ORDER[idx - 1]);
+}
+
+function updateProgress() {
+  const idx = SCREEN_ORDER.indexOf(state.currentScreen);
+  const shown = idx <= 0 ? 0 : idx;
+  const pct = Math.max(0, Math.min(100, Math.round((shown / TOTAL_STEPS) * 100)));
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPercent').textContent = pct + '%';
+  document.getElementById('progressLabel').textContent = 'Section ' + Math.max(1, shown) + ' of ' + TOTAL_STEPS;
+}
+
+function beginLesson() {
+  const name = document.getElementById('studentName').value.trim();
+  const email = document.getElementById('studentEmail').value.trim();
+  const cls = document.getElementById('studentClass').value.trim();
+  if (!name || !email) {
+    document.getElementById('setupAlert').classList.add('show');
+    return;
+  }
+  document.getElementById('setupAlert').classList.remove('show');
+  state.studentInfo.name = name;
+  state.studentInfo.email = email;
+  state.studentInfo.class = cls;
+  if (!state.startedAt) state.startedAt = new Date().toISOString();
+  saveLocal();
+  showScreen('hook');
+}
+
+function updateStudentInfoFromForm() {
+  const name = document.getElementById('studentName');
+  const email = document.getElementById('studentEmail');
+  const cls = document.getElementById('studentClass');
+  if (name) state.studentInfo.name = name.value.trim();
+  if (email) state.studentInfo.email = email.value.trim();
+  if (cls) state.studentInfo.class = cls.value.trim();
+}
+
+function updateWordCount(textareaId, countId, minimum) {
+  const el = document.getElementById(textareaId);
+  const words = countWords(el.value);
+  state.responses[textareaId] = el.value.trim();
+  updateStudentInfoFromForm();
+  const counter = document.getElementById(countId);
+  const met = words >= minimum;
+  counter.innerHTML = '<span>' + words + ' words</span><span class="' + (met ? 'met' : 'short') + '">Minimum: ' + minimum + ' words</span>';
+  if (textareaId === 'hookResponse') document.getElementById('hookNext').disabled = !met;
+  if (textareaId === 'td1' || textareaId === 'td2') document.getElementById('tdNext').disabled = !(countWords(document.getElementById('td1').value) >= MINIMUMS.td1 && countWords(document.getElementById('td2').value) >= MINIMUMS.td2);
+  if (textareaId === 'synthesis') document.getElementById('synthNext').disabled = !met;
+  if (textareaId === 'lensReflect') checkLensReady();
+  saveLocal();
+}
+
+function updatePause(textareaId, countId, minimum, nextId, checkId) {
+  updateWordCount(textareaId, countId, minimum);
+  const wordsMet = countWords(document.getElementById(textareaId).value) >= minimum;
+  const checkMet = !checkId || !!state.inlineChecks[checkId];
+  document.getElementById(nextId).disabled = !(wordsMet && checkMet);
+}
+
+function openTerm(card) {
+  const term = card.getAttribute('data-term');
+  card.classList.toggle('open');
+  if (!state.termsViewed.includes(term)) state.termsViewed.push(term);
+  card.classList.add('viewed');
+  document.getElementById('termsViewed').textContent = state.termsViewed.length;
+  document.getElementById('termsNext').disabled = state.termsViewed.length < REQUIRED_TERMS;
+  saveLocal();
+}
+
+function answerCheck(btn, checkId, correctAnswer) {
+  const wrap = btn.closest('.check');
+  if (wrap.querySelector('.check-option.answered')) return;
+
+  wrap.querySelectorAll('.check-option').forEach(b => b.classList.add('answered'));
+  const chosen = btn.getAttribute('data-answer');
+  const isCorrect = chosen === correctAnswer;
+  btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+  if (!isCorrect) {
+    wrap.querySelectorAll('.check-option').forEach(b => {
+      if (b.getAttribute('data-answer') === correctAnswer) b.classList.add('correct');
+    });
+  }
+
+  state.inlineChecks[checkId] = { selected: chosen, correct: isCorrect };
+  const fb = document.getElementById('fb-' + checkId);
+  fb.textContent = isCorrect ? 'Correct. You matched the main lesson idea.' : 'Not quite. The correct answer is highlighted for you.';
+  fb.classList.add('show');
+
+  if (checkId === 'intro1') document.getElementById('introNext').disabled = !(countWords(document.getElementById('pauseIntro').value) >= MINIMUMS.pauseIntro);
+  if (checkId === 'parables1') document.getElementById('parablesNext').disabled = !(countWords(document.getElementById('pauseParables').value) >= MINIMUMS.pauseParables);
+  if (checkId === 'sermon1') document.getElementById('sermonNext').disabled = !(countWords(document.getElementById('pauseSermon').value) >= MINIMUMS.pauseSermon);
+  if (checkId === 'tradition1') document.getElementById('traditionNext').disabled = !(countWords(document.getElementById('pauseTradition').value) >= MINIMUMS.pauseTradition);
+  if (checkId === 'real1') document.getElementById('realNext').disabled = !(countWords(document.getElementById('pauseReal').value) >= MINIMUMS.pauseReal);
+  saveLocal();
+}
+
+function rate(btn, key) {
+  const row = btn.parentElement;
+  row.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  state.lensRatings[key] = Number(btn.getAttribute('data-val'));
+  showLensResults();
+  saveLocal();
+}
+
+function showLensResults() {
+  const groups = {
+    generosity: ['g1','g2','g3','g4'],
+    mercy: ['m1','m2','m3','m4'],
+    neighbor: ['n1','n2','n3','n4'],
+    heart: ['h1','h2','h3','h4']
+  };
+  const avgs = {};
+  Object.keys(groups).forEach(group => {
+    const vals = groups[group].map(id => state.lensRatings[id] || 0);
+    avgs[group] = vals.reduce((a,b)=>a+b,0) / 4;
+  });
+  state.lensAverages = avgs;
+  document.getElementById('lensResult').classList.add('show');
+  setTimeout(() => {
+    document.getElementById('bar-generosity').style.width = (avgs.generosity / 5 * 100) + '%';
+    document.getElementById('bar-mercy').style.width = (avgs.mercy / 5 * 100) + '%';
+    document.getElementById('bar-neighbor').style.width = (avgs.neighbor / 5 * 100) + '%';
+    document.getElementById('bar-heart').style.width = (avgs.heart / 5 * 100) + '%';
+  }, 100);
+  checkLensReady();
+}
+
+function checkLensReady() {
+  const ratingsDone = Object.keys(state.lensRatings).length >= 16;
+  const lensEl = document.getElementById('lensReflect');
+  const reflectDone = lensEl ? countWords(lensEl.value) >= MINIMUMS.lensReflect : false;
+  document.getElementById('lensNext').disabled = !(ratingsDone && reflectDone);
+}
+
+function refreshButtons() {
+  const valueWords = id => {
+    const el = document.getElementById(id);
+    return el ? countWords(el.value) : countWords(state.responses[id] || '');
+  };
+  document.getElementById('hookNext').disabled = valueWords('hookResponse') < MINIMUMS.hookResponse;
+  document.getElementById('introNext').disabled = !(valueWords('pauseIntro') >= MINIMUMS.pauseIntro && !!state.inlineChecks.intro1);
+  document.getElementById('termsNext').disabled = state.termsViewed.length < REQUIRED_TERMS;
+  document.getElementById('parablesNext').disabled = !(valueWords('pauseParables') >= MINIMUMS.pauseParables && !!state.inlineChecks.parables1);
+  document.getElementById('sermonNext').disabled = !(valueWords('pauseSermon') >= MINIMUMS.pauseSermon && !!state.inlineChecks.sermon1);
+  document.getElementById('traditionNext').disabled = !(valueWords('pauseTradition') >= MINIMUMS.pauseTradition && !!state.inlineChecks.tradition1);
+  document.getElementById('realNext').disabled = !(valueWords('pauseReal') >= MINIMUMS.pauseReal && !!state.inlineChecks.real1);
+  document.getElementById('tdNext').disabled = !(valueWords('td1') >= MINIMUMS.td1 && valueWords('td2') >= MINIMUMS.td2);
+  document.getElementById('synthNext').disabled = valueWords('synthesis') < MINIMUMS.synthesis;
+  checkLensReady();
+  if (Object.keys(state.quiz.answers).length >= QUIZ.length) document.getElementById('quizNext').disabled = false;
+}
+
+function restoreStateToUi() {
+  document.getElementById('studentName').value = state.studentInfo.name || '';
+  document.getElementById('studentEmail').value = state.studentInfo.email || '';
+  document.getElementById('studentClass').value = state.studentInfo.class || '';
+
+  const mapping = {
+    hookResponse:['hookWC', MINIMUMS.hookResponse],
+    pauseIntro:['pauseIntroWC', MINIMUMS.pauseIntro],
+    pauseParables:['pauseParablesWC', MINIMUMS.pauseParables],
+    pauseSermon:['pauseSermonWC', MINIMUMS.pauseSermon],
+    pauseTradition:['pauseTraditionWC', MINIMUMS.pauseTradition],
+    pauseReal:['pauseRealWC', MINIMUMS.pauseReal],
+    lensReflect:['lensWC', MINIMUMS.lensReflect],
+    td1:['td1WC', MINIMUMS.td1],
+    td2:['td2WC', MINIMUMS.td2],
+    synthesis:['synthWC', MINIMUMS.synthesis]
+  };
+  Object.keys(mapping).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.value = state.responses[id] || '';
+      updateWordCount(id, mapping[id][0], mapping[id][1]);
+    }
+  });
+
+  document.querySelectorAll('.term-card').forEach(card => {
+    if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed');
+  });
+  document.getElementById('termsViewed').textContent = state.termsViewed.length;
+
+  Object.entries(state.inlineChecks).forEach(([checkId, info]) => {
+    const wrap = document.querySelector('.check[data-check="' + checkId + '"]');
+    if (!wrap) return;
+    const correct = CORRECT_MAP[checkId];
+    wrap.querySelectorAll('.check-option').forEach(opt => {
+      opt.classList.add('answered');
+      if (opt.getAttribute('data-answer') === correct) opt.classList.add('correct');
+      else if (opt.getAttribute('data-answer') === info.selected) opt.classList.add('incorrect');
+    });
+    const fb = document.getElementById('fb-' + checkId);
+    if (fb) {
+      fb.textContent = info.correct ? 'Correct. You matched the main lesson idea.' : 'Not quite. The correct answer is highlighted for you.';
+      fb.classList.add('show');
+    }
+  });
+
+  Object.entries(state.lensRatings).forEach(([id, val]) => {
+    document.querySelectorAll('.rating-btn').forEach(btn => {
+      const onclick = btn.getAttribute('onclick') || '';
+      if (onclick.includes("'" + id + "'") && Number(btn.getAttribute('data-val')) === val) btn.classList.add('selected');
+    });
+  });
+  if (Object.keys(state.lensRatings).length > 0) showLensResults();
+
+  renderQuiz();
+  Object.entries(state.quiz.answers).forEach(([qId, chosen]) => {
+    const q = QUIZ.find(item => item.id === qId);
+    const qEl = document.querySelector('.quiz-question[data-qid="' + qId + '"]');
+    if (!qEl) return;
+    const buttons = qEl.querySelectorAll('.q-option');
+    buttons.forEach(b => b.classList.add('locked'));
+    const chosenBtn = qEl.querySelector('.q-option[data-opt="' + chosen + '"]');
+    const correctBtn = qEl.querySelector('.q-option[data-opt="' + q.correct + '"]');
+    if (chosen === q.correct) chosenBtn.classList.add('correct');
+    else {
+      chosenBtn.classList.add('incorrect');
+      correctBtn.classList.add('correct');
+    }
+    document.getElementById('exp-' + qId).classList.add('show');
+  });
+  if (Object.keys(state.quiz.answers).length >= QUIZ.length) {
+    document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length;
+    document.getElementById('quizScore').classList.add('show');
+  }
+
+  refreshButtons();
+  refreshFinishStats();
+}
+
+function renderQuiz() {
+  const container = document.getElementById('quizQuestions');
+  if (container.dataset.rendered === 'yes') return;
+  container.dataset.rendered = 'yes';
+  const letters = ['a','b','c','d'];
+  container.innerHTML = QUIZ.map((q, idx) => {
+    return '<div class="quiz-question" data-qid="' + q.id + '">' +
+      '<div class="q-number">Question ' + (idx + 1) + ' of ' + QUIZ.length + '</div>' +
+      '<div class="q-text">' + escapeHTML(q.q) + '</div>' +
+      '<div class="q-options">' +
+        q.opts.map((opt, i) =>
+          '<button class="q-option" data-opt="' + i + '" onclick="answerQ(\'' + q.id + '\', ' + i + ', ' + q.correct + ')">' +
+            '<span class="letter">' + letters[i] + '.</span><span>' + escapeHTML(opt) + '</span>' +
+          '</button>'
+        ).join('') +
+      '</div>' +
+      '<div class="q-explanation" id="exp-' + q.id + '">' + escapeHTML(q.explain) + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function answerQ(qId, chosen, correct) {
+  if (state.quiz.answers[qId] !== undefined) return;
+  state.quiz.answers[qId] = chosen;
+  const qEl = document.querySelector('.quiz-question[data-qid="' + qId + '"]');
+  const buttons = qEl.querySelectorAll('.q-option');
+  buttons.forEach(b => b.classList.add('locked'));
+  const chosenBtn = qEl.querySelector('.q-option[data-opt="' + chosen + '"]');
+  const correctBtn = qEl.querySelector('.q-option[data-opt="' + correct + '"]');
+  if (chosen === correct) {
+    chosenBtn.classList.add('correct');
+    state.quiz.scoreCount++;
+    if (!state.quiz.correctIds.includes(qId)) state.quiz.correctIds.push(qId);
+  } else {
+    chosenBtn.classList.add('incorrect');
+    correctBtn.classList.add('correct');
+  }
+  document.getElementById('exp-' + qId).classList.add('show');
+  if (Object.keys(state.quiz.answers).length >= QUIZ.length) {
+    document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length;
+    document.getElementById('quizScore').classList.add('show');
+    document.getElementById('quizNext').disabled = false;
+  }
+  saveLocal();
+}
+
+function refreshFinishStats() {
+  const totalMs = Object.values(state.sectionTimes).reduce((a,b)=>a+b,0) + (Date.now() - screenEnterTime);
+  document.getElementById('finishQuiz').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length;
+  document.getElementById('finishWords').textContent = totalWordsCount().toLocaleString();
+  document.getElementById('finishTime').textContent = formatTime(totalMs);
+}
+
+function finishLesson() {
+  if (!state.finishedAt) state.finishedAt = new Date().toISOString();
+  refreshFinishStats();
+  saveLocal();
+  showScreen('finish');
+}
+
+function buildReportHtml(inProgress) {
+  updateStudentInfoFromForm();
+  const totalMs = Object.values(state.sectionTimes).reduce((a,b)=>a+b,0) + (Date.now() - screenEnterTime);
+  const letters = ['a','b','c','d'];
+  const quizReview = QUIZ.map((q, idx) => {
+    const chosen = state.quiz.answers[q.id];
+    const chosenText = chosen !== undefined ? q.opts[chosen] : 'Not answered';
+    const correctText = q.opts[q.correct];
+    const isCorrect = chosen === q.correct;
+    const mark = isCorrect ? '<span class="mark correct-mark">CORRECT</span>' : '<span class="mark incorrect-mark">INCORRECT</span>';
+    const correctLine = !isCorrect ? '<div class="q-ans correct-note"><strong>Correct answer:</strong> ' + letters[q.correct] + '. ' + escapeHTML(correctText) + '</div>' : '';
+    return '<div class="q-block">' +
+      '<div class="q-num">Question ' + (idx + 1) + ' ' + mark + '</div>' +
+      '<div class="q-prompt">' + escapeHTML(q.q) + '</div>' +
+      '<div class="q-ans"><strong>Student answer:</strong> ' + (chosen !== undefined ? letters[chosen] + '. ' : '') + escapeHTML(chosenText) + '</div>' +
+      correctLine +
+      '</div>';
+  }).join('');
+
+  let lensSummary = '';
+  if (Object.keys(state.lensAverages).length > 0) {
+    lensSummary =
+      '<div class="sub-heading">Justice Lens Averages</div>' +
+      '<ul class="compass-list">' +
+      '<li>Generosity: ' + state.lensAverages.generosity.toFixed(2) + ' / 5</li>' +
+      '<li>Mercy: ' + state.lensAverages.mercy.toFixed(2) + ' / 5</li>' +
+      '<li>Neighbor-Love: ' + state.lensAverages.neighbor.toFixed(2) + ' / 5</li>' +
+      '<li>Heart Transformation: ' + state.lensAverages.heart.toFixed(2) + ' / 5</li>' +
+      '</ul>';
+  }
+
+  const checkEntries = Object.entries(state.inlineChecks);
+  let checksHtml = '';
+  if (checkEntries.length > 0) {
+    checksHtml = '<div class="sub-heading">Inline Comprehension Checks</div>' +
+      '<ul class="compass-list">' +
+      checkEntries.map(entry => '<li>' + entry[0] + ': <strong>' + (entry[1].correct ? 'Correct' : 'Incorrect') + '</strong> (chose ' + entry[1].selected + ')</li>').join('') +
+      '</ul>';
+  }
+
+  const responseBlocks = RESPONSE_ORDER.map(key => {
+    return '<h2>' + escapeHTML(RESPONSE_TITLES[key]) + '</h2>' +
+      '<div class="response-prompt">' + escapeHTML(PROMPTS[key]) + '</div>' +
+      '<div class="response-box">' + escapeHTML(state.responses[key] || '') + '</div>' +
+      '<div class="response-wc">' + countWords(state.responses[key] || '') + ' words</div>';
+  }).join('');
+
+  const stateJson = JSON.stringify(state).replace(/</g, '\u003c');
+  const safeName = (state.studentInfo.name || 'Student').replace(/[^a-zA-Z0-9]/g, '_');
+  const dateStr = new Date().toISOString().slice(0,10);
+  const filename = REPORT_FILE_PREFIX + '_' + safeName + (inProgress ? '_IN-PROGRESS' : '') + '_' + dateStr + '.html';
+
+  const report = '<!DOCTYPE html>\n<html lang="en">\n<head>\n' +
+    '<meta charset="UTF-8">\n' +
+    '<title>' + REPORT_FILE_PREFIX + ' Report · ' + escapeHTML(state.studentInfo.name) + '</title>\n' +
+    '<style>\n' +
+    'body { font-family: Georgia, "Times New Roman", serif; max-width: 820px; margin: 40px auto; padding: 24px; color: #1E2A2F; line-height: 1.6; background: #F6F1E7; }\n' +
+    '.hdr { border-bottom: 3px double #956A32; padding-bottom: 16px; margin-bottom: 24px; }\n' +
+    '.hdr-label { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: #956A32; font-weight: 600; }\n' +
+    'h1 { font-size: 28px; color: #2F6A59; margin: 8px 0 4px; }\n' +
+    '.subtitle { font-style: italic; color: #4B5C61; font-size: 16px; }\n' +
+    '.meta { background: #FBF8F1; padding: 14px 18px; margin: 20px 0; border-left: 3px solid #956A32; font-size: 14px; }\n' +
+    '.meta dl { margin: 0; display: grid; grid-template-columns: 140px 1fr; gap: 6px 16px; }\n' +
+    '.meta dt { font-weight: 700; color: #956A32; font-family: Arial, sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }\n' +
+    '.meta dd { margin: 0; }\n' +
+    'h2 { font-size: 20px; color: #2F6A59; border-bottom: 1px solid #D2A15B; padding-bottom: 6px; margin-top: 30px; }\n' +
+    '.score-big { font-size: 36px; color: #2F6A59; font-weight: 700; margin: 10px 0; }\n' +
+    '.sub-heading { font-weight: 700; font-size: 13px; color: #956A32; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 18px; margin-bottom: 8px; font-family: Arial, sans-serif; }\n' +
+    '.response-box { background: white; border: 1px solid #ddd; border-left: 3px solid #956A32; padding: 14px 18px; margin: 8px 0 20px; white-space: pre-wrap; font-size: 15px; line-height: 1.65; }\n' +
+    '.response-prompt { font-style: italic; color: #555; font-size: 14px; margin-bottom: 6px; }\n' +
+    '.response-wc { font-family: Arial, sans-serif; font-size: 11px; color: #956A32; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.08em; }\n' +
+    '.q-block { background: white; border: 1px solid #e0e0e0; padding: 12px 16px; margin-bottom: 12px; }\n' +
+    '.q-num { font-weight: 700; color: #2F6A59; margin-bottom: 6px; }\n' +
+    '.q-prompt { margin-bottom: 6px; }\n' +
+    '.q-ans { font-size: 14px; }\n' +
+    '.mark { font-size: 11px; padding: 2px 6px; margin-left: 8px; border-radius: 2px; font-family: Arial, sans-serif; letter-spacing: 0.08em; }\n' +
+    '.correct-mark { background: #E8F3EE; color: #2F7D67; border: 1px solid #2F7D67; }\n' +
+    '.incorrect-mark { background: #F9ECE8; color: #A8432B; border: 1px solid #A8432B; }\n' +
+    '.compass-list { margin: 0 0 18px 18px; }\n' +
+    '.progress-banner { background: #FBF4E7; border-left: 3px solid #D2A15B; padding: 12px 14px; margin-bottom: 18px; font-family: Arial, sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #956A32; }\n' +
+    '.percent { float: right; }\n' +
+    '#save-data { display:none; }\n' +
+    '</style>\n</head>\n<body>\n' +
+    '<div class="hdr"><div class="hdr-label">HRE4M1 · Unit 3 · Lesson 2</div><h1>Jesus and Justice</h1><div class="subtitle">Student Report</div></div>\n' +
+    (inProgress ? '<div class="progress-banner">In Progress <span class="percent">' + Math.round((SCREEN_ORDER.indexOf(state.currentScreen) / TOTAL_STEPS) * 100) + '%</span></div>' : '') +
+    '<div class="meta"><dl>' +
+      '<dt>Name</dt><dd>' + escapeHTML(state.studentInfo.name) + '</dd>' +
+      '<dt>Email</dt><dd>' + escapeHTML(state.studentInfo.email) + '</dd>' +
+      '<dt>Class</dt><dd>' + escapeHTML(state.studentInfo.class) + '</dd>' +
+      '<dt>Started</dt><dd>' + (state.startedAt ? new Date(state.startedAt).toLocaleString('en-CA') : '') + '</dd>' +
+      '<dt>Completed</dt><dd>' + (state.finishedAt ? new Date(state.finishedAt).toLocaleString('en-CA') : (inProgress ? 'In progress' : '')) + '</dd>' +
+      '<dt>Total Time</dt><dd>' + formatTime(totalMs) + '</dd>' +
+      '<dt>Words Written</dt><dd>' + totalWordsCount().toLocaleString() + '</dd>' +
+    '</dl></div>' +
+    '<h2>Quiz Score</h2><div class="score-big">' + state.quiz.scoreCount + ' / ' + QUIZ.length + '</div>' +
+    lensSummary + checksHtml + responseBlocks + '<h2>Quiz Review</h2>' + quizReview +
+    '<script type="application/json" id="hre4m1-save-data">' + stateJson + '<\/script>' +
+    '</body></html>';
+
+  return { filename, report };
+}
+
+function triggerDownload(filename, content, mime) {
+  const blob = new Blob([content], {type: mime});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function saveProgressNow() {
+  const payload = JSON.stringify(state, null, 2);
+  const stamp = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-');
+  triggerDownload('HRE4M1_L3_2_progress_' + stamp + '.json', payload, 'application/json');
+  showToast('✓ Progress downloaded. Keep this file to resume later.');
+  markSaveButtonsSaved();
+}
+
+function downloadReport() {
+  const built = buildReportHtml(false);
+  triggerDownload(built.filename, built.report, 'text/html');
+}
+
+function showToast(message) {
+  const toast = document.getElementById('saveToast');
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2800);
+}
+
+function markSaveButtonsSaved() {
+  const buttons = document.querySelectorAll('.save-sticky, .btn-save-row');
+  buttons.forEach(b => {
+    b.classList.add('saved');
+    const original = b.innerHTML;
+    if (b.classList.contains('save-sticky')) b.innerHTML = '<span>✓</span><span>Saved</span>';
+    else b.innerHTML = '✓ Saved';
+    clearTimeout(b._revertTimer);
+    b._revertTimer = setTimeout(() => {
+      b.classList.remove('saved');
+      b.innerHTML = original;
+    }, 2200);
+  });
+}
+
+function resumeFromFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const saved = JSON.parse(e.target.result);
+      if (saved.lessonId !== LESSON_ID) {
+        alert('This file is from a different lesson. Please upload the file for Lesson 3.2.');
+        return;
+      }
+      Object.assign(state, saved);
+      screenEnterTime = Date.now();
+      restoreStateToUi();
+      showScreen(state.currentScreen || 'hook');
+      showToast('✓ Progress restored.');
+    } catch(err) {
+      alert('Could not load that file. Please upload a valid Lesson 3.2 progress file.');
+    }
+  };
+  reader.readAsText(file);
+}
+
+function hydrateFromLocalStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const saved = JSON.parse(raw);
+    if (saved.lessonId !== LESSON_ID) return;
+    Object.assign(state, saved);
+    restoreStateToUi();
+    if (state.currentScreen && state.currentScreen !== 'welcome') {
+      showScreen(state.currentScreen);
+    }
+  } catch (e) {}
+}
+
+hydrateFromLocalStorage();
+</script>
+</body>
+</html>
