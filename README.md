@@ -6,6 +6,7 @@ This repository hosts HRE4M1 lesson apps through GitHub Pages.
 
 - All units: `https://fslb10.github.io/Interactive-Lessons/`
 - Unit 1: `https://fslb10.github.io/Interactive-Lessons/unit-1/`
+- Unit 2: `https://fslb10.github.io/Interactive-Lessons/Unit-2/`
 - Unit 4: `https://fslb10.github.io/Interactive-Lessons/Unit-4/`
 
 ## Unit 1 lesson URLs
@@ -22,6 +23,18 @@ This repository hosts HRE4M1 lesson apps through GitHub Pages.
 - Lesson 1.10: `https://fslb10.github.io/Interactive-Lessons/unit-1/apps/1-10-faith-and-reason.html`
 - Lesson 1.11: `https://fslb10.github.io/Interactive-Lessons/unit-1/apps/1-11-catholic-moral-objective-truth.html`
 - Lesson 1.12: `https://fslb10.github.io/Interactive-Lessons/unit-1/apps/1-12-conscience-morality-ethics.html`
+
+## Unit 2 lesson URLs
+
+- Lesson 2.1: `https://fslb10.github.io/Interactive-Lessons/Unit-2/apps/2-1-sacred-scripture.html`
+- Lesson 2.2: `https://fslb10.github.io/Interactive-Lessons/Unit-2/apps/2-2-four-senses-of-scripture.html`
+- Lesson 2.3: `https://fslb10.github.io/Interactive-Lessons/Unit-2/apps/2-3-images-of-god-in-scripture.html`
+- Lesson 2.4: `https://fslb10.github.io/Interactive-Lessons/Unit-2/apps/2-4-scripture-tradition-magisterium.html`
+- Lesson 2.5: `https://fslb10.github.io/Interactive-Lessons/Unit-2/apps/2-5-four-marks-of-the-church.html`
+- Lesson 2.6: `https://fslb10.github.io/Interactive-Lessons/Unit-2/apps/2-6-the-virgin-mary.html`
+- Lesson 2.7: `https://fslb10.github.io/Interactive-Lessons/Unit-2/apps/2-7-who-is-jesus.html`
+- Lesson 2.8: `https://fslb10.github.io/Interactive-Lessons/Unit-2/apps/2-8-prophets-and-call-stories.html`
+- Lesson 2.9: `https://fslb10.github.io/Interactive-Lessons/Unit-2/apps/2-9-saints.html`
 
 ## Unit 4 lesson URLs
 

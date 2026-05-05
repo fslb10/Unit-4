@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HRE4M1 Unit 1 Dashboard</title>
+  <title>HRE4M1 Unit 2 Dashboard</title>
   <style>
     :root {
       color-scheme: light;
-      --bg: #fff7ee;
-      --ink: #251419;
-      --muted: #6c4b4f;
-      --wine: #8b1024;
-      --clay: #b84632;
-      --line: rgba(139, 16, 36, 0.2);
-      --surface: rgba(255, 255, 255, 0.56);
+      --bg: #f6f0e4;
+      --ink: #232238;
+      --muted: #55506a;
+      --purple: #5b2d68;
+      --gold: #8b5e2a;
+      --line: rgba(91, 45, 104, 0.2);
+      --surface: rgba(255, 253, 247, 0.68);
     }
 
     * {
@@ -24,8 +24,8 @@
       margin: 0;
       min-height: 100vh;
       background:
-        radial-gradient(circle at top left, rgba(212, 154, 58, 0.26), transparent 34rem),
-        linear-gradient(135deg, #fff7ee 0%, #f8dccf 48%, #f2c8ad 100%);
+        radial-gradient(circle at 0% 0%, rgba(139, 94, 42, 0.2), transparent 30rem),
+        linear-gradient(135deg, #f6f0e4 0%, #efe3cf 52%, #ddd4e4 100%);
       color: var(--ink);
       font-family: Arial, Helvetica, sans-serif;
       line-height: 1.5;
@@ -39,14 +39,13 @@
 
     .topbar {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
+      flex-wrap: wrap;
+      gap: 14px;
       padding-bottom: 28px;
     }
 
     .home-link {
-      color: var(--wine);
+      color: var(--purple);
       font-size: 0.9rem;
       font-weight: 700;
       text-decoration: none;
@@ -69,7 +68,7 @@
 
     h1 {
       margin: 0;
-      color: var(--wine);
+      color: var(--purple);
       font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(2.35rem, 7vw, 5.8rem);
       line-height: 0.95;
@@ -79,7 +78,7 @@
     .eyebrow,
     .count {
       margin: 0 0 12px;
-      color: var(--clay);
+      color: var(--gold);
       font-size: 0.78rem;
       font-weight: 800;
       letter-spacing: 0.14em;
@@ -97,9 +96,9 @@
       min-width: 8rem;
       margin: 0;
       padding: 14px 16px;
-      border-left: 3px solid var(--clay);
-      background: rgba(255, 255, 255, 0.4);
-      color: var(--wine);
+      border-left: 3px solid var(--gold);
+      background: rgba(255, 253, 247, 0.48);
+      color: var(--purple);
       text-align: right;
     }
 
@@ -136,14 +135,14 @@
     .lesson-grid a:focus-visible {
       position: relative;
       z-index: 1;
-      background: rgba(255, 255, 255, 0.84);
-      box-shadow: 0 14px 32px rgba(139, 16, 36, 0.16);
+      background: rgba(255, 253, 247, 0.92);
+      box-shadow: 0 14px 32px rgba(91, 45, 104, 0.16);
       transform: translateY(-2px);
       outline: none;
     }
 
     .lesson-number {
-      color: var(--clay);
+      color: var(--gold);
       font-size: 0.78rem;
       font-weight: 800;
       letter-spacing: 0.12em;
@@ -153,7 +152,7 @@
     .lesson-title {
       display: block;
       margin-top: 22px;
-      color: var(--wine);
+      color: var(--purple);
       font-family: Georgia, "Times New Roman", serif;
       font-size: 1.35rem;
       font-weight: 700;
@@ -183,32 +182,29 @@
   <main>
     <nav class="topbar" aria-label="Site navigation">
       <a class="home-link" href="../">All Units</a>
-      <a class="home-link" href="../Unit-2/">Unit 2 Dashboard</a>
+      <a class="home-link" href="../unit-1/">Unit 1 Dashboard</a>
       <a class="home-link" href="../Unit-4/">Unit 4 Dashboard</a>
     </nav>
 
     <header>
       <div>
         <p class="eyebrow">HRE4M1 Interactive Walkthroughs</p>
-        <h1>Unit 1 Dashboard</h1>
+        <h1>Unit 2 Dashboard</h1>
         <p class="intro">Select a lesson to launch its shareable HTML app.</p>
       </div>
-      <p class="count">12 lessons</p>
+      <p class="count">9 lessons</p>
     </header>
 
     <ul class="lesson-grid">
-      <li><a href="apps/1-1-the-existence-of-god.html"><span class="lesson-number">Lesson 1.1</span><span class="lesson-title">The Existence of God</span><span class="open">Open lesson</span></a></li>
-      <li><a href="apps/1-2-causation-theory.html"><span class="lesson-number">Lesson 1.2</span><span class="lesson-title">Causation Theory</span><span class="open">Open lesson</span></a></li>
-      <li><a href="apps/1-3-the-nature-of-god.html"><span class="lesson-number">Lesson 1.3</span><span class="lesson-title">The Nature of God</span><span class="open">Open lesson</span></a></li>
-      <li><a href="apps/1-4-the-incarnation.html"><span class="lesson-number">Lesson 1.4</span><span class="lesson-title">The Incarnation</span><span class="open">Open lesson</span></a></li>
-      <li><a href="apps/1-5-the-paschal-mystery.html"><span class="lesson-number">Lesson 1.5</span><span class="lesson-title">The Paschal Mystery</span><span class="open">Open lesson</span></a></li>
-      <li><a href="apps/1-6-one-true-baptism.html"><span class="lesson-number">Lesson 1.6</span><span class="lesson-title">One True Baptism</span><span class="open">Open lesson</span></a></li>
-      <li><a href="apps/1-7-jesus-prophet-king-priest.html"><span class="lesson-number">Lesson 1.7</span><span class="lesson-title">Jesus, Prophet, King, Priest</span><span class="open">Open lesson</span></a></li>
-      <li><a href="apps/1-8-humanity-what-does-it-mean-to-be-human.html"><span class="lesson-number">Lesson 1.8</span><span class="lesson-title">Humanity, What Does It Mean to Be Human?</span><span class="open">Open lesson</span></a></li>
-      <li><a href="apps/1-9-the-soul-immortal-essence.html"><span class="lesson-number">Lesson 1.9</span><span class="lesson-title">The Soul, The Immortal Essence of Human Identity</span><span class="open">Open lesson</span></a></li>
-      <li><a href="apps/1-10-faith-and-reason.html"><span class="lesson-number">Lesson 1.10</span><span class="lesson-title">Faith and Reason</span><span class="open">Open lesson</span></a></li>
-      <li><a href="apps/1-11-catholic-moral-objective-truth.html"><span class="lesson-number">Lesson 1.11</span><span class="lesson-title">Catholic Moral Objective Truth</span><span class="open">Open lesson</span></a></li>
-      <li><a href="apps/1-12-conscience-morality-ethics.html"><span class="lesson-number">Lesson 1.12</span><span class="lesson-title">Conscience, Morality, and Ethics</span><span class="open">Open lesson</span></a></li>
+      <li><a href="apps/2-1-sacred-scripture.html"><span class="lesson-number">Lesson 2.1</span><span class="lesson-title">Sacred Scripture</span><span class="open">Open lesson</span></a></li>
+      <li><a href="apps/2-2-four-senses-of-scripture.html"><span class="lesson-number">Lesson 2.2</span><span class="lesson-title">Four Senses of Scripture</span><span class="open">Open lesson</span></a></li>
+      <li><a href="apps/2-3-images-of-god-in-scripture.html"><span class="lesson-number">Lesson 2.3</span><span class="lesson-title">Images of God in Scripture</span><span class="open">Open lesson</span></a></li>
+      <li><a href="apps/2-4-scripture-tradition-magisterium.html"><span class="lesson-number">Lesson 2.4</span><span class="lesson-title">Scripture, Tradition, and the Magisterium</span><span class="open">Open lesson</span></a></li>
+      <li><a href="apps/2-5-four-marks-of-the-church.html"><span class="lesson-number">Lesson 2.5</span><span class="lesson-title">The Four Marks of the Church</span><span class="open">Open lesson</span></a></li>
+      <li><a href="apps/2-6-the-virgin-mary.html"><span class="lesson-number">Lesson 2.6</span><span class="lesson-title">The Virgin Mary</span><span class="open">Open lesson</span></a></li>
+      <li><a href="apps/2-7-who-is-jesus.html"><span class="lesson-number">Lesson 2.7</span><span class="lesson-title">Who Is Jesus?</span><span class="open">Open lesson</span></a></li>
+      <li><a href="apps/2-8-prophets-and-call-stories.html"><span class="lesson-number">Lesson 2.8</span><span class="lesson-title">Prophets and Call Stories</span><span class="open">Open lesson</span></a></li>
+      <li><a href="apps/2-9-saints.html"><span class="lesson-number">Lesson 2.9</span><span class="lesson-title">Saints</span><span class="open">Open lesson</span></a></li>
     </ul>
   </main>
 </body>

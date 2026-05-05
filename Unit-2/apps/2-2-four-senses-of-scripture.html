@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRE4M1 · Lesson 2.2: Four Senses of Scripture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+
+  :root {
+    --bg-deep: #1B1833;
+    --bg-mid: #31204F;
+    --bg-card: #F6EFE2;
+    --bg-card-alt: #E8DCC7;
+    --gold: #C49A4A;
+    --gold-soft: #DFC084;
+    --gold-deep: #8B5E2A;
+    --wine: #5B2D68;
+    --ivory: #F6EFE2;
+    --cream: #F1E4C8;
+    --ink: #232238;
+    --ink-soft: #55506A;
+    --locked: #4A556880;
+    --success: #3E7C68;
+    --danger: #9E3B32;
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.25);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Textured background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(201, 169, 97, 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(107, 44, 44, 0.1), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ---- Header ---- */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .unit-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .lesson-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .lesson-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gold-soft);
+    opacity: 0.9;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  /* ---- Progress bar ---- */
+  .progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-deep) 70%, transparent);
+    padding: 16px 0 12px;
+    margin: -24px -20px 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft));
+    width: 0%;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.5);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    margin: 8px auto 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  /* ---- Sticky save button (top bar) ---- */
+  .save-sticky {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 169, 97, 0.12);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .save-sticky:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    border-color: var(--gold);
+  }
+
+  .save-sticky.saved {
+    background: rgba(63, 122, 77, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  /* ---- In-row save (button row) ---- */
+  .btn-save-row {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-save-row:hover {
+    background: var(--gold-deep);
+    color: var(--ivory);
+  }
+
+  .btn-save-row.saved {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .btn-row-split {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* ---- Pause and Reflect blocks (in-flow) ---- */
+  .pause {
+    background: linear-gradient(135deg, rgba(107, 44, 44, 0.06), rgba(201, 169, 97, 0.08));
+    border: 1px solid rgba(107, 44, 44, 0.2);
+    border-left: 3px solid var(--wine);
+    padding: 22px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .pause-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pause-label::before {
+    content: '❊';
+    font-size: 14px;
+    color: var(--gold-deep);
+  }
+
+  .pause-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .pause textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(107, 44, 44, 0.25);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    border-radius: 2px;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .pause textarea:focus {
+    outline: none;
+    border-color: var(--wine);
+    box-shadow: 0 0 0 2px rgba(107, 44, 44, 0.15);
+  }
+
+  /* Save confirmation toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid var(--gold);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---- Screen Cards ---- */
+  .screen {
+    display: none;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .screen.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .screen-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .screen-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .screen-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .prose {
+    font-size: 16.5px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .prose p { margin-bottom: 18px; }
+
+  .prose strong { color: var(--wine); font-weight: 600; }
+
+  .prose em { color: var(--ink-soft); }
+
+  .prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 28px 0 14px;
+    color: var(--wine);
+    line-height: 1.25;
+  }
+
+  .prose h3::before {
+    content: '❖ ';
+    color: var(--gold-deep);
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+
+  .divider {
+    display: block;
+    margin: 32px auto;
+    width: 120px;
+    height: auto;
+    opacity: 0.6;
+  }
+
+  .pullquote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--wine);
+    text-align: center;
+    margin: 28px 20px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    line-height: 1.4;
+  }
+
+  .scripture {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scripture-ref {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--ivory);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--wine);
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:disabled {
+    background: var(--locked);
+    border-color: var(--locked);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+  }
+
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- Forms ---- */
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .word-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .word-count .met {
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  .word-count .short {
+    color: var(--danger);
+  }
+
+  /* ---- Key Terms / Flashcards ---- */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .term-card {
+    background: var(--bg-card-alt);
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    border-radius: 2px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 100px;
+  }
+
+  .term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--gold-deep);
+  }
+
+  .term-card.viewed {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+  }
+
+  .term-card.viewed::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .term-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.7;
+  }
+
+  .term-def {
+    display: none;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .term-card.open .term-def { display: block; }
+  .term-card.open .term-tap { display: none; }
+
+  /* ---- Inline comprehension check ---- */
+  .check {
+    background: #FDF8E8;
+    border: 1px dashed var(--gold-deep);
+    border-radius: 2px;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .check-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .check-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .check-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-option {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .check-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .check-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .check-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .check-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .check-feedback {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    display: none;
+  }
+
+  .check-feedback.show { display: block; }
+
+  /* ---- Vocation Compass ---- */
+  .compass-intro {
+    background: #FDF8E8;
+    border-left: 3px solid var(--wine);
+    padding: 18px 22px;
+    margin: 20px 0 30px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .compass-vocation {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(140, 113, 53, 0.25);
+  }
+
+  .compass-vocation:last-child {
+    border-bottom: none;
+  }
+
+  .compass-voc-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+
+  .compass-voc-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  .compass-aspect {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px dotted rgba(140, 113, 53, 0.2);
+  }
+
+  .compass-aspect:first-of-type { border-top: none; }
+
+  .compass-aspect-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .rating-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .rating-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(140, 113, 53, 0.4);
+    background: white;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .rating-btn:hover {
+    border-color: var(--gold-deep);
+  }
+
+  .rating-btn.selected {
+    background: var(--wine);
+    color: var(--ivory);
+    border-color: var(--wine);
+  }
+
+  .rating-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  .compass-result {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(107, 44, 44, 0.08));
+    border: 1px solid var(--gold-deep);
+    padding: 24px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  .compass-result.show { display: block; }
+
+  .result-voc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.3);
+  }
+
+  .result-voc:last-child { border-bottom: none; }
+
+  .result-voc-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--wine);
+  }
+
+  .result-bar {
+    width: 180px;
+    height: 8px;
+    background: rgba(140, 113, 53, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .result-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    transition: width 1s ease;
+  }
+
+  /* ---- Quiz ---- */
+  .quiz-question {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.25);
+  }
+
+  .quiz-question:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .q-option {
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .q-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .q-option.selected {
+    border-color: var(--wine);
+    background: rgba(107, 44, 44, 0.06);
+  }
+
+  .q-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .q-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+  }
+
+  .q-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+  }
+
+  .q-option.locked {
+    pointer-events: none;
+  }
+
+  .q-explanation {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201, 169, 97, 0.1);
+    border-left: 2px solid var(--gold-deep);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    display: none;
+  }
+
+  .q-explanation.show { display: block; }
+
+  .quiz-score {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(107, 44, 44, 0.1));
+    border: 1px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score strong {
+    font-size: 34px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ---- Completion screen ---- */
+  .completion-hero {
+    text-align: center;
+    padding: 20px 0 32px;
+  }
+
+  .completion-icon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    color: var(--gold-deep);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .completion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .completion-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .summary-stat {
+    background: #FDF8E8;
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+  }
+
+  .download-note {
+    background: rgba(201, 169, 97, 0.12);
+    padding: 18px 22px;
+    border-left: 3px solid var(--gold-deep);
+    margin: 24px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ---- Hero (start screen) ---- */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-deep));
+    color: var(--ivory);
+    padding: 40px 40px 36px;
+    margin: -40px -44px 32px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .hero-banner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+
+  .hero-banner p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-soft);
+    margin-top: 8px;
+  }
+
+  .hero-banner .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+
+  .upload-zone {
+    border: 1px dashed rgba(140, 113, 53, 0.4);
+    padding: 20px;
+    text-align: center;
+    margin-top: 24px;
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .upload-zone label {
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .upload-zone input { display: none; }
+
+  /* ---- Error / alert ---- */
+  .alert {
+    padding: 12px 16px;
+    background: rgba(168, 67, 43, 0.1);
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    margin-top: 14px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .alert.show { display: block; }
+
+  /* ---- Footer ---- */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .card { padding: 28px 22px; }
+    .hero-banner { margin: -28px -22px 28px; padding: 30px 24px 26px; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; justify-content: center; }
+    .compass-aspect { grid-template-columns: 1fr; gap: 8px; }
+    .result-bar { width: 120px; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .save-sticky {
+      position: static;
+      display: flex;
+      margin: 10px auto 0;
+      width: fit-content;
+    }
+    .progress-meta { flex-wrap: wrap; }
+    .btn-row-split { width: 100%; flex-direction: column; }
+    .btn-row-split .btn-save-row { width: 100%; justify-content: center; }
+  }
+
+  /* Print-friendly download report styling will be injected separately */
+
+  /* Unit 2 Scripture palette overrides */
+  body::before {
+    background:
+      radial-gradient(ellipse at top left, rgba(196, 154, 74, 0.10), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(91, 45, 104, 0.16), transparent 50%);
+  }
+  .pause { background: linear-gradient(135deg, rgba(91, 45, 104, 0.08), rgba(196, 154, 74, 0.08)); border-color: rgba(91, 45, 104, 0.22); }
+  .check, .field input, .field textarea, .field select, .pause textarea, .summary-stat { background:#FFF9EC; }
+  .term-card.viewed { background: linear-gradient(135deg, #FFF9EC, var(--bg-card-alt)); }
+
+
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="unit-label">HRE4M1 · Unit 2 · Lesson 2</div>
+    <h1 class="lesson-title">Four Senses of Scripture</h1>
+    <div class="lesson-subtitle">Reading Scripture through literal, allegorical, moral, and anagogical meaning</div>
+    <svg class="ornament" width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg" style="color:var(--gold);">
+      <path d="M 0 10 L 30 10 M 50 10 L 80 10" stroke="currentColor" stroke-width="1" fill="none"/>
+      <circle cx="40" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1"/>
+      <circle cx="40" cy="10" r="1" fill="currentColor"/>
+    </svg>
+  </div>
+
+  <div class="progress-container" id="progressContainer" style="display:none; position:relative;">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-meta"><span id="progressLabel">Section 1 of 13</span><span id="progressPercent">0%</span></div>
+    <button class="save-sticky" id="stickySave" onclick="saveProgressNow()" title="Download your progress to resume later"><span>💾</span><span id="stickySaveLabel">Save Progress</span></button>
+  </div>
+
+  <div id="screens">
+    <section class="screen active" data-screen="welcome">
+      <div class="card">
+        <div class="hero-banner">
+          <div class="ornament-line">
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+            <span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">A Study in Biblical Interpretation</span>
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+          </div>
+          <h2>Welcome to Lesson 2.2</h2>
+          <p>This lesson explores the Four Senses of Scripture and how Catholics read the Bible with depth, faith, and care.</p>
+        </div>
+
+        <p class="prose" style="margin-bottom:24px;">Before you begin, enter your information. Your name will appear on the final report you can download and submit at the end of the lesson.</p>
+        <div class="field"><label for="studentName">Full Name</label><input autocomplete="name" id="studentName" placeholder="First and last name" type="text"></div>
+        <div class="field"><label for="studentEmail">School Email</label><input autocomplete="email" id="studentEmail" placeholder="you@school.ca" type="email"></div>
+        <div class="field"><label for="studentClass">Class / Period</label><input id="studentClass" placeholder="e.g., HRE4M1 · Period 2" type="text"></div>
+        <div class="alert" id="setupAlert">Please fill in your name and email before starting.</div>
+        <div class="btn-row"><div></div><button class="btn btn-primary" onclick="beginLesson()">Begin Lesson →</button></div>
+        <div class="upload-zone">
+          <div style="font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Returning to finish?</div>
+          <label for="resumeFile">Upload your saved progress file</label>
+          <input accept=".json" id="resumeFile" onchange="resumeFromFile(event)" type="file">
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="hook">
+      <div class="card">
+        <div class="screen-label">Before We Begin</div>
+        <h2 class="screen-title">A Question to Sit With</h2>
+        <p class="screen-intro">Start with your honest instinct before learning the four senses.</p>
+        <div class="prose">
+          <p>Sometimes a Bible story seems simple at first, but then we notice that it teaches more than one thing at the same time.</p>
+          <p>Before we begin, think of a story, movie, song, or Bible passage that has more meaning than what appears on the surface. What made you realize there was a deeper meaning?</p>
+        </div>
+        <div class="field" style="margin-top:20px;">
+          <label for="hookResponse">Your starting point</label>
+          <textarea id="hookResponse" oninput="updateWordCount('hookResponse','hookWC',35)" placeholder="Describe something that had a deeper meaning than you first noticed."></textarea>
+          <div class="word-count" id="hookWC"><span>0 words</span><span>Minimum: 35 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="hookNext" onclick="showScreen('intro')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="intro">
+      <div class="card">
+        <div class="screen-label">Part One · Introduction</div>
+        <h2 class="screen-title">One Scripture, Many Layers</h2>
+        <p class="screen-intro">The Church teaches that Scripture has a literal sense and spiritual senses that help us read God’s Word more fully.</p>
+        <div class="prose">
+          <p>In Lesson 2.1, you learned that Catholics interpret Scripture carefully by considering context, genre, and the Church’s guidance. This lesson adds another classic Catholic tool: the <strong>Four Senses of Scripture</strong>.</p>
+          <p>The four senses are <strong>literal</strong>, <strong>allegorical</strong>, <strong>moral</strong>, and <strong>anagogical</strong>. They help readers see what the text says, how it points to Christ, how it teaches us to live, and how it directs our hearts toward heaven.</p>
+          <p>A medieval summary puts it this way: the letter teaches what happened, allegory teaches what to believe, the moral sense teaches how to act, and anagogy teaches where we are going.</p>
+          <div class="scripture">"The Letter speaks of deeds; Allegory to faith; The Moral how to act; Anagogy our destiny."<span class="scripture-ref">Traditional medieval summary of the four senses</span></div>
+        </div>
+
+        <div class="check" data-check="intro1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">What are the Four Senses of Scripture?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'intro1','c')"><span class="letter">a.</span><span>Historical, scientific, poetic, and legal.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'intro1','c')"><span class="letter">b.</span><span>Old Testament, New Testament, Gospel, and Epistle.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'intro1','c')"><span class="letter">c.</span><span>Literal, allegorical, moral, and anagogical.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'intro1','c')"><span class="letter">d.</span><span>Faith, hope, charity, and prudence.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-intro1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Why do you think the Church encourages Catholics to look for deeper meaning in Scripture without ignoring the literal meaning?</div>
+          <textarea id="pauseIntro" oninput="updatePause('pauseIntro','pauseIntroWC',60,'introNext','intro1')" placeholder="Explain why both the surface meaning and deeper spiritual meaning matter."></textarea>
+          <div class="word-count" id="pauseIntroWC"><span>0 words</span><span>Minimum: 60 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="introNext" onclick="showScreen('terms')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="terms">
+      <div class="card">
+        <div class="screen-label">Part Two · Vocabulary</div>
+        <h2 class="screen-title">Five Key Terms to Know</h2>
+        <p class="screen-intro">Tap each card to reveal its meaning. View all five before moving on.</p>
+        <div class="terms-grid" id="termsGrid">
+          <div class="term-card" data-term="literal" onclick="openTerm(this)"><div class="term-name">Literal Sense</div><div class="term-tap">Tap to reveal</div><div class="term-def">The meaning conveyed by the words of Scripture in their historical context. It is the foundation for all other senses.</div></div>
+          <div class="term-card" data-term="allegorical" onclick="openTerm(this)"><div class="term-name">Allegorical Sense</div><div class="term-tap">Tap to reveal</div><div class="term-def">A deeper spiritual meaning that points to Christ, the Church, the sacraments, or salvation history.</div></div>
+          <div class="term-card" data-term="moral" onclick="openTerm(this)"><div class="term-name">Moral Sense</div><div class="term-tap">Tap to reveal</div><div class="term-def">The meaning that teaches us how to live and act justly. It asks, what is God calling me to do?</div></div>
+          <div class="term-card" data-term="anagogical" onclick="openTerm(this)"><div class="term-name">Anagogical Sense</div><div class="term-tap">Tap to reveal</div><div class="term-def">The eternal meaning that points us toward heaven, final salvation, and the fullness of God’s Kingdom.</div></div>
+          <div class="term-card" data-term="typology" onclick="openTerm(this)"><div class="term-name">Typology</div><div class="term-tap">Tap to reveal</div><div class="term-def">A way of reading Scripture where an Old Testament person or event foreshadows a greater New Testament fulfillment.</div></div>
+        </div>
+        <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink-soft); text-align:center; margin-top:16px;">Viewed: <span id="termsViewed">0</span> of 5</div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="termsNext" onclick="showScreen('literal')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="literal">
+      <div class="card">
+        <div class="screen-label">Part Three · The Foundation</div>
+        <h2 class="screen-title">The Literal Sense</h2>
+        <p class="screen-intro">The literal sense is the foundation for every other sense of Scripture.</p>
+        <div class="prose">
+          <p>The literal sense asks: <strong>What does the text actually say in its original context?</strong> It focuses on the words, genre, historical setting, audience, and author’s intention.</p>
+          <p>For example, the literal sense of the Exodus account is that Moses led the Israelites out of slavery in Egypt through God’s intervention. Before asking what Exodus symbolizes, we first need to understand what the story is saying.</p>
+          <p>This matters because spiritual interpretation must not float away from the text. The Church teaches that all other senses are based on the literal sense.</p>
+          <div class="scripture">"All other senses of Sacred Scripture are based on the literal."<span class="scripture-ref">Catechism of the Catholic Church, §116</span></div>
+        </div>
+
+        <div class="check" data-check="literal1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Why must we begin with the literal sense?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'literal1','b')"><span class="letter">a.</span><span>Because the literal sense is the only meaning Scripture can ever have.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'literal1','b')"><span class="letter">b.</span><span>Because the spiritual senses must be grounded in what the text actually says.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'literal1','b')"><span class="letter">c.</span><span>Because historical context makes prayer unnecessary.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'literal1','b')"><span class="letter">d.</span><span>Because Catholics reject symbolic meaning in Scripture.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-literal1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Why can skipping the literal sense lead to a weak or misleading interpretation of Scripture?</div>
+          <textarea id="pauseLiteral" oninput="updatePause('pauseLiteral','pauseLiteralWC',65,'literalNext','literal1')" placeholder="Explain why context and author’s intent matter."></textarea>
+          <div class="word-count" id="pauseLiteralWC"><span>0 words</span><span>Minimum: 65 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="literalNext" onclick="showScreen('allegorical')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="allegorical">
+      <div class="card">
+        <div class="screen-label">Part Four · Faith and Christ</div>
+        <h2 class="screen-title">The Allegorical Sense</h2>
+        <p class="screen-intro">The allegorical sense asks how Scripture points to Christ and God’s saving plan.</p>
+        <div class="prose">
+          <p>The allegorical sense looks for deeper connections in salvation history. It often shows how people or events in the Old Testament foreshadow Christ, the Church, the sacraments, or New Testament realities.</p>
+          <p>This is where <strong>typology</strong> becomes important. A type is an earlier person, event, or symbol that points forward to a greater fulfillment. The fulfillment is sometimes called the antitype.</p>
+          <p>For example, the Passover lamb saved Israel from death in Exodus. Allegorically, it points to Jesus, the Lamb of God, whose sacrifice saves humanity from sin and death.</p>
+          <div class="scripture">"Here is the Lamb of God who takes away the sin of the world!"<span class="scripture-ref">John 1:29, NRSV-CE</span></div>
+        </div>
+
+        <div class="check" data-check="allegorical1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Which example best shows the allegorical sense?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'allegorical1','d')"><span class="letter">a.</span><span>Noah built an ark because God warned him about the flood.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'allegorical1','d')"><span class="letter">b.</span><span>The Good Samaritan teaches us to help people in need.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'allegorical1','d')"><span class="letter">c.</span><span>The heavenly Jerusalem points to eternal life with God.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'allegorical1','d')"><span class="letter">d.</span><span>Jonah’s three days in the fish point to Christ’s three days in the tomb and resurrection.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-allegorical1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Why might the allegorical sense help Christians see unity between the Old Testament and the New Testament?</div>
+          <textarea id="pauseAllegorical" oninput="updatePause('pauseAllegorical','pauseAllegoricalWC',70,'allegoricalNext','allegorical1')" placeholder="Explain how earlier events can point forward to Christ."></textarea>
+          <div class="word-count" id="pauseAllegoricalWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="allegoricalNext" onclick="showScreen('moral')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="moral">
+      <div class="card">
+        <div class="screen-label">Part Five · How to Live</div>
+        <h2 class="screen-title">The Moral Sense</h2>
+        <p class="screen-intro">The moral sense asks what Scripture teaches us about how to live, choose, and act.</p>
+        <div class="prose">
+          <p>The moral sense is also called the tropological sense. It asks: <strong>How should I live in response to this passage?</strong></p>
+          <p>Sometimes the moral message is obvious, as with the Ten Commandments or the Sermon on the Mount. Other times, we learn from the choices of biblical figures. Job teaches patience and trust. The Good Samaritan teaches active love of neighbor. Mary teaches openness to God.</p>
+          <p>The moral sense is not just about finding a nice lesson. It helps form conscience. It asks what God might be calling us to change, practice, avoid, or strengthen.</p>
+        </div>
+
+        <div class="check" data-check="moral1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">What main question does the moral sense ask?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'moral1','a')"><span class="letter">a.</span><span>How should I live or act because of this Scripture?</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'moral1','a')"><span class="letter">b.</span><span>What exact year did this event happen?</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'moral1','a')"><span class="letter">c.</span><span>Which Old Testament event points to Christ?</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'moral1','a')"><span class="letter">d.</span><span>How does this passage describe heaven?</span></button>
+          </div>
+          <div class="check-feedback" id="fb-moral1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Choose one Bible story you know. What moral lesson could it teach a person your age?</div>
+          <textarea id="pauseMoral" oninput="updatePause('pauseMoral','pauseMoralWC',70,'moralNext','moral1')" placeholder="Name the story and explain the lesson for real life."></textarea>
+          <div class="word-count" id="pauseMoralWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="moralNext" onclick="showScreen('anagogical')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="anagogical">
+      <div class="card">
+        <div class="screen-label">Part Six · Eternal Meaning</div>
+        <h2 class="screen-title">The Anagogical Sense</h2>
+        <p class="screen-intro">The anagogical sense lifts our eyes toward heaven, final salvation, and the fulfillment of God’s Kingdom.</p>
+        <div class="prose">
+          <p>The word <strong>anagogical</strong> comes from a Greek word connected to ascent or being led upward. This sense asks how Scripture points to our eternal destiny with God.</p>
+          <p>For example, the earthly Jerusalem can point to the heavenly Jerusalem. The Promised Land can point to heaven. Feasts, weddings, and images of paradise can remind us of the joy and fullness God promises.</p>
+          <p>The anagogical sense gives hope. It reminds us that Scripture is not only about the past. It also directs us toward the future fulfillment of all things in God.</p>
+          <div class="scripture">"Set your minds on things that are above, not on things that are on earth."<span class="scripture-ref">Colossians 3:2, NRSV-CE</span></div>
+        </div>
+
+        <div class="check" data-check="anagogical1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Which statement best describes the anagogical sense?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'anagogical1','c')"><span class="letter">a.</span><span>It explains only the grammar of a Bible passage.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'anagogical1','c')"><span class="letter">b.</span><span>It asks how we can act better today.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'anagogical1','c')"><span class="letter">c.</span><span>It points to heaven, eternal life, and the fulfillment of God’s Kingdom.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'anagogical1','c')"><span class="letter">d.</span><span>It removes the need for the literal sense.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-anagogical1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">How might remembering heaven or God’s final promises change the way a person faces suffering, fear, or uncertainty?</div>
+          <textarea id="pauseAnagogical" oninput="updatePause('pauseAnagogical','pauseAnagogicalWC',75,'anagogicalNext','anagogical1')" placeholder="Explain why eternal hope matters in real life."></textarea>
+          <div class="word-count" id="pauseAnagogicalWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="anagogicalNext" onclick="showScreen('example')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="example">
+      <div class="card">
+        <div class="screen-label">Part Seven · Example</div>
+        <h2 class="screen-title">The Four Senses in Action: Noah’s Ark</h2>
+        <p class="screen-intro">A single biblical story can be read through multiple faithful angles without becoming four separate stories.</p>
+        <div class="prose">
+          <h3>Literal</h3>
+          <p>Noah builds an ark and survives the great flood with his family and the animals, according to Genesis 6 to 9.</p>
+          <h3>Allegorical</h3>
+          <p>The ark can symbolize the Church and Baptism. Just as the ark saves through water, Baptism is connected to salvation through the waters of rebirth.</p>
+          <h3>Moral</h3>
+          <p>Noah’s obedience teaches faithfulness in a corrupt world. He trusts God even when others do not understand.</p>
+          <h3>Anagogical</h3>
+          <p>The flood and ark point toward final salvation and the new creation God promises, where death and destruction will be overcome.</p>
+        </div>
+
+        <div class="check" data-check="example1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">In the Noah’s Ark example, which reading is moral?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'example1','d')"><span class="letter">a.</span><span>The ark points to Baptism and the Church.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'example1','d')"><span class="letter">b.</span><span>Noah builds an ark and survives the flood.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'example1','d')"><span class="letter">c.</span><span>The flood points toward final purification and salvation.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'example1','d')"><span class="letter">d.</span><span>Noah’s obedience teaches us to be faithful in a corrupt world.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-example1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Which of the four senses seems easiest for you to understand right now, and which one seems hardest? Explain why.</div>
+          <textarea id="pauseExample" oninput="updatePause('pauseExample','pauseExampleWC',70,'exampleNext','example1')" placeholder="Compare two senses and explain your thinking."></textarea>
+          <div class="word-count" id="pauseExampleWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="exampleNext" onclick="showScreen('tradition')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="tradition">
+      <div class="card">
+        <div class="screen-label">Part Eight · Catholic Tradition and Culture</div>
+        <h2 class="screen-title">A Living Tradition of Interpretation</h2>
+        <p class="screen-intro">The four senses connect today’s Bible study to centuries of Catholic interpretation.</p>
+        <div class="prose">
+          <p>The Four Senses of Scripture were taught by great Catholic thinkers such as St. Augustine and St. Thomas Aquinas. They were also used in medieval Cathedral schools and in Church preaching and commentary.</p>
+          <p>This approach is not just academic. It also appears in Catholic liturgy. At the Easter Vigil, the Exodus is read not only as Israel’s escape from Egypt, but also as a sign of Christian Baptism and liberation in Christ.</p>
+          <p>The Catechism reaffirms the fourfold sense in CCC 115 to 119. This keeps Catholic interpretation rooted in Scripture, Tradition, and the Church’s guidance.</p>
+        </div>
+
+        <div class="check" data-check="tradition1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Why does Church guidance matter when using the four senses?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'tradition1','b')"><span class="letter">a.</span><span>It lets people invent any meaning they personally prefer.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'tradition1','b')"><span class="letter">b.</span><span>It keeps interpretation faithful to Scripture, Tradition, and the Deposit of Faith.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'tradition1','b')"><span class="letter">c.</span><span>It means Catholics are not allowed to study Scripture personally.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'tradition1','b')"><span class="letter">d.</span><span>It removes the need for prayer when reading the Bible.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-tradition1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">How could the four senses help someone avoid reading the Bible in either a shallow way or a totally random way?</div>
+          <textarea id="pauseTradition" oninput="updatePause('pauseTradition','pauseTraditionWC',75,'traditionNext','tradition1')" placeholder="Explain how the four senses create depth and boundaries."></textarea>
+          <div class="word-count" id="pauseTraditionWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="traditionNext" onclick="showScreen('quiz')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="quiz">
+      <div class="card">
+        <div class="screen-label">Part Nine · Check Your Understanding</div>
+        <h2 class="screen-title">Lesson Quiz</h2>
+        <p class="screen-intro">Answer all seven questions. Feedback will appear as you complete each one.</p>
+        <div id="quizWrap"></div>
+        <div class="quiz-score" id="quizScore">Quiz Score<strong id="scoreText">0 / 7</strong></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="quizNext" onclick="showScreen('deeper')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="deeper">
+      <div class="card">
+        <div class="screen-label">Part Ten · Think Deeper</div>
+        <h2 class="screen-title">Stretch Your Thinking</h2>
+        <p class="screen-intro">These responses should show that you can apply the four senses, not just define them.</p>
+        <div class="field">
+          <label for="td1">Think Deeper 1</label>
+          <div class="prose" style="margin-bottom:12px;"><p>Choose a familiar Bible story such as David and Goliath, Moses and the burning bush, the feeding of the 5000, or the Good Samaritan. Identify a possible meaning for each of the four senses.</p></div>
+          <textarea id="td1" oninput="updateWordCount('td1','td1WC',150)" placeholder="Name the story, then explain the literal, allegorical, moral, and anagogical meanings."></textarea>
+          <div class="word-count" id="td1WC"><span>0 words</span><span>Minimum: 150 words</span></div>
+        </div>
+        <div class="field">
+          <label for="td2">Think Deeper 2</label>
+          <div class="prose" style="margin-bottom:12px;"><p>Explain how reading an Old Testament story in light of Christ can enrich its meaning for Christians. Use one example if possible.</p></div>
+          <textarea id="td2" oninput="updateWordCount('td2','td2WC',130)" placeholder="Explain how the allegorical sense reveals unity between the Old and New Testaments."></textarea>
+          <div class="word-count" id="td2WC"><span>0 words</span><span>Minimum: 130 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="deeperNext" onclick="showScreen('synthesis')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="synthesis">
+      <div class="card">
+        <div class="screen-label">Part Eleven · Final Synthesis</div>
+        <h2 class="screen-title">Bring the Lesson Together</h2>
+        <p class="screen-intro">This final response should show that you understand how the four senses work together.</p>
+        <div class="field">
+          <label for="synthesis">Final Synthesis</label>
+          <div class="prose" style="margin-bottom:12px;"><p>Explain why the Four Senses of Scripture are useful for Catholic interpretation. Your answer should include the literal, allegorical, moral, and anagogical senses, and should explain why they work together instead of competing with each other.</p></div>
+          <textarea id="synthesis" oninput="updateWordCount('synthesis','synthesisWC',170)" placeholder="Show how the four senses help Catholics read Scripture deeply and faithfully."></textarea>
+          <div class="word-count" id="synthesisWC"><span>0 words</span><span>Minimum: 170 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="synthesisNext" onclick="showScreen('finish')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="finish">
+      <div class="card">
+        <div class="screen-label">Part Twelve · Wrap Up</div>
+        <h2 class="screen-title">Almost Finished</h2>
+        <p class="screen-intro">Review your progress, download your report, and then mark the lesson as complete.</p>
+        <div class="summary-grid">
+          <div class="summary-stat"><div class="stat-label">Quiz Score</div><div class="stat-value" id="finishQuiz">0 / 7</div></div>
+          <div class="summary-stat"><div class="stat-label">Words Written</div><div class="stat-value" id="finishWords">0</div></div>
+          <div class="summary-stat"><div class="stat-label">Time in Lesson</div><div class="stat-value" id="finishTime">0 min</div></div>
+        </div>
+        <div class="download-note">Download your final report when you are ready. It will include your student information, quiz score, and written responses from the whole lesson.</div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn btn-gold" onclick="downloadReport()">⬇ Download Report</button><button class="btn btn-primary" onclick="finishLesson()">Mark Complete →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="complete">
+      <div class="card">
+        <div class="completion-hero">
+          <div class="completion-icon">✦</div>
+          <div class="completion-title">Lesson Completed</div>
+          <div class="completion-sub">You have finished Lesson 2.2, Four Senses of Scripture.</div>
+        </div>
+        <div class="download-note">Your work has been saved in this session. Download your report if you have not already done so.</div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="showScreen('finish')">← Back to Report</button><div class="btn-row-split"><button class="btn btn-gold" onclick="downloadReport()">⬇ Download Report Again</button></div></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast">Saved.</div>
+  <div class="footer">HRE4M1 · Unit 2 · Lesson 2</div>
+</div>
+
+<script>
+const LESSON_ID = '2.2';
+const STORAGE_KEY = 'hre4m1_lesson_2_2';
+const SCREEN_ORDER = ['welcome','hook','intro','terms','literal','allegorical','moral','anagogical','example','tradition','quiz','deeper','synthesis','finish','complete'];
+const TOTAL_STEPS = SCREEN_ORDER.length - 2;
+const REQUIRED_TERMS = 5;
+const QUIZ = [
+  {id:'q1', q:'Which sense is the foundation for all the other senses of Scripture?', opts:['Allegorical sense','Moral sense','Literal sense','Anagogical sense'], correct:2, explain:'The literal sense is the foundation because spiritual meanings must be grounded in what the text actually says.'},
+  {id:'q2', q:'What does the allegorical sense usually help us see?', opts:['How a passage points to Christ, the Church, the sacraments, or salvation history.','Only the basic historical facts of the passage.','The exact grammar and punctuation of the passage.','The author’s personal opinion about politics.'], correct:0, explain:'The allegorical sense reveals deeper connections to Christ and God’s saving plan.'},
+  {id:'q3', q:'Which question best matches the moral sense?', opts:['How does this passage point to heaven?','How should I live because of this passage?','What ancient city is mentioned here?','Which Old Testament event foreshadows Christ?'], correct:1, explain:'The moral sense asks how Scripture teaches us to live, act, and grow in virtue.'},
+  {id:'q4', q:'What does the anagogical sense point toward?', opts:['Eternal life, heaven, and the fulfillment of God’s Kingdom.','The number of years between biblical events.','Only social rules from the ancient world.','The private feelings of the reader.'], correct:0, explain:'The anagogical sense lifts our minds to heaven, final salvation, and our destiny with God.'},
+  {id:'q5', q:'What is typology?', opts:['A method that ignores the Old Testament.','A way of reading where an earlier person or event foreshadows a later fulfillment.','A list of grammar rules for translating Scripture.','A practice of reading personal opinions into the text.'], correct:1, explain:'Typology sees earlier people, events, or symbols as types that point forward to greater fulfillment.'},
+  {id:'q6', q:'In the Noah’s Ark example, which reading is allegorical?', opts:['Noah builds an ark and survives the flood.','Noah’s obedience teaches us to be faithful.','The ark points to the Church and Baptism.','The flood points toward final salvation and new creation.'], correct:2, explain:'The ark symbolizing the Church and Baptism is an allegorical reading.'},
+  {id:'q7', q:'Why does the Catholic approach use multiple senses instead of only one?', opts:['To make Scripture say whatever a reader wants.','To reject the literal meaning of the Bible.','To read Scripture deeply while keeping spiritual meanings grounded in the text and guided by the Church.','To avoid applying Scripture to moral life.'], correct:2, explain:'The four senses deepen interpretation while keeping it anchored in the literal sense and Church teaching.'}
+];
+const CORRECT_MAP = {intro1:'c', literal1:'b', allegorical1:'d', moral1:'a', anagogical1:'c', example1:'d', tradition1:'b'};
+const MINIMUMS = {hookResponse:35, pauseIntro:60, pauseLiteral:65, pauseAllegorical:70, pauseMoral:70, pauseAnagogical:75, pauseExample:70, pauseTradition:75, td1:150, td2:130, synthesis:170};
+const RESPONSE_ORDER = ['hookResponse','pauseIntro','pauseLiteral','pauseAllegorical','pauseMoral','pauseAnagogical','pauseExample','pauseTradition','td1','td2','synthesis'];
+const RESPONSE_TITLES = {hookResponse:'Starting Point', pauseIntro:'Reflection 1', pauseLiteral:'Reflection 2', pauseAllegorical:'Reflection 3', pauseMoral:'Reflection 4', pauseAnagogical:'Reflection 5', pauseExample:'Reflection 6', pauseTradition:'Reflection 7', td1:'Think Deeper 1', td2:'Think Deeper 2', synthesis:'Final Synthesis'};
+const REPORT_FILE_PREFIX = 'HRE4M1_L2_2_Four_Senses_of_Scripture';
+const REPORT_HEADER_LABEL = 'HRE4M1 · Unit 2 · Lesson 2';
+const REPORT_TITLE = 'Four Senses of Scripture';
+const REPORT_SUBTITLE = 'Student Report';
+const RESUME_ERROR = 'Could not load that file. Please upload a valid Lesson 2.2 progress file.';
+const state = {lessonId:LESSON_ID, startedAt:null, finishedAt:null, currentScreen:'welcome', studentInfo:{name:'',email:'',className:''}, termsViewed:[], inlineChecks:{}, responses:{}, quiz:{answers:{}, scoreCount:0}, sectionTimes:{}, lastSavedAt:null};
+RESPONSE_ORDER.forEach(key => state.responses[key] = '');
+let screenEnterTime = Date.now();
+function countWords(str) { if (!str) return 0; return str.trim().split(/\s+/).filter(Boolean).length; }
+function escapeHTML(str) { if (str === null || str === undefined) return ''; return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function formatTime(ms) { const totalMin = Math.floor(ms / 60000); if (totalMin < 1) return '< 1 min'; if (totalMin < 60) return totalMin + ' min'; const hrs = Math.floor(totalMin / 60); const mins = totalMin % 60; return hrs + 'h ' + mins + 'm'; }
+function persistInputsToState() { const nameEl = document.getElementById('studentName'); const emailEl = document.getElementById('studentEmail'); const classEl = document.getElementById('studentClass'); if (nameEl) state.studentInfo.name = nameEl.value.trim(); if (emailEl) state.studentInfo.email = emailEl.value.trim(); if (classEl) state.studentInfo.className = classEl.value.trim(); RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) state.responses[key] = el.value.trim(); }); }
+function saveLocal() { state.lastSavedAt = new Date().toISOString(); persistInputsToState(); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function totalWords() { persistInputsToState(); return Object.values(state.responses).reduce((sum, value) => sum + countWords(value), 0); }
+function totalTimeMs() { let total = 0; Object.values(state.sectionTimes).forEach(ms => total += ms || 0); if (state.currentScreen && screenEnterTime) total += Date.now() - screenEnterTime; return total; }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1600); }
+function markSaveButtonsSaved() { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.add('saved')); const label = document.getElementById('stickySaveLabel'); if (label) label.textContent = 'Saved'; setTimeout(() => { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.remove('saved')); const again = document.getElementById('stickySaveLabel'); if (again) again.textContent = 'Save Progress'; }, 1300); }
+function updateProgress() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); const activeStep = Math.max(0, Math.min(TOTAL_STEPS, idx)); const pct = Math.max(0, Math.min(100, Math.round((activeStep / TOTAL_STEPS) * 100))); document.getElementById('progressFill').style.width = pct + '%'; document.getElementById('progressPercent').textContent = pct + '%'; const displayStep = state.currentScreen === 'welcome' ? 1 : Math.min(TOTAL_STEPS, Math.max(1, idx)); document.getElementById('progressLabel').textContent = 'Section ' + displayStep + ' of ' + TOTAL_STEPS; }
+function showScreen(screenId) { persistInputsToState(); const now = Date.now(); if (state.currentScreen) { state.sectionTimes[state.currentScreen] = (state.sectionTimes[state.currentScreen] || 0) + (now - screenEnterTime); } screenEnterTime = now; state.currentScreen = screenId; document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); const target = document.querySelector('.screen[data-screen="' + screenId + '"]'); if (target) target.classList.add('active'); document.getElementById('progressContainer').style.display = screenId === 'welcome' ? 'none' : 'block'; if (screenId === 'quiz') renderQuiz(); if (screenId === 'finish') refreshFinishStats(); updateProgress(); refreshGating(); saveLocal(); window.scrollTo({top:0, behavior:'smooth'}); }
+function prevScreen() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); if (idx > 0) showScreen(SCREEN_ORDER[idx - 1]); }
+function beginLesson() { const name = document.getElementById('studentName').value.trim(); const email = document.getElementById('studentEmail').value.trim(); if (!name || !email) { document.getElementById('setupAlert').classList.add('show'); return; } document.getElementById('setupAlert').classList.remove('show'); if (!state.startedAt) state.startedAt = new Date().toISOString(); showScreen('hook'); }
+function updateWordCount(textareaId, countId, minimum) { const el = document.getElementById(textareaId); const words = countWords(el.value); state.responses[textareaId] = el.value.trim(); const counter = document.getElementById(countId); const met = words >= minimum; counter.innerHTML = '<span>' + words + ' words</span><span class="' + (met ? 'met' : 'short') + '">Minimum: ' + minimum + ' words</span>'; saveLocal(); refreshGating(); }
+function updatePause(textareaId, countId, minimum, nextBtnId, checkId) { updateWordCount(textareaId, countId, minimum); const wordsMet = countWords(document.getElementById(textareaId).value) >= minimum; const checkMet = !checkId || !!state.inlineChecks[checkId]; const btn = document.getElementById(nextBtnId); if (btn) btn.disabled = !(wordsMet && checkMet); }
+function openTerm(card) { const term = card.getAttribute('data-term'); card.classList.toggle('open'); if (!state.termsViewed.includes(term)) state.termsViewed.push(term); card.classList.add('viewed'); document.getElementById('termsViewed').textContent = state.termsViewed.length; saveLocal(); refreshGating(); }
+function answerCheck(btn, checkId, correctLetter) { if (state.inlineChecks[checkId]) return; const chosen = btn.getAttribute('data-answer'); state.inlineChecks[checkId] = chosen; const wrap = btn.closest('.check'); wrap.querySelectorAll('.check-option').forEach(opt => opt.classList.add('answered')); const fb = document.getElementById('fb-' + checkId); wrap.querySelectorAll('.check-option').forEach(opt => { if (opt.getAttribute('data-answer') === correctLetter) opt.classList.add('correct'); else if (opt === btn) opt.classList.add('incorrect'); }); fb.textContent = chosen === correctLetter ? 'Correct. You matched the main lesson idea.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); saveLocal(); refreshGating(); }
+function refreshGating() { const needs = (id, min) => countWords((document.getElementById(id)?.value || '').trim()) >= min; const checked = id => !!state.inlineChecks[id]; const setDisabled = (id, disabled) => { const el = document.getElementById(id); if (el) el.disabled = !!disabled; }; setDisabled('hookNext', !needs('hookResponse', MINIMUMS.hookResponse)); setDisabled('introNext', !(needs('pauseIntro', MINIMUMS.pauseIntro) && checked('intro1'))); setDisabled('termsNext', state.termsViewed.length < REQUIRED_TERMS); setDisabled('literalNext', !(needs('pauseLiteral', MINIMUMS.pauseLiteral) && checked('literal1'))); setDisabled('allegoricalNext', !(needs('pauseAllegorical', MINIMUMS.pauseAllegorical) && checked('allegorical1'))); setDisabled('moralNext', !(needs('pauseMoral', MINIMUMS.pauseMoral) && checked('moral1'))); setDisabled('anagogicalNext', !(needs('pauseAnagogical', MINIMUMS.pauseAnagogical) && checked('anagogical1'))); setDisabled('exampleNext', !(needs('pauseExample', MINIMUMS.pauseExample) && checked('example1'))); setDisabled('traditionNext', !(needs('pauseTradition', MINIMUMS.pauseTradition) && checked('tradition1'))); setDisabled('deeperNext', !(needs('td1', MINIMUMS.td1) && needs('td2', MINIMUMS.td2))); setDisabled('synthesisNext', !needs('synthesis', MINIMUMS.synthesis)); setDisabled('quizNext', Object.keys(state.quiz.answers).length !== QUIZ.length); }
+function renderQuiz() { const wrap = document.getElementById('quizWrap'); if (wrap.dataset.rendered === '1') return restoreQuiz(); wrap.innerHTML = QUIZ.map((q, idx) => `<div class="quiz-question" id="${q.id}"><div class="q-number">Question ${idx + 1}</div><div class="q-text">${q.q}</div><div class="q-options">${q.opts.map((opt, i) => `<button class="q-option" data-opt="${i}" onclick="answerQuiz('${q.id}', ${i})"><span class="letter">${String.fromCharCode(97 + i)}.</span><span>${opt}</span></button>`).join('')}</div><div class="q-explanation" id="exp-${q.id}">${q.explain}</div></div>`).join(''); wrap.dataset.rendered = '1'; restoreQuiz(); }
+function answerQuiz(qId, choice) { if (state.quiz.answers[qId] !== undefined) return; state.quiz.answers[qId] = choice; const q = QUIZ.find(item => item.id === qId); if (choice === q.correct) state.quiz.scoreCount += 1; restoreQuiz(); saveLocal(); refreshGating(); }
+function restoreQuiz() { QUIZ.forEach(q => { const qEl = document.getElementById(q.id); if (!qEl) return; const chosen = state.quiz.answers[q.id]; const options = qEl.querySelectorAll('.q-option'); options.forEach(opt => opt.classList.remove('selected','correct','incorrect','locked')); qEl.querySelector('.q-explanation').classList.remove('show'); if (chosen !== undefined) { options.forEach(opt => opt.classList.add('locked')); const selected = qEl.querySelector('.q-option[data-opt="' + chosen + '"]'); const correctBtn = qEl.querySelector('.q-option[data-opt="' + q.correct + '"]'); if (selected) selected.classList.add('selected'); if (chosen === q.correct) selected.classList.add('correct'); else { if (selected) selected.classList.add('incorrect'); if (correctBtn) correctBtn.classList.add('correct'); } qEl.querySelector('.q-explanation').classList.add('show'); } }); if (Object.keys(state.quiz.answers).length === QUIZ.length) { document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('quizScore').classList.add('show'); } }
+function triggerDownload(filename, content, mime) { const blob = new Blob([content], {type: mime}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 500); }
+function saveProgressNow() { saveLocal(); const stamp = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-'); triggerDownload(`HRE4M1_L2_2_progress_${stamp}.json`, JSON.stringify(state, null, 2), 'application/json'); markSaveButtonsSaved(); showToast('Progress downloaded.'); }
+function refreshFinishStats() { document.getElementById('finishQuiz').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('finishWords').textContent = totalWords(); document.getElementById('finishTime').textContent = formatTime(totalTimeMs()); }
+function buildReportHTML() { persistInputsToState(); const rows = RESPONSE_ORDER.map(key => `<section style="margin:0 0 28px 0;"><h3 style="font-family:Georgia,serif;font-size:24px;margin:0 0 8px 0;color:#5B2D68;">${escapeHTML(RESPONSE_TITLES[key])}</h3><div style="font-size:13px;color:#8B5E2A;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">${countWords(state.responses[key])} words</div><div style="white-space:pre-wrap;line-height:1.7;font-size:16px;border:1px solid #ddd7c6;background:#fffdf7;padding:16px 18px;">${escapeHTML(state.responses[key] || '')}</div></section>`).join(''); return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${REPORT_TITLE} Report</title><style>body{font-family:Georgia,serif;background:#f5efe2;color:#232238;margin:0;padding:40px;line-height:1.6;}.wrap{max-width:900px;margin:0 auto;background:#fff;padding:42px 46px;border:1px solid #d8c9a0;box-shadow:0 10px 30px rgba(0,0,0,.08);}.small{font-family:Arial,sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8B5E2A;}h1{font-size:42px;color:#5B2D68;margin:8px 0 4px;}h2{font-size:18px;font-style:italic;color:#55506A;margin:0 0 26px;}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0 28px;}.card{border:1px solid #ddd7c6;background:#fffdf7;padding:14px 16px;}.label{font-family:Arial,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8B5E2A;margin-bottom:6px;}.value{font-size:18px;color:#5B2D68;}hr{border:none;border-top:1px solid #d8c9a0;margin:26px 0;}@media print{body{background:white;padding:0;} .wrap{box-shadow:none;border:none;}}</style></head><body><div class="wrap"><div class="small">${REPORT_HEADER_LABEL}</div><h1>${REPORT_TITLE}</h1><h2>${REPORT_SUBTITLE}</h2><div class="grid"><div class="card"><div class="label">Student</div><div class="value">${escapeHTML(state.studentInfo.name || '')}</div></div><div class="card"><div class="label">Email</div><div class="value">${escapeHTML(state.studentInfo.email || '')}</div></div><div class="card"><div class="label">Class</div><div class="value">${escapeHTML(state.studentInfo.className || '')}</div></div><div class="card"><div class="label">Quiz Score</div><div class="value">${state.quiz.scoreCount} / ${QUIZ.length}</div></div><div class="card"><div class="label">Total Words</div><div class="value">${totalWords()}</div></div><div class="card"><div class="label">Time in Lesson</div><div class="value">${formatTime(totalTimeMs())}</div></div></div><hr>${rows}</div></body></html>`; }
+function downloadReport() { const stamp = new Date().toISOString().slice(0,10); const safeName = (state.studentInfo.name || 'student').replace(/[^a-z0-9]+/gi,'_'); triggerDownload(`${REPORT_FILE_PREFIX}_${safeName}_${stamp}.html`, buildReportHTML(), 'text/html'); showToast('Report downloaded.'); }
+function finishLesson() { state.finishedAt = new Date().toISOString(); saveLocal(); showScreen('complete'); }
+function restoreChecks() { Object.entries(state.inlineChecks).forEach(([checkId, chosen]) => { const wrap = document.querySelector('.check[data-check="' + checkId + '"]'); if (!wrap) return; const correct = CORRECT_MAP[checkId]; wrap.querySelectorAll('.check-option').forEach(opt => { opt.classList.add('answered'); if (opt.getAttribute('data-answer') === correct) opt.classList.add('correct'); else if (opt.getAttribute('data-answer') === chosen) opt.classList.add('incorrect'); }); const fb = document.getElementById('fb-' + checkId); if (fb) { fb.textContent = chosen === correct ? 'Correct. You matched the main lesson idea.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); } }); }
+function restoreTextAndCounts() { const countIdMap = {hookResponse:'hookWC', pauseIntro:'pauseIntroWC', pauseLiteral:'pauseLiteralWC', pauseAllegorical:'pauseAllegoricalWC', pauseMoral:'pauseMoralWC', pauseAnagogical:'pauseAnagogicalWC', pauseExample:'pauseExampleWC', pauseTradition:'pauseTraditionWC', td1:'td1WC', td2:'td2WC', synthesis:'synthesisWC'}; RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) el.value = state.responses[key] || ''; const wcId = countIdMap[key]; if (el && document.getElementById(wcId)) updateWordCount(key, wcId, MINIMUMS[key]); }); }
+function resumeFromFile(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = function(e) { try { const loaded = JSON.parse(e.target.result); if (!loaded || loaded.lessonId !== LESSON_ID) throw new Error('Wrong lesson file'); Object.assign(state, loaded); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); showScreen(state.currentScreen || 'hook'); showToast('Progress restored.'); } catch (err) { alert(RESUME_ERROR); } }; reader.readAsText(file); }
+function hydrateFromLocalStorage() { try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return; const saved = JSON.parse(raw); if (!saved || saved.lessonId !== LESSON_ID) return; Object.assign(state, saved); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); } catch (err) {} }
+hydrateFromLocalStorage();
+updateProgress();
+refreshGating();
+</script>
+</body>
+</html>

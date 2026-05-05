@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HRE4M1 · Lesson 2.5: The Four Marks of the Church</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=Lora:ital,wght@0,400;0,500;0,600;1,400&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+
+
+  :root {
+    --bg-deep: #1B1833;
+    --bg-mid: #31204F;
+    --bg-card: #F6EFE2;
+    --bg-card-alt: #E8DCC7;
+    --gold: #C49A4A;
+    --gold-soft: #DFC084;
+    --gold-deep: #8B5E2A;
+    --wine: #5B2D68;
+    --ivory: #F6EFE2;
+    --cream: #F1E4C8;
+    --ink: #232238;
+    --ink-soft: #55506A;
+    --locked: #4A556880;
+    --success: #3E7C68;
+    --danger: #9E3B32;
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.25);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Textured background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(201, 169, 97, 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(107, 44, 44, 0.1), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ---- Header ---- */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .unit-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .lesson-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .lesson-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gold-soft);
+    opacity: 0.9;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  /* ---- Progress bar ---- */
+  .progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-deep) 70%, transparent);
+    padding: 16px 0 12px;
+    margin: -24px -20px 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft));
+    width: 0%;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.5);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    margin: 8px auto 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  /* ---- Sticky save button (top bar) ---- */
+  .save-sticky {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 169, 97, 0.12);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .save-sticky:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    border-color: var(--gold);
+  }
+
+  .save-sticky.saved {
+    background: rgba(63, 122, 77, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  /* ---- In-row save (button row) ---- */
+  .btn-save-row {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-save-row:hover {
+    background: var(--gold-deep);
+    color: var(--ivory);
+  }
+
+  .btn-save-row.saved {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .btn-row-split {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* ---- Pause and Reflect blocks (in-flow) ---- */
+  .pause {
+    background: linear-gradient(135deg, rgba(107, 44, 44, 0.06), rgba(201, 169, 97, 0.08));
+    border: 1px solid rgba(107, 44, 44, 0.2);
+    border-left: 3px solid var(--wine);
+    padding: 22px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .pause-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pause-label::before {
+    content: '❊';
+    font-size: 14px;
+    color: var(--gold-deep);
+  }
+
+  .pause-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .pause textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(107, 44, 44, 0.25);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    border-radius: 2px;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .pause textarea:focus {
+    outline: none;
+    border-color: var(--wine);
+    box-shadow: 0 0 0 2px rgba(107, 44, 44, 0.15);
+  }
+
+  /* Save confirmation toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid var(--gold);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---- Screen Cards ---- */
+  .screen {
+    display: none;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .screen.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .screen-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .screen-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .screen-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .prose {
+    font-size: 16.5px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .prose p { margin-bottom: 18px; }
+
+  .prose strong { color: var(--wine); font-weight: 600; }
+
+  .prose em { color: var(--ink-soft); }
+
+  .prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 28px 0 14px;
+    color: var(--wine);
+    line-height: 1.25;
+  }
+
+  .prose h3::before {
+    content: '❖ ';
+    color: var(--gold-deep);
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+
+  .divider {
+    display: block;
+    margin: 32px auto;
+    width: 120px;
+    height: auto;
+    opacity: 0.6;
+  }
+
+  .pullquote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--wine);
+    text-align: center;
+    margin: 28px 20px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    line-height: 1.4;
+  }
+
+  .scripture {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scripture-ref {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--ivory);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--wine);
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:disabled {
+    background: var(--locked);
+    border-color: var(--locked);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+  }
+
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- Forms ---- */
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .word-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .word-count .met {
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  .word-count .short {
+    color: var(--danger);
+  }
+
+  /* ---- Key Terms / Flashcards ---- */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .term-card {
+    background: var(--bg-card-alt);
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    border-radius: 2px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 100px;
+  }
+
+  .term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--gold-deep);
+  }
+
+  .term-card.viewed {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+  }
+
+  .term-card.viewed::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .term-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.7;
+  }
+
+  .term-def {
+    display: none;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .term-card.open .term-def { display: block; }
+  .term-card.open .term-tap { display: none; }
+
+  /* ---- Inline comprehension check ---- */
+  .check {
+    background: #FDF8E8;
+    border: 1px dashed var(--gold-deep);
+    border-radius: 2px;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .check-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .check-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .check-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-option {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .check-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .check-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .check-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .check-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .check-feedback {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    display: none;
+  }
+
+  .check-feedback.show { display: block; }
+
+  /* ---- Vocation Compass ---- */
+  .compass-intro {
+    background: #FDF8E8;
+    border-left: 3px solid var(--wine);
+    padding: 18px 22px;
+    margin: 20px 0 30px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .compass-vocation {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(140, 113, 53, 0.25);
+  }
+
+  .compass-vocation:last-child {
+    border-bottom: none;
+  }
+
+  .compass-voc-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+
+  .compass-voc-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  .compass-aspect {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px dotted rgba(140, 113, 53, 0.2);
+  }
+
+  .compass-aspect:first-of-type { border-top: none; }
+
+  .compass-aspect-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .rating-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .rating-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(140, 113, 53, 0.4);
+    background: white;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .rating-btn:hover {
+    border-color: var(--gold-deep);
+  }
+
+  .rating-btn.selected {
+    background: var(--wine);
+    color: var(--ivory);
+    border-color: var(--wine);
+  }
+
+  .rating-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  .compass-result {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(107, 44, 44, 0.08));
+    border: 1px solid var(--gold-deep);
+    padding: 24px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  .compass-result.show { display: block; }
+
+  .result-voc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.3);
+  }
+
+  .result-voc:last-child { border-bottom: none; }
+
+  .result-voc-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--wine);
+  }
+
+  .result-bar {
+    width: 180px;
+    height: 8px;
+    background: rgba(140, 113, 53, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .result-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    transition: width 1s ease;
+  }
+
+  /* ---- Quiz ---- */
+  .quiz-question {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.25);
+  }
+
+  .quiz-question:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .q-option {
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .q-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .q-option.selected {
+    border-color: var(--wine);
+    background: rgba(107, 44, 44, 0.06);
+  }
+
+  .q-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .q-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+  }
+
+  .q-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+  }
+
+  .q-option.locked {
+    pointer-events: none;
+  }
+
+  .q-explanation {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201, 169, 97, 0.1);
+    border-left: 2px solid var(--gold-deep);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    display: none;
+  }
+
+  .q-explanation.show { display: block; }
+
+  .quiz-score {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(107, 44, 44, 0.1));
+    border: 1px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score strong {
+    font-size: 34px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ---- Completion screen ---- */
+  .completion-hero {
+    text-align: center;
+    padding: 20px 0 32px;
+  }
+
+  .completion-icon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    color: var(--gold-deep);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .completion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .completion-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .summary-stat {
+    background: #FDF8E8;
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+  }
+
+  .download-note {
+    background: rgba(201, 169, 97, 0.12);
+    padding: 18px 22px;
+    border-left: 3px solid var(--gold-deep);
+    margin: 24px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ---- Hero (start screen) ---- */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-deep));
+    color: var(--ivory);
+    padding: 40px 40px 36px;
+    margin: -40px -44px 32px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .hero-banner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+
+  .hero-banner p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-soft);
+    margin-top: 8px;
+  }
+
+  .hero-banner .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+
+  .upload-zone {
+    border: 1px dashed rgba(140, 113, 53, 0.4);
+    padding: 20px;
+    text-align: center;
+    margin-top: 24px;
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .upload-zone label {
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .upload-zone input { display: none; }
+
+  /* ---- Error / alert ---- */
+  .alert {
+    padding: 12px 16px;
+    background: rgba(168, 67, 43, 0.1);
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    margin-top: 14px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .alert.show { display: block; }
+
+  /* ---- Footer ---- */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .card { padding: 28px 22px; }
+    .hero-banner { margin: -28px -22px 28px; padding: 30px 24px 26px; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; justify-content: center; }
+    .compass-aspect { grid-template-columns: 1fr; gap: 8px; }
+    .result-bar { width: 120px; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .save-sticky {
+      position: static;
+      display: flex;
+      margin: 10px auto 0;
+      width: fit-content;
+    }
+    .progress-meta { flex-wrap: wrap; }
+    .btn-row-split { width: 100%; flex-direction: column; }
+    .btn-row-split .btn-save-row { width: 100%; justify-content: center; }
+  }
+
+  /* Print-friendly download report styling will be injected separately */
+
+  /* Unit 2 Scripture palette overrides */
+  body::before {
+    background:
+      radial-gradient(ellipse at top left, rgba(196, 154, 74, 0.10), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(91, 45, 104, 0.16), transparent 50%);
+  }
+  .pause { background: linear-gradient(135deg, rgba(91, 45, 104, 0.08), rgba(196, 154, 74, 0.08)); border-color: rgba(91, 45, 104, 0.22); }
+  .check, .field input, .field textarea, .field select, .pause textarea, .summary-stat { background:#FFF9EC; }
+  .term-card.viewed { background: linear-gradient(135deg, #FFF9EC, var(--bg-card-alt)); }
+
+
+</style>
+</head>
+<body>
+<div class="app">
+<div class="header">
+<div class="unit-label">HRE4M1 · Unit 2 · Lesson 5</div>
+<h1 class="lesson-title">The Four Marks of the Church</h1>
+<div class="lesson-subtitle">One, Holy, Catholic, and Apostolic</div>
+<svg class="ornament" height="20" style="color:var(--gold);" viewbox="0 0 80 20" width="80" xmlns="http://www.w3.org/2000/svg">
+<path d="M 0 10 L 30 10 M 50 10 L 80 10" fill="none" stroke="currentColor" stroke-width="1"></path>
+<circle cx="40" cy="10" fill="none" r="3" stroke="currentColor" stroke-width="1"></circle>
+<circle cx="40" cy="10" fill="currentColor" r="1"></circle>
+</svg>
+</div>
+<div class="progress-container" id="progressContainer" style="display:none; position:relative;">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-meta"><span id="progressLabel">Section 1 of 13</span><span id="progressPercent">0%</span></div>
+<button class="save-sticky" id="stickySave" onclick="saveProgressNow()" title="Download your progress to resume later"><span>💾</span><span id="stickySaveLabel">Save Progress</span></button>
+</div>
+<div id="screens">
+<section class="screen active" data-screen="welcome">
+<div class="card">
+<div class="hero-banner">
+<div class="ornament-line">
+<svg height="12" viewbox="0 0 40 12" width="40"><line stroke="currentColor" stroke-width="1" x1="0" x2="40" y1="6" y2="6"></line></svg>
+<span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">A Study in the Nature of the Church</span>
+<svg height="12" viewbox="0 0 40 12" width="40"><line stroke="currentColor" stroke-width="1" x1="0" x2="40" y1="6" y2="6"></line></svg>
+</div>
+<h2>Welcome to Lesson 2.5</h2>
+<p>This lesson explores the four marks we profess in the Nicene Creed: one, holy, catholic, and apostolic.</p>
+</div>
+<p class="prose" style="margin-bottom:24px;">Enter your information before you begin. At the end, you will be able to download a report of your responses and quiz results.</p>
+<div class="field"><label for="studentName">Full Name</label><input autocomplete="name" id="studentName" placeholder="First and last name" type="text"/></div>
+<div class="field"><label for="studentEmail">School Email</label><input autocomplete="email" id="studentEmail" placeholder="you@school.ca" type="email"/></div>
+<div class="field"><label for="studentClass">Class / Period</label><input id="studentClass" placeholder="e.g., HRE4M1 · Period 2" type="text"/></div>
+<div class="alert" id="setupAlert">Please fill in your name and email before starting.</div>
+<div class="btn-row"><div></div><button class="btn btn-primary" onclick="beginLesson()">Begin Lesson →</button></div>
+<div class="upload-zone">
+<div style="font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Returning to finish?</div>
+<label for="resumeFile">Upload your saved progress file</label>
+<input accept=".json" id="resumeFile" onchange="resumeFromFile(event)" type="file"/>
+</div>
+</div>
+</section>
+<section class="screen" data-screen="hook">
+<div class="card">
+<div class="screen-label">Before We Begin</div>
+<h2 class="screen-title">What Makes the Church the Church?</h2>
+<p class="screen-intro">Start with your own understanding before the lesson gives you the formal language.</p>
+<div class="prose">
+<p>Every Sunday, Catholics profess belief in “one, holy, catholic, and apostolic Church.” These are not random adjectives. They are signs that help us understand the Church founded by Jesus Christ.</p>
+<p>Before beginning, explain what you think makes the Catholic Church unique. You can mention unity, sacraments, saints, the Pope, worldwide membership, apostolic roots, or anything else that comes to mind.</p>
+</div>
+<div class="field" style="margin-top:20px;">
+<label for="hookResponse">Your starting point</label>
+<textarea id="hookResponse" oninput="updateWordCount('hookResponse', 'hookWC', 35)" placeholder="What makes the Catholic Church unique or identifiable?"></textarea>
+<div class="word-count" id="hookWC"><span>0 words</span><span>Minimum: 35 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="hookNext" onclick="showScreen('intro')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="intro">
+<div class="card">
+<div class="screen-label">Part One · Introduction</div>
+<h2 class="screen-title">One, Holy, Catholic, and Apostolic</h2>
+<p class="screen-intro">The four marks are essential characteristics of the Church. They describe what the Church is by Christ’s gift, and they challenge us to live as members of that Church.</p>
+<div class="prose">
+<p>In the Nicene Creed, Catholics profess belief in “one, holy, catholic, and apostolic Church.” These are called the <strong>Four Marks of the Church</strong>. A mark is a sign or identifying characteristic. The four marks help us recognize the Church founded by Jesus Christ.</p>
+<p>The Church is <strong>one</strong> because she is united in faith, sacraments, and leadership. She is <strong>holy</strong> because Christ is holy and gives the Church the means of holiness. She is <strong>catholic</strong> because she is universal, sent to all peoples, and possesses the fullness of Christ’s teaching. She is <strong>apostolic</strong> because she is founded on the apostles and continues through apostolic succession.</p>
+<p>These marks are not just vocabulary. They ask each Catholic to live differently: to protect unity, seek holiness, welcome all peoples, and remain faithful to apostolic teaching.</p>
+</div>
+<div class="check" data-check="intro1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">What are the four marks of the Church?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">a.</span><span>Faith, hope, love, and justice.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">b.</span><span>Scripture, Tradition, Magisterium, and conscience.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">c.</span><span>One, holy, catholic, and apostolic.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">d.</span><span>Prayer, fasting, almsgiving, and service.</span></button>
+</div>
+<div class="check-feedback" id="fb-intro1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Which mark do you think most people notice first when they look at the Catholic Church: one, holy, catholic, or apostolic? Why?</div>
+<textarea id="pauseIntro" oninput="updatePause('pauseIntro', 'pauseIntroWC', 60, 'introNext', 'intro1')" placeholder="Choose one mark and explain why it stands out."></textarea>
+<div class="word-count" id="pauseIntroWC"><span>0 words</span><span>Minimum: 60 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="introNext" onclick="showScreen('terms')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="terms">
+<div class="card">
+<div class="screen-label">Part Two · Vocabulary</div>
+<h2 class="screen-title">Ten Key Terms to Know</h2>
+<p class="screen-intro">Tap each card to reveal its meaning. View all ten before moving on.</p>
+<div class="terms-grid" id="termsGrid">
+<div class="term-card" data-term="church" onclick="openTerm(this)"><div class="term-name">Church</div><div class="term-tap">Tap to reveal</div><div class="term-def">The community of all baptized believers in Christ, founded by Jesus and guided by the Holy Spirit.</div></div>
+<div class="term-card" data-term="one" onclick="openTerm(this)"><div class="term-name">One</div><div class="term-tap">Tap to reveal</div><div class="term-def">The mark of unity. The Church is one in faith, sacraments, and leadership, rooted in the unity of the Trinity.</div></div>
+<div class="term-card" data-term="holy" onclick="openTerm(this)"><div class="term-name">Holy</div><div class="term-tap">Tap to reveal</div><div class="term-def">The mark of sanctity. The Church is holy because Christ is holy, the Spirit gives grace, and the sacraments make people holy.</div></div>
+<div class="term-card" data-term="catholic" onclick="openTerm(this)"><div class="term-name">Catholic</div><div class="term-tap">Tap to reveal</div><div class="term-def">The mark of universality. The Church is for all peoples, exists worldwide, and teaches the fullness of God’s revelation.</div></div>
+<div class="term-card" data-term="apostolic" onclick="openTerm(this)"><div class="term-name">Apostolic</div><div class="term-tap">Tap to reveal</div><div class="term-def">The mark showing that the Church is founded on the apostles, preserves their teaching, and continues through apostolic succession.</div></div>
+<div class="term-card" data-term="nicene" onclick="openTerm(this)"><div class="term-name">Nicene Creed</div><div class="term-tap">Tap to reveal</div><div class="term-def">The profession of faith from the Councils of Nicaea and Constantinople. It explicitly proclaims the four marks of the Church.</div></div>
+<div class="term-card" data-term="schism" onclick="openTerm(this)"><div class="term-name">Schism</div><div class="term-tap">Tap to reveal</div><div class="term-def">A break in the visible unity of the Church when individuals or groups separate themselves.</div></div>
+<div class="term-card" data-term="sanctification" onclick="openTerm(this)"><div class="term-name">Sanctification</div><div class="term-tap">Tap to reveal</div><div class="term-def">The process of being made holy by God’s grace, especially through prayer, virtue, sacraments, and charity.</div></div>
+<div class="term-card" data-term="catholicity" onclick="openTerm(this)"><div class="term-name">Catholicity</div><div class="term-tap">Tap to reveal</div><div class="term-def">The Church’s universality, worldwide mission, openness to all peoples, and possession of the fullness of truth.</div></div>
+<div class="term-card" data-term="succession" onclick="openTerm(this)"><div class="term-name">Apostolic Succession</div><div class="term-tap">Tap to reveal</div><div class="term-def">The handing on of apostolic authority from the apostles to bishops through the laying on of hands.</div></div>
+</div>
+<div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink-soft); text-align:center; margin-top:16px;">Viewed: <span id="termsViewed">0</span> of 10</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="termsNext" onclick="showScreen('literal')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="literal">
+<div class="card">
+<div class="screen-label">Part Three · One</div>
+<h2 class="screen-title">One: The Unity of the Church</h2>
+<p class="screen-intro">The Church is one because her source is the unity of the Trinity, and because Christ prayed that His followers would be one.</p>
+<div class="prose">
+<p>Jesus prayed, “that they may all be one” (John 17:21). Unity is not optional for Christians. The Church is one in faith, one in sacramental life, and one in leadership under the Pope and bishops in communion with him.</p>
+<p>This unity does not mean every Catholic looks, prays, sings, or expresses culture the same way. The Church includes different rites, languages, spiritualities, and cultures. Unity is not uniformity. It is more like a body with many parts or a mosaic with many tiles.</p>
+<p>Divisions among Christians, such as schisms and denominational separation, are wounds to the unity Christ desires. That is why the Church works for ecumenism, the effort to restore unity among Christians through truth, prayer, and dialogue.</p>
+</div>
+<div class="check" data-check="literal1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">Which statement best explains the Church’s mark of “one”?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'literal1', 'b')"><span class="letter">a.</span><span>The Church is one because all Catholics must have exactly the same culture and personality.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'literal1', 'b')"><span class="letter">b.</span><span>The Church is united in faith, sacraments, and leadership, while allowing legitimate diversity.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'literal1', 'b')"><span class="letter">c.</span><span>The Church is one because divisions among Christians do not matter.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'literal1', 'b')"><span class="letter">d.</span><span>The Church is one only when everyone agrees on every preference.</span></button>
+</div>
+<div class="check-feedback" id="fb-literal1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">What actions help build unity in a parish, school, or Catholic community? What actions damage unity?</div>
+<textarea id="pauseLiteral" oninput="updatePause('pauseLiteral', 'pauseLiteralWC', 70, 'literalNext', 'literal1')" placeholder="Explain both unity-building and unity-breaking actions."></textarea>
+<div class="word-count" id="pauseLiteralWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="literalNext" onclick="showScreen('allegorical')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="allegorical">
+<div class="card">
+<div class="screen-label">Part Four · Holy</div>
+<h2 class="screen-title">Holy: The Church of Saints and Sinners</h2>
+<p class="screen-intro">The Church is holy because Christ is holy and gives the Church the means to make sinners holy.</p>
+<div class="prose">
+<p>Calling the Church holy can be confusing because members of the Church still sin. The holiness of the Church does not mean every Catholic is already perfect. It means the Church belongs to Christ, is filled with the Holy Spirit, and possesses the means of grace.</p>
+<p>The sacraments, Scripture, prayer, charity, and the guidance of the Holy Spirit are all means of sanctification. The Church is often described as a hospital for sinners, not a museum of perfect people.</p>
+<p>The saints are strong evidence of the Church’s holiness. People like St. Francis of Assisi, St. Thérèse of Lisieux, St. Maximilian Kolbe, and St. Teresa of Calcutta show what Christ can do in human lives through grace.</p>
+</div>
+<div class="check" data-check="allegorical1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">How can the Church be holy if her members are sinners?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'allegorical1', 'd')"><span class="letter">a.</span><span>Because Catholic members never sin after Baptism.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'allegorical1', 'd')"><span class="letter">b.</span><span>Because sin in the Church does not really matter.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'allegorical1', 'd')"><span class="letter">c.</span><span>Because the Church’s holiness depends on public image and success.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'allegorical1', 'd')"><span class="letter">d.</span><span>Because Christ is holy, the Spirit gives grace, and the Church has the means to make sinners holy.</span></button>
+</div>
+<div class="check-feedback" id="fb-allegorical1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Why is it important to admit the sins of Church members while still believing that the Church herself is holy?</div>
+<textarea id="pauseAllegorical" oninput="updatePause('pauseAllegorical', 'pauseAllegoricalWC', 70, 'allegoricalNext', 'allegorical1')" placeholder="Explain why honesty and faith both matter here."></textarea>
+<div class="word-count" id="pauseAllegoricalWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="allegoricalNext" onclick="showScreen('moral')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="moral">
+<div class="card">
+<div class="screen-label">Part Five · Catholic</div>
+<h2 class="screen-title">Catholic: Universal and Whole</h2>
+<p class="screen-intro">The word catholic means universal, according to the whole. The Church is for all peoples, all cultures, and all times.</p>
+<div class="prose">
+<p>The Church is catholic because she is sent to everyone. Jesus commanded the apostles to make disciples of all nations. That mission continues today through parishes, schools, hospitals, missions, charities, and families around the world.</p>
+<p>Catholicity also means the Church teaches the fullness of the faith. The Catholic Church does not exist for one nation, language, ethnicity, or political group. She is meant to embrace what is true and good in every culture, purify it, and raise it toward Christ.</p>
+<p>This is why someone can attend Mass in Canada, Italy, the Philippines, Nigeria, Brazil, or Korea and still recognize the same Eucharist, Creed, and sacramental life, even with different music, language, and local customs.</p>
+</div>
+<div class="check" data-check="moral1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">What does catholic mean in the phrase “one, holy, catholic, and apostolic Church”?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'moral1', 'a')"><span class="letter">a.</span><span>Universal, worldwide, open to all peoples, and possessing the fullness of faith.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'moral1', 'a')"><span class="letter">b.</span><span>Limited to one country, one culture, and one language.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'moral1', 'a')"><span class="letter">c.</span><span>A word that means the Church changes its beliefs to match every culture.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'moral1', 'a')"><span class="letter">d.</span><span>A term that refers only to Roman architecture and old churches.</span></button>
+</div>
+<div class="check-feedback" id="fb-moral1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Have you ever noticed the Church’s catholicity in a parish, school, family, trip, online Catholic community, or world event? Explain.</div>
+<textarea id="pauseMoral" oninput="updatePause('pauseMoral', 'pauseMoralWC', 75, 'moralNext', 'moral1')" placeholder="Describe an example of the Church being universal and diverse."></textarea>
+<div class="word-count" id="pauseMoralWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="moralNext" onclick="showScreen('anagogical')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="anagogical">
+<div class="card">
+<div class="screen-label">Part Six · Apostolic</div>
+<h2 class="screen-title">Apostolic: Founded on the Apostles</h2>
+<p class="screen-intro">The Church is apostolic because she comes from the apostles, teaches their faith, and continues their authority through bishops.</p>
+<div class="prose">
+<p>The Church did not begin as a later invention. Jesus chose the apostles, taught them, and sent them to continue His mission. The Church preserves the apostolic teaching handed down from the beginning.</p>
+<p>Apostolic succession is the unbroken handing on of apostolic authority through bishops. The Pope, as Bishop of Rome, is the successor of St. Peter. Bishops are successors of the apostles and are responsible for teaching, sanctifying, and governing the Church in communion with the Pope.</p>
+<p>This gives Catholics confidence that the Church today is connected historically and doctrinally to the Church of the apostles.</p>
+</div>
+<div class="check" data-check="anagogical1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">What is apostolic succession?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'anagogical1', 'c')"><span class="letter">a.</span><span>A symbolic idea with no connection to Church leadership.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'anagogical1', 'c')"><span class="letter">b.</span><span>A way of saying every Catholic personally met the apostles.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'anagogical1', 'c')"><span class="letter">c.</span><span>The handing on of apostolic authority from the apostles to bishops through the laying on of hands.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'anagogical1', 'c')"><span class="letter">d.</span><span>The belief that the Church started over again in every century.</span></button>
+</div>
+<div class="check-feedback" id="fb-anagogical1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Why might apostolic continuity matter for confidence in Church teaching today?</div>
+<textarea id="pauseAnagogical" oninput="updatePause('pauseAnagogical', 'pauseAnagogicalWC', 75, 'anagogicalNext', 'anagogical1')" placeholder="Explain why historical connection to the apostles matters."></textarea>
+<div class="word-count" id="pauseAnagogicalWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="anagogicalNext" onclick="showScreen('example')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="example">
+<div class="card">
+<div class="screen-label">Part Seven · Living the Four Marks</div>
+<h2 class="screen-title">The Four Marks Are a Mission</h2>
+<p class="screen-intro">The four marks describe the Church, but they also challenge every Catholic to live differently.</p>
+<div class="prose">
+<p>To live the mark of <strong>one</strong>, Catholics protect unity, avoid gossip and division, forgive others, and work for Christian unity. Unity begins in ordinary choices.</p>
+<p>To live the mark of <strong>holy</strong>, Catholics seek sanctification through prayer, sacraments, virtue, and service. The Church is holy by Christ’s grace, but each member is called to become holy too.</p>
+<p>To live the mark of <strong>catholic</strong>, Catholics welcome people of every background, respect legitimate cultural diversity, and share the Gospel beyond their own comfort zone.</p>
+<p>To live the mark of <strong>apostolic</strong>, Catholics remain faithful to the apostles’ teaching, respect the Pope and bishops, and live as people sent on mission.</p>
+</div>
+<div class="check" data-check="example1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">Which action best shows a Catholic living the mark of “one”?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'example1', 'd')"><span class="letter">a.</span><span>Spreading parish gossip because it feels entertaining.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'example1', 'd')"><span class="letter">b.</span><span>Refusing to pray with anyone who has a different culture or personality.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'example1', 'd')"><span class="letter">c.</span><span>Choosing division whenever disagreement appears.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'example1', 'd')"><span class="letter">d.</span><span>Working for forgiveness, peace, and unity in a Catholic community.</span></button>
+</div>
+<div class="check-feedback" id="fb-example1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Which of the four marks do you think Catholics your age are most called to live more intentionally right now? Explain your choice.</div>
+<textarea id="pauseExample" oninput="updatePause('pauseExample', 'pauseExampleWC', 75, 'exampleNext', 'example1')" placeholder="Choose one mark and connect it to real teenage or school life."></textarea>
+<div class="word-count" id="pauseExampleWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="exampleNext" onclick="showScreen('tradition')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="tradition">
+<div class="card">
+<div class="screen-label">Part Eight · Catholic Tradition and Culture</div>
+<h2 class="screen-title">The Marks in Catholic Life</h2>
+<p class="screen-intro">The four marks appear in the Creed, the liturgy, Catholic art, world events, the lives of saints, and the visible structure of the Church.</p>
+<div class="prose">
+<p>The Nicene Creed came from early Church councils, where bishops clarified how Christians should profess the faith. When Catholics say “one, holy, catholic, and apostolic Church,” they are praying words that connect them to centuries of Christian belief.</p>
+<p>World Youth Day is a powerful modern image of the marks. Young Catholics from every continent gather with the Pope, pray the same Creed in many languages, and show the Church’s unity, catholicity, apostolic leadership, and call to holiness.</p>
+<p>St. Peter’s Basilica, shown in the lesson’s page 8 visual, also teaches these marks. Pilgrims from around the world gather there, the tomb of St. Peter points to apostolic continuity, and the saints represented inside witness to the holiness the Church nurtures.</p>
+</div>
+<div class="check" data-check="tradition1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">Why is St. Peter’s Basilica a strong symbol of the four marks?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'tradition1', 'b')"><span class="letter">a.</span><span>Because it proves the Church exists only in Rome and not around the world.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'tradition1', 'b')"><span class="letter">b.</span><span>Because pilgrims gather from across the world, and Peter’s tomb points to apostolic continuity.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'tradition1', 'b')"><span class="letter">c.</span><span>Because it replaces the need for the local parish.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'tradition1', 'b')"><span class="letter">d.</span><span>Because it shows the Church is only a historical museum.</span></button>
+</div>
+<div class="check-feedback" id="fb-tradition1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Which example best helps you understand the four marks: the Creed, World Youth Day, St. Peter’s Basilica, the saints, or your local parish? Why?</div>
+<textarea id="pauseTradition" oninput="updatePause('pauseTradition', 'pauseTraditionWC', 75, 'traditionNext', 'tradition1')" placeholder="Choose one example and connect it to one or more marks."></textarea>
+<div class="word-count" id="pauseTraditionWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="traditionNext" onclick="showScreen('quiz')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="quiz">
+<div class="card">
+<div class="screen-label">Part Nine · Check Your Understanding</div>
+<h2 class="screen-title">Lesson Quiz</h2>
+<p class="screen-intro">Answer all seven questions. Feedback will appear as you complete each one.</p>
+<div id="quizWrap"></div>
+<div class="quiz-score" id="quizScore">Quiz Score<strong id="scoreText">0 / 7</strong></div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="quizNext" onclick="showScreen('deeper')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="deeper">
+<div class="card">
+<div class="screen-label">Part Ten · Think Deeper</div>
+<h2 class="screen-title">Stretch Your Thinking</h2>
+<p class="screen-intro">Use the lesson ideas, but also think carefully and honestly.</p>
+<div class="field">
+<label for="td1">Think Deeper 1</label>
+<div class="prose" style="margin-bottom:12px;"><p>Jesus prayed that His followers would be one. What can ordinary Catholics do to protect unity in a school, parish, family, or online space? What habits harm unity?</p></div>
+<textarea id="td1" oninput="updateWordCount('td1', 'td1WC', 150)" placeholder="Explain concrete ways unity can be protected or damaged."></textarea>
+<div class="word-count" id="td1WC"><span>0 words</span><span>Minimum: 150 words</span></div>
+</div>
+<div class="field">
+<label for="td2">Think Deeper 2</label>
+<div class="prose" style="margin-bottom:12px;"><p>Some people say the Church is too ancient to relate to young people today. How do the four marks show that the Church is both ancient and still alive now?</p></div>
+<textarea id="td2" oninput="updateWordCount('td2', 'td2WC', 140)" placeholder="Connect apostolic roots, catholic universality, holiness, and unity to today."></textarea>
+<div class="word-count" id="td2WC"><span>0 words</span><span>Minimum: 140 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="deeperNext" onclick="showScreen('synthesis')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="synthesis">
+<div class="card">
+<div class="screen-label">Part Eleven · Final Synthesis</div>
+<h2 class="screen-title">Bring the Lesson Together</h2>
+<p class="screen-intro">This final response should show that you understand the lesson as a whole, not just one mark.</p>
+<div class="field">
+<label for="synthesis">Final Synthesis</label>
+<div class="prose" style="margin-bottom:12px;"><p>In one thoughtful response, explain what the Four Marks of the Church reveal about the Catholic Church. Your answer should include one, holy, catholic, apostolic, and at least one real-life example of how Catholics are called to live these marks.</p></div>
+<textarea id="synthesis" oninput="updateWordCount('synthesis', 'synthesisWC', 170)" placeholder="Show how the four marks connect to the Church and to Catholic life today."></textarea>
+<div class="word-count" id="synthesisWC"><span>0 words</span><span>Minimum: 170 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="synthesisNext" onclick="showScreen('finish')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="finish">
+<div class="card">
+<div class="screen-label">Part Twelve · Wrap Up</div>
+<h2 class="screen-title">Almost Finished</h2>
+<p class="screen-intro">Review your progress, download your report, and then mark the lesson as complete.</p>
+<div class="summary-grid">
+<div class="summary-stat"><div class="stat-label">Quiz Score</div><div class="stat-value" id="finishQuiz">0 / 7</div></div>
+<div class="summary-stat"><div class="stat-label">Words Written</div><div class="stat-value" id="finishWords">0</div></div>
+<div class="summary-stat"><div class="stat-label">Time in Lesson</div><div class="stat-value" id="finishTime">0 min</div></div>
+</div>
+<div class="download-note">Download your final report when you are ready. It will include your student information, quiz score, and written responses from the whole lesson.</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn btn-gold" onclick="downloadReport()">⬇ Download Report</button><button class="btn btn-primary" onclick="finishLesson()">Mark Complete →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="complete">
+<div class="card">
+<div class="completion-hero">
+<div class="completion-icon">✦</div>
+<div class="completion-title">Lesson Completed</div>
+<div class="completion-sub">You have finished Lesson 2.5, The Four Marks of the Church.</div>
+</div>
+<div class="download-note">Your work has been saved in this session. Download your report if you have not already done so.</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="showScreen('finish')">← Back to Report</button><div class="btn-row-split"><button class="btn btn-gold" onclick="downloadReport()">⬇ Download Report Again</button></div></div>
+</div>
+</section>
+</div>
+<div class="toast" id="toast">Saved.</div>
+<div class="footer">HRE4M1 · Unit 2 · Lesson 5</div>
+</div>
+<script>
+const LESSON_ID = '2.5';
+const STORAGE_KEY = 'hre4m1_lesson_2_5';
+const SCREEN_ORDER = ['welcome','hook','intro','terms','literal','allegorical','moral','anagogical','example','tradition','quiz','deeper','synthesis','finish','complete'];
+const TOTAL_STEPS = SCREEN_ORDER.length - 2;
+const REQUIRED_TERMS = 10;
+const QUIZ = [
+  {id:'q1', q:'Which phrase names the four marks of the Church?', opts:['Faith, hope, love, and mercy.','One, holy, catholic, and apostolic.','Scripture, Tradition, Magisterium, and Creed.','Prayer, sacraments, saints, and service.'], correct:1, explain:'The Nicene Creed identifies the Church as one, holy, catholic, and apostolic.'},
+  {id:'q2', q:'What does the mark “one” mean?', opts:['The Church has only one culture and language.','The Church is united in faith, sacraments, and leadership while allowing legitimate diversity.','The Church ignores divisions among Christians.','Every Catholic must have the same personality and preferences.'], correct:1, explain:'The Church is one through unity in faith, sacramental life, and governance, not by eliminating legitimate diversity.'},
+  {id:'q3', q:'How can the Church be holy if her members are sinners?', opts:['Because the holiness of the Church comes from Christ, the Holy Spirit, and the means of grace.','Because sin in the Church does not matter.','Because Catholic members cannot commit serious sin.','Because holiness means public success rather than conversion.'], correct:0, explain:'The Church is holy because Christ is holy and gives grace through the Spirit, sacraments, prayer, and truth.'},
+  {id:'q4', q:'What does catholic mean as a mark of the Church?', opts:['Limited to one nation and one style of worship.','Universal, for all peoples, and possessing the fullness of Christ’s teaching.','Only connected to Roman buildings and European culture.','A word that means the Church changes truth to fit every culture.'], correct:1, explain:'Catholic means universal, according to the whole, and open to all peoples while holding the fullness of faith.'},
+  {id:'q5', q:'What makes the Church apostolic?', opts:['It began as a modern organization.','It avoids connection to historical leadership.','It is founded on the apostles, preserves their teaching, and continues through apostolic succession.','It teaches that every believer has the exact same role as the apostles.'], correct:2, explain:'The Church is apostolic in origin, teaching, and succession through bishops and the Pope.'},
+  {id:'q6', q:'Which example best shows the Church’s catholicity?', opts:['A parish refusing to welcome people from other cultures.','Catholics in many countries sharing the same Eucharist and Creed in different languages.','A local club choosing its own beliefs separate from the wider Church.','A Catholic event limited to one nation and one tradition only.'], correct:1, explain:'Catholicity is visible when one universal Church is present in many cultures and places.'},
+  {id:'q7', q:'Why do the four marks matter for ordinary Catholics?', opts:['They are only historical facts and do not affect daily life.','They call Catholics to build unity, seek holiness, welcome all peoples, and remain faithful to apostolic teaching.','They replace the need for sacraments and prayer.','They prove that Catholics never need to grow or change.'], correct:1, explain:'The marks describe the Church and challenge each member to live them faithfully.'}
+];
+const CORRECT_MAP = {intro1:'c', literal1:'b', allegorical1:'d', moral1:'a', anagogical1:'c', example1:'d', tradition1:'b'};
+const MINIMUMS = {hookResponse:35, pauseIntro:60, pauseLiteral:70, pauseAllegorical:70, pauseMoral:75, pauseAnagogical:75, pauseExample:75, pauseTradition:75, td1:150, td2:140, synthesis:170};
+const RESPONSE_ORDER = ['hookResponse','pauseIntro','pauseLiteral','pauseAllegorical','pauseMoral','pauseAnagogical','pauseExample','pauseTradition','td1','td2','synthesis'];
+const RESPONSE_TITLES = {hookResponse:'Starting Point', pauseIntro:'Reflection 1', pauseLiteral:'Reflection 2', pauseAllegorical:'Reflection 3', pauseMoral:'Reflection 4', pauseAnagogical:'Reflection 5', pauseExample:'Reflection 6', pauseTradition:'Reflection 7', td1:'Think Deeper 1', td2:'Think Deeper 2', synthesis:'Final Synthesis'};
+const REPORT_FILE_PREFIX = 'HRE4M1_L2_3_Images_of_God_in_Scripture';
+const REPORT_HEADER_LABEL = 'HRE4M1 · Unit 2 · Lesson 5';
+const REPORT_TITLE = 'The Four Marks of the Church';
+const REPORT_SUBTITLE = 'Student Report';
+const RESUME_ERROR = 'Could not load that file. Please upload a valid Lesson 2.5 progress file.';
+const state = {lessonId:LESSON_ID, startedAt:null, finishedAt:null, currentScreen:'welcome', studentInfo:{name:'',email:'',className:''}, termsViewed:[], inlineChecks:{}, responses:{}, quiz:{answers:{}, scoreCount:0}, sectionTimes:{}, lastSavedAt:null};
+RESPONSE_ORDER.forEach(key => state.responses[key] = '');
+let screenEnterTime = Date.now();
+function countWords(str) { if (!str) return 0; return str.trim().split(/\s+/).filter(Boolean).length; }
+function escapeHTML(str) { if (str === null || str === undefined) return ''; return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function formatTime(ms) { const totalMin = Math.floor(ms / 60000); if (totalMin < 1) return '< 1 min'; if (totalMin < 60) return totalMin + ' min'; const hrs = Math.floor(totalMin / 60); const mins = totalMin % 60; return hrs + 'h ' + mins + 'm'; }
+function persistInputsToState() { const nameEl = document.getElementById('studentName'); const emailEl = document.getElementById('studentEmail'); const classEl = document.getElementById('studentClass'); if (nameEl) state.studentInfo.name = nameEl.value.trim(); if (emailEl) state.studentInfo.email = emailEl.value.trim(); if (classEl) state.studentInfo.className = classEl.value.trim(); RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) state.responses[key] = el.value.trim(); }); }
+function saveLocal() { state.lastSavedAt = new Date().toISOString(); persistInputsToState(); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function totalWords() { persistInputsToState(); return Object.values(state.responses).reduce((sum, value) => sum + countWords(value), 0); }
+function totalTimeMs() { let total = 0; Object.values(state.sectionTimes).forEach(ms => total += ms || 0); if (state.currentScreen && screenEnterTime) total += Date.now() - screenEnterTime; return total; }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1600); }
+function markSaveButtonsSaved() { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.add('saved')); const label = document.getElementById('stickySaveLabel'); if (label) label.textContent = 'Saved'; setTimeout(() => { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.remove('saved')); const again = document.getElementById('stickySaveLabel'); if (again) again.textContent = 'Save Progress'; }, 1300); }
+function updateProgress() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); const activeStep = Math.max(0, Math.min(TOTAL_STEPS, idx)); const pct = Math.max(0, Math.min(100, Math.round((activeStep / TOTAL_STEPS) * 100))); document.getElementById('progressFill').style.width = pct + '%'; document.getElementById('progressPercent').textContent = pct + '%'; const displayStep = state.currentScreen === 'welcome' ? 1 : Math.min(TOTAL_STEPS, Math.max(1, idx)); document.getElementById('progressLabel').textContent = 'Section ' + displayStep + ' of ' + TOTAL_STEPS; }
+function showScreen(screenId) { persistInputsToState(); const now = Date.now(); if (state.currentScreen) { state.sectionTimes[state.currentScreen] = (state.sectionTimes[state.currentScreen] || 0) + (now - screenEnterTime); } screenEnterTime = now; state.currentScreen = screenId; document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); const target = document.querySelector('.screen[data-screen="' + screenId + '"]'); if (target) target.classList.add('active'); document.getElementById('progressContainer').style.display = screenId === 'welcome' ? 'none' : 'block'; if (screenId === 'quiz') renderQuiz(); if (screenId === 'finish') refreshFinishStats(); updateProgress(); refreshGating(); saveLocal(); window.scrollTo({top:0, behavior:'smooth'}); }
+function prevScreen() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); if (idx > 0) showScreen(SCREEN_ORDER[idx - 1]); }
+function beginLesson() { const name = document.getElementById('studentName').value.trim(); const email = document.getElementById('studentEmail').value.trim(); if (!name || !email) { document.getElementById('setupAlert').classList.add('show'); return; } document.getElementById('setupAlert').classList.remove('show'); if (!state.startedAt) state.startedAt = new Date().toISOString(); showScreen('hook'); }
+function updateWordCount(textareaId, countId, minimum) { const el = document.getElementById(textareaId); const words = countWords(el.value); state.responses[textareaId] = el.value.trim(); const counter = document.getElementById(countId); const met = words >= minimum; counter.innerHTML = '<span>' + words + ' words</span><span class="' + (met ? 'met' : 'short') + '">Minimum: ' + minimum + ' words</span>'; saveLocal(); refreshGating(); }
+function updatePause(textareaId, countId, minimum, nextBtnId, checkId) { updateWordCount(textareaId, countId, minimum); const wordsMet = countWords(document.getElementById(textareaId).value) >= minimum; const checkMet = !checkId || !!state.inlineChecks[checkId]; const btn = document.getElementById(nextBtnId); if (btn) btn.disabled = !(wordsMet && checkMet); }
+function openTerm(card) { const term = card.getAttribute('data-term'); card.classList.toggle('open'); if (!state.termsViewed.includes(term)) state.termsViewed.push(term); card.classList.add('viewed'); document.getElementById('termsViewed').textContent = state.termsViewed.length; saveLocal(); refreshGating(); }
+function answerCheck(btn, checkId, correctLetter) { if (state.inlineChecks[checkId]) return; const chosen = btn.getAttribute('data-answer'); state.inlineChecks[checkId] = chosen; const wrap = btn.closest('.check'); wrap.querySelectorAll('.check-option').forEach(opt => opt.classList.add('answered')); const fb = document.getElementById('fb-' + checkId); wrap.querySelectorAll('.check-option').forEach(opt => { if (opt.getAttribute('data-answer') === correctLetter) opt.classList.add('correct'); else if (opt === btn) opt.classList.add('incorrect'); }); fb.textContent = chosen === correctLetter ? 'Correct. You matched the main lesson idea.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); saveLocal(); refreshGating(); }
+function refreshGating() { const needs = (id, min) => countWords((document.getElementById(id)?.value || '').trim()) >= min; const checked = id => !!state.inlineChecks[id]; const setDisabled = (id, disabled) => { const el = document.getElementById(id); if (el) el.disabled = !!disabled; }; setDisabled('hookNext', !needs('hookResponse', MINIMUMS.hookResponse)); setDisabled('introNext', !(needs('pauseIntro', MINIMUMS.pauseIntro) && checked('intro1'))); setDisabled('termsNext', state.termsViewed.length < REQUIRED_TERMS); setDisabled('literalNext', !(needs('pauseLiteral', MINIMUMS.pauseLiteral) && checked('literal1'))); setDisabled('allegoricalNext', !(needs('pauseAllegorical', MINIMUMS.pauseAllegorical) && checked('allegorical1'))); setDisabled('moralNext', !(needs('pauseMoral', MINIMUMS.pauseMoral) && checked('moral1'))); setDisabled('anagogicalNext', !(needs('pauseAnagogical', MINIMUMS.pauseAnagogical) && checked('anagogical1'))); setDisabled('exampleNext', !(needs('pauseExample', MINIMUMS.pauseExample) && checked('example1'))); setDisabled('traditionNext', !(needs('pauseTradition', MINIMUMS.pauseTradition) && checked('tradition1'))); setDisabled('deeperNext', !(needs('td1', MINIMUMS.td1) && needs('td2', MINIMUMS.td2))); setDisabled('synthesisNext', !needs('synthesis', MINIMUMS.synthesis)); setDisabled('quizNext', Object.keys(state.quiz.answers).length !== QUIZ.length); }
+function renderQuiz() { const wrap = document.getElementById('quizWrap'); if (wrap.dataset.rendered === '1') return restoreQuiz(); wrap.innerHTML = QUIZ.map((q, idx) => `<div class="quiz-question" id="${q.id}"><div class="q-number">Question ${idx + 1}</div><div class="q-text">${q.q}</div><div class="q-options">${q.opts.map((opt, i) => `<button class="q-option" data-opt="${i}" onclick="answerQuiz('${q.id}', ${i})"><span class="letter">${String.fromCharCode(97 + i)}.</span><span>${opt}</span></button>`).join('')}</div><div class="q-explanation" id="exp-${q.id}">${q.explain}</div></div>`).join(''); wrap.dataset.rendered = '1'; restoreQuiz(); }
+function answerQuiz(qId, choice) { if (state.quiz.answers[qId] !== undefined) return; state.quiz.answers[qId] = choice; const q = QUIZ.find(item => item.id === qId); if (choice === q.correct) state.quiz.scoreCount += 1; restoreQuiz(); saveLocal(); refreshGating(); }
+function restoreQuiz() { QUIZ.forEach(q => { const qEl = document.getElementById(q.id); if (!qEl) return; const chosen = state.quiz.answers[q.id]; const options = qEl.querySelectorAll('.q-option'); options.forEach(opt => opt.classList.remove('selected','correct','incorrect','locked')); qEl.querySelector('.q-explanation').classList.remove('show'); if (chosen !== undefined) { options.forEach(opt => opt.classList.add('locked')); const selected = qEl.querySelector('.q-option[data-opt="' + chosen + '"]'); const correctBtn = qEl.querySelector('.q-option[data-opt="' + q.correct + '"]'); if (selected) selected.classList.add('selected'); if (chosen === q.correct) selected.classList.add('correct'); else { if (selected) selected.classList.add('incorrect'); if (correctBtn) correctBtn.classList.add('correct'); } qEl.querySelector('.q-explanation').classList.add('show'); } }); if (Object.keys(state.quiz.answers).length === QUIZ.length) { document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('quizScore').classList.add('show'); } }
+function triggerDownload(filename, content, mime) { const blob = new Blob([content], {type: mime}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 500); }
+function saveProgressNow() { saveLocal(); const stamp = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-'); triggerDownload(`HRE4M1_L2_5_progress_${stamp}.json`, JSON.stringify(state, null, 2), 'application/json'); markSaveButtonsSaved(); showToast('Progress downloaded.'); }
+function refreshFinishStats() { document.getElementById('finishQuiz').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('finishWords').textContent = totalWords(); document.getElementById('finishTime').textContent = formatTime(totalTimeMs()); }
+function buildReportHTML() { persistInputsToState(); const rows = RESPONSE_ORDER.map(key => `<section style="margin:0 0 28px 0;"><h3 style="font-family:Georgia,serif;font-size:24px;margin:0 0 8px 0;color:#5B2D68;">${escapeHTML(RESPONSE_TITLES[key])}</h3><div style="font-size:13px;color:#8B5E2A;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">${countWords(state.responses[key])} words</div><div style="white-space:pre-wrap;line-height:1.7;font-size:16px;border:1px solid #ddd7c6;background:#fffdf7;padding:16px 18px;">${escapeHTML(state.responses[key] || '')}</div></section>`).join(''); return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${REPORT_TITLE} Report</title><style>body{font-family:Georgia,serif;background:#f5efe2;color:#232238;margin:0;padding:40px;line-height:1.6;}.wrap{max-width:900px;margin:0 auto;background:#fff;padding:42px 46px;border:1px solid #d8c9a0;box-shadow:0 10px 30px rgba(0,0,0,.08);}.small{font-family:Arial,sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8B5E2A;}h1{font-size:42px;color:#5B2D68;margin:8px 0 4px;}h2{font-size:18px;font-style:italic;color:#55506A;margin:0 0 26px;}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0 28px;}.card{border:1px solid #ddd7c6;background:#fffdf7;padding:14px 16px;}.label{font-family:Arial,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8B5E2A;margin-bottom:6px;}.value{font-size:18px;color:#5B2D68;}hr{border:none;border-top:1px solid #d8c9a0;margin:26px 0;}@media print{body{background:white;padding:0;} .wrap{box-shadow:none;border:none;}}</style></head><body><div class="wrap"><div class="small">${REPORT_HEADER_LABEL}</div><h1>${REPORT_TITLE}</h1><h2>${REPORT_SUBTITLE}</h2><div class="grid"><div class="card"><div class="label">Student</div><div class="value">${escapeHTML(state.studentInfo.name || '')}</div></div><div class="card"><div class="label">Email</div><div class="value">${escapeHTML(state.studentInfo.email || '')}</div></div><div class="card"><div class="label">Class</div><div class="value">${escapeHTML(state.studentInfo.className || '')}</div></div><div class="card"><div class="label">Quiz Score</div><div class="value">${state.quiz.scoreCount} / ${QUIZ.length}</div></div><div class="card"><div class="label">Total Words</div><div class="value">${totalWords()}</div></div><div class="card"><div class="label">Time in Lesson</div><div class="value">${formatTime(totalTimeMs())}</div></div></div><hr>${rows}</div></body></html>`; }
+function downloadReport() { const stamp = new Date().toISOString().slice(0,10); const safeName = (state.studentInfo.name || 'student').replace(/[^a-z0-9]+/gi,'_'); triggerDownload(`${REPORT_FILE_PREFIX}_${safeName}_${stamp}.html`, buildReportHTML(), 'text/html'); showToast('Report downloaded.'); }
+function finishLesson() { state.finishedAt = new Date().toISOString(); saveLocal(); showScreen('complete'); }
+function restoreChecks() { Object.entries(state.inlineChecks).forEach(([checkId, chosen]) => { const wrap = document.querySelector('.check[data-check="' + checkId + '"]'); if (!wrap) return; const correct = CORRECT_MAP[checkId]; wrap.querySelectorAll('.check-option').forEach(opt => { opt.classList.add('answered'); if (opt.getAttribute('data-answer') === correct) opt.classList.add('correct'); else if (opt.getAttribute('data-answer') === chosen) opt.classList.add('incorrect'); }); const fb = document.getElementById('fb-' + checkId); if (fb) { fb.textContent = chosen === correct ? 'Correct. You matched the main lesson idea.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); } }); }
+function restoreTextAndCounts() { const countIdMap = {hookResponse:'hookWC', pauseIntro:'pauseIntroWC', pauseLiteral:'pauseLiteralWC', pauseAllegorical:'pauseAllegoricalWC', pauseMoral:'pauseMoralWC', pauseAnagogical:'pauseAnagogicalWC', pauseExample:'pauseExampleWC', pauseTradition:'pauseTraditionWC', td1:'td1WC', td2:'td2WC', synthesis:'synthesisWC'}; RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) el.value = state.responses[key] || ''; const wcId = countIdMap[key]; if (el && document.getElementById(wcId)) updateWordCount(key, wcId, MINIMUMS[key]); }); }
+function resumeFromFile(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = function(e) { try { const loaded = JSON.parse(e.target.result); if (!loaded || loaded.lessonId !== LESSON_ID) throw new Error('Wrong lesson file'); Object.assign(state, loaded); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); showScreen(state.currentScreen || 'hook'); showToast('Progress restored.'); } catch (err) { alert(RESUME_ERROR); } }; reader.readAsText(file); }
+function hydrateFromLocalStorage() { try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return; const saved = JSON.parse(raw); if (!saved || saved.lessonId !== LESSON_ID) return; Object.assign(state, saved); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); } catch (err) {} }
+hydrateFromLocalStorage();
+updateProgress();
+refreshGating();
+</script>
+</body>
+</html>

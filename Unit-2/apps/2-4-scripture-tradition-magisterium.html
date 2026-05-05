@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HRE4M1 · Lesson 2.4: Scripture, Tradition, and the Magisterium</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=Lora:ital,wght@0,400;0,500;0,600;1,400&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+
+
+  :root {
+    --bg-deep: #1B1833;
+    --bg-mid: #31204F;
+    --bg-card: #F6EFE2;
+    --bg-card-alt: #E8DCC7;
+    --gold: #C49A4A;
+    --gold-soft: #DFC084;
+    --gold-deep: #8B5E2A;
+    --wine: #5B2D68;
+    --ivory: #F6EFE2;
+    --cream: #F1E4C8;
+    --ink: #232238;
+    --ink-soft: #55506A;
+    --locked: #4A556880;
+    --success: #3E7C68;
+    --danger: #9E3B32;
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.25);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Textured background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(201, 169, 97, 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(107, 44, 44, 0.1), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ---- Header ---- */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .unit-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .lesson-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .lesson-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gold-soft);
+    opacity: 0.9;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  /* ---- Progress bar ---- */
+  .progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-deep) 70%, transparent);
+    padding: 16px 0 12px;
+    margin: -24px -20px 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft));
+    width: 0%;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.5);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    margin: 8px auto 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  /* ---- Sticky save button (top bar) ---- */
+  .save-sticky {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 169, 97, 0.12);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .save-sticky:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    border-color: var(--gold);
+  }
+
+  .save-sticky.saved {
+    background: rgba(63, 122, 77, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  /* ---- In-row save (button row) ---- */
+  .btn-save-row {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-save-row:hover {
+    background: var(--gold-deep);
+    color: var(--ivory);
+  }
+
+  .btn-save-row.saved {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .btn-row-split {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* ---- Pause and Reflect blocks (in-flow) ---- */
+  .pause {
+    background: linear-gradient(135deg, rgba(107, 44, 44, 0.06), rgba(201, 169, 97, 0.08));
+    border: 1px solid rgba(107, 44, 44, 0.2);
+    border-left: 3px solid var(--wine);
+    padding: 22px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .pause-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pause-label::before {
+    content: '❊';
+    font-size: 14px;
+    color: var(--gold-deep);
+  }
+
+  .pause-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .pause textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(107, 44, 44, 0.25);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    border-radius: 2px;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .pause textarea:focus {
+    outline: none;
+    border-color: var(--wine);
+    box-shadow: 0 0 0 2px rgba(107, 44, 44, 0.15);
+  }
+
+  /* Save confirmation toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid var(--gold);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---- Screen Cards ---- */
+  .screen {
+    display: none;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .screen.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .screen-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .screen-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .screen-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .prose {
+    font-size: 16.5px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .prose p { margin-bottom: 18px; }
+
+  .prose strong { color: var(--wine); font-weight: 600; }
+
+  .prose em { color: var(--ink-soft); }
+
+  .prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 28px 0 14px;
+    color: var(--wine);
+    line-height: 1.25;
+  }
+
+  .prose h3::before {
+    content: '❖ ';
+    color: var(--gold-deep);
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+
+  .divider {
+    display: block;
+    margin: 32px auto;
+    width: 120px;
+    height: auto;
+    opacity: 0.6;
+  }
+
+  .pullquote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--wine);
+    text-align: center;
+    margin: 28px 20px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    line-height: 1.4;
+  }
+
+  .scripture {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scripture-ref {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--ivory);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--wine);
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:disabled {
+    background: var(--locked);
+    border-color: var(--locked);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+  }
+
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- Forms ---- */
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .word-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .word-count .met {
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  .word-count .short {
+    color: var(--danger);
+  }
+
+  /* ---- Key Terms / Flashcards ---- */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .term-card {
+    background: var(--bg-card-alt);
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    border-radius: 2px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 100px;
+  }
+
+  .term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--gold-deep);
+  }
+
+  .term-card.viewed {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+  }
+
+  .term-card.viewed::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .term-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.7;
+  }
+
+  .term-def {
+    display: none;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .term-card.open .term-def { display: block; }
+  .term-card.open .term-tap { display: none; }
+
+  /* ---- Inline comprehension check ---- */
+  .check {
+    background: #FDF8E8;
+    border: 1px dashed var(--gold-deep);
+    border-radius: 2px;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .check-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .check-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .check-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-option {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .check-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .check-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .check-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .check-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .check-feedback {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    display: none;
+  }
+
+  .check-feedback.show { display: block; }
+
+  /* ---- Vocation Compass ---- */
+  .compass-intro {
+    background: #FDF8E8;
+    border-left: 3px solid var(--wine);
+    padding: 18px 22px;
+    margin: 20px 0 30px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .compass-vocation {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(140, 113, 53, 0.25);
+  }
+
+  .compass-vocation:last-child {
+    border-bottom: none;
+  }
+
+  .compass-voc-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+
+  .compass-voc-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  .compass-aspect {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px dotted rgba(140, 113, 53, 0.2);
+  }
+
+  .compass-aspect:first-of-type { border-top: none; }
+
+  .compass-aspect-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .rating-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .rating-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(140, 113, 53, 0.4);
+    background: white;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .rating-btn:hover {
+    border-color: var(--gold-deep);
+  }
+
+  .rating-btn.selected {
+    background: var(--wine);
+    color: var(--ivory);
+    border-color: var(--wine);
+  }
+
+  .rating-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  .compass-result {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(107, 44, 44, 0.08));
+    border: 1px solid var(--gold-deep);
+    padding: 24px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  .compass-result.show { display: block; }
+
+  .result-voc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.3);
+  }
+
+  .result-voc:last-child { border-bottom: none; }
+
+  .result-voc-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--wine);
+  }
+
+  .result-bar {
+    width: 180px;
+    height: 8px;
+    background: rgba(140, 113, 53, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .result-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    transition: width 1s ease;
+  }
+
+  /* ---- Quiz ---- */
+  .quiz-question {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.25);
+  }
+
+  .quiz-question:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .q-option {
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .q-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .q-option.selected {
+    border-color: var(--wine);
+    background: rgba(107, 44, 44, 0.06);
+  }
+
+  .q-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .q-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+  }
+
+  .q-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+  }
+
+  .q-option.locked {
+    pointer-events: none;
+  }
+
+  .q-explanation {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201, 169, 97, 0.1);
+    border-left: 2px solid var(--gold-deep);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    display: none;
+  }
+
+  .q-explanation.show { display: block; }
+
+  .quiz-score {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(107, 44, 44, 0.1));
+    border: 1px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score strong {
+    font-size: 34px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ---- Completion screen ---- */
+  .completion-hero {
+    text-align: center;
+    padding: 20px 0 32px;
+  }
+
+  .completion-icon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    color: var(--gold-deep);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .completion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .completion-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .summary-stat {
+    background: #FDF8E8;
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+  }
+
+  .download-note {
+    background: rgba(201, 169, 97, 0.12);
+    padding: 18px 22px;
+    border-left: 3px solid var(--gold-deep);
+    margin: 24px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ---- Hero (start screen) ---- */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-deep));
+    color: var(--ivory);
+    padding: 40px 40px 36px;
+    margin: -40px -44px 32px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .hero-banner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+
+  .hero-banner p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-soft);
+    margin-top: 8px;
+  }
+
+  .hero-banner .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+
+  .upload-zone {
+    border: 1px dashed rgba(140, 113, 53, 0.4);
+    padding: 20px;
+    text-align: center;
+    margin-top: 24px;
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .upload-zone label {
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .upload-zone input { display: none; }
+
+  /* ---- Error / alert ---- */
+  .alert {
+    padding: 12px 16px;
+    background: rgba(168, 67, 43, 0.1);
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    margin-top: 14px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .alert.show { display: block; }
+
+  /* ---- Footer ---- */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .card { padding: 28px 22px; }
+    .hero-banner { margin: -28px -22px 28px; padding: 30px 24px 26px; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; justify-content: center; }
+    .compass-aspect { grid-template-columns: 1fr; gap: 8px; }
+    .result-bar { width: 120px; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .save-sticky {
+      position: static;
+      display: flex;
+      margin: 10px auto 0;
+      width: fit-content;
+    }
+    .progress-meta { flex-wrap: wrap; }
+    .btn-row-split { width: 100%; flex-direction: column; }
+    .btn-row-split .btn-save-row { width: 100%; justify-content: center; }
+  }
+
+  /* Print-friendly download report styling will be injected separately */
+
+  /* Unit 2 Scripture palette overrides */
+  body::before {
+    background:
+      radial-gradient(ellipse at top left, rgba(196, 154, 74, 0.10), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(91, 45, 104, 0.16), transparent 50%);
+  }
+  .pause { background: linear-gradient(135deg, rgba(91, 45, 104, 0.08), rgba(196, 154, 74, 0.08)); border-color: rgba(91, 45, 104, 0.22); }
+  .check, .field input, .field textarea, .field select, .pause textarea, .summary-stat { background:#FFF9EC; }
+  .term-card.viewed { background: linear-gradient(135deg, #FFF9EC, var(--bg-card-alt)); }
+
+
+</style>
+</head>
+<body>
+<div class="app">
+<div class="header">
+<div class="unit-label">HRE4M1 · Unit 2 · Lesson 4</div>
+<h1 class="lesson-title">Scripture, Tradition, and the Magisterium</h1>
+<div class="lesson-subtitle">The three pillars that preserve and interpret the Catholic faith</div>
+<svg class="ornament" height="20" style="color:var(--gold);" viewbox="0 0 80 20" width="80" xmlns="http://www.w3.org/2000/svg">
+<path d="M 0 10 L 30 10 M 50 10 L 80 10" fill="none" stroke="currentColor" stroke-width="1"></path>
+<circle cx="40" cy="10" fill="none" r="3" stroke="currentColor" stroke-width="1"></circle>
+<circle cx="40" cy="10" fill="currentColor" r="1"></circle>
+</svg>
+</div>
+<div class="progress-container" id="progressContainer" style="display:none; position:relative;">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-meta"><span id="progressLabel">Section 1 of 13</span><span id="progressPercent">0%</span></div>
+<button class="save-sticky" id="stickySave" onclick="saveProgressNow()" title="Download your progress to resume later"><span>💾</span><span id="stickySaveLabel">Save Progress</span></button>
+</div>
+<div id="screens">
+<section class="screen active" data-screen="welcome">
+<div class="card">
+<div class="hero-banner">
+<div class="ornament-line">
+<svg height="12" viewbox="0 0 40 12" width="40"><line stroke="currentColor" stroke-width="1" x1="0" x2="40" y1="6" y2="6"></line></svg>
+<span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">A Study in Catholic Authority</span>
+<svg height="12" viewbox="0 0 40 12" width="40"><line stroke="currentColor" stroke-width="1" x1="0" x2="40" y1="6" y2="6"></line></svg>
+</div>
+<h2>Welcome to Lesson 2.4</h2>
+<p>This lesson explores how Sacred Scripture, Sacred Tradition, and the Magisterium work together to guide Catholic belief and moral life.</p>
+</div>
+<p class="prose" style="margin-bottom:24px;">Before you begin, enter your information. Your name will appear on the final report you can download and submit at the end of the lesson.</p>
+<div class="field"><label for="studentName">Full Name</label><input autocomplete="name" id="studentName" placeholder="First and last name" type="text"/></div>
+<div class="field"><label for="studentEmail">School Email</label><input autocomplete="email" id="studentEmail" placeholder="you@school.ca" type="email"/></div>
+<div class="field"><label for="studentClass">Class / Period</label><input id="studentClass" placeholder="e.g., HRE4M1 · Period 2" type="text"/></div>
+<div class="alert" id="setupAlert">Please fill in your name and email before starting.</div>
+<div class="btn-row"><div></div><button class="btn btn-primary" onclick="beginLesson()">Begin Lesson →</button></div>
+<div class="upload-zone">
+<div style="font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Returning to finish?</div>
+<label for="resumeFile">Upload your saved progress file</label>
+<input accept=".json" id="resumeFile" onchange="resumeFromFile(event)" type="file"/>
+</div>
+</div>
+</section>
+<section class="screen" data-screen="hook">
+<div class="card">
+<div class="screen-label">Before We Begin</div>
+<h2 class="screen-title">Where Do Catholics Get Their Teachings?</h2>
+<p class="screen-intro">Start with what you already think before the lesson develops the Catholic answer.</p>
+<div class="prose">
+<p>When Catholics believe something about God, morality, the sacraments, Mary, the Eucharist, or modern ethical issues, where does that belief come from?</p>
+<p>Some people assume Catholics simply “add rules” to the Bible. This lesson will help you understand the Catholic view more clearly.</p>
+</div>
+<div class="field" style="margin-top:20px;">
+<label for="hookResponse">Your starting point</label>
+<textarea id="hookResponse" oninput="updateWordCount('hookResponse', 'hookWC', 35)" placeholder="Where do you think Catholics get their teachings from, and why?"></textarea>
+<div class="word-count" id="hookWC"><span>0 words</span><span>Minimum: 35 words</span></div>
+</div>
+<div class="btn-row">
+<button class="btn btn-ghost" onclick="prevScreen()">← Back</button>
+<div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="hookNext" onclick="showScreen('intro')">Continue →</button></div>
+</div>
+</div>
+</section>
+<section class="screen" data-screen="intro">
+<div class="card">
+<div class="screen-label">Part One · Introduction</div>
+<h2 class="screen-title">The Three Pillars of Catholic Faith</h2>
+<p class="screen-intro">Catholics do not see Scripture, Tradition, and the Magisterium as competing authorities. They work together as one unified way God preserves and hands on the Gospel.</p>
+<div class="prose">
+<p>The Catholic Church teaches that God’s Revelation is handed on through <strong>Sacred Scripture</strong> and <strong>Sacred Tradition</strong>. These are not two different truths. They flow from the same divine source and form one sacred deposit of faith.</p>
+<p>The <strong>Magisterium</strong>, the Pope and bishops in communion with him, serves this deposit of faith by authentically interpreting Scripture and Tradition. It does not invent new revelation. It protects, clarifies, and teaches what has been handed on.</p>
+<p>A helpful image is a three-legged stool. If one leg is removed, the stool becomes unstable. In the same way, Scripture, Tradition, and the Magisterium belong together.</p>
+<div class="scripture">“So then, brothers and sisters, stand firm and hold fast to the traditions that you were taught by us, either by word of mouth or by our letter.”<span class="scripture-ref">2 Thessalonians 2:15, NRSV-CE</span></div>
+</div>
+<div class="check" data-check="intro1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">Which statement best summarizes the Catholic view of Scripture, Tradition, and the Magisterium?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">a.</span><span>They are three unrelated sources that often compete with each other.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">b.</span><span>Scripture is important, but Tradition and the Magisterium are optional.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">c.</span><span>They are united and complementary, preserving and interpreting the one deposit of faith.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'intro1', 'c')"><span class="letter">d.</span><span>The Magisterium can create new revelation whenever the Church needs it.</span></button>
+</div>
+<div class="check-feedback" id="fb-intro1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Why do you think Catholics need more than private interpretation of the Bible when dealing with difficult faith or moral questions?</div>
+<textarea id="pauseIntro" oninput="updatePause('pauseIntro', 'pauseIntroWC', 60, 'introNext', 'intro1')" placeholder="Explain why unity, guidance, and authority matter for faith."></textarea>
+<div class="word-count" id="pauseIntroWC"><span>0 words</span><span>Minimum: 60 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="introNext" onclick="showScreen('terms')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="terms">
+<div class="card">
+<div class="screen-label">Part Two · Vocabulary</div>
+<h2 class="screen-title">Seven Key Terms to Know</h2>
+<p class="screen-intro">Tap each card to reveal its meaning. View all seven before moving on.</p>
+<div class="terms-grid" id="termsGrid">
+<div class="term-card" data-term="scripture" onclick="openTerm(this)"><div class="term-name">Sacred Scripture</div><div class="term-tap">Tap to reveal</div><div class="term-def">The written Word of God, the Bible, consisting of 73 inspired books in the Catholic canon.</div></div>
+<div class="term-card" data-term="tradition" onclick="openTerm(this)"><div class="term-name">Sacred Tradition</div><div class="term-tap">Tap to reveal</div><div class="term-def">The living transmission of the apostles’ teaching, worship, and faith through the Church, guided by the Holy Spirit.</div></div>
+<div class="term-card" data-term="magisterium" onclick="openTerm(this)"><div class="term-name">Magisterium</div><div class="term-tap">Tap to reveal</div><div class="term-def">The teaching authority of the Church, entrusted to the Pope and bishops in communion with him.</div></div>
+<div class="term-card" data-term="apostolic" onclick="openTerm(this)"><div class="term-name">Apostolic Succession</div><div class="term-tap">Tap to reveal</div><div class="term-def">The unbroken line of bishops going back to the apostles, preserving continuity in teaching and authority.</div></div>
+<div class="term-card" data-term="dogma" onclick="openTerm(this)"><div class="term-name">Dogma</div><div class="term-tap">Tap to reveal</div><div class="term-def">A truth formally defined by the Magisterium as revealed by God and required for Catholic belief.</div></div>
+<div class="term-card" data-term="doctrine" onclick="openTerm(this)"><div class="term-name">Doctrine</div><div class="term-tap">Tap to reveal</div><div class="term-def">An official teaching of the Church on faith or morals. Some doctrines are dogmas, but not all are formally defined dogmas.</div></div>
+<div class="term-card" data-term="discipline" onclick="openTerm(this)"><div class="term-name">Discipline or Practice</div><div class="term-tap">Tap to reveal</div><div class="term-def">A changeable Church practice, such as fasting rules or liturgical norms. These are guided by authority but are not unchanging doctrines.</div></div>
+</div>
+<div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink-soft); text-align:center; margin-top:16px;">Viewed: <span id="termsViewed">0</span> of 7</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="termsNext" onclick="showScreen('literal')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="literal">
+<div class="card">
+<div class="screen-label">Part Three · Sacred Scripture and Tradition</div>
+<h2 class="screen-title">One Deposit of Faith, Two Modes of Transmission</h2>
+<p class="screen-intro">Scripture and Tradition are not enemies. They both hand on the Word of God entrusted to the Church.</p>
+<div class="prose">
+<p>Jesus taught orally. The apostles preached orally. The Church was baptizing, celebrating the Eucharist, and teaching the faith before the New Testament was fully written and recognized as Scripture.</p>
+<p>This matters because the Bible did not drop from heaven with a table of contents. The Church, guided by the Holy Spirit, recognized which books belonged in the biblical canon. In that sense, even our knowledge of what counts as Scripture comes through the Church’s Tradition.</p>
+<p>Sacred Tradition is not random human custom. It is the living handing on of the apostolic faith. The Trinity, the canon of Scripture, and the creeds are examples of truths clarified and handed on through the Church’s life and teaching.</p>
+</div>
+<div class="check" data-check="literal1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">Why does Catholic teaching say Scripture and Tradition belong together?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'literal1', 'b')"><span class="letter">a.</span><span>Because Tradition replaces Scripture whenever Scripture is unclear.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'literal1', 'b')"><span class="letter">b.</span><span>Because both flow from the same divine source and hand on the one deposit of faith.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'literal1', 'b')"><span class="letter">c.</span><span>Because Scripture was written by the Magisterium in the Middle Ages.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'literal1', 'b')"><span class="letter">d.</span><span>Because Catholics do not believe Scripture is inspired.</span></button>
+</div>
+<div class="check-feedback" id="fb-literal1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Why is it important to remember that the Church existed, worshipped, and taught before the New Testament was fully written and gathered?</div>
+<textarea id="pauseLiteral" oninput="updatePause('pauseLiteral', 'pauseLiteralWC', 70, 'literalNext', 'literal1')" placeholder="Explain what this shows about Tradition and the early Church."></textarea>
+<div class="word-count" id="pauseLiteralWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="literalNext" onclick="showScreen('allegorical')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="allegorical">
+<div class="card">
+<div class="screen-label">Part Four · The Magisterium</div>
+<h2 class="screen-title">The Church’s Teaching Authority</h2>
+<p class="screen-intro">The Magisterium serves the Word of God by authentically interpreting Scripture and Tradition.</p>
+<div class="prose">
+<p>The word <strong>Magisterium</strong> comes from a Latin word meaning teacher. In the Catholic Church, it refers to the Pope and the bishops in communion with him.</p>
+<p>Jesus gave real teaching authority to the apostles. He told them, “Whoever listens to you listens to me” (Luke 10:16), and He gave Peter the keys of the Kingdom. Through apostolic succession, bishops continue this teaching mission.</p>
+<p>The Magisterium does not stand above Scripture and Tradition. It serves them. Its task is to guard, clarify, and authentically interpret the deposit of faith, especially when confusion, heresy, or modern moral questions arise.</p>
+</div>
+<div class="check" data-check="allegorical1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">What is the main role of the Magisterium?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'allegorical1', 'd')"><span class="letter">a.</span><span>To replace Scripture with new revelation.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'allegorical1', 'd')"><span class="letter">b.</span><span>To let every Catholic decide doctrine privately.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'allegorical1', 'd')"><span class="letter">c.</span><span>To change dogmas whenever culture changes.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'allegorical1', 'd')"><span class="letter">d.</span><span>To authentically interpret and guard Scripture and Tradition with the authority of Christ.</span></button>
+</div>
+<div class="check-feedback" id="fb-allegorical1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Why might a Church need an authentic teaching authority rather than leaving every major doctrine to personal opinion?</div>
+<textarea id="pauseAllegorical" oninput="updatePause('pauseAllegorical', 'pauseAllegoricalWC', 70, 'allegoricalNext', 'allegorical1')" placeholder="Think about unity, confusion, disagreements, and moral questions."></textarea>
+<div class="word-count" id="pauseAllegoricalWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="allegoricalNext" onclick="showScreen('moral')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="moral">
+<div class="card">
+<div class="screen-label">Part Five · Unity and Infallibility</div>
+<h2 class="screen-title">Infallibility Does Not Mean Sinlessness</h2>
+<p class="screen-intro">The Church’s teaching authority is protected by the Holy Spirit in specific ways, but that does not mean Church leaders are perfect people.</p>
+<div class="prose">
+<p>Infallibility means that in certain conditions, the Holy Spirit prevents the Church from teaching error in matters of faith and morals. This can happen when the Pope teaches ex cathedra, or when the bishops united with the Pope define doctrine in an ecumenical council.</p>
+<p>This does not mean the Pope cannot sin. It also does not mean every opinion, interview, homily, or private comment from a bishop or Pope is infallible. Infallibility is about the protection of the Church’s official teaching in faith and morals, not personal perfection.</p>
+<p>This gift protects the Church from losing the essential truths of the Gospel, even through difficult periods of history.</p>
+</div>
+<div class="check" data-check="moral1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">What does infallibility mean in Catholic teaching?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'moral1', 'a')"><span class="letter">a.</span><span>In certain conditions, the Holy Spirit protects the Church from teaching error in faith and morals.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'moral1', 'a')"><span class="letter">b.</span><span>The Pope never sins and never makes any mistakes.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'moral1', 'a')"><span class="letter">c.</span><span>Every Catholic leader’s private opinion is automatically Church teaching.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'moral1', 'a')"><span class="letter">d.</span><span>Church doctrine can change completely whenever a new Pope is elected.</span></button>
+</div>
+<div class="check-feedback" id="fb-moral1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Why is it important to distinguish between infallible teaching and the personal holiness or opinions of Church leaders?</div>
+<textarea id="pauseMoral" oninput="updatePause('pauseMoral', 'pauseMoralWC', 75, 'moralNext', 'moral1')" placeholder="Explain why this distinction protects both truth and honesty."></textarea>
+<div class="word-count" id="pauseMoralWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="moralNext" onclick="showScreen('anagogical')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="anagogical">
+<div class="card">
+<div class="screen-label">Part Six · Three Pillars Working Together</div>
+<h2 class="screen-title">How Doctrine Becomes Clear</h2>
+<p class="screen-intro">The Catholic Church often clarifies doctrine when confusion or new questions arise.</p>
+<div class="prose">
+<p>The early Christians believed Jesus is divine. Scripture supports this truth, and Tradition preserved it in worship and preaching. But when Arius denied Christ’s full divinity, the bishops gathered at the Council of Nicaea to clarify the truth.</p>
+<p>The result was the Nicene Creed, which teaches that Jesus Christ is “consubstantial” with the Father. Scripture, Tradition, and the Magisterium worked together.</p>
+<p>This same pattern appears in teachings about the Eucharist, marriage, Mary, social justice, bioethics, and modern moral issues. The Church draws from Scripture and Tradition, then the Magisterium applies and clarifies the teaching.</p>
+</div>
+<div class="check" data-check="anagogical1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">What does the Council of Nicaea example show?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'anagogical1', 'c')"><span class="letter">a.</span><span>Doctrine is created from scratch whenever bishops meet.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'anagogical1', 'c')"><span class="letter">b.</span><span>Scripture alone gives every answer with no need for interpretation.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'anagogical1', 'c')"><span class="letter">c.</span><span>Scripture, Tradition, and the Magisterium work together to clarify and protect the faith.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'anagogical1', 'c')"><span class="letter">d.</span><span>The early Church avoided doctrinal questions.</span></button>
+</div>
+<div class="check-feedback" id="fb-anagogical1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Why do you think doctrine sometimes needs to be clarified over time, even if the truth itself does not change?</div>
+<textarea id="pauseAnagogical" oninput="updatePause('pauseAnagogical', 'pauseAnagogicalWC', 75, 'anagogicalNext', 'anagogical1')" placeholder="Think about heresies, new questions, language, and cultural confusion."></textarea>
+<div class="word-count" id="pauseAnagogicalWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="anagogicalNext" onclick="showScreen('example')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="example">
+<div class="card">
+<div class="screen-label">Part Seven · Real World Application</div>
+<h2 class="screen-title">Using the Three Pillars Today</h2>
+<p class="screen-intro">The Bible does not mention every modern technology or ethical problem by name. Catholics use Scripture, Tradition, and the Magisterium to reason faithfully.</p>
+<div class="prose">
+<p>Imagine someone asks about using technology to design the traits of a future child. Scripture does not mention AI or genetic editing directly, but it does teach the sacredness of human life and God’s role as Creator.</p>
+<p>Tradition provides a long-standing respect for natural law, human dignity, and the truth that children are gifts, not products. The Magisterium then applies these principles in Church documents on bioethics and human dignity.</p>
+<p>The same pattern can guide everyday decisions too. If a student is pressured to cheat, Scripture condemns lying, Tradition honors saints who chose integrity, and the Catechism explains why dishonesty violates justice and charity.</p>
+</div>
+<div class="check" data-check="example1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">Why are the three pillars useful for modern ethical questions?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'example1', 'd')"><span class="letter">a.</span><span>Because modern problems have no connection to ancient faith.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'example1', 'd')"><span class="letter">b.</span><span>Because Catholics can ignore Scripture when new questions arise.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'example1', 'd')"><span class="letter">c.</span><span>Because personal feelings are the final authority in moral decisions.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'example1', 'd')"><span class="letter">d.</span><span>Because they allow eternal truths to be applied faithfully to new situations.</span></button>
+</div>
+<div class="check-feedback" id="fb-example1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Choose one modern moral issue or everyday choice. How could Scripture, Tradition, and the Magisterium help someone think about it more clearly?</div>
+<textarea id="pauseExample" oninput="updatePause('pauseExample', 'pauseExampleWC', 75, 'exampleNext', 'example1')" placeholder="Name the issue and explain how each pillar could guide a Catholic response."></textarea>
+<div class="word-count" id="pauseExampleWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="exampleNext" onclick="showScreen('tradition')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="tradition">
+<div class="card">
+<div class="screen-label">Part Eight · Catholic Tradition and Culture</div>
+<h2 class="screen-title">Councils, Creeds, and the Living Church</h2>
+<p class="screen-intro">Catholic history shows these three pillars working together whenever the Church faces confusion, heresy, or new questions.</p>
+<div class="prose">
+<p>The Council of Trent reaffirmed the relationship between Scripture and Tradition during the Protestant Reformation and clarified the canon of Scripture. The Second Vatican Council later explained this relationship beautifully in <em>Dei Verbum</em>.</p>
+<p>Catholic life is full of Scripture and Tradition together. The Mass is packed with biblical language, but it is also shaped by worship practices handed down through the Church. The Sign of the Cross, the creeds, the lectionary, devotions, and the Catechism all show the living faith of the Church.</p>
+<p>On page 5 of the lesson PDF, the visual shows three connected elements, <strong>Teaching Authority</strong>, <strong>Apostolic Tradition</strong>, and <strong>Holy Scripture</strong>. This image captures the lesson’s central idea: Catholics receive the faith through a living unity, not isolated pieces.</p>
+</div>
+<div class="check" data-check="tradition1">
+<div class="check-label">Quick Check</div>
+<div class="check-q">What did <em>Dei Verbum</em> teach about Scripture, Tradition, and the Magisterium?</div>
+<div class="check-options">
+<button class="check-option" data-answer="a" onclick="answerCheck(this, 'tradition1', 'b')"><span class="letter">a.</span><span>They can each stand alone without the others.</span></button>
+<button class="check-option" data-answer="b" onclick="answerCheck(this, 'tradition1', 'b')"><span class="letter">b.</span><span>They are so linked and joined together that one cannot stand without the others.</span></button>
+<button class="check-option" data-answer="c" onclick="answerCheck(this, 'tradition1', 'b')"><span class="letter">c.</span><span>The Church no longer needs Tradition.</span></button>
+<button class="check-option" data-answer="d" onclick="answerCheck(this, 'tradition1', 'b')"><span class="letter">d.</span><span>The Magisterium is above the Word of God and can change it.</span></button>
+</div>
+<div class="check-feedback" id="fb-tradition1"></div>
+</div>
+<div class="pause">
+<div class="pause-label">Pause and Reflect</div>
+<div class="pause-q">Which part of Catholic life best shows Scripture, Tradition, and the Magisterium working together: Mass, the Creed, the Catechism, councils, or moral teaching? Explain.</div>
+<textarea id="pauseTradition" oninput="updatePause('pauseTradition', 'pauseTraditionWC', 75, 'traditionNext', 'tradition1')" placeholder="Choose one example and explain how the three pillars connect there."></textarea>
+<div class="word-count" id="pauseTraditionWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="traditionNext" onclick="showScreen('quiz')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="quiz">
+<div class="card">
+<div class="screen-label">Part Nine · Check Your Understanding</div>
+<h2 class="screen-title">Lesson Quiz</h2>
+<p class="screen-intro">Answer all seven questions. Feedback will appear as you complete each one.</p>
+<div id="quizWrap"></div>
+<div class="quiz-score" id="quizScore">Quiz Score<strong id="scoreText">0 / 7</strong></div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="quizNext" onclick="showScreen('deeper')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="deeper">
+<div class="card">
+<div class="screen-label">Part Ten · Think Deeper</div>
+<h2 class="screen-title">Stretch Your Thinking</h2>
+<p class="screen-intro">These responses should move beyond summary. Apply the lesson to real Catholic life.</p>
+<div class="field">
+<label for="td1">Think Deeper 1</label>
+<div class="prose" style="margin-bottom:12px;"><p>Why is it important that Catholics read the Bible within Tradition and under the guidance of the Magisterium? Explain using at least one example of how a passage or doctrine could be misunderstood without guidance.</p></div>
+<textarea id="td1" oninput="updateWordCount('td1', 'td1WC', 150)" placeholder="Explain why guidance and context matter for interpretation."></textarea>
+<div class="word-count" id="td1WC"><span>0 words</span><span>Minimum: 150 words</span></div>
+</div>
+<div class="field">
+<label for="td2">Think Deeper 2</label>
+<div class="prose" style="margin-bottom:12px;"><p>A friend says, “Catholics follow man-made traditions. I just follow the Bible.” Write a friendly response that explains the Catholic view of Tradition and the Magisterium.</p></div>
+<textarea id="td2" oninput="updateWordCount('td2', 'td2WC', 140)" placeholder="Respond in a way that is clear, fair, and respectful."></textarea>
+<div class="word-count" id="td2WC"><span>0 words</span><span>Minimum: 140 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="deeperNext" onclick="showScreen('synthesis')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="synthesis">
+<div class="card">
+<div class="screen-label">Part Eleven · Final Synthesis</div>
+<h2 class="screen-title">Bring the Lesson Together</h2>
+<p class="screen-intro">This final response should show that you understand the whole lesson, not just one part.</p>
+<div class="field">
+<label for="synthesis">Final Synthesis</label>
+<div class="prose" style="margin-bottom:12px;"><p>In one thoughtful response, explain how Scripture, Tradition, and the Magisterium work together in Catholic faith. Your answer should mention the deposit of faith, apostolic succession, the role of the Pope and bishops, and why this matters for modern moral questions.</p></div>
+<textarea id="synthesis" oninput="updateWordCount('synthesis', 'synthesisWC', 170)" placeholder="Show how the three pillars connect and why they matter."></textarea>
+<div class="word-count" id="synthesisWC"><span>0 words</span><span>Minimum: 170 words</span></div>
+</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled="" id="synthesisNext" onclick="showScreen('finish')">Continue →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="finish">
+<div class="card">
+<div class="screen-label">Part Twelve · Wrap Up</div>
+<h2 class="screen-title">Almost Finished</h2>
+<p class="screen-intro">Review your progress, download your report, and then mark the lesson as complete.</p>
+<div class="summary-grid">
+<div class="summary-stat"><div class="stat-label">Quiz Score</div><div class="stat-value" id="finishQuiz">0 / 7</div></div>
+<div class="summary-stat"><div class="stat-label">Words Written</div><div class="stat-value" id="finishWords">0</div></div>
+<div class="summary-stat"><div class="stat-label">Time in Lesson</div><div class="stat-value" id="finishTime">0 min</div></div>
+</div>
+<div class="download-note">Download your final report when you are ready. It will include your student information, quiz score, and written responses from the whole lesson.</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn btn-gold" onclick="downloadReport()">⬇ Download Report</button><button class="btn btn-primary" onclick="finishLesson()">Mark Complete →</button></div></div>
+</div>
+</section>
+<section class="screen" data-screen="complete">
+<div class="card">
+<div class="completion-hero">
+<div class="completion-icon">✦</div>
+<div class="completion-title">Lesson Completed</div>
+<div class="completion-sub">You have finished Lesson 2.4, Scripture, Tradition, and the Magisterium.</div>
+</div>
+<div class="download-note">Your work has been saved in this session. Download your report if you have not already done so.</div>
+<div class="btn-row"><button class="btn btn-ghost" onclick="showScreen('finish')">← Back to Report</button><div class="btn-row-split"><button class="btn btn-gold" onclick="downloadReport()">⬇ Download Report Again</button></div></div>
+</div>
+</section>
+</div>
+<div class="toast" id="toast">Saved.</div>
+<div class="footer">HRE4M1 · Unit 2 · Lesson 4</div>
+</div>
+<script>
+const LESSON_ID = '2.4';
+const STORAGE_KEY = 'hre4m1_lesson_2_4';
+const SCREEN_ORDER = ['welcome','hook','intro','terms','literal','allegorical','moral','anagogical','example','tradition','quiz','deeper','synthesis','finish','complete'];
+const TOTAL_STEPS = SCREEN_ORDER.length - 2;
+const REQUIRED_TERMS = 7;
+const QUIZ = [
+  {id:'q1', q:'What are the three pillars that uphold Catholic faith in this lesson?', opts:['Bible, prayer, and personal opinion.','Scripture, Tradition, and the Magisterium.','Tradition, culture, and feelings.','The Pope, saints, and theologians only.'], correct:1, explain:'The lesson focuses on Sacred Scripture, Sacred Tradition, and the Magisterium.'},
+  {id:'q2', q:'What is Sacred Tradition?', opts:['Random customs Catholics invented later.','The living transmission of the apostles’ teaching, worship, and faith through the Church.','Any local parish practice that people enjoy.','A replacement for the Bible.'], correct:1, explain:'Sacred Tradition is the living handing on of the apostolic faith, not merely human custom.'},
+  {id:'q3', q:'Who makes up the Magisterium?', opts:['All Catholics who read the Bible privately.','Only Catholic school teachers.','The Pope and bishops in communion with him.','Only theologians at universities.'], correct:2, explain:'The Magisterium is the Church’s teaching authority, entrusted to the Pope and bishops united with him.'},
+  {id:'q4', q:'Which statement best explains infallibility?', opts:['The Pope can never sin.','Every statement by a bishop is automatically perfect.','The Holy Spirit protects the Church from teaching error in faith and morals under specific conditions.','Infallibility means Church leaders know every scientific fact.'], correct:2, explain:'Infallibility protects the Church’s official teaching in faith and morals under defined conditions. It does not mean personal sinlessness.'},
+  {id:'q5', q:'Why is the canon of Scripture an important example for this lesson?', opts:['Because the Bible lists its own table of contents.','Because Tradition and Church authority helped recognize which books belonged in the Bible.','Because Catholics have fewer books than other Christians.','Because Scripture was written after the Council of Trent.'], correct:1, explain:'The Church recognized the canon through Tradition and authority. The Bible does not include its own inspired table of contents.'},
+  {id:'q6', q:'What does the three-legged stool image teach?', opts:['That Scripture alone is the only authority Catholics need.','That Scripture, Tradition, and the Magisterium are linked and support the faith together.','That Church disciplines can never change.','That doctrine is based on three equal personal opinions.'], correct:1, explain:'The stool image shows that the three pillars belong together and help preserve the unity of the faith.'},
+  {id:'q7', q:'Why are the three pillars helpful for modern ethical issues?', opts:['They help Catholics apply eternal truths faithfully to new situations.','They allow Catholics to ignore difficult teachings.','They replace moral reasoning with blind feelings.','They make every new technology automatically sinful.'], correct:0, explain:'Scripture, Tradition, and the Magisterium help Catholics apply enduring truth to new questions like bioethics, social justice, and technology.'}
+];
+const CORRECT_MAP = {intro1:'c', literal1:'b', allegorical1:'d', moral1:'a', anagogical1:'c', example1:'d', tradition1:'b'};
+const MINIMUMS = {hookResponse:35, pauseIntro:60, pauseLiteral:70, pauseAllegorical:70, pauseMoral:75, pauseAnagogical:75, pauseExample:75, pauseTradition:75, td1:150, td2:140, synthesis:170};
+const RESPONSE_ORDER = ['hookResponse','pauseIntro','pauseLiteral','pauseAllegorical','pauseMoral','pauseAnagogical','pauseExample','pauseTradition','td1','td2','synthesis'];
+const RESPONSE_TITLES = {hookResponse:'Starting Point', pauseIntro:'Reflection 1', pauseLiteral:'Reflection 2', pauseAllegorical:'Reflection 3', pauseMoral:'Reflection 4', pauseAnagogical:'Reflection 5', pauseExample:'Reflection 6', pauseTradition:'Reflection 7', td1:'Think Deeper 1', td2:'Think Deeper 2', synthesis:'Final Synthesis'};
+const REPORT_FILE_PREFIX = 'HRE4M1_L2_3_Images_of_God_in_Scripture';
+const REPORT_HEADER_LABEL = 'HRE4M1 · Unit 2 · Lesson 4';
+const REPORT_TITLE = 'Scripture, Tradition, and the Magisterium';
+const REPORT_SUBTITLE = 'Student Report';
+const RESUME_ERROR = 'Could not load that file. Please upload a valid Lesson 2.4 progress file.';
+const state = {lessonId:LESSON_ID, startedAt:null, finishedAt:null, currentScreen:'welcome', studentInfo:{name:'',email:'',className:''}, termsViewed:[], inlineChecks:{}, responses:{}, quiz:{answers:{}, scoreCount:0}, sectionTimes:{}, lastSavedAt:null};
+RESPONSE_ORDER.forEach(key => state.responses[key] = '');
+let screenEnterTime = Date.now();
+function countWords(str) { if (!str) return 0; return str.trim().split(/\s+/).filter(Boolean).length; }
+function escapeHTML(str) { if (str === null || str === undefined) return ''; return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function formatTime(ms) { const totalMin = Math.floor(ms / 60000); if (totalMin < 1) return '< 1 min'; if (totalMin < 60) return totalMin + ' min'; const hrs = Math.floor(totalMin / 60); const mins = totalMin % 60; return hrs + 'h ' + mins + 'm'; }
+function persistInputsToState() { const nameEl = document.getElementById('studentName'); const emailEl = document.getElementById('studentEmail'); const classEl = document.getElementById('studentClass'); if (nameEl) state.studentInfo.name = nameEl.value.trim(); if (emailEl) state.studentInfo.email = emailEl.value.trim(); if (classEl) state.studentInfo.className = classEl.value.trim(); RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) state.responses[key] = el.value.trim(); }); }
+function saveLocal() { state.lastSavedAt = new Date().toISOString(); persistInputsToState(); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function totalWords() { persistInputsToState(); return Object.values(state.responses).reduce((sum, value) => sum + countWords(value), 0); }
+function totalTimeMs() { let total = 0; Object.values(state.sectionTimes).forEach(ms => total += ms || 0); if (state.currentScreen && screenEnterTime) total += Date.now() - screenEnterTime; return total; }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1600); }
+function markSaveButtonsSaved() { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.add('saved')); const label = document.getElementById('stickySaveLabel'); if (label) label.textContent = 'Saved'; setTimeout(() => { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.remove('saved')); const again = document.getElementById('stickySaveLabel'); if (again) again.textContent = 'Save Progress'; }, 1300); }
+function updateProgress() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); const activeStep = Math.max(0, Math.min(TOTAL_STEPS, idx)); const pct = Math.max(0, Math.min(100, Math.round((activeStep / TOTAL_STEPS) * 100))); document.getElementById('progressFill').style.width = pct + '%'; document.getElementById('progressPercent').textContent = pct + '%'; const displayStep = state.currentScreen === 'welcome' ? 1 : Math.min(TOTAL_STEPS, Math.max(1, idx)); document.getElementById('progressLabel').textContent = 'Section ' + displayStep + ' of ' + TOTAL_STEPS; }
+function showScreen(screenId) { persistInputsToState(); const now = Date.now(); if (state.currentScreen) { state.sectionTimes[state.currentScreen] = (state.sectionTimes[state.currentScreen] || 0) + (now - screenEnterTime); } screenEnterTime = now; state.currentScreen = screenId; document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); const target = document.querySelector('.screen[data-screen="' + screenId + '"]'); if (target) target.classList.add('active'); document.getElementById('progressContainer').style.display = screenId === 'welcome' ? 'none' : 'block'; if (screenId === 'quiz') renderQuiz(); if (screenId === 'finish') refreshFinishStats(); updateProgress(); refreshGating(); saveLocal(); window.scrollTo({top:0, behavior:'smooth'}); }
+function prevScreen() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); if (idx > 0) showScreen(SCREEN_ORDER[idx - 1]); }
+function beginLesson() { const name = document.getElementById('studentName').value.trim(); const email = document.getElementById('studentEmail').value.trim(); if (!name || !email) { document.getElementById('setupAlert').classList.add('show'); return; } document.getElementById('setupAlert').classList.remove('show'); if (!state.startedAt) state.startedAt = new Date().toISOString(); showScreen('hook'); }
+function updateWordCount(textareaId, countId, minimum) { const el = document.getElementById(textareaId); const words = countWords(el.value); state.responses[textareaId] = el.value.trim(); const counter = document.getElementById(countId); const met = words >= minimum; counter.innerHTML = '<span>' + words + ' words</span><span class="' + (met ? 'met' : 'short') + '">Minimum: ' + minimum + ' words</span>'; saveLocal(); refreshGating(); }
+function updatePause(textareaId, countId, minimum, nextBtnId, checkId) { updateWordCount(textareaId, countId, minimum); const wordsMet = countWords(document.getElementById(textareaId).value) >= minimum; const checkMet = !checkId || !!state.inlineChecks[checkId]; const btn = document.getElementById(nextBtnId); if (btn) btn.disabled = !(wordsMet && checkMet); }
+function openTerm(card) { const term = card.getAttribute('data-term'); card.classList.toggle('open'); if (!state.termsViewed.includes(term)) state.termsViewed.push(term); card.classList.add('viewed'); document.getElementById('termsViewed').textContent = state.termsViewed.length; saveLocal(); refreshGating(); }
+function answerCheck(btn, checkId, correctLetter) { if (state.inlineChecks[checkId]) return; const chosen = btn.getAttribute('data-answer'); state.inlineChecks[checkId] = chosen; const wrap = btn.closest('.check'); wrap.querySelectorAll('.check-option').forEach(opt => opt.classList.add('answered')); const fb = document.getElementById('fb-' + checkId); wrap.querySelectorAll('.check-option').forEach(opt => { if (opt.getAttribute('data-answer') === correctLetter) opt.classList.add('correct'); else if (opt === btn) opt.classList.add('incorrect'); }); fb.textContent = chosen === correctLetter ? 'Correct. You matched the main lesson idea.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); saveLocal(); refreshGating(); }
+function refreshGating() { const needs = (id, min) => countWords((document.getElementById(id)?.value || '').trim()) >= min; const checked = id => !!state.inlineChecks[id]; const setDisabled = (id, disabled) => { const el = document.getElementById(id); if (el) el.disabled = !!disabled; }; setDisabled('hookNext', !needs('hookResponse', MINIMUMS.hookResponse)); setDisabled('introNext', !(needs('pauseIntro', MINIMUMS.pauseIntro) && checked('intro1'))); setDisabled('termsNext', state.termsViewed.length < REQUIRED_TERMS); setDisabled('literalNext', !(needs('pauseLiteral', MINIMUMS.pauseLiteral) && checked('literal1'))); setDisabled('allegoricalNext', !(needs('pauseAllegorical', MINIMUMS.pauseAllegorical) && checked('allegorical1'))); setDisabled('moralNext', !(needs('pauseMoral', MINIMUMS.pauseMoral) && checked('moral1'))); setDisabled('anagogicalNext', !(needs('pauseAnagogical', MINIMUMS.pauseAnagogical) && checked('anagogical1'))); setDisabled('exampleNext', !(needs('pauseExample', MINIMUMS.pauseExample) && checked('example1'))); setDisabled('traditionNext', !(needs('pauseTradition', MINIMUMS.pauseTradition) && checked('tradition1'))); setDisabled('deeperNext', !(needs('td1', MINIMUMS.td1) && needs('td2', MINIMUMS.td2))); setDisabled('synthesisNext', !needs('synthesis', MINIMUMS.synthesis)); setDisabled('quizNext', Object.keys(state.quiz.answers).length !== QUIZ.length); }
+function renderQuiz() { const wrap = document.getElementById('quizWrap'); if (wrap.dataset.rendered === '1') return restoreQuiz(); wrap.innerHTML = QUIZ.map((q, idx) => `<div class="quiz-question" id="${q.id}"><div class="q-number">Question ${idx + 1}</div><div class="q-text">${q.q}</div><div class="q-options">${q.opts.map((opt, i) => `<button class="q-option" data-opt="${i}" onclick="answerQuiz('${q.id}', ${i})"><span class="letter">${String.fromCharCode(97 + i)}.</span><span>${opt}</span></button>`).join('')}</div><div class="q-explanation" id="exp-${q.id}">${q.explain}</div></div>`).join(''); wrap.dataset.rendered = '1'; restoreQuiz(); }
+function answerQuiz(qId, choice) { if (state.quiz.answers[qId] !== undefined) return; state.quiz.answers[qId] = choice; const q = QUIZ.find(item => item.id === qId); if (choice === q.correct) state.quiz.scoreCount += 1; restoreQuiz(); saveLocal(); refreshGating(); }
+function restoreQuiz() { QUIZ.forEach(q => { const qEl = document.getElementById(q.id); if (!qEl) return; const chosen = state.quiz.answers[q.id]; const options = qEl.querySelectorAll('.q-option'); options.forEach(opt => opt.classList.remove('selected','correct','incorrect','locked')); qEl.querySelector('.q-explanation').classList.remove('show'); if (chosen !== undefined) { options.forEach(opt => opt.classList.add('locked')); const selected = qEl.querySelector('.q-option[data-opt="' + chosen + '"]'); const correctBtn = qEl.querySelector('.q-option[data-opt="' + q.correct + '"]'); if (selected) selected.classList.add('selected'); if (chosen === q.correct) selected.classList.add('correct'); else { if (selected) selected.classList.add('incorrect'); if (correctBtn) correctBtn.classList.add('correct'); } qEl.querySelector('.q-explanation').classList.add('show'); } }); if (Object.keys(state.quiz.answers).length === QUIZ.length) { document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('quizScore').classList.add('show'); } }
+function triggerDownload(filename, content, mime) { const blob = new Blob([content], {type: mime}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 500); }
+function saveProgressNow() { saveLocal(); const stamp = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-'); triggerDownload(`HRE4M1_L2_4_progress_${stamp}.json`, JSON.stringify(state, null, 2), 'application/json'); markSaveButtonsSaved(); showToast('Progress downloaded.'); }
+function refreshFinishStats() { document.getElementById('finishQuiz').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('finishWords').textContent = totalWords(); document.getElementById('finishTime').textContent = formatTime(totalTimeMs()); }
+function buildReportHTML() { persistInputsToState(); const rows = RESPONSE_ORDER.map(key => `<section style="margin:0 0 28px 0;"><h3 style="font-family:Georgia,serif;font-size:24px;margin:0 0 8px 0;color:#5B2D68;">${escapeHTML(RESPONSE_TITLES[key])}</h3><div style="font-size:13px;color:#8B5E2A;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">${countWords(state.responses[key])} words</div><div style="white-space:pre-wrap;line-height:1.7;font-size:16px;border:1px solid #ddd7c6;background:#fffdf7;padding:16px 18px;">${escapeHTML(state.responses[key] || '')}</div></section>`).join(''); return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${REPORT_TITLE} Report</title><style>body{font-family:Georgia,serif;background:#f5efe2;color:#232238;margin:0;padding:40px;line-height:1.6;}.wrap{max-width:900px;margin:0 auto;background:#fff;padding:42px 46px;border:1px solid #d8c9a0;box-shadow:0 10px 30px rgba(0,0,0,.08);}.small{font-family:Arial,sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8B5E2A;}h1{font-size:42px;color:#5B2D68;margin:8px 0 4px;}h2{font-size:18px;font-style:italic;color:#55506A;margin:0 0 26px;}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0 28px;}.card{border:1px solid #ddd7c6;background:#fffdf7;padding:14px 16px;}.label{font-family:Arial,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8B5E2A;margin-bottom:6px;}.value{font-size:18px;color:#5B2D68;}hr{border:none;border-top:1px solid #d8c9a0;margin:26px 0;}@media print{body{background:white;padding:0;} .wrap{box-shadow:none;border:none;}}</style></head><body><div class="wrap"><div class="small">${REPORT_HEADER_LABEL}</div><h1>${REPORT_TITLE}</h1><h2>${REPORT_SUBTITLE}</h2><div class="grid"><div class="card"><div class="label">Student</div><div class="value">${escapeHTML(state.studentInfo.name || '')}</div></div><div class="card"><div class="label">Email</div><div class="value">${escapeHTML(state.studentInfo.email || '')}</div></div><div class="card"><div class="label">Class</div><div class="value">${escapeHTML(state.studentInfo.className || '')}</div></div><div class="card"><div class="label">Quiz Score</div><div class="value">${state.quiz.scoreCount} / ${QUIZ.length}</div></div><div class="card"><div class="label">Total Words</div><div class="value">${totalWords()}</div></div><div class="card"><div class="label">Time in Lesson</div><div class="value">${formatTime(totalTimeMs())}</div></div></div><hr>${rows}</div></body></html>`; }
+function downloadReport() { const stamp = new Date().toISOString().slice(0,10); const safeName = (state.studentInfo.name || 'student').replace(/[^a-z0-9]+/gi,'_'); triggerDownload(`${REPORT_FILE_PREFIX}_${safeName}_${stamp}.html`, buildReportHTML(), 'text/html'); showToast('Report downloaded.'); }
+function finishLesson() { state.finishedAt = new Date().toISOString(); saveLocal(); showScreen('complete'); }
+function restoreChecks() { Object.entries(state.inlineChecks).forEach(([checkId, chosen]) => { const wrap = document.querySelector('.check[data-check="' + checkId + '"]'); if (!wrap) return; const correct = CORRECT_MAP[checkId]; wrap.querySelectorAll('.check-option').forEach(opt => { opt.classList.add('answered'); if (opt.getAttribute('data-answer') === correct) opt.classList.add('correct'); else if (opt.getAttribute('data-answer') === chosen) opt.classList.add('incorrect'); }); const fb = document.getElementById('fb-' + checkId); if (fb) { fb.textContent = chosen === correct ? 'Correct. You matched the main lesson idea.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); } }); }
+function restoreTextAndCounts() { const countIdMap = {hookResponse:'hookWC', pauseIntro:'pauseIntroWC', pauseLiteral:'pauseLiteralWC', pauseAllegorical:'pauseAllegoricalWC', pauseMoral:'pauseMoralWC', pauseAnagogical:'pauseAnagogicalWC', pauseExample:'pauseExampleWC', pauseTradition:'pauseTraditionWC', td1:'td1WC', td2:'td2WC', synthesis:'synthesisWC'}; RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) el.value = state.responses[key] || ''; const wcId = countIdMap[key]; if (el && document.getElementById(wcId)) updateWordCount(key, wcId, MINIMUMS[key]); }); }
+function resumeFromFile(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = function(e) { try { const loaded = JSON.parse(e.target.result); if (!loaded || loaded.lessonId !== LESSON_ID) throw new Error('Wrong lesson file'); Object.assign(state, loaded); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); showScreen(state.currentScreen || 'hook'); showToast('Progress restored.'); } catch (err) { alert(RESUME_ERROR); } }; reader.readAsText(file); }
+function hydrateFromLocalStorage() { try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return; const saved = JSON.parse(raw); if (!saved || saved.lessonId !== LESSON_ID) return; Object.assign(state, saved); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); } catch (err) {} }
+hydrateFromLocalStorage();
+updateProgress();
+refreshGating();
+</script>
+</body>
+</html>

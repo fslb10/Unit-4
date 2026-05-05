@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HRE4M1 · Lesson 2.6: The Virgin Mary</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+
+
+  :root {
+    --bg-deep: #1B1833;
+    --bg-mid: #31204F;
+    --bg-card: #F6EFE2;
+    --bg-card-alt: #E8DCC7;
+    --gold: #C49A4A;
+    --gold-soft: #DFC084;
+    --gold-deep: #8B5E2A;
+    --wine: #5B2D68;
+    --ivory: #F6EFE2;
+    --cream: #F1E4C8;
+    --ink: #232238;
+    --ink-soft: #55506A;
+    --locked: #4A556880;
+    --success: #3E7C68;
+    --danger: #9E3B32;
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.25);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Textured background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(201, 169, 97, 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(107, 44, 44, 0.1), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ---- Header ---- */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .unit-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .lesson-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .lesson-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gold-soft);
+    opacity: 0.9;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  /* ---- Progress bar ---- */
+  .progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-deep) 70%, transparent);
+    padding: 16px 0 12px;
+    margin: -24px -20px 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft));
+    width: 0%;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.5);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    margin: 8px auto 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  /* ---- Sticky save button (top bar) ---- */
+  .save-sticky {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 169, 97, 0.12);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .save-sticky:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    border-color: var(--gold);
+  }
+
+  .save-sticky.saved {
+    background: rgba(63, 122, 77, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  /* ---- In-row save (button row) ---- */
+  .btn-save-row {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-save-row:hover {
+    background: var(--gold-deep);
+    color: var(--ivory);
+  }
+
+  .btn-save-row.saved {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .btn-row-split {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* ---- Pause and Reflect blocks (in-flow) ---- */
+  .pause {
+    background: linear-gradient(135deg, rgba(107, 44, 44, 0.06), rgba(201, 169, 97, 0.08));
+    border: 1px solid rgba(107, 44, 44, 0.2);
+    border-left: 3px solid var(--wine);
+    padding: 22px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .pause-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pause-label::before {
+    content: '❊';
+    font-size: 14px;
+    color: var(--gold-deep);
+  }
+
+  .pause-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .pause textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(107, 44, 44, 0.25);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    border-radius: 2px;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .pause textarea:focus {
+    outline: none;
+    border-color: var(--wine);
+    box-shadow: 0 0 0 2px rgba(107, 44, 44, 0.15);
+  }
+
+  /* Save confirmation toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid var(--gold);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---- Screen Cards ---- */
+  .screen {
+    display: none;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .screen.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .screen-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .screen-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .screen-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .prose {
+    font-size: 16.5px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .prose p { margin-bottom: 18px; }
+
+  .prose strong { color: var(--wine); font-weight: 600; }
+
+  .prose em { color: var(--ink-soft); }
+
+  .prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 28px 0 14px;
+    color: var(--wine);
+    line-height: 1.25;
+  }
+
+  .prose h3::before {
+    content: '❖ ';
+    color: var(--gold-deep);
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+
+  .divider {
+    display: block;
+    margin: 32px auto;
+    width: 120px;
+    height: auto;
+    opacity: 0.6;
+  }
+
+  .pullquote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--wine);
+    text-align: center;
+    margin: 28px 20px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    line-height: 1.4;
+  }
+
+  .scripture {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scripture-ref {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--ivory);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--wine);
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:disabled {
+    background: var(--locked);
+    border-color: var(--locked);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+  }
+
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- Forms ---- */
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .word-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .word-count .met {
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  .word-count .short {
+    color: var(--danger);
+  }
+
+  /* ---- Key Terms / Flashcards ---- */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .term-card {
+    background: var(--bg-card-alt);
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    border-radius: 2px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 100px;
+  }
+
+  .term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--gold-deep);
+  }
+
+  .term-card.viewed {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+  }
+
+  .term-card.viewed::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .term-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.7;
+  }
+
+  .term-def {
+    display: none;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .term-card.open .term-def { display: block; }
+  .term-card.open .term-tap { display: none; }
+
+  /* ---- Inline comprehension check ---- */
+  .check {
+    background: #FDF8E8;
+    border: 1px dashed var(--gold-deep);
+    border-radius: 2px;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .check-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .check-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .check-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-option {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .check-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .check-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .check-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .check-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .check-feedback {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    display: none;
+  }
+
+  .check-feedback.show { display: block; }
+
+  /* ---- Vocation Compass ---- */
+  .compass-intro {
+    background: #FDF8E8;
+    border-left: 3px solid var(--wine);
+    padding: 18px 22px;
+    margin: 20px 0 30px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .compass-vocation {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(140, 113, 53, 0.25);
+  }
+
+  .compass-vocation:last-child {
+    border-bottom: none;
+  }
+
+  .compass-voc-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+
+  .compass-voc-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  .compass-aspect {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px dotted rgba(140, 113, 53, 0.2);
+  }
+
+  .compass-aspect:first-of-type { border-top: none; }
+
+  .compass-aspect-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .rating-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .rating-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(140, 113, 53, 0.4);
+    background: white;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .rating-btn:hover {
+    border-color: var(--gold-deep);
+  }
+
+  .rating-btn.selected {
+    background: var(--wine);
+    color: var(--ivory);
+    border-color: var(--wine);
+  }
+
+  .rating-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  .compass-result {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(107, 44, 44, 0.08));
+    border: 1px solid var(--gold-deep);
+    padding: 24px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  .compass-result.show { display: block; }
+
+  .result-voc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.3);
+  }
+
+  .result-voc:last-child { border-bottom: none; }
+
+  .result-voc-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--wine);
+  }
+
+  .result-bar {
+    width: 180px;
+    height: 8px;
+    background: rgba(140, 113, 53, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .result-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    transition: width 1s ease;
+  }
+
+  /* ---- Quiz ---- */
+  .quiz-question {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.25);
+  }
+
+  .quiz-question:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .q-option {
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .q-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .q-option.selected {
+    border-color: var(--wine);
+    background: rgba(107, 44, 44, 0.06);
+  }
+
+  .q-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .q-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+  }
+
+  .q-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+  }
+
+  .q-option.locked {
+    pointer-events: none;
+  }
+
+  .q-explanation {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201, 169, 97, 0.1);
+    border-left: 2px solid var(--gold-deep);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    display: none;
+  }
+
+  .q-explanation.show { display: block; }
+
+  .quiz-score {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(107, 44, 44, 0.1));
+    border: 1px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score strong {
+    font-size: 34px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ---- Completion screen ---- */
+  .completion-hero {
+    text-align: center;
+    padding: 20px 0 32px;
+  }
+
+  .completion-icon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    color: var(--gold-deep);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .completion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .completion-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .summary-stat {
+    background: #FDF8E8;
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+  }
+
+  .download-note {
+    background: rgba(201, 169, 97, 0.12);
+    padding: 18px 22px;
+    border-left: 3px solid var(--gold-deep);
+    margin: 24px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ---- Hero (start screen) ---- */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-deep));
+    color: var(--ivory);
+    padding: 40px 40px 36px;
+    margin: -40px -44px 32px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .hero-banner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+
+  .hero-banner p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-soft);
+    margin-top: 8px;
+  }
+
+  .hero-banner .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+
+  .upload-zone {
+    border: 1px dashed rgba(140, 113, 53, 0.4);
+    padding: 20px;
+    text-align: center;
+    margin-top: 24px;
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .upload-zone label {
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .upload-zone input { display: none; }
+
+  /* ---- Error / alert ---- */
+  .alert {
+    padding: 12px 16px;
+    background: rgba(168, 67, 43, 0.1);
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    margin-top: 14px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .alert.show { display: block; }
+
+  /* ---- Footer ---- */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .card { padding: 28px 22px; }
+    .hero-banner { margin: -28px -22px 28px; padding: 30px 24px 26px; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; justify-content: center; }
+    .compass-aspect { grid-template-columns: 1fr; gap: 8px; }
+    .result-bar { width: 120px; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .save-sticky {
+      position: static;
+      display: flex;
+      margin: 10px auto 0;
+      width: fit-content;
+    }
+    .progress-meta { flex-wrap: wrap; }
+    .btn-row-split { width: 100%; flex-direction: column; }
+    .btn-row-split .btn-save-row { width: 100%; justify-content: center; }
+  }
+
+  /* Print-friendly download report styling will be injected separately */
+
+  /* Unit 2 Scripture palette overrides */
+  body::before {
+    background:
+      radial-gradient(ellipse at top left, rgba(196, 154, 74, 0.10), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(91, 45, 104, 0.16), transparent 50%);
+  }
+  .pause { background: linear-gradient(135deg, rgba(91, 45, 104, 0.08), rgba(196, 154, 74, 0.08)); border-color: rgba(91, 45, 104, 0.22); }
+  .check, .field input, .field textarea, .field select, .pause textarea, .summary-stat { background:#FFF9EC; }
+  .term-card.viewed { background: linear-gradient(135deg, #FFF9EC, var(--bg-card-alt)); }
+
+
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="unit-label">HRE4M1 · Unit 2 · Lesson 6</div>
+    <h1 class="lesson-title">The Virgin Mary</h1>
+    <div class="lesson-subtitle">Model disciple, Mother of God, and spiritual mother of the Church</div>
+    <svg class="ornament" width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg" style="color:var(--gold);">
+      <path d="M 0 10 L 30 10 M 50 10 L 80 10" stroke="currentColor" stroke-width="1" fill="none"/>
+      <circle cx="40" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1"/>
+      <circle cx="40" cy="10" r="1" fill="currentColor"/>
+    </svg>
+  </div>
+
+  <div class="progress-container" id="progressContainer" style="display:none; position:relative;">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-meta"><span id="progressLabel">Section 1 of 12</span><span id="progressPercent">0%</span></div>
+    <button class="save-sticky" id="stickySave" onclick="saveProgressNow()" title="Download your progress to resume later"><span>💾</span><span id="stickySaveLabel">Save Progress</span></button>
+  </div>
+
+  <div id="screens">
+    <section class="screen active" data-screen="welcome">
+      <div class="card">
+        <div class="hero-banner">
+          <div class="ornament-line">
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+            <span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">A Study in Marian Theology</span>
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+          </div>
+          <h2>Welcome to Lesson 2.6</h2>
+          <p>This lesson explores Mary in Scripture, Tradition, Catholic dogma, devotion, and culture.</p>
+        </div>
+        <p class="prose" style="margin-bottom:24px;">Before you begin, enter your information. Your name will appear on the final report you can download and submit at the end of the lesson.</p>
+        <div class="field"><label for="studentName">Full Name</label><input autocomplete="name" id="studentName" placeholder="First and last name" type="text"/></div>
+        <div class="field"><label for="studentEmail">School Email</label><input autocomplete="email" id="studentEmail" placeholder="you@school.ca" type="email"/></div>
+        <div class="field"><label for="studentClass">Class / Period</label><input id="studentClass" placeholder="e.g., HRE4M1 · Period 2" type="text"/></div>
+        <div class="alert" id="setupAlert">Please fill in your name and email before starting.</div>
+        <div class="btn-row"><div></div><button class="btn btn-primary" onclick="beginLesson()">Begin Lesson →</button></div>
+        <div class="upload-zone">
+          <div style="font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Returning to finish?</div>
+          <label for="resumeFile">Upload your saved progress file</label>
+          <input accept=".json" id="resumeFile" onchange="resumeFromFile(event)" type="file"/>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="hook">
+      <div class="card">
+        <div class="screen-label">Before We Begin</div>
+        <h2 class="screen-title">A Question to Sit With</h2>
+        <p class="screen-intro">Start with what you already think, then let the lesson deepen or correct it.</p>
+        <div class="prose">
+          <p>Mary is deeply loved in Catholic life, but she is also sometimes misunderstood.</p>
+          <p>What do you think Catholics believe about Mary? What questions or confusions do people often have about her?</p>
+        </div>
+        <div class="field" style="margin-top:20px;">
+          <label for="hookResponse">Your starting point</label>
+          <textarea id="hookResponse" oninput="updateWordCount('hookResponse','hookWC',35)" placeholder="What do you already know or wonder about Mary?"></textarea>
+          <div class="word-count" id="hookWC"><span>0 words</span><span>Minimum: 35 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="hookNext" onclick="showScreen('intro')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="intro">
+      <div class="card">
+        <div class="screen-label">Part One · Introduction</div>
+        <h2 class="screen-title">Mary, Venerated but Not Worshipped</h2>
+        <p class="screen-intro">Catholics honor Mary because of what God did in and through her, but worship belongs to God alone.</p>
+        <div class="prose">
+          <p>Mary was a first-century Jewish woman from Nazareth who said yes to God’s call to become the mother of Jesus Christ. Catholics see her as the model disciple because she trusted God, obeyed God, and remained faithful to Christ from His birth to His death.</p>
+          <p>A key distinction matters: Catholics <strong>venerate</strong> Mary, but they do not worship her. Veneration means honor, respect, and love. Worship is adoration, and adoration belongs to God alone.</p>
+          <p>Mary’s greatness does not compete with Jesus. Her whole life points toward Him. In her own words, “My soul magnifies the Lord” (Luke 1:46, NRSV-CE). Authentic Marian devotion always leads us closer to Christ.</p>
+        </div>
+        <div class="check" data-check="intro1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">What is the Catholic distinction between veneration and worship?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'intro1','b')"><span class="letter">a.</span><span>Catholics worship Mary and Jesus in the same way.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'intro1','b')"><span class="letter">b.</span><span>Catholics honor Mary with love and respect, but worship is reserved for God alone.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'intro1','b')"><span class="letter">c.</span><span>Catholics avoid honoring Mary because she was only an ordinary historical figure.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'intro1','b')"><span class="letter">d.</span><span>Veneration means treating Mary as more important than Christ.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-intro1"></div>
+        </div>
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Why do you think the distinction between honoring Mary and worshipping God is so important when explaining Catholic belief to others?</div>
+          <textarea id="pauseIntro" oninput="updateWordCount('pauseIntro','pauseIntroWC',60)" placeholder="Explain why this clarification matters."></textarea>
+          <div class="word-count" id="pauseIntroWC"><span>0 words</span><span>Minimum: 60 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="introNext" onclick="showScreen('terms')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="terms">
+      <div class="card">
+        <div class="screen-label">Part Two · Vocabulary</div>
+        <h2 class="screen-title">Seven Key Terms</h2>
+        <p class="screen-intro">Tap each card to reveal its meaning. View all seven before moving on.</p>
+        <div class="terms-grid" id="termsGrid">
+          <div class="term-card" data-term="immaculate" onclick="openTerm(this)"><div class="term-name">Immaculate Conception</div><div class="term-tap">Tap to reveal</div><div class="term-def">The dogma that Mary was conceived without original sin by a special grace of God, preparing her to be the mother of Jesus.</div></div>
+          <div class="term-card" data-term="annunciation" onclick="openTerm(this)"><div class="term-name">Annunciation</div><div class="term-tap">Tap to reveal</div><div class="term-def">The event in Luke 1 when the angel Gabriel announced that Mary would conceive Jesus by the power of the Holy Spirit.</div></div>
+          <div class="term-card" data-term="fiat" onclick="openTerm(this)"><div class="term-name">Fiat</div><div class="term-tap">Tap to reveal</div><div class="term-def">A Latin word meaning “let it be done.” It refers to Mary’s free yes to God at the Annunciation.</div></div>
+          <div class="term-card" data-term="theotokos" onclick="openTerm(this)"><div class="term-name">Theotokos</div><div class="term-tap">Tap to reveal</div><div class="term-def">Greek for “God-bearer” or Mother of God. This title protects the truth that Jesus is truly God and truly human.</div></div>
+          <div class="term-card" data-term="assumption" onclick="openTerm(this)"><div class="term-name">Assumption</div><div class="term-tap">Tap to reveal</div><div class="term-def">The belief that Mary was taken body and soul into heaven at the end of her earthly life.</div></div>
+          <div class="term-card" data-term="intercession" onclick="openTerm(this)"><div class="term-name">Intercession</div><div class="term-tap">Tap to reveal</div><div class="term-def">Praying on behalf of another person. Catholics ask Mary to pray for us, just as we might ask a holy friend to pray for us.</div></div>
+          <div class="term-card" data-term="rosary" onclick="openTerm(this)"><div class="term-name">Rosary</div><div class="term-tap">Tap to reveal</div><div class="term-def">A Marian devotion that reflects on the mysteries of Christ’s life with Mary as a guide to deeper prayer.</div></div>
+        </div>
+        <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink-soft); text-align:center; margin-top:16px;">Viewed: <span id="termsViewed">0</span> of 7</div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="termsNext" onclick="showScreen('scripture')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="scripture">
+      <div class="card">
+        <div class="screen-label">Part Three · Mary in Scripture</div>
+        <h2 class="screen-title">Mary’s Yes and Her Faithful Presence</h2>
+        <p class="screen-intro">Mary appears in Scripture as a woman of faith, obedience, courage, and prayer.</p>
+        <div class="prose">
+          <p>At the Annunciation, Mary receives an impossible call. She is asked to trust God completely, even though she cannot see the full path ahead. Her response, “Let it be with me according to your word” (Luke 1:38, NRSV-CE), is known as her fiat.</p>
+          <p>Mary’s faith continues beyond that moment. She gives birth to Jesus, raises Him, notices the needs of others at Cana, stands by the Cross, and prays with the early Church after the Ascension.</p>
+          <p>At the Cross, Jesus says to the beloved disciple, “Here is your mother” (John 19:27, NRSV-CE). Catholics understand this as pointing to Mary’s spiritual motherhood of all believers.</p>
+        </div>
+        <div class="check" data-check="scripture1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">What does Mary’s fiat show?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'scripture1','c')"><span class="letter">a.</span><span>That Mary understood every detail of God’s plan before accepting it.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'scripture1','c')"><span class="letter">b.</span><span>That Mary had no freedom in responding to God.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'scripture1','c')"><span class="letter">c.</span><span>That Mary freely trusted and obeyed God, even without seeing the whole future.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'scripture1','c')"><span class="letter">d.</span><span>That Mary’s role ended before Jesus’ public ministry began.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-scripture1"></div>
+        </div>
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Which Scriptural image of Mary stands out most to you, the Annunciation, Cana, the Cross, or Mary praying with the early Church? Why?</div>
+          <textarea id="pauseScripture" oninput="updateWordCount('pauseScripture','pauseScriptureWC',70)" placeholder="Choose one Scripture moment and explain what it reveals about Mary."></textarea>
+          <div class="word-count" id="pauseScriptureWC"><span>0 words</span><span>Minimum: 70 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="scriptureNext" onclick="showScreen('dogmas')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="dogmas">
+      <div class="card">
+        <div class="screen-label">Part Four · Marian Dogmas</div>
+        <h2 class="screen-title">What the Church Teaches About Mary</h2>
+        <p class="screen-intro">The Marian dogmas do not make Mary divine. They protect the truth about Christ and show what God’s grace can do in a human life.</p>
+        <div class="prose">
+          <h3>Divine Motherhood</h3>
+          <p>Mary is Theotokos, Mother of God, because Jesus is one divine Person with both a human and divine nature. This title defends the truth of the Incarnation.</p>
+          <h3>Perpetual Virginity</h3>
+          <p>The Church teaches that Mary remained a virgin before, during, and after the birth of Jesus, highlighting the unique and miraculous nature of Christ’s birth.</p>
+          <h3>Immaculate Conception</h3>
+          <p>Mary was preserved from original sin from the first moment of her conception by God’s special grace, preparing her for her mission as mother of the Savior.</p>
+          <h3>Assumption</h3>
+          <p>Mary was taken body and soul into heaven. This points to God’s victory over sin and death and gives hope for the resurrection promised to all faithful disciples.</p>
+        </div>
+        <div class="check" data-check="dogmas1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Why is Mary called Theotokos, Mother of God?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'dogmas1','d')"><span class="letter">a.</span><span>Because Mary existed before God.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'dogmas1','d')"><span class="letter">b.</span><span>Because Mary is equal to the Trinity.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'dogmas1','d')"><span class="letter">c.</span><span>Because Jesus was only human and needed a human mother.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'dogmas1','d')"><span class="letter">d.</span><span>Because the child she bore is Jesus Christ, true God and true man.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-dogmas1"></div>
+        </div>
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Which Marian dogma do you think is most misunderstood: Divine Motherhood, Perpetual Virginity, Immaculate Conception, or Assumption? Explain the misunderstanding and the deeper meaning.</div>
+          <textarea id="pauseDogmas" oninput="updateWordCount('pauseDogmas','pauseDogmasWC',80)" placeholder="Choose one dogma and explain it clearly."></textarea>
+          <div class="word-count" id="pauseDogmasWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="dogmasNext" onclick="showScreen('intercession')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="intercession">
+      <div class="card">
+        <div class="screen-label">Part Five · Prayer and Devotion</div>
+        <h2 class="screen-title">Mary’s Intercession and the Rosary</h2>
+        <p class="screen-intro">Catholics ask Mary to pray for us because she is a spiritual mother who always points to her Son.</p>
+        <div class="prose">
+          <p>Intercession means praying on behalf of someone else. When Catholics ask Mary to intercede, they are not replacing Jesus. They are asking the mother of Jesus to join her prayers to ours.</p>
+          <p>This is similar to asking a holy friend or family member to pray for you, but Mary has a unique closeness to Christ. At the Wedding at Cana, she notices a need and brings it to Jesus. Her words to the servants are simple and powerful: “Do whatever he tells you” (John 2:5, NRSV-CE).</p>
+          <p>The Rosary is one of the best-known Marian devotions. It is not meant to distract from Jesus. Its mysteries lead Catholics to meditate on the life, death, and Resurrection of Christ with Mary as a guide.</p>
+        </div>
+        <div class="check" data-check="intercession1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">What is Mary’s intercession?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'intercession1','b')"><span class="letter">a.</span><span>Mary granting grace independently from God.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'intercession1','b')"><span class="letter">b.</span><span>Mary praying for us and bringing our needs to Jesus.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'intercession1','b')"><span class="letter">c.</span><span>Mary replacing the need for Christ’s saving work.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'intercession1','b')"><span class="letter">d.</span><span>Mary becoming the fourth person of the Trinity.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-intercession1"></div>
+        </div>
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">How would you explain Marian intercession to someone who thinks Catholics are worshipping Mary?</div>
+          <textarea id="pauseIntercession" oninput="updateWordCount('pauseIntercession','pauseIntercessionWC',80)" placeholder="Explain it simply and accurately."></textarea>
+          <div class="word-count" id="pauseIntercessionWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="intercessionNext" onclick="showScreen('culture')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="culture">
+      <div class="card">
+        <div class="screen-label">Part Six · Real World Connections</div>
+        <h2 class="screen-title">Mary in Culture, History, and Daily Life</h2>
+        <p class="screen-intro">Mary’s influence is visible in art, architecture, feast days, devotions, and the spiritual lives of Catholics around the world.</p>
+        <div class="prose">
+          <p>Mary has inspired paintings, sculptures, hymns, cathedrals, festivals, and names across many cultures. Churches such as Notre-Dame de Paris, meaning Our Lady of Paris, show how central Marian devotion has been in Catholic imagination and culture.</p>
+          <p>Mary’s example also matters in daily life. In a world that often celebrates pride and self-promotion, Mary models humility, courage, attentiveness, mercy, and trust. She shows that God can work through ordinary people who say yes.</p>
+          <p>Mary is also respected beyond Catholicism. The lesson notes that she is the only woman named in the Qur’an, and that Islam honors Maryam as a woman of great virtue and mother of Jesus. This shows how widely her holiness is recognized.</p>
+        </div>
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Which aspect of Mary’s example feels most relevant today: courage, humility, trust, compassion, strength in suffering, or attentiveness to others? Explain why.</div>
+          <textarea id="pauseCulture" oninput="updateWordCount('pauseCulture','pauseCultureWC',80)" placeholder="Choose one virtue or quality and connect it to real life today."></textarea>
+          <div class="word-count" id="pauseCultureWC"><span>0 words</span><span>Minimum: 80 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="cultureNext" onclick="showScreen('tradition')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="tradition">
+      <div class="card">
+        <div class="screen-label">Part Seven · Catholic Tradition and Culture</div>
+        <h2 class="screen-title">Feasts, Saints, and Marian Devotion</h2>
+        <p class="screen-intro">Mary is woven into Catholic life through prayer, feast days, church history, and local culture.</p>
+        <div class="prose">
+          <p>The Church celebrates many Marian feasts, including Mary, Mother of God on January 1, the Assumption on August 15, and Our Lady of Guadalupe on December 12. May is traditionally dedicated to Mary, often with May Crowning ceremonies.</p>
+          <p>The Council of Ephesus in 431 affirmed Mary as Theotokos, Mother of God. This was not only about Mary. It defended the truth that Jesus is fully God and fully human.</p>
+          <p>Many saints and popes have loved Mary deeply. St. John Paul II’s motto, <em>Totus Tuus</em>, means “Totally Yours,” expressing his Marian devotion. Catholic tradition always understands true devotion to Mary as a path that leads to Christ.</p>
+        </div>
+        <div class="check" data-check="tradition1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Why was the title Theotokos affirmed by the Council of Ephesus?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'tradition1','c')"><span class="letter">a.</span><span>To claim that Mary created Jesus’ divine nature.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'tradition1','c')"><span class="letter">b.</span><span>To make Marian devotion more important than the Gospel.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'tradition1','c')"><span class="letter">c.</span><span>To protect the truth that Jesus is one divine Person, truly God and truly human.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'tradition1','c')"><span class="letter">d.</span><span>To teach that Mary is equal to God.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-tradition1"></div>
+        </div>
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Which Marian feast, devotion, or cultural practice from this lesson seems most meaningful or interesting to you, and why?</div>
+          <textarea id="pauseTradition" oninput="updateWordCount('pauseTradition','pauseTraditionWC',75)" placeholder="Choose one practice and explain its meaning."></textarea>
+          <div class="word-count" id="pauseTraditionWC"><span>0 words</span><span>Minimum: 75 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="traditionNext" onclick="showScreen('quiz')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="quiz">
+      <div class="card">
+        <div class="screen-label">Part Eight · Check Your Understanding</div>
+        <h2 class="screen-title">Lesson Quiz</h2>
+        <p class="screen-intro">Answer all seven questions. Feedback appears as you complete each one.</p>
+        <div id="quizWrap"></div>
+        <div class="quiz-score" id="quizScore">Quiz Score<strong id="scoreText">0 / 7</strong></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="quizNext" onclick="showScreen('deeper')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="deeper">
+      <div class="card">
+        <div class="screen-label">Part Nine · Think Deeper</div>
+        <h2 class="screen-title">Stretch Your Thinking</h2>
+        <p class="screen-intro">These questions ask you to connect the lesson to faith, doctrine, and everyday life.</p>
+        <div class="field">
+          <label for="td1">Think Deeper 1</label>
+          <div class="prose" style="margin-bottom:12px;"><p>Why do you think God chose Mary, an unknown young woman from Nazareth, for such a central role in salvation history? What does this reveal about the way God calls people today?</p></div>
+          <textarea id="td1" oninput="updateWordCount('td1','td1WC',140)" placeholder="Develop your answer with clear reasoning."></textarea>
+          <div class="word-count" id="td1WC"><span>0 words</span><span>Minimum: 140 words</span></div>
+        </div>
+        <div class="field">
+          <label for="td2">Think Deeper 2</label>
+          <div class="prose" style="margin-bottom:12px;"><p>Mary is sometimes called the New Eve. How does Mary’s obedience contrast with Eve’s disobedience, and what does this symbolism reveal about God’s plan of salvation?</p></div>
+          <textarea id="td2" oninput="updateWordCount('td2','td2WC',140)" placeholder="Explain the parallel and its meaning."></textarea>
+          <div class="word-count" id="td2WC"><span>0 words</span><span>Minimum: 140 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="deeperNext" onclick="showScreen('synthesis')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="synthesis">
+      <div class="card">
+        <div class="screen-label">Part Ten · Final Synthesis</div>
+        <h2 class="screen-title">Bring the Lesson Together</h2>
+        <p class="screen-intro">Show how the major ideas from the lesson connect.</p>
+        <div class="field">
+          <label for="synthesis">Final Synthesis</label>
+          <div class="prose" style="margin-bottom:12px;"><p>In one thoughtful response, explain why Mary matters in Catholic faith. Include at least three of the following ideas: model disciple, Annunciation, Theotokos, Immaculate Conception, Assumption, intercession, Rosary, spiritual motherhood, and how Mary leads believers to Jesus.</p></div>
+          <textarea id="synthesis" oninput="updateWordCount('synthesis','synthesisWC',170)" placeholder="Connect the major ideas from the lesson in a clear final response."></textarea>
+          <div class="word-count" id="synthesisWC"><span>0 words</span><span>Minimum: 170 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="synthesisNext" onclick="showScreen('finish')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="finish">
+      <div class="card">
+        <div class="screen-label">Part Eleven · Wrap Up</div>
+        <h2 class="screen-title">Almost Finished</h2>
+        <p class="screen-intro">Review your progress, download your report, and then mark the lesson as complete.</p>
+        <div class="summary-grid">
+          <div class="summary-stat"><div class="stat-label">Quiz Score</div><div class="stat-value" id="finishQuiz">0 / 7</div></div>
+          <div class="summary-stat"><div class="stat-label">Words Written</div><div class="stat-value" id="finishWords">0</div></div>
+          <div class="summary-stat"><div class="stat-label">Time in Lesson</div><div class="stat-value" id="finishTime">0 min</div></div>
+        </div>
+        <div class="download-note">Download your final report when you are ready. It includes your student information, quiz score, and written responses.</div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn btn-gold" onclick="downloadReport()">⬇ Download Report</button><button class="btn btn-primary" onclick="finishLesson()">Mark Complete →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="complete">
+      <div class="card">
+        <div class="completion-hero"><div class="completion-icon">✦</div><div class="completion-title">Lesson Completed</div><div class="completion-sub">You have finished Lesson 2.6, The Virgin Mary.</div></div>
+        <div class="download-note">Your work has been saved in this session. Download your report if you have not already done so.</div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="showScreen('finish')">← Back to Report</button><div class="btn-row-split"><button class="btn btn-gold" onclick="downloadReport()">⬇ Download Report Again</button></div></div>
+      </div>
+    </section>
+  </div>
+  <div class="toast" id="toast">Saved.</div>
+  <div class="footer">HRE4M1 · Unit 2 · Lesson 6</div>
+</div>
+
+<script>
+const LESSON_ID = '2.6';
+const STORAGE_KEY = 'hre4m1_lesson_2_6';
+const SCREEN_ORDER = ['welcome','hook','intro','terms','scripture','dogmas','intercession','culture','tradition','quiz','deeper','synthesis','finish','complete'];
+const TOTAL_STEPS = SCREEN_ORDER.length - 2;
+const REQUIRED_TERMS = 7;
+const QUIZ = [
+  {id:'q1', q:'What is the Immaculate Conception?', opts:['The teaching that Jesus was conceived without a human father.','The teaching that Mary was conceived without original sin by God’s special grace.','The teaching that Mary gave birth in Bethlehem.','The teaching that Mary was assumed into heaven.'], correct:1, explain:'The Immaculate Conception means Mary was conceived without original sin by a special grace of God.'},
+  {id:'q2', q:'What is Mary’s fiat?', opts:['Her hymn of praise in the Magnificat.','Her title as Mother of God.','Her yes to God at the Annunciation, “let it be done.”','Her Assumption into heaven.'], correct:2, explain:'Fiat means let it be done, and refers to Mary’s free yes to God’s plan.'},
+  {id:'q3', q:'Why is Mary called Theotokos?', opts:['Because she is divine.','Because she is the source of Jesus’ divinity.','Because Jesus is only human.','Because the child she bore is Jesus Christ, true God and true man.'], correct:3, explain:'Theotokos means God-bearer or Mother of God, and protects the truth of Jesus’ full divinity and humanity.'},
+  {id:'q4', q:'What does the Assumption teach?', opts:['Mary was taken body and soul into heaven.','Mary never experienced any suffering.','Mary replaced the need for the Church.','Mary wrote one of the Gospels.'], correct:0, explain:'The Assumption teaches that Mary was taken body and soul into heaven at the end of her earthly life.'},
+  {id:'q5', q:'Do Catholics worship Mary?', opts:['Yes, in the same way they worship God.','No. Catholics venerate Mary, but worship is reserved for God alone.','Yes, because she is a member of the Trinity.','No. Catholics ignore Mary completely.'], correct:1, explain:'Catholics honor or venerate Mary, but adoration and worship belong only to God.'},
+  {id:'q6', q:'What is the main purpose of the Rosary?', opts:['To replace Scripture with Marian prayers.','To meditate on the mysteries of Christ’s life with Mary as a guide.','To worship Mary instead of Jesus.','To focus only on Mary’s life apart from Jesus.'], correct:1, explain:'The Rosary is Christ-centered because its mysteries lead believers to meditate on Jesus’ life, death, and Resurrection.'},
+  {id:'q7', q:'What does Mary’s spiritual motherhood mean?', opts:['Mary cares for believers and intercedes for them as a mother in the order of grace.','Mary becomes greater than Jesus.','Mary removes the need for prayer to God.','Mary’s role ended after Jesus’ birth.'], correct:0, explain:'At the Cross, Catholics see Jesus giving Mary as spiritual mother to believers, and she continues to intercede for the Church.'}
+];
+const CORRECT_MAP = {intro1:'b', scripture1:'c', dogmas1:'d', intercession1:'b', tradition1:'c'};
+const MINIMUMS = {hookResponse:35, pauseIntro:60, pauseScripture:70, pauseDogmas:80, pauseIntercession:80, pauseCulture:80, pauseTradition:75, td1:140, td2:140, synthesis:170};
+const RESPONSE_ORDER = ['hookResponse','pauseIntro','pauseScripture','pauseDogmas','pauseIntercession','pauseCulture','pauseTradition','td1','td2','synthesis'];
+const RESPONSE_TITLES = {hookResponse:'Starting Point', pauseIntro:'Reflection 1', pauseScripture:'Reflection 2', pauseDogmas:'Reflection 3', pauseIntercession:'Reflection 4', pauseCulture:'Reflection 5', pauseTradition:'Reflection 6', td1:'Think Deeper 1', td2:'Think Deeper 2', synthesis:'Final Synthesis'};
+const REPORT_FILE_PREFIX = 'HRE4M1_L2_6_The_Virgin_Mary';
+const REPORT_HEADER_LABEL = 'HRE4M1 · Unit 2 · Lesson 6';
+const REPORT_TITLE = 'The Virgin Mary';
+const REPORT_SUBTITLE = 'Student Report';
+const RESUME_ERROR = 'Could not load that file. Please upload a valid Lesson 2.6 progress file.';
+const state = {lessonId:LESSON_ID, startedAt:null, finishedAt:null, currentScreen:'welcome', studentInfo:{name:'',email:'',className:''}, termsViewed:[], inlineChecks:{}, responses:{}, quiz:{answers:{}, scoreCount:0}, sectionTimes:{}, lastSavedAt:null};
+RESPONSE_ORDER.forEach(key => state.responses[key] = '');
+let screenEnterTime = Date.now();
+function countWords(str) { if (!str) return 0; return str.trim().split(/\s+/).filter(Boolean).length; }
+function escapeHTML(str) { if (str === null || str === undefined) return ''; return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function formatTime(ms) { const totalMin = Math.floor(ms / 60000); if (totalMin < 1) return '< 1 min'; if (totalMin < 60) return totalMin + ' min'; const hrs = Math.floor(totalMin / 60); const mins = totalMin % 60; return hrs + 'h ' + mins + 'm'; }
+function persistInputsToState() { const nameEl = document.getElementById('studentName'); const emailEl = document.getElementById('studentEmail'); const classEl = document.getElementById('studentClass'); if (nameEl) state.studentInfo.name = nameEl.value.trim(); if (emailEl) state.studentInfo.email = emailEl.value.trim(); if (classEl) state.studentInfo.className = classEl.value.trim(); RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) state.responses[key] = el.value.trim(); }); }
+function saveLocal() { state.lastSavedAt = new Date().toISOString(); persistInputsToState(); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function totalWords() { persistInputsToState(); return Object.values(state.responses).reduce((sum, value) => sum + countWords(value), 0); }
+function totalTimeMs() { let total = 0; Object.values(state.sectionTimes).forEach(ms => total += ms || 0); if (state.currentScreen && screenEnterTime) total += Date.now() - screenEnterTime; return total; }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1600); }
+function markSaveButtonsSaved() { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.add('saved')); const label = document.getElementById('stickySaveLabel'); if (label) label.textContent = 'Saved'; setTimeout(() => { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.remove('saved')); const again = document.getElementById('stickySaveLabel'); if (again) again.textContent = 'Save Progress'; }, 1300); }
+function updateProgress() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); const activeStep = Math.max(0, Math.min(TOTAL_STEPS, idx)); const pct = Math.max(0, Math.min(100, Math.round((activeStep / TOTAL_STEPS) * 100))); document.getElementById('progressFill').style.width = pct + '%'; document.getElementById('progressPercent').textContent = pct + '%'; const displayStep = state.currentScreen === 'welcome' ? 1 : Math.min(TOTAL_STEPS, Math.max(1, idx)); document.getElementById('progressLabel').textContent = 'Section ' + displayStep + ' of ' + TOTAL_STEPS; }
+function showScreen(screenId) { persistInputsToState(); const now = Date.now(); if (state.currentScreen) { state.sectionTimes[state.currentScreen] = (state.sectionTimes[state.currentScreen] || 0) + (now - screenEnterTime); } screenEnterTime = now; state.currentScreen = screenId; document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); const target = document.querySelector('.screen[data-screen="' + screenId + '"]'); if (target) target.classList.add('active'); document.getElementById('progressContainer').style.display = screenId === 'welcome' ? 'none' : 'block'; if (screenId === 'quiz') renderQuiz(); if (screenId === 'finish') refreshFinishStats(); updateProgress(); refreshGating(); saveLocal(); window.scrollTo({top:0, behavior:'smooth'}); }
+function prevScreen() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); if (idx > 0) showScreen(SCREEN_ORDER[idx - 1]); }
+function beginLesson() { const name = document.getElementById('studentName').value.trim(); const email = document.getElementById('studentEmail').value.trim(); if (!name || !email) { document.getElementById('setupAlert').classList.add('show'); return; } document.getElementById('setupAlert').classList.remove('show'); if (!state.startedAt) state.startedAt = new Date().toISOString(); showScreen('hook'); }
+function updateWordCount(textareaId, countId, minimum) { const el = document.getElementById(textareaId); const words = countWords(el.value); state.responses[textareaId] = el.value.trim(); const counter = document.getElementById(countId); const met = words >= minimum; counter.innerHTML = '<span>' + words + ' words</span><span class="' + (met ? 'met' : 'short') + '">Minimum: ' + minimum + ' words</span>'; saveLocal(); refreshGating(); }
+function openTerm(card) { const term = card.getAttribute('data-term'); card.classList.toggle('open'); if (!state.termsViewed.includes(term)) state.termsViewed.push(term); card.classList.add('viewed'); document.getElementById('termsViewed').textContent = state.termsViewed.length; saveLocal(); refreshGating(); }
+function answerCheck(btn, checkId, correctLetter) { if (state.inlineChecks[checkId]) return; const chosen = btn.getAttribute('data-answer'); state.inlineChecks[checkId] = chosen; const wrap = btn.closest('.check'); wrap.querySelectorAll('.check-option').forEach(opt => opt.classList.add('answered')); const fb = document.getElementById('fb-' + checkId); wrap.querySelectorAll('.check-option').forEach(opt => { if (opt.getAttribute('data-answer') === correctLetter) opt.classList.add('correct'); else if (opt === btn) opt.classList.add('incorrect'); }); fb.textContent = chosen === correctLetter ? 'Correct. You matched the main lesson idea.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); saveLocal(); refreshGating(); }
+function refreshGating() { const needs = (id, min) => countWords((document.getElementById(id)?.value || '').trim()) >= min; const checked = id => !!state.inlineChecks[id]; const setDisabled = (id, disabled) => { const el = document.getElementById(id); if (el) el.disabled = !!disabled; }; setDisabled('hookNext', !needs('hookResponse', MINIMUMS.hookResponse)); setDisabled('introNext', !(needs('pauseIntro', MINIMUMS.pauseIntro) && checked('intro1'))); setDisabled('termsNext', state.termsViewed.length < REQUIRED_TERMS); setDisabled('scriptureNext', !(needs('pauseScripture', MINIMUMS.pauseScripture) && checked('scripture1'))); setDisabled('dogmasNext', !(needs('pauseDogmas', MINIMUMS.pauseDogmas) && checked('dogmas1'))); setDisabled('intercessionNext', !(needs('pauseIntercession', MINIMUMS.pauseIntercession) && checked('intercession1'))); setDisabled('cultureNext', !needs('pauseCulture', MINIMUMS.pauseCulture)); setDisabled('traditionNext', !(needs('pauseTradition', MINIMUMS.pauseTradition) && checked('tradition1'))); setDisabled('deeperNext', !(needs('td1', MINIMUMS.td1) && needs('td2', MINIMUMS.td2))); setDisabled('synthesisNext', !needs('synthesis', MINIMUMS.synthesis)); setDisabled('quizNext', Object.keys(state.quiz.answers).length !== QUIZ.length); }
+function renderQuiz() { const wrap = document.getElementById('quizWrap'); if (wrap.dataset.rendered === '1') return restoreQuiz(); wrap.innerHTML = QUIZ.map((q, idx) => `<div class="quiz-question" id="${q.id}"><div class="q-number">Question ${idx + 1}</div><div class="q-text">${q.q}</div><div class="q-options">${q.opts.map((opt, i) => `<button class="q-option" data-opt="${i}" onclick="answerQuiz('${q.id}', ${i})"><span class="letter">${String.fromCharCode(97 + i)}.</span><span>${opt}</span></button>`).join('')}</div><div class="q-explanation" id="exp-${q.id}">${q.explain}</div></div>`).join(''); wrap.dataset.rendered = '1'; restoreQuiz(); }
+function answerQuiz(qId, choice) { if (state.quiz.answers[qId] !== undefined) return; state.quiz.answers[qId] = choice; const q = QUIZ.find(item => item.id === qId); if (choice === q.correct) state.quiz.scoreCount += 1; restoreQuiz(); saveLocal(); refreshGating(); }
+function restoreQuiz() { QUIZ.forEach(q => { const qEl = document.getElementById(q.id); if (!qEl) return; const chosen = state.quiz.answers[q.id]; const options = qEl.querySelectorAll('.q-option'); options.forEach(opt => opt.classList.remove('selected','correct','incorrect','locked')); qEl.querySelector('.q-explanation').classList.remove('show'); if (chosen !== undefined) { options.forEach(opt => opt.classList.add('locked')); const selected = qEl.querySelector('.q-option[data-opt="' + chosen + '"]'); const correctBtn = qEl.querySelector('.q-option[data-opt="' + q.correct + '"]'); if (selected) selected.classList.add('selected'); if (chosen === q.correct) selected.classList.add('correct'); else { if (selected) selected.classList.add('incorrect'); if (correctBtn) correctBtn.classList.add('correct'); } qEl.querySelector('.q-explanation').classList.add('show'); } }); if (Object.keys(state.quiz.answers).length === QUIZ.length) { document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('quizScore').classList.add('show'); } }
+function triggerDownload(filename, content, mime) { const blob = new Blob([content], {type:mime}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 500); }
+function saveProgressNow() { saveLocal(); const stamp = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-'); triggerDownload(`HRE4M1_L2_6_progress_${stamp}.json`, JSON.stringify(state, null, 2), 'application/json'); markSaveButtonsSaved(); showToast('Progress downloaded.'); }
+function refreshFinishStats() { document.getElementById('finishQuiz').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('finishWords').textContent = totalWords(); document.getElementById('finishTime').textContent = formatTime(totalTimeMs()); }
+function buildReportHTML() { persistInputsToState(); const rows = RESPONSE_ORDER.map(key => `<section style="margin:0 0 28px 0;"><h3 style="font-family:Georgia,serif;font-size:24px;margin:0 0 8px 0;color:#5B2D68;">${escapeHTML(RESPONSE_TITLES[key])}</h3><div style="font-size:13px;color:#8B5E2A;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">${countWords(state.responses[key])} words</div><div style="white-space:pre-wrap;line-height:1.7;font-size:16px;border:1px solid #ddd7c6;background:#fffdf7;padding:16px 18px;">${escapeHTML(state.responses[key] || '')}</div></section>`).join(''); return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${REPORT_TITLE} Report</title><style>body{font-family:Georgia,serif;background:#f5efe2;color:#232238;margin:0;padding:40px;line-height:1.6;}.wrap{max-width:900px;margin:0 auto;background:#fff;padding:42px 46px;border:1px solid #d8c9a0;box-shadow:0 10px 30px rgba(0,0,0,.08);}.small{font-family:Arial,sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8B5E2A;}h1{font-size:42px;color:#5B2D68;margin:8px 0 4px;}h2{font-size:18px;font-style:italic;color:#55506A;margin:0 0 26px;}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0 28px;}.card{border:1px solid #ddd7c6;background:#fffdf7;padding:14px 16px;}.label{font-family:Arial,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8B5E2A;margin-bottom:6px;}.value{font-size:18px;color:#5B2D68;}hr{border:none;border-top:1px solid #d8c9a0;margin:26px 0;}@media print{body{background:white;padding:0;} .wrap{box-shadow:none;border:none;}}</style></head><body><div class="wrap"><div class="small">${REPORT_HEADER_LABEL}</div><h1>${REPORT_TITLE}</h1><h2>${REPORT_SUBTITLE}</h2><div class="grid"><div class="card"><div class="label">Student</div><div class="value">${escapeHTML(state.studentInfo.name || '')}</div></div><div class="card"><div class="label">Email</div><div class="value">${escapeHTML(state.studentInfo.email || '')}</div></div><div class="card"><div class="label">Class</div><div class="value">${escapeHTML(state.studentInfo.className || '')}</div></div><div class="card"><div class="label">Quiz Score</div><div class="value">${state.quiz.scoreCount} / ${QUIZ.length}</div></div><div class="card"><div class="label">Total Words</div><div class="value">${totalWords()}</div></div><div class="card"><div class="label">Time in Lesson</div><div class="value">${formatTime(totalTimeMs())}</div></div></div><hr>${rows}</div></body></html>`; }
+function downloadReport() { const stamp = new Date().toISOString().slice(0,10); const safeName = (state.studentInfo.name || 'student').replace(/[^a-z0-9]+/gi,'_'); triggerDownload(`${REPORT_FILE_PREFIX}_${safeName}_${stamp}.html`, buildReportHTML(), 'text/html'); showToast('Report downloaded.'); }
+function finishLesson() { state.finishedAt = new Date().toISOString(); saveLocal(); showScreen('complete'); }
+function restoreChecks() { Object.entries(state.inlineChecks).forEach(([checkId, chosen]) => { const wrap = document.querySelector('.check[data-check="' + checkId + '"]'); if (!wrap) return; const correct = CORRECT_MAP[checkId]; wrap.querySelectorAll('.check-option').forEach(opt => { opt.classList.add('answered'); if (opt.getAttribute('data-answer') === correct) opt.classList.add('correct'); else if (opt.getAttribute('data-answer') === chosen) opt.classList.add('incorrect'); }); const fb = document.getElementById('fb-' + checkId); if (fb) { fb.textContent = chosen === correct ? 'Correct. You matched the main lesson idea.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); } }); }
+function restoreTextAndCounts() { const countIdMap = {hookResponse:'hookWC', pauseIntro:'pauseIntroWC', pauseScripture:'pauseScriptureWC', pauseDogmas:'pauseDogmasWC', pauseIntercession:'pauseIntercessionWC', pauseCulture:'pauseCultureWC', pauseTradition:'pauseTraditionWC', td1:'td1WC', td2:'td2WC', synthesis:'synthesisWC'}; RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) el.value = state.responses[key] || ''; const wcId = countIdMap[key]; if (el && document.getElementById(wcId)) updateWordCount(key, wcId, MINIMUMS[key]); }); }
+function resumeFromFile(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = function(e) { try { const loaded = JSON.parse(e.target.result); if (!loaded || loaded.lessonId !== LESSON_ID) throw new Error('Wrong lesson file'); Object.assign(state, loaded); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); showScreen(state.currentScreen || 'hook'); showToast('Progress restored.'); } catch (err) { alert(RESUME_ERROR); } }; reader.readAsText(file); }
+function hydrateFromLocalStorage() { try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return; const saved = JSON.parse(raw); if (!saved || saved.lessonId !== LESSON_ID) return; Object.assign(state, saved); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); } catch (err) {} }
+hydrateFromLocalStorage();
+updateProgress();
+refreshGating();
+</script>
+</body>
+</html>

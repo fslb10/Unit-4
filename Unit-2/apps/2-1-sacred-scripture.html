@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRE4M1 · Lesson 2.1: Sacred Scripture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --bg-deep: #1B1833;
+    --bg-mid: #31204F;
+    --bg-card: #F6EFE2;
+    --bg-card-alt: #E8DCC7;
+    --gold: #C49A4A;
+    --gold-soft: #DFC084;
+    --gold-deep: #8B5E2A;
+    --wine: #5B2D68;
+    --ivory: #F6EFE2;
+    --cream: #F1E4C8;
+    --ink: #232238;
+    --ink-soft: #55506A;
+    --locked: #4A556880;
+    --success: #3E7C68;
+    --danger: #9E3B32;
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.25);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Textured background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(201, 169, 97, 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(107, 44, 44, 0.1), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ---- Header ---- */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .unit-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .lesson-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .lesson-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gold-soft);
+    opacity: 0.9;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  /* ---- Progress bar ---- */
+  .progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-deep) 70%, transparent);
+    padding: 16px 0 12px;
+    margin: -24px -20px 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft));
+    width: 0%;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.5);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    margin: 8px auto 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  /* ---- Sticky save button (top bar) ---- */
+  .save-sticky {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 169, 97, 0.12);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .save-sticky:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    border-color: var(--gold);
+  }
+
+  .save-sticky.saved {
+    background: rgba(63, 122, 77, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  /* ---- In-row save (button row) ---- */
+  .btn-save-row {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-save-row:hover {
+    background: var(--gold-deep);
+    color: var(--ivory);
+  }
+
+  .btn-save-row.saved {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .btn-row-split {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* ---- Pause and Reflect blocks (in-flow) ---- */
+  .pause {
+    background: linear-gradient(135deg, rgba(107, 44, 44, 0.06), rgba(201, 169, 97, 0.08));
+    border: 1px solid rgba(107, 44, 44, 0.2);
+    border-left: 3px solid var(--wine);
+    padding: 22px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .pause-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pause-label::before {
+    content: '❊';
+    font-size: 14px;
+    color: var(--gold-deep);
+  }
+
+  .pause-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .pause textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(107, 44, 44, 0.25);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    border-radius: 2px;
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .pause textarea:focus {
+    outline: none;
+    border-color: var(--wine);
+    box-shadow: 0 0 0 2px rgba(107, 44, 44, 0.15);
+  }
+
+  /* Save confirmation toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid var(--gold);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---- Screen Cards ---- */
+  .screen {
+    display: none;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .screen.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .screen-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .screen-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .screen-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .prose {
+    font-size: 16.5px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .prose p { margin-bottom: 18px; }
+
+  .prose strong { color: var(--wine); font-weight: 600; }
+
+  .prose em { color: var(--ink-soft); }
+
+  .prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 28px 0 14px;
+    color: var(--wine);
+    line-height: 1.25;
+  }
+
+  .prose h3::before {
+    content: '❖ ';
+    color: var(--gold-deep);
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+
+  .divider {
+    display: block;
+    margin: 32px auto;
+    width: 120px;
+    height: auto;
+    opacity: 0.6;
+  }
+
+  .pullquote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--wine);
+    text-align: center;
+    margin: 28px 20px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    line-height: 1.4;
+  }
+
+  .scripture {
+    background: rgba(201, 169, 97, 0.12);
+    border-left: 3px solid var(--gold-deep);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scripture-ref {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--ivory);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--wine);
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:disabled {
+    background: var(--locked);
+    border-color: var(--locked);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+  }
+
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- Forms ---- */
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    background: #FDF8E8;
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .word-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .word-count .met {
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  .word-count .short {
+    color: var(--danger);
+  }
+
+  /* ---- Key Terms / Flashcards ---- */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .term-card {
+    background: var(--bg-card-alt);
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    border-radius: 2px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 100px;
+  }
+
+  .term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--gold-deep);
+  }
+
+  .term-card.viewed {
+    background: linear-gradient(135deg, #FDF8E8, var(--bg-card-alt));
+  }
+
+  .term-card.viewed::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .term-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.7;
+  }
+
+  .term-def {
+    display: none;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .term-card.open .term-def { display: block; }
+  .term-card.open .term-tap { display: none; }
+
+  /* ---- Inline comprehension check ---- */
+  .check {
+    background: #FDF8E8;
+    border: 1px dashed var(--gold-deep);
+    border-radius: 2px;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .check-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .check-q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .check-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-option {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .check-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .check-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .check-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .check-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .check-feedback {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    display: none;
+  }
+
+  .check-feedback.show { display: block; }
+
+  /* ---- Vocation Compass ---- */
+  .compass-intro {
+    background: #FDF8E8;
+    border-left: 3px solid var(--wine);
+    padding: 18px 22px;
+    margin: 20px 0 30px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .compass-vocation {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(140, 113, 53, 0.25);
+  }
+
+  .compass-vocation:last-child {
+    border-bottom: none;
+  }
+
+  .compass-voc-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+
+  .compass-voc-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  .compass-aspect {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px dotted rgba(140, 113, 53, 0.2);
+  }
+
+  .compass-aspect:first-of-type { border-top: none; }
+
+  .compass-aspect-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .rating-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .rating-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(140, 113, 53, 0.4);
+    background: white;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .rating-btn:hover {
+    border-color: var(--gold-deep);
+  }
+
+  .rating-btn.selected {
+    background: var(--wine);
+    color: var(--ivory);
+    border-color: var(--wine);
+  }
+
+  .rating-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  .compass-result {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(107, 44, 44, 0.08));
+    border: 1px solid var(--gold-deep);
+    padding: 24px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  .compass-result.show { display: block; }
+
+  .result-voc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.3);
+  }
+
+  .result-voc:last-child { border-bottom: none; }
+
+  .result-voc-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--wine);
+  }
+
+  .result-bar {
+    width: 180px;
+    height: 8px;
+    background: rgba(140, 113, 53, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .result-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    transition: width 1s ease;
+  }
+
+  /* ---- Quiz ---- */
+  .quiz-question {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(140, 113, 53, 0.25);
+  }
+
+  .quiz-question:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .q-option {
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid rgba(31, 41, 55, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .q-option:hover:not(.answered) {
+    border-color: var(--gold-deep);
+    background: #FDF8E8;
+  }
+
+  .q-option.selected {
+    border-color: var(--wine);
+    background: rgba(107, 44, 44, 0.06);
+  }
+
+  .q-option .letter {
+    font-weight: 700;
+    color: var(--gold-deep);
+    min-width: 20px;
+  }
+
+  .q-option.correct {
+    background: rgba(63, 122, 77, 0.12);
+    border-color: var(--success);
+  }
+
+  .q-option.incorrect {
+    background: rgba(168, 67, 43, 0.1);
+    border-color: var(--danger);
+  }
+
+  .q-option.locked {
+    pointer-events: none;
+  }
+
+  .q-explanation {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201, 169, 97, 0.1);
+    border-left: 2px solid var(--gold-deep);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    display: none;
+  }
+
+  .q-explanation.show { display: block; }
+
+  .quiz-score {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(107, 44, 44, 0.1));
+    border: 1px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    color: var(--wine);
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score strong {
+    font-size: 34px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ---- Completion screen ---- */
+  .completion-hero {
+    text-align: center;
+    padding: 20px 0 32px;
+  }
+
+  .completion-icon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    color: var(--gold-deep);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .completion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  .completion-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .summary-stat {
+    background: #FDF8E8;
+    border: 1px solid rgba(140, 113, 53, 0.3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine);
+  }
+
+  .download-note {
+    background: rgba(201, 169, 97, 0.12);
+    padding: 18px 22px;
+    border-left: 3px solid var(--gold-deep);
+    margin: 24px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ---- Hero (start screen) ---- */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-deep));
+    color: var(--ivory);
+    padding: 40px 40px 36px;
+    margin: -40px -44px 32px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .hero-banner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+
+  .hero-banner p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-soft);
+    margin-top: 8px;
+  }
+
+  .hero-banner .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+
+  .upload-zone {
+    border: 1px dashed rgba(140, 113, 53, 0.4);
+    padding: 20px;
+    text-align: center;
+    margin-top: 24px;
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .upload-zone label {
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .upload-zone input { display: none; }
+
+  /* ---- Error / alert ---- */
+  .alert {
+    padding: 12px 16px;
+    background: rgba(168, 67, 43, 0.1);
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    margin-top: 14px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .alert.show { display: block; }
+
+  /* ---- Footer ---- */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .card { padding: 28px 22px; }
+    .hero-banner { margin: -28px -22px 28px; padding: 30px 24px 26px; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; justify-content: center; }
+    .compass-aspect { grid-template-columns: 1fr; gap: 8px; }
+    .result-bar { width: 120px; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .save-sticky {
+      position: static;
+      display: flex;
+      margin: 10px auto 0;
+      width: fit-content;
+    }
+    .progress-meta { flex-wrap: wrap; }
+    .btn-row-split { width: 100%; flex-direction: column; }
+    .btn-row-split .btn-save-row { width: 100%; justify-content: center; }
+  }
+
+  /* Print-friendly download report styling will be injected separately */
+
+  /* Unit 2 Scripture palette overrides */
+  body::before {
+    background:
+      radial-gradient(ellipse at top left, rgba(196, 154, 74, 0.10), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(91, 45, 104, 0.16), transparent 50%);
+  }
+  .pause { background: linear-gradient(135deg, rgba(91, 45, 104, 0.08), rgba(196, 154, 74, 0.08)); border-color: rgba(91, 45, 104, 0.22); }
+  .check, .field input, .field textarea, .field select, .pause textarea, .summary-stat { background:#FFF9EC; }
+  .term-card.viewed { background: linear-gradient(135deg, #FFF9EC, var(--bg-card-alt)); }
+
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="unit-label">HRE4M1 · Unit 2 · Lesson 1</div>
+    <h1 class="lesson-title">Sacred Scripture</h1>
+    <div class="lesson-subtitle">Inspiration, inerrancy, and faithful interpretation</div>
+    <svg class="ornament" width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg" style="color:var(--gold);">
+      <path d="M 0 10 L 30 10 M 50 10 L 80 10" stroke="currentColor" stroke-width="1" fill="none"/>
+      <circle cx="40" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1"/>
+      <circle cx="40" cy="10" r="1" fill="currentColor"/>
+    </svg>
+  </div>
+
+  <div class="progress-container" id="progressContainer" style="display:none; position:relative;">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-meta"><span id="progressLabel">Section 1 of 13</span><span id="progressPercent">0%</span></div>
+    <button class="save-sticky" id="stickySave" onclick="saveProgressNow()" title="Download your progress to resume later"><span>💾</span><span id="stickySaveLabel">Save Progress</span></button>
+  </div>
+
+  <div id="screens">
+    <section class="screen active" data-screen="welcome">
+      <div class="card">
+        <div class="hero-banner">
+          <div class="ornament-line">
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+            <span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">A Study in Sacred Scripture</span>
+            <svg width="40" height="12" viewBox="0 0 40 12"><line x1="0" y1="6" x2="40" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+          </div>
+          <h2>Welcome to Lesson 2.1</h2>
+          <p>This lesson explores how the Bible is both God's Word and human writing, and how Catholics interpret it faithfully.</p>
+        </div>
+
+        <p class="prose" style="margin-bottom:24px;">Before you begin, enter your information. Your name will appear on the final report you can download and submit at the end of the lesson.</p>
+
+        <div class="field"><label for="studentName">Full Name</label><input autocomplete="name" id="studentName" placeholder="First and last name" type="text"></div>
+        <div class="field"><label for="studentEmail">School Email</label><input autocomplete="email" id="studentEmail" placeholder="you@school.ca" type="email"></div>
+        <div class="field"><label for="studentClass">Class / Period</label><input id="studentClass" placeholder="e.g., HRE4M1 · Period 2" type="text"></div>
+        <div class="alert" id="setupAlert">Please fill in your name and email before starting.</div>
+
+        <div class="btn-row"><div></div><button class="btn btn-primary" onclick="beginLesson()">Begin Lesson →</button></div>
+
+        <div class="upload-zone">
+          <div style="font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Returning to finish?</div>
+          <label for="resumeFile">Upload your saved progress file</label>
+          <input accept=".json" id="resumeFile" onchange="resumeFromFile(event)" type="file">
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="hook">
+      <div class="card">
+        <div class="screen-label">Before We Begin</div>
+        <h2 class="screen-title">A Question to Sit With</h2>
+        <p class="screen-intro">Start with your honest instinct before the lesson shapes your answer.</p>
+        <div class="prose">
+          <p>The Bible is called the inspired Word of God, but it was also written by real human authors in real cultures and historical moments.</p>
+          <p>Before we begin, what do you think it means to say that the Bible is both <strong>God's Word</strong> and <strong>human writing</strong>?</p>
+        </div>
+        <div class="field" style="margin-top:20px;">
+          <label for="hookResponse">Your starting point</label>
+          <textarea id="hookResponse" oninput="updateWordCount('hookResponse','hookWC',35)" placeholder="What does it mean to call the Bible God's Word when human authors wrote it?"></textarea>
+          <div class="word-count" id="hookWC"><span>0 words</span><span>Minimum: 35 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="hookNext" onclick="showScreen('intro')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="intro">
+      <div class="card">
+        <div class="screen-label">Part One · Introduction</div>
+        <h2 class="screen-title">Scripture as Inspired Word</h2>
+        <p class="screen-intro">Catholics believe the Bible is inspired by God, but inspiration does not mean the human authors became robots.</p>
+        <div class="prose">
+          <p>The Bible is at the heart of Catholic faith because it reveals God, His plan, and the saving truth fulfilled in Jesus Christ. Sacred Scripture has many human authors, but one divine author: God.</p>
+          <p><strong>Divine inspiration</strong> means the Holy Spirit guided the biblical authors so that they wrote what God wanted expressed for our salvation. God worked through their language, culture, abilities, personality, and historical setting.</p>
+          <p>This is why Catholics read Scripture with reverence and intelligence. We take seriously that Scripture is God's Word, and we also take seriously the human context through which that Word was written.</p>
+          <div class="scripture">"God is the author of Sacred Scripture because he inspired its human authors."<span class="scripture-ref">Catechism of the Catholic Church, §105</span></div>
+        </div>
+
+        <div class="check" data-check="intro1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">What does divine inspiration mean in Catholic teaching?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'intro1','c')"><span class="letter">a.</span><span>The Bible dropped from heaven as one finished book.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'intro1','c')"><span class="letter">b.</span><span>The human authors wrote only their private opinions about God.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'intro1','c')"><span class="letter">c.</span><span>The Holy Spirit guided human authors to write what God wanted expressed for salvation.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'intro1','c')"><span class="letter">d.</span><span>The Bible should be read as a modern science textbook.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-intro1"></div>
+        </div>
+
+        <div class="pause">
+          <div class="pause-label">Pause and Reflect</div>
+          <div class="pause-q">Why is it important to remember both sides: God is the author of Scripture, and human authors wrote in real historical contexts?</div>
+          <textarea id="pauseIntro" oninput="updatePause('pauseIntro','pauseIntroWC',60,'introNext','intro1')" placeholder="Explain why both the divine and human dimensions matter."></textarea>
+          <div class="word-count" id="pauseIntroWC"><span>0 words</span><span>Minimum: 60 words</span></div>
+        </div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="introNext" onclick="showScreen('terms')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="terms">
+      <div class="card">
+        <div class="screen-label">Part Two · Vocabulary</div>
+        <h2 class="screen-title">Eight Key Terms to Know</h2>
+        <p class="screen-intro">Tap each card to reveal its meaning. View all eight before moving on.</p>
+        <div class="terms-grid" id="termsGrid">
+          <div class="term-card" data-term="inspiration" onclick="openTerm(this)"><div class="term-name">Divine Inspiration</div><div class="term-tap">Tap to reveal</div><div class="term-def">The guidance of the Holy Spirit by which human authors wrote what God wanted expressed. God is the ultimate author of Scripture.</div></div>
+          <div class="term-card" data-term="inerrancy" onclick="openTerm(this)"><div class="term-name">Inerrancy</div><div class="term-tap">Tap to reveal</div><div class="term-def">The belief that Scripture teaches truth without error in what God wanted revealed for our salvation, especially faith and morals.</div></div>
+          <div class="term-card" data-term="revelation" onclick="openTerm(this)"><div class="term-name">Revelation</div><div class="term-tap">Tap to reveal</div><div class="term-def">God's self-disclosure to humanity. In Scripture, God reveals Himself, His covenant, His saving plan, and ultimately Jesus Christ.</div></div>
+          <div class="term-card" data-term="tradition" onclick="openTerm(this)"><div class="term-name">Oral, Written, Edited Tradition</div><div class="term-tap">Tap to reveal</div><div class="term-def">The stages by which Scripture formed: stories were first told, then written down, then collected and refined by the faith community.</div></div>
+          <div class="term-card" data-term="gospel" onclick="openTerm(this)"><div class="term-name">Gospel</div><div class="term-tap">Tap to reveal</div><div class="term-def">A word meaning Good News. The four Gospels proclaim the life, teachings, death, and resurrection of Jesus Christ.</div></div>
+          <div class="term-card" data-term="hermeneutics" onclick="openTerm(this)"><div class="term-name">Hermeneutics</div><div class="term-tap">Tap to reveal</div><div class="term-def">The study of interpretation. Biblical hermeneutics helps bridge the ancient text and the lives of readers today.</div></div>
+          <div class="term-card" data-term="exegesis" onclick="openTerm(this)"><div class="term-name">Exegesis</div><div class="term-tap">Tap to reveal</div><div class="term-def">Drawing meaning out of a biblical text by studying the author's intent, audience, context, genre, and message.</div></div>
+          <div class="term-card" data-term="eisegesis" onclick="openTerm(this)"><div class="term-name">Eisegesis</div><div class="term-tap">Tap to reveal</div><div class="term-def">Reading one's own ideas, biases, or agenda into Scripture, often distorting the original meaning.</div></div>
+        </div>
+        <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink-soft); text-align:center; margin-top:16px;">Viewed: <span id="termsViewed">0</span> of 8</div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="termsNext" onclick="showScreen('authorship')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="authorship">
+      <div class="card">
+        <div class="screen-label">Part Three · Inspiration and Inerrancy</div>
+        <h2 class="screen-title">God's Word in Human Words</h2>
+        <p class="screen-intro">The Catholic approach holds together two truths: Scripture is divine, and Scripture is genuinely human.</p>
+        <div class="prose">
+          <p>The Bible was written over many centuries by many human authors. Yet Catholics believe God guided these authors through the Holy Spirit. Their writing is not merely human opinion. It is inspired Scripture.</p>
+          <p>Because God is the principal author, Scripture teaches without error the truth God wanted revealed for salvation. This is called <strong>inerrancy</strong>. It does not mean the Bible is trying to answer every modern scientific or historical question in the way a textbook would.</p>
+          <p>Instead, inerrancy means Scripture reliably teaches saving truth: who God is, who we are, what sin does, how God saves, and how we are called to live in faith and holiness.</p>
+          <div class="pullquote">The Bible is not less sacred because humans wrote it. God chose to speak through human words.</div>
+        </div>
+        <div class="check" data-check="authorship1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">In Catholic teaching, biblical inerrancy means...</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'authorship1','d')"><span class="letter">a.</span><span>Every line of the Bible should be read as modern science.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'authorship1','d')"><span class="letter">b.</span><span>The Bible has no human authors or cultural context.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'authorship1','d')"><span class="letter">c.</span><span>The Bible can be used to prove any personal opinion.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'authorship1','d')"><span class="letter">d.</span><span>Scripture teaches without error the saving truth God wanted revealed.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-authorship1"></div>
+        </div>
+        <div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">Why could it be misleading to say, "The Bible is either God's Word or human writing," as if it cannot be both?</div><textarea id="pauseAuthorship" oninput="updatePause('pauseAuthorship','pauseAuthorshipWC',70,'authorshipNext','authorship1')" placeholder="Explain why Catholics hold these together."></textarea><div class="word-count" id="pauseAuthorshipWC"><span>0 words</span><span>Minimum: 70 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="authorshipNext" onclick="showScreen('formation')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="formation">
+      <div class="card">
+        <div class="screen-label">Part Four · How Scripture Formed</div>
+        <h2 class="screen-title">Oral, Written, and Edited Tradition</h2>
+        <p class="screen-intro">Scripture did not appear all at once. God's revelation unfolded through history and was preserved by a faith community.</p>
+        <div class="prose">
+          <p>The Old Testament tells the story of God forming a covenant people: Abraham, Moses, the Law, the prophets, the exile, and the hope for a Messiah. These experiences were remembered, proclaimed, written down, and collected.</p>
+          <p>This process can be described in three stages. First, stories and teachings were passed down orally. Then they were written. Later, the community collected and refined these writings so they could be handed on faithfully.</p>
+          <p>The New Testament centers on Jesus Christ and the early Church. It includes the four Gospels, Acts of the Apostles, letters to Christian communities, and Revelation. The New Testament is shorter than the Old, but it contains the definitive revelation of God in Jesus.</p>
+        </div>
+        <div class="check" data-check="formation1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Which order best describes the formation of Scripture?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'formation1','b')"><span class="letter">a.</span><span>Printed Bible, social media, oral tradition.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'formation1','b')"><span class="letter">b.</span><span>Oral tradition, written tradition, edited and collected tradition.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'formation1','b')"><span class="letter">c.</span><span>Edited tradition, oral tradition, then Revelation.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'formation1','b')"><span class="letter">d.</span><span>Private opinion, public vote, modern publication.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-formation1"></div>
+        </div>
+        <div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">Why does knowing that Scripture formed through oral, written, and edited tradition help us read the Bible more thoughtfully?</div><textarea id="pauseFormation" oninput="updatePause('pauseFormation','pauseFormationWC',70,'formationNext','formation1')" placeholder="Explain how formation history helps interpretation."></textarea><div class="word-count" id="pauseFormationWC"><span>0 words</span><span>Minimum: 70 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="formationNext" onclick="showScreen('gospels')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="gospels">
+      <div class="card">
+        <div class="screen-label">Part Five · The Four Gospels</div>
+        <h2 class="screen-title">One Good News, Four Portraits</h2>
+        <p class="screen-intro">Matthew, Mark, Luke, and John proclaim the same Jesus, but each does so from a unique perspective.</p>
+        <div class="prose">
+          <h3>Matthew</h3>
+          <p>Matthew writes especially for a Jewish-Christian audience and emphasizes Jesus as the Messiah who fulfills the Law and prophets.</p>
+          <h3>Mark</h3>
+          <p>Mark writes in a fast-moving style, stressing Jesus' power, suffering, and the cost of discipleship.</p>
+          <h3>Luke</h3>
+          <p>Luke writes an orderly account for Gentile converts, highlighting Jesus as Savior of all, especially the poor, sinners, and outsiders.</p>
+          <h3>John</h3>
+          <p>John uses poetic and symbolic language to reveal Jesus' divine identity as the Word made flesh and Son of God.</p>
+          <p>The Gospels sometimes differ in detail, order, or emphasis, but they converge in faithfully proclaiming Jesus' life, death, and resurrection.</p>
+        </div>
+        <div class="check" data-check="gospels1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Why are the four Gospels different from one another?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'gospels1','c')"><span class="letter">a.</span><span>Because only one of them is actually about Jesus.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'gospels1','c')"><span class="letter">b.</span><span>Because the Church could not decide which story was correct.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'gospels1','c')"><span class="letter">c.</span><span>Because each Evangelist wrote for a different audience and emphasized different aspects of Jesus.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'gospels1','c')"><span class="letter">d.</span><span>Because the Gospels are meant only as fictional symbols.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-gospels1"></div>
+        </div>
+        <div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">Why might it be helpful, not confusing, that the four Gospels give us different portraits of Jesus?</div><textarea id="pauseGospels" oninput="updatePause('pauseGospels','pauseGospelsWC',70,'gospelsNext','gospels1')" placeholder="Explain how different perspectives can deepen understanding."></textarea><div class="word-count" id="pauseGospelsWC"><span>0 words</span><span>Minimum: 70 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="gospelsNext" onclick="showScreen('interpretation')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="interpretation">
+      <div class="card">
+        <div class="screen-label">Part Six · Interpretation</div>
+        <h2 class="screen-title">Exegesis, Not Eisegesis</h2>
+        <p class="screen-intro">Faithful interpretation means drawing meaning from Scripture, not forcing our own agenda into it.</p>
+        <div class="prose">
+          <p><strong>Hermeneutics</strong> is the study of interpretation. For Catholics, it means reading Scripture with attention to both the literal meaning and the deeper spiritual message God communicates through the Church.</p>
+          <p><strong>Exegesis</strong> asks careful questions: Who wrote this? Who was the original audience? What genre is it? What was happening historically and culturally? What did the sacred author intend?</p>
+          <p><strong>Eisegesis</strong> does the opposite. It reads personal bias into the text. This is dangerous because it can make the Bible seem to support ideas the text never actually meant. For example, people have misused Scripture to defend slavery, revenge, racism, or personal prejudice by ignoring context.</p>
+          <div class="pullquote">A faithful reader asks, "What is God saying through this text?" not "How can I use this text to support what I already think?"</div>
+        </div>
+        <div class="check" data-check="interpretation1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Which statement best describes exegesis?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'interpretation1','a')"><span class="letter">a.</span><span>Drawing meaning out of the text by studying context, genre, audience, and author intent.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'interpretation1','a')"><span class="letter">b.</span><span>Using isolated Bible verses to prove whatever I already believe.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'interpretation1','a')"><span class="letter">c.</span><span>Ignoring the literal meaning because only personal feelings matter.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'interpretation1','a')"><span class="letter">d.</span><span>Treating every biblical genre as if it were exactly the same.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-interpretation1"></div>
+        </div>
+        <div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">Why can eisegesis be harmful, especially when people use Bible verses online or in arguments?</div><textarea id="pauseInterpretation" oninput="updatePause('pauseInterpretation','pauseInterpretationWC',80,'interpretationNext','interpretation1')" placeholder="Explain the danger of reading bias into Scripture."></textarea><div class="word-count" id="pauseInterpretationWC"><span>0 words</span><span>Minimum: 80 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="interpretationNext" onclick="showScreen('method')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="method">
+      <div class="card">
+        <div class="screen-label">Part Seven · A Catholic Method</div>
+        <h2 class="screen-title">Five Steps for Reading Scripture</h2>
+        <p class="screen-intro">A simple method helps readers move from the text's original meaning to personal application without skipping context.</p>
+        <div class="prose">
+          <h3>1. Read the passage</h3>
+          <p>Understand the literal story or teaching. What happens? Who is involved? What is said?</p>
+          <h3>2. Study the background</h3>
+          <p>Look at history, culture, location, audience, and genre. The original setting matters.</p>
+          <h3>3. Notice key words and images</h3>
+          <p>Pay attention to repeated words, symbolic images, actions, and contrasts.</p>
+          <h3>4. Discover the message</h3>
+          <p>Ask what spiritual truth God is communicating through the passage.</p>
+          <h3>5. Apply it to life</h3>
+          <p>Ask how this Word calls you to faith, repentance, trust, mercy, or action today.</p>
+          <p>This method can be applied to the Prodigal Son, Jesus calming the storm, and the Widow's Offering. In each case, context deepens the message and helps us avoid shallow interpretation.</p>
+        </div>
+        <div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">Choose one step from the method that students are most likely to skip. Why is that step important?</div><textarea id="pauseMethod" oninput="updatePause('pauseMethod','pauseMethodWC',80,'methodNext',null)" placeholder="Choose one step and explain why it matters."></textarea><div class="word-count" id="pauseMethodWC"><span>0 words</span><span>Minimum: 80 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="methodNext" onclick="showScreen('tradition')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="tradition">
+      <div class="card">
+        <div class="screen-label">Part Eight · Catholic Tradition and Culture</div>
+        <h2 class="screen-title">Canon, Tradition, and the Church</h2>
+        <p class="screen-intro">The Bible was not separated from the Church. The Church discerned, preserved, interpreted, and handed on the inspired books.</p>
+        <div class="prose">
+          <p>The <strong>canon of Scripture</strong> is the official list of inspired books. Catholics recognize 73 books in the Bible. This canon was discerned through Sacred Tradition and the authority of the Church.</p>
+          <p>Early councils, guided by the Holy Spirit, confirmed which books belonged in the Bible. The Council of Rome in AD 382 and later the Council of Trent in AD 1546 are important moments in this process.</p>
+          <p>The Magisterium, the Church's teaching authority, guides interpretation so Scripture is read in continuity with the apostolic faith. Scripture and Tradition work together in transmitting God's Revelation.</p>
+          <p>St. Jerome translated the Scriptures into Latin around AD 400, producing the Vulgate. His famous saying, "Ignorance of Scripture is ignorance of Christ," reminds Catholics that Scripture study is not optional decoration. It leads us to Jesus.</p>
+        </div>
+        <div class="check" data-check="tradition1">
+          <div class="check-label">Quick Check</div>
+          <div class="check-q">Why is Sacred Tradition important for the Bible?</div>
+          <div class="check-options">
+            <button class="check-option" data-answer="a" onclick="answerCheck(this,'tradition1','b')"><span class="letter">a.</span><span>It replaces Scripture, so Catholics do not need the Bible.</span></button>
+            <button class="check-option" data-answer="b" onclick="answerCheck(this,'tradition1','b')"><span class="letter">b.</span><span>It helped the Church discern the canon and guides faithful interpretation.</span></button>
+            <button class="check-option" data-answer="c" onclick="answerCheck(this,'tradition1','b')"><span class="letter">c.</span><span>It proves individuals can interpret Scripture however they want.</span></button>
+            <button class="check-option" data-answer="d" onclick="answerCheck(this,'tradition1','b')"><span class="letter">d.</span><span>It means the Bible has no connection to the early Church.</span></button>
+          </div>
+          <div class="check-feedback" id="fb-tradition1"></div>
+        </div>
+        <div class="pause"><div class="pause-label">Pause and Reflect</div><div class="pause-q">What does St. Jerome's line, "Ignorance of Scripture is ignorance of Christ," suggest about why Catholics should read the Bible seriously?</div><textarea id="pauseTradition" oninput="updatePause('pauseTradition','pauseTraditionWC',75,'traditionNext','tradition1')" placeholder="Explain what this quote means in your own words."></textarea><div class="word-count" id="pauseTraditionWC"><span>0 words</span><span>Minimum: 75 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="traditionNext" onclick="showScreen('quiz')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="quiz">
+      <div class="card"><div class="screen-label">Part Nine · Check Your Understanding</div><h2 class="screen-title">Lesson Quiz</h2><p class="screen-intro">Answer all eight questions. Feedback will appear as you complete each one.</p><div id="quizWrap"></div><div class="quiz-score" id="quizScore">Quiz Score<strong id="scoreText">0 / 8</strong></div><div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="quizNext" onclick="showScreen('deeper')">Continue →</button></div></div></div>
+    </section>
+
+    <section class="screen" data-screen="deeper">
+      <div class="card">
+        <div class="screen-label">Part Ten · Think Deeper</div><h2 class="screen-title">Stretch Your Thinking</h2><p class="screen-intro">Use the lesson ideas, but move beyond simple recall.</p>
+        <div class="field"><label for="td1">Think Deeper 1</label><div class="prose" style="margin-bottom:12px;"><p>Why is it important to consider historical context and author intent when reading a Bible passage? Use a real or invented example of how a passage could be misunderstood without context.</p></div><textarea id="td1" oninput="updateWordCount('td1','td1WC',140)" placeholder="Explain why context and author intent matter."></textarea><div class="word-count" id="td1WC"><span>0 words</span><span>Minimum: 140 words</span></div></div>
+        <div class="field"><label for="td2">Think Deeper 2</label><div class="prose" style="margin-bottom:12px;"><p>How can Catholics read Scripture both faithfully and intelligently? Include ideas such as inspiration, inerrancy, exegesis, genre, Sacred Tradition, or the Magisterium.</p></div><textarea id="td2" oninput="updateWordCount('td2','td2WC',140)" placeholder="Explain how faith and careful study work together."></textarea><div class="word-count" id="td2WC"><span>0 words</span><span>Minimum: 140 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="deeperNext" onclick="showScreen('synthesis')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="synthesis">
+      <div class="card">
+        <div class="screen-label">Part Eleven · Final Synthesis</div><h2 class="screen-title">Bring the Lesson Together</h2><p class="screen-intro">This final response should connect the whole lesson.</p>
+        <div class="field"><label for="synthesis">Final Synthesis</label><div class="prose" style="margin-bottom:12px;"><p>In one thoughtful response, explain how Catholics understand and interpret Sacred Scripture. Your answer should include inspiration, inerrancy, the role of human authors, the formation of Scripture, the Gospels, exegesis, eisegesis, and the Church's guidance.</p></div><textarea id="synthesis" oninput="updateWordCount('synthesis','synthesisWC',180)" placeholder="Show how the main ideas connect."></textarea><div class="word-count" id="synthesisWC"><span>0 words</span><span>Minimum: 180 words</span></div></div>
+        <div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn-save-row" onclick="saveProgressNow()">💾 Save</button><button class="btn btn-primary" disabled id="synthesisNext" onclick="showScreen('finish')">Continue →</button></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="finish">
+      <div class="card"><div class="screen-label">Part Twelve · Wrap Up</div><h2 class="screen-title">Almost Finished</h2><p class="screen-intro">Review your progress, download your report, and then mark the lesson as complete.</p><div class="summary-grid"><div class="summary-stat"><div class="stat-label">Quiz Score</div><div class="stat-value" id="finishQuiz">0 / 8</div></div><div class="summary-stat"><div class="stat-label">Words Written</div><div class="stat-value" id="finishWords">0</div></div><div class="summary-stat"><div class="stat-label">Time in Lesson</div><div class="stat-value" id="finishTime">0 min</div></div></div><div class="download-note">Download your final report when you are ready. It will include your student information, quiz score, and written responses from the whole lesson.</div><div class="btn-row"><button class="btn btn-ghost" onclick="prevScreen()">← Back</button><div class="btn-row-split"><button class="btn btn-gold" onclick="downloadReport()">⬇ Download Report</button><button class="btn btn-primary" onclick="finishLesson()">Mark Complete →</button></div></div></div>
+    </section>
+
+    <section class="screen" data-screen="complete">
+      <div class="card"><div class="completion-hero"><div class="completion-icon">✦</div><div class="completion-title">Lesson Completed</div><div class="completion-sub">You have finished Lesson 2.1, Sacred Scripture.</div></div><div class="download-note">Your work has been saved in this session. Download your report if you have not already done so.</div><div class="btn-row"><button class="btn btn-ghost" onclick="showScreen('finish')">← Back to Report</button><div class="btn-row-split"><button class="btn btn-gold" onclick="downloadReport()">⬇ Download Report Again</button></div></div></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast">Saved.</div>
+  <div class="footer">HRE4M1 · Unit 2 · Lesson 1</div>
+</div>
+
+<script>
+const LESSON_ID = '2.1';
+const STORAGE_KEY = 'hre4m1_lesson_2_1';
+const SCREEN_ORDER = ['welcome','hook','intro','terms','authorship','formation','gospels','interpretation','method','tradition','quiz','deeper','synthesis','finish','complete'];
+const TOTAL_STEPS = SCREEN_ORDER.length - 2;
+const REQUIRED_TERMS = 8;
+const QUIZ = [
+  {id:'q1', q:'What does divine inspiration mean?', opts:['The Holy Spirit guided the human authors to write what God wanted expressed.','The Bible has no human authors at all.','The Bible was created by one author in one century.','The Bible is useful only as ancient literature.'], correct:0, explain:'Divine inspiration means God worked through human authors by the Holy Spirit.'},
+  {id:'q2', q:'In Catholic teaching, Scripture is inerrant in what sense?', opts:['It answers every modern scientific question directly.','It teaches without error the saving truth God wanted revealed.','It removes the need to study genre or context.','It should always be read as literal history in every line.'], correct:1, explain:'Inerrancy concerns the saving truth God willed to reveal for faith and salvation.'},
+  {id:'q3', q:'Which terms describe the stages in the formation of Scripture?', opts:['Private, political, and digital tradition.','Oral, written, and edited tradition.','Scientific, poetic, and fictional tradition.','Ancient, medieval, and modern tradition only.'], correct:1, explain:'The lesson describes Scripture forming through oral, written, and edited tradition.'},
+  {id:'q4', q:'What does Gospel mean?', opts:['A private spiritual opinion.','Good News, especially the proclamation of Jesus Christ.','A historical appendix to the Old Testament.','A list of Church laws.'], correct:1, explain:'Gospel means Good News and refers to the proclamation of Jesus Christ.'},
+  {id:'q5', q:'Why do the four Gospels differ in some details or emphasis?', opts:['Each Evangelist wrote for a different audience and theological purpose.','Only one Gospel was considered inspired.','The Evangelists were trying to contradict one another.','The differences prove the Gospels have no shared message.'], correct:0, explain:'Each Evangelist gives a distinct portrait of the one Christ for a particular audience.'},
+  {id:'q6', q:'What is the difference between exegesis and eisegesis?', opts:['Exegesis reads personal bias into the text, while eisegesis studies context.','Exegesis draws meaning out of the text, while eisegesis reads one’s own ideas into it.','Both words mean exactly the same thing.','Eisegesis is the Catholic method, while exegesis is rejected by the Church.'], correct:1, explain:'Exegesis draws out meaning from the text. Eisegesis imposes meaning onto the text.'},
+  {id:'q7', q:'Which question belongs to faithful biblical interpretation?', opts:['How can I use this verse to prove what I already think?','What did this mean to the author and original audience in context?','How can I ignore the surrounding verses?','Which interpretation requires the least effort?'], correct:1, explain:'Faithful interpretation studies author, audience, context, genre, and meaning.'},
+  {id:'q8', q:'What role did Sacred Tradition and the Magisterium play in relation to the Bible?', opts:['They helped discern the canon and guide faithful interpretation.','They replaced Scripture completely.','They prove the Bible is only a private book.','They encourage every person to invent a different canon.'], correct:0, explain:'The Church, through Sacred Tradition and the Magisterium, discerned the canon and guides interpretation.'}
+];
+const CORRECT_MAP = {intro1:'c', authorship1:'d', formation1:'b', gospels1:'c', interpretation1:'a', tradition1:'b'};
+const MINIMUMS = {hookResponse:35, pauseIntro:60, pauseAuthorship:70, pauseFormation:70, pauseGospels:70, pauseInterpretation:80, pauseMethod:80, pauseTradition:75, td1:140, td2:140, synthesis:180};
+const RESPONSE_ORDER = ['hookResponse','pauseIntro','pauseAuthorship','pauseFormation','pauseGospels','pauseInterpretation','pauseMethod','pauseTradition','td1','td2','synthesis'];
+const RESPONSE_TITLES = {hookResponse:'Starting Point', pauseIntro:'Reflection 1', pauseAuthorship:'Reflection 2', pauseFormation:'Reflection 3', pauseGospels:'Reflection 4', pauseInterpretation:'Reflection 5', pauseMethod:'Reflection 6', pauseTradition:'Reflection 7', td1:'Think Deeper 1', td2:'Think Deeper 2', synthesis:'Final Synthesis'};
+const REPORT_FILE_PREFIX = 'HRE4M1_L2_1_Sacred_Scripture';
+const REPORT_HEADER_LABEL = 'HRE4M1 · Unit 2 · Lesson 1';
+const REPORT_TITLE = 'Sacred Scripture';
+const REPORT_SUBTITLE = 'Student Report';
+const RESUME_ERROR = 'Could not load that file. Please upload a valid Lesson 2.1 progress file.';
+
+const state = {lessonId: LESSON_ID, startedAt: null, finishedAt: null, currentScreen: 'welcome', studentInfo: {name:'', email:'', className:''}, termsViewed: [], inlineChecks: {}, responses: {}, quiz: {answers: {}, scoreCount: 0}, sectionTimes: {}, lastSavedAt: null};
+RESPONSE_ORDER.forEach(key => state.responses[key] = '');
+let screenEnterTime = Date.now();
+
+function countWords(str) { if (!str) return 0; return str.trim().split(/\s+/).filter(Boolean).length; }
+function escapeHTML(str) { if (str === null || str === undefined) return ''; return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function formatTime(ms) { const totalMin = Math.floor(ms / 60000); if (totalMin < 1) return '< 1 min'; if (totalMin < 60) return totalMin + ' min'; const hrs = Math.floor(totalMin / 60); const mins = totalMin % 60; return hrs + 'h ' + mins + 'm'; }
+function persistInputsToState() { const n = document.getElementById('studentName'); const e = document.getElementById('studentEmail'); const c = document.getElementById('studentClass'); if (n) state.studentInfo.name = n.value.trim(); if (e) state.studentInfo.email = e.value.trim(); if (c) state.studentInfo.className = c.value.trim(); RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) state.responses[key] = el.value.trim(); }); }
+function saveLocal() { state.lastSavedAt = new Date().toISOString(); persistInputsToState(); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function totalWords() { persistInputsToState(); return Object.values(state.responses).reduce((sum, value) => sum + countWords(value), 0); }
+function totalTimeMs() { let total = 0; Object.values(state.sectionTimes).forEach(ms => total += ms || 0); if (state.currentScreen && screenEnterTime) total += Date.now() - screenEnterTime; return total; }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1600); }
+function markSaveButtonsSaved() { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.add('saved')); const label = document.getElementById('stickySaveLabel'); if (label) label.textContent = 'Saved'; setTimeout(() => { document.querySelectorAll('.btn-save-row, .save-sticky').forEach(btn => btn.classList.remove('saved')); const again = document.getElementById('stickySaveLabel'); if (again) again.textContent = 'Save Progress'; }, 1300); }
+function updateProgress() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); const activeStep = Math.max(0, Math.min(TOTAL_STEPS, idx)); const pct = Math.max(0, Math.min(100, Math.round((activeStep / TOTAL_STEPS) * 100))); document.getElementById('progressFill').style.width = pct + '%'; document.getElementById('progressPercent').textContent = pct + '%'; const displayStep = state.currentScreen === 'welcome' ? 1 : Math.min(TOTAL_STEPS, Math.max(1, idx)); document.getElementById('progressLabel').textContent = 'Section ' + displayStep + ' of ' + TOTAL_STEPS; }
+function showScreen(screenId) { persistInputsToState(); const now = Date.now(); if (state.currentScreen) state.sectionTimes[state.currentScreen] = (state.sectionTimes[state.currentScreen] || 0) + (now - screenEnterTime); screenEnterTime = now; state.currentScreen = screenId; document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); const target = document.querySelector('.screen[data-screen="' + screenId + '"]'); if (target) target.classList.add('active'); document.getElementById('progressContainer').style.display = screenId === 'welcome' ? 'none' : 'block'; if (screenId === 'quiz') renderQuiz(); if (screenId === 'finish') refreshFinishStats(); updateProgress(); refreshGating(); saveLocal(); window.scrollTo({top:0, behavior:'smooth'}); }
+function prevScreen() { const idx = SCREEN_ORDER.indexOf(state.currentScreen); if (idx > 0) showScreen(SCREEN_ORDER[idx - 1]); }
+function beginLesson() { const name = document.getElementById('studentName').value.trim(); const email = document.getElementById('studentEmail').value.trim(); if (!name || !email) { document.getElementById('setupAlert').classList.add('show'); return; } document.getElementById('setupAlert').classList.remove('show'); if (!state.startedAt) state.startedAt = new Date().toISOString(); showScreen('hook'); }
+function updateWordCount(textareaId, countId, minimum) { const el = document.getElementById(textareaId); const words = countWords(el.value); state.responses[textareaId] = el.value.trim(); const counter = document.getElementById(countId); const met = words >= minimum; counter.innerHTML = '<span>' + words + ' words</span><span class="' + (met ? 'met' : 'short') + '">Minimum: ' + minimum + ' words</span>'; saveLocal(); refreshGating(); }
+function updatePause(textareaId, countId, minimum, nextBtnId, checkId) { updateWordCount(textareaId, countId, minimum); const wordsMet = countWords(document.getElementById(textareaId).value) >= minimum; const checkMet = !checkId || !!state.inlineChecks[checkId]; const btn = document.getElementById(nextBtnId); if (btn) btn.disabled = !(wordsMet && checkMet); }
+function openTerm(card) { const term = card.getAttribute('data-term'); card.classList.toggle('open'); if (!state.termsViewed.includes(term)) state.termsViewed.push(term); card.classList.add('viewed'); document.getElementById('termsViewed').textContent = state.termsViewed.length; saveLocal(); refreshGating(); }
+function answerCheck(btn, checkId, correctLetter) { if (state.inlineChecks[checkId]) return; const chosen = btn.getAttribute('data-answer'); state.inlineChecks[checkId] = chosen; const wrap = btn.closest('.check'); wrap.querySelectorAll('.check-option').forEach(opt => opt.classList.add('answered')); const fb = document.getElementById('fb-' + checkId); wrap.querySelectorAll('.check-option').forEach(opt => { if (opt.getAttribute('data-answer') === correctLetter) opt.classList.add('correct'); else if (opt === btn) opt.classList.add('incorrect'); }); fb.textContent = chosen === correctLetter ? 'Correct. You matched the main lesson idea.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); saveLocal(); refreshGating(); }
+function refreshGating() { const needs = (id, min) => countWords((document.getElementById(id)?.value || '').trim()) >= min; const checked = id => !!state.inlineChecks[id]; const setDisabled = (id, disabled) => { const el = document.getElementById(id); if (el) el.disabled = !!disabled; }; setDisabled('hookNext', !needs('hookResponse', MINIMUMS.hookResponse)); setDisabled('introNext', !(needs('pauseIntro', MINIMUMS.pauseIntro) && checked('intro1'))); setDisabled('termsNext', state.termsViewed.length < REQUIRED_TERMS); setDisabled('authorshipNext', !(needs('pauseAuthorship', MINIMUMS.pauseAuthorship) && checked('authorship1'))); setDisabled('formationNext', !(needs('pauseFormation', MINIMUMS.pauseFormation) && checked('formation1'))); setDisabled('gospelsNext', !(needs('pauseGospels', MINIMUMS.pauseGospels) && checked('gospels1'))); setDisabled('interpretationNext', !(needs('pauseInterpretation', MINIMUMS.pauseInterpretation) && checked('interpretation1'))); setDisabled('methodNext', !needs('pauseMethod', MINIMUMS.pauseMethod)); setDisabled('traditionNext', !(needs('pauseTradition', MINIMUMS.pauseTradition) && checked('tradition1'))); setDisabled('deeperNext', !(needs('td1', MINIMUMS.td1) && needs('td2', MINIMUMS.td2))); setDisabled('synthesisNext', !needs('synthesis', MINIMUMS.synthesis)); setDisabled('quizNext', Object.keys(state.quiz.answers).length !== QUIZ.length); }
+function renderQuiz() { const wrap = document.getElementById('quizWrap'); if (wrap.dataset.rendered === '1') return restoreQuiz(); wrap.innerHTML = QUIZ.map((q, idx) => `<div class="quiz-question" id="${q.id}"><div class="q-number">Question ${idx + 1}</div><div class="q-text">${q.q}</div><div class="q-options">${q.opts.map((opt, i) => `<button class="q-option" data-opt="${i}" onclick="answerQuiz('${q.id}', ${i})"><span class="letter">${String.fromCharCode(97 + i)}.</span><span>${opt}</span></button>`).join('')}</div><div class="q-explanation" id="exp-${q.id}">${q.explain}</div></div>`).join(''); wrap.dataset.rendered = '1'; restoreQuiz(); }
+function answerQuiz(qId, choice) { if (state.quiz.answers[qId] !== undefined) return; state.quiz.answers[qId] = choice; const q = QUIZ.find(item => item.id === qId); if (choice === q.correct) state.quiz.scoreCount += 1; restoreQuiz(); saveLocal(); refreshGating(); }
+function restoreQuiz() { QUIZ.forEach(q => { const qEl = document.getElementById(q.id); if (!qEl) return; const chosen = state.quiz.answers[q.id]; const options = qEl.querySelectorAll('.q-option'); options.forEach(opt => opt.classList.remove('selected','correct','incorrect','locked')); qEl.querySelector('.q-explanation').classList.remove('show'); if (chosen !== undefined) { options.forEach(opt => opt.classList.add('locked')); const selected = qEl.querySelector('.q-option[data-opt="' + chosen + '"]'); const correctBtn = qEl.querySelector('.q-option[data-opt="' + q.correct + '"]'); if (selected) selected.classList.add('selected'); if (chosen === q.correct) selected.classList.add('correct'); else { if (selected) selected.classList.add('incorrect'); if (correctBtn) correctBtn.classList.add('correct'); } qEl.querySelector('.q-explanation').classList.add('show'); } }); if (Object.keys(state.quiz.answers).length === QUIZ.length) { document.getElementById('scoreText').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('quizScore').classList.add('show'); } }
+function triggerDownload(filename, content, mime) { const blob = new Blob([content], {type: mime}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 500); }
+function saveProgressNow() { saveLocal(); const stamp = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-'); triggerDownload(`HRE4M1_L2_1_progress_${stamp}.json`, JSON.stringify(state, null, 2), 'application/json'); markSaveButtonsSaved(); showToast('Progress downloaded.'); }
+function refreshFinishStats() { document.getElementById('finishQuiz').textContent = state.quiz.scoreCount + ' / ' + QUIZ.length; document.getElementById('finishWords').textContent = totalWords(); document.getElementById('finishTime').textContent = formatTime(totalTimeMs()); }
+function buildReportHTML() { persistInputsToState(); const rows = RESPONSE_ORDER.map(key => `<section style="margin:0 0 28px 0;"><h3 style="font-family:Georgia,serif;font-size:24px;margin:0 0 8px 0;color:#5B2D68;">${escapeHTML(RESPONSE_TITLES[key])}</h3><div style="font-size:13px;color:#8B5E2A;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">${countWords(state.responses[key])} words</div><div style="white-space:pre-wrap;line-height:1.7;font-size:16px;border:1px solid #ddd7c6;background:#fffdf7;padding:16px 18px;">${escapeHTML(state.responses[key] || '')}</div></section>`).join(''); return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${REPORT_TITLE} Report</title><style>body{font-family:Georgia,serif;background:#f5efe2;color:#232238;margin:0;padding:40px;line-height:1.6;}.wrap{max-width:900px;margin:0 auto;background:#fff;padding:42px 46px;border:1px solid #d8c9a0;box-shadow:0 10px 30px rgba(0,0,0,.08);}.small{font-family:Arial,sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8B5E2A;}h1{font-size:42px;color:#5B2D68;margin:8px 0 4px;}h2{font-size:18px;font-style:italic;color:#55506A;margin:0 0 26px;}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0 28px;}.card{border:1px solid #ddd7c6;background:#fffdf7;padding:14px 16px;}.label{font-family:Arial,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8B5E2A;margin-bottom:6px;}.value{font-size:18px;color:#5B2D68;}hr{border:none;border-top:1px solid #d8c9a0;margin:26px 0;}@media print{body{background:white;padding:0;} .wrap{box-shadow:none;border:none;}}</style></head><body><div class="wrap"><div class="small">${REPORT_HEADER_LABEL}</div><h1>${REPORT_TITLE}</h1><h2>${REPORT_SUBTITLE}</h2><div class="grid"><div class="card"><div class="label">Student</div><div class="value">${escapeHTML(state.studentInfo.name || '')}</div></div><div class="card"><div class="label">Email</div><div class="value">${escapeHTML(state.studentInfo.email || '')}</div></div><div class="card"><div class="label">Class</div><div class="value">${escapeHTML(state.studentInfo.className || '')}</div></div><div class="card"><div class="label">Quiz Score</div><div class="value">${state.quiz.scoreCount} / ${QUIZ.length}</div></div><div class="card"><div class="label">Total Words</div><div class="value">${totalWords()}</div></div><div class="card"><div class="label">Time in Lesson</div><div class="value">${formatTime(totalTimeMs())}</div></div></div><hr>${rows}</div></body></html>`; }
+function downloadReport() { const stamp = new Date().toISOString().slice(0,10); const safeName = (state.studentInfo.name || 'student').replace(/[^a-z0-9]+/gi,'_'); triggerDownload(`${REPORT_FILE_PREFIX}_${safeName}_${stamp}.html`, buildReportHTML(), 'text/html'); showToast('Report downloaded.'); }
+function finishLesson() { state.finishedAt = new Date().toISOString(); saveLocal(); showScreen('complete'); }
+function restoreChecks() { Object.entries(state.inlineChecks).forEach(([checkId, chosen]) => { const wrap = document.querySelector('.check[data-check="' + checkId + '"]'); if (!wrap) return; const correct = CORRECT_MAP[checkId]; wrap.querySelectorAll('.check-option').forEach(opt => { opt.classList.add('answered'); if (opt.getAttribute('data-answer') === correct) opt.classList.add('correct'); else if (opt.getAttribute('data-answer') === chosen) opt.classList.add('incorrect'); }); const fb = document.getElementById('fb-' + checkId); if (fb) { fb.textContent = chosen === correct ? 'Correct. You matched the main lesson idea.' : 'Not quite. The correct answer is highlighted for you.'; fb.classList.add('show'); } }); }
+function restoreTextAndCounts() { const countIdMap = {hookResponse:'hookWC', pauseIntro:'pauseIntroWC', pauseAuthorship:'pauseAuthorshipWC', pauseFormation:'pauseFormationWC', pauseGospels:'pauseGospelsWC', pauseInterpretation:'pauseInterpretationWC', pauseMethod:'pauseMethodWC', pauseTradition:'pauseTraditionWC', td1:'td1WC', td2:'td2WC', synthesis:'synthesisWC'}; RESPONSE_ORDER.forEach(key => { const el = document.getElementById(key); if (el) el.value = state.responses[key] || ''; const wcId = countIdMap[key]; if (el && document.getElementById(wcId)) updateWordCount(key, wcId, MINIMUMS[key]); }); }
+function resumeFromFile(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = function(e) { try { const loaded = JSON.parse(e.target.result); if (!loaded || loaded.lessonId !== LESSON_ID) throw new Error('Wrong lesson file'); Object.assign(state, loaded); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); showScreen(state.currentScreen || 'hook'); showToast('Progress restored.'); } catch (err) { alert(RESUME_ERROR); } }; reader.readAsText(file); }
+function hydrateFromLocalStorage() { try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return; const saved = JSON.parse(raw); if (!saved || saved.lessonId !== LESSON_ID) return; Object.assign(state, saved); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); } catch (err) {} }
+hydrateFromLocalStorage();
+updateProgress();
+refreshGating();
+</script>
+</body>
+</html>
