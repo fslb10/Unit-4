@@ -5,10 +5,20 @@ This repository hosts HRE4M1 lesson apps through GitHub Pages.
 ## Dashboards
 
 - All units: `https://fslb10.github.io/Interactive-Lessons/`
+- Unit 0: `https://fslb10.github.io/Interactive-Lessons/Unit-0/`
 - Unit 1: `https://fslb10.github.io/Interactive-Lessons/unit-1/`
 - Unit 2: `https://fslb10.github.io/Interactive-Lessons/Unit-2/`
 - Unit 3: `https://fslb10.github.io/Interactive-Lessons/Unit-3/`
 - Unit 4: `https://fslb10.github.io/Interactive-Lessons/Unit-4/`
+
+## Unit 0 lesson URLs
+
+- Lesson 0.1: `https://fslb10.github.io/Interactive-Lessons/Unit-0/apps/0-1-from-jesus-to-the-early-church.html`
+- Lesson 0.2: `https://fslb10.github.io/Interactive-Lessons/Unit-0/apps/0-2-constantine-and-the-edict-of-milan.html`
+- Lesson 0.3: `https://fslb10.github.io/Interactive-Lessons/Unit-0/apps/0-3-the-rise-of-monasticism.html`
+- Lesson 0.4: `https://fslb10.github.io/Interactive-Lessons/Unit-0/apps/0-4-the-great-schism.html`
+- Lesson 0.5: `https://fslb10.github.io/Interactive-Lessons/Unit-0/apps/0-5-protestant-reformation-catholic-response.html`
+- Lesson 0.6: `https://fslb10.github.io/Interactive-Lessons/Unit-0/apps/0-6-vatican-ii-modern-world.html`
 
 ## Unit 1 lesson URLs
 
