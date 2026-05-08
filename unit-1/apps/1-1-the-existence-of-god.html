@@ -1332,5 +1332,6 @@ function resumeFromFile(event) { const file = event.target.files[0]; if (!file) 
 function hydrateFromLocalStorage() { try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return; const saved = JSON.parse(raw); if (!saved || saved.lessonId !== LESSON_ID) return; Object.assign(state, saved); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); } catch (err) {} }
 hydrateFromLocalStorage(); updateProgress(); refreshGating();
 </script>
+  <script src="../../assets/lesson-submit.js"></script>
 </body>
 </html>

@@ -307,5 +307,6 @@ function resumeFromFile(event){const file=event.target.files[0]; if(!file)return
 function hydrateFromLocalStorage(){try{const raw=localStorage.getItem(STORAGE_KEY); if(!raw)return; const saved=JSON.parse(raw); if(!saved||saved.lessonId!==LESSON_ID)return; Object.assign(state,saved); document.getElementById('studentName').value=state.studentInfo.name||''; document.getElementById('studentEmail').value=state.studentInfo.email||''; document.getElementById('studentClass').value=state.studentInfo.className||''; restoreText(); restoreChecks(); restoreActivities(); renderQuiz(); refreshGating();}catch(err){}}
 fillSelects(); hydrateFromLocalStorage(); updateProgress(); refreshGating();
 </script>
+  <script src="../../assets/lesson-submit.js"></script>
 </body>
 </html>
