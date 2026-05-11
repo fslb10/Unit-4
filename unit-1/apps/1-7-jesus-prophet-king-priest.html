@@ -1532,6 +1532,19 @@ function restoreTextAndCounts() { const map = {hookResponse:'hookWC', pauseIntro
 function resumeFromFile(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = function(e) { try { const loaded = JSON.parse(e.target.result); if (!loaded || loaded.lessonId !== LESSON_ID) throw new Error('Wrong lesson file'); Object.assign(state, loaded); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); refreshGating(); showScreen(state.currentScreen || 'hook'); showToast('Progress restored.'); } catch (err) { alert('Could not load that file. Please upload a valid Unit 1.5 progress file.'); } }; reader.readAsText(file); }
 function hydrateFromLocalStorage() { try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return; const saved = JSON.parse(raw); if (!saved || saved.lessonId !== LESSON_ID) return; Object.assign(state, saved); document.getElementById('studentName').value = state.studentInfo.name || ''; document.getElementById('studentEmail').value = state.studentInfo.email || ''; document.getElementById('studentClass').value = state.studentInfo.className || ''; restoreTextAndCounts(); document.querySelectorAll('.term-card').forEach(card => { if (state.termsViewed.includes(card.getAttribute('data-term'))) card.classList.add('viewed'); }); document.getElementById('termsViewed').textContent = state.termsViewed.length; restoreChecks(); renderQuiz(); } catch (err) {} }
 hydrateFromLocalStorage(); updateProgress(); refreshGating();
+
+
+/* No-paste safeguard for student written responses */
+document.querySelectorAll("textarea").forEach(field => {
+  field.addEventListener("paste", e => {
+    e.preventDefault();
+    alert("Pasting is disabled here. Please type your response in your own words.");
+  });
+
+  field.addEventListener("drop", e => {
+    e.preventDefault();
+  });
+});
 </script>
   <script src="../../assets/lesson-submit.js"></script>
 </body>
