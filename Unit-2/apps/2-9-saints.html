@@ -1615,6 +1615,20 @@ function hydrateFromLocalStorage() { try { const raw = localStorage.getItem(STOR
 hydrateFromLocalStorage();
 updateProgress();
 refreshGating();
+
+
+// Blocks paste and drag/drop into written response fields only.
+// Students can still type normally, and name/email fields are not affected.
+document.querySelectorAll("textarea").forEach(field => {
+  field.addEventListener("paste", e => {
+    e.preventDefault();
+    alert("Pasting is disabled here. Please type your response in your own words.");
+  });
+
+  field.addEventListener("drop", e => {
+    e.preventDefault();
+  });
+});
 </script>
   <script src="../../assets/lesson-submit.js"></script>
 </body>
