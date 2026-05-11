@@ -2232,7 +2232,8 @@ function buildReportHtml(inProgress) {
     '<h2>Quiz Score</h2><div class="score-big">' + state.quiz.scoreCount + ' / ' + QUIZ.length + '</div>' +
     lensSummary + checksHtml + responseBlocks + '<h2>Quiz Review</h2>' + quizReview +
     '<script type="application/json" id="hre4m1-save-data">' + stateJson + '<\/script>' +
-    '</body></html>';
+    '
+</body></html>';
 
   return { filename, report };
 }
@@ -2326,6 +2327,22 @@ function hydrateFromLocalStorage() {
 }
 
 hydrateFromLocalStorage();
+
+function blockPasteInResponseFields() {
+  document.querySelectorAll("textarea").forEach(field => {
+    field.addEventListener("paste", e => {
+      e.preventDefault();
+      alert("Pasting is disabled here. Please type your response in your own words.");
+    });
+
+    field.addEventListener("drop", e => {
+      e.preventDefault();
+    });
+  });
+}
+
+blockPasteInResponseFields();
+
 </script>
   <script src="../../assets/lesson-submit.js"></script>
 </body>
