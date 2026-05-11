@@ -155,6 +155,19 @@ function restoreActivities(){document.querySelectorAll('.profile-card').forEach(
 function resumeFromFile(event){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=e=>{try{const loaded=JSON.parse(e.target.result);if(!loaded||loaded.lessonId!==LESSON_ID)throw new Error('Wrong lesson');Object.assign(state,loaded);document.getElementById('studentName').value=state.studentInfo.name||'';document.getElementById('studentEmail').value=state.studentInfo.email||'';document.getElementById('studentClass').value=state.studentInfo.className||'';restoreText();restoreChecks();restoreActivities();renderQuiz();refreshGating();showScreen(state.currentScreen||'roadmap');showToast('Progress restored.');}catch(err){alert('Could not load that file. Please upload a valid Unit 0.3 progress file.');}};reader.readAsText(file);}
 function hydrateFromLocalStorage(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return;const saved=JSON.parse(raw);if(!saved||saved.lessonId!==LESSON_ID)return;Object.assign(state,saved);document.getElementById('studentName').value=state.studentInfo.name||'';document.getElementById('studentEmail').value=state.studentInfo.email||'';document.getElementById('studentClass').value=state.studentInfo.className||'';restoreText();restoreChecks();restoreActivities();renderQuiz();refreshGating();}catch(err){}}
 fillSelects();hydrateFromLocalStorage();updateProgress();refreshGating();
+
+
+/* Prevent copy-paste shortcuts in written response boxes only. */
+document.querySelectorAll("textarea").forEach(field => {
+  field.addEventListener("paste", e => {
+    e.preventDefault();
+    alert("Pasting is disabled here. Please type your response in your own words.");
+  });
+
+  field.addEventListener("drop", e => {
+    e.preventDefault();
+  });
+});
 </script>
   <script src="../../assets/lesson-submit.js"></script>
 </body>
